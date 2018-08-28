@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 循环数组的两个方法
+    *
+    * forEach 必须以函数作为参数
+    * map
+    *
+    * */
+    let ary = [12,32,14,24,23];
+    // var a = ary.forEach(function (item,index) {
+    //     console.log(item,index);
+    //     // item 是数组中的项
+    //     // index是对应的索引
+    //     // forEach  没有返回值
+    //     // 不改变原有数组
+    //     // item = 0;
+    //     // ary[index] = 0;
+    //     console.log(arguments);
+    // });
+    // var arr = [];
+    // var b = ary.forEach((item,index)=>{
+    //     // ary[2]
+    //     arr.push(item*2);
+    //     return 12;
+    //     // console.log(item,index)
+    // });
+    // // b 是 ary.forEach 执行之后的返回值  是undefined； forEach 没有返回值
+    // console.log(b);
+    // // ary.qq = 12;
+    // // for(var k in ary){
+    // //     //k 是 索引
+    // // }
+    // console.log(a);
+    // console.log(ary);
+
+
+    /*
+    * map
+    * */
+
+    // var c = ary.map((item,index)=>{
+    //     console.log(item,index);
+    //     //箭头函数没有 arguments
+    // });
+
+
+    var c = ary.map(function(item,index){
+        console.log(item,index);
+        console.log(arguments);
+        return 12;
+    });
+    console.log(c,ary);
+    /*
+    * map 有返回值； 返回值是由回调函数内的 return确定的；没有return 默认返回 undefined 组成的 数组
+    * */
+    var arr = [];
+    ary.forEach((item)=>{
+        arr.push(item*2)
+    });
+
+    var count = 0;
+    var arr2 = ary.map((item)=>{
+        count++;
+        return item*2
+    });
+    console.log(count);
+
+
+</script>  

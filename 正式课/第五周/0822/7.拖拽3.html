@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #24ccc8;
+            line-height: 200px;
+            text-align: center;
+            border-radius: 50%;
+            user-select: none;
+            cursor: move;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+<div id="div1">ddd</div>
+</body>
+</html>
+<script src="../js/jquery1.11.3.js"></script>
+<script>
+    var $oDiv=$('#div1')
+    $oDiv.on('mousedown',function (e) {
+        dragStart.call(this,e)
+        //出版是在外面直接给document绑定 move
+        //这次 在 onmousedown 中绑定
+        $(document).on('mousemove', dragMove.bind(this))
+        $(document).on('mouseup',dragEnd.bind(this))
+    })
+
+
+    function dragStart(e) {
+        this.startX=this.offsetLeft;
+        this.startY=this.offsetTop;
+        this.mx=e.clientX;
+        this.my=e.clientY;
+        // this.canM = true;
+    }
+    function dragMove(e) {
+        // if(!this.canM)return;
+        var x=e.clientX - this.mx,
+            y=e.clientY - this.my;
+        $(this).css({
+            left: this.startX+x,
+            top: this.startY+y
+        })
+    }
+    function dragEnd(e) {
+        // this.canM=false;
+        $(document).off('mousemove')
+        $(document).off('mouseup')
+    }
+</script>

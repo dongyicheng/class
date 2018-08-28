@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .litBox{
+            width: 225px;
+            height: 110px;
+            margin-top: 50px;
+        }
+        .litBox img{
+            width: 100%;
+            height: 100%;
+        }
+        .bigBox{
+            width: 450px;
+            height: 220px;
+            display: none;
+            position: absolute;
+        }
+        .bigBox img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <div class="litBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/03/1dead9e7a3094b23bc84c391398858d2.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+    <div class="litBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/22/39c09c9537144717b22702aa9cdd03e7.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+    <div class="litBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/22/79843a37bcd749d79141a9b1820e03fc.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+
+    <div class="bigBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/03/1dead9e7a3094b23bc84c391398858d2.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+    <div class="bigBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/22/39c09c9537144717b22702aa9cdd03e7.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+    <div class="bigBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/22/79843a37bcd749d79141a9b1820e03fc.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+</body>
+</html>
+<script>
+    var litBoxs = document.getElementsByClassName('litBox'),
+        bigBoxs = document.getElementsByClassName('bigBox');
+    document.onmousemove = function (e) {
+        e = e || window.event;
+        var tar = e.target || e.srcElement;
+        if(tar.parentNode.className == 'litBox'){
+            var n=[...litBoxs].indexOf(tar.parentNode); // 求出 该项的索引
+            bigBoxs[n].style.display = 'block';
+            bigBoxs[n].style.left = e.pageX + 20+ 'px';
+            bigBoxs[n].style.top = e.pageY + 20 + 'px';
+        }else {
+            [...bigBoxs].forEach((item)=>{
+                item.style.display = 'none';
+            });
+        }
+    }
+</script>  

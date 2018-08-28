@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    //let const  都属于 es6 的内容
+    // let声明 的变量 没有变量提升； 而且他也不是 window 上的一个属性
+    // 不能重复声明 ； 重复声明会报错； 可以重新赋值
+    // const 跟let基本一样，但是也不能重新赋值
+
+
+    // var a =12;
+    // b = 13
+    // let a = 12;
+    // a = 13;
+    //
+    // const b = 14;
+    // console.log('a' in window);
+    // let a = 12;
+    function f() {
+        console.log(a)
+    }
+    const a= 19;
+    function f1() {
+        console.log(b);//undefined
+        console.log(a);// a is not defined
+        let a = 15;
+        var b = 10;
+        console.log(b,a);
+    }
+    // let a = 12;
+    f();
+    f1();
+    /*
+    * 在函数执行的时候，形成的私有作用域中，
+    * 用var 声明过的变量 ，会有变量提升，给一个默认值是undefined
+    * 用let 和 const 声明的变量， 不会进行变量提升，但是他也会对里边的带let 和 const 的变量进行预览,这时 ，浏览器不会再往上级作用域查找相应变量
+    *
+    * 暂时性死区
+    *
+    * */
+
+    /*
+    * 全局作用域
+    * 私有作用域 ： 函数执行的时候形成的
+    *
+    * es6 块级作用域 {} for  if   while
+    *  块级作用域 ：只跟 let 或者 const 声明的变量起作用；对于 var  没有块级作用域的限制
+    *
+    * */
+    var obj ={};
+    if(true){
+        let aa = 12;
+        if(true){
+            let aa = 13;
+            function f2(){
+                console.log(aa)
+            }
+            f2()
+            // console.log(aa);
+            // let aa =13;
+        }
+    }
+    // console.log(aa);
+
+    if(true){
+        var bb = 13;
+    }
+    console.log(bb);
+
+    // 一个变量 第一次出现可以赋值，但不能调用
+    // console.log(g);
+
+    typeof g // undefined
+
+    typeof f // f is not defined
+    let f = 12;
+
+</script>

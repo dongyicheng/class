@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box box2 box3">
+    盒子
+</div>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script>
+    /*判断元素有没有某个类名*/
+    function hasClass(ele,str) {
+        str=str.replace(/^ +| +$/g,'');
+        var reg=new RegExp('(^| +)'+str+'( +|$)');
+        return reg.test(ele.className);
+    }
+
+
+    function hasClass2(ele,str) {
+        str=str.replace(/^ +| +$/g,'');
+        var ary=str.split(/ +/);
+        for (let i = 0; i < ary.length; i++) {
+            var reg=new RegExp('(^| +)'+ary[i]+'( +|$)');
+            if(!reg.test(ele.className)){
+                return false
+            }
+        }
+        return true;
+    }
+/*
+*
+* 给元素添加类名 addClass
+* 思路1 先把 str 根元素之前的类名拼接起来  然后分割成数组  给数组去重
+*       去重之后 再用空格拼接成字符串  把这个字符串 赋给元素的className
+* */
+function addClass(ele,str) {
+    str =str.replace(/^ +| +$/g,'');//去除首尾空格
+    if(hasClass(ele,str))return;//如果之前有这个类名 ; 直接return
+    var ary=str.split(/ +/);//把str 分割成数组 , 每项都是一个类名
+    for (let i = 0; i < ary.length; i++) {
+       if(!hasClass(ele,ary[i])){
+           ele.className+=(' ' + ary[i]);
+       }
+    }
+}
+
+/*给元素删除类名*/
+function removeClass(ele,str) {
+    str=str.replace(/^ +| +$/g,'');
+    var ary=str.split(/ +/)
+    for (let i = 0; i < ary.length; i++) {
+         var reg=new RegExp('(^| +)'+ary[i]+'( +|$)','g')
+         ele.className=ele.className.replace(reg,' ')
+    }
+
+}
+</script>

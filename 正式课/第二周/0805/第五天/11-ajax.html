@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * JSON 数据
+    * 里边所有的字符串（不管是属性属性名还是属性值） 必须要用双引号包起来
+    * 里边引用数据类型只能有 数组 和 对象
+    * 最后一项的 逗号 必须省略
+    *
+    * */
+    var obj = {
+        "qqq":"qwer"
+    };
+    console.log(obj);
+    // JSON.parse()  把JSON字符串 转化成 JSON 对象
+    // JSON.stringify()  把JSON对象 转成 JSON 字符串
+    var str = JSON.stringify(obj);
+    console.log(str);
+
+    /*
+    * ajax
+    * */
+
+    var xhr = new XMLHttpRequest();// 创建一个ajax实例
+
+    //2 、以 某种方式打开某个某个链接； 以同步或者异步的方式
+    // 第一个参数 get  post  put delete
+    // 第二个参数  是要（访问）打开的接口
+    // 第三个是  以同步或者 异步的方式
+    xhr.open(`get`,'./test.json',false);// ./同级  ../ 上级
+
+    //3、监听请求状态
+    xhr.onreadystatechange = function () {
+        //readyState //请求状态码 0 1 2 3 4
+        //0 未发送请求
+        //1 发送请求
+        //2 接收响应头
+        //3 接收响应体
+        //4 完成
+
+        //status     //网络状态码
+        // 2xx  请求成功
+        // 3xx  重定向
+        // 4xx  一般代表路径错误
+        // 5xx  一般都是服务器错误
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(JSON.parse(xhr.responseText));
+            // console.log(xhr.responseText);
+        }
+
+    };
+
+    // 4、发送请求
+    xhr.send();
+</script>  

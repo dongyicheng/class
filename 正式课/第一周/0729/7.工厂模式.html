@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 工厂模式 就是一个普通函数
+    *
+    *
+    *
+    * */
+    //解决代码冗余问题
+    //函数可以实现代码的高内聚低耦合
+    //单例模式有个缺点, 就是每次都要手动新创建一个对象   当需要创造很多个单例时, 每次都var一个新的对象比较麻烦, 还会造成一定的代码冗余; 这时可以利用函数去创造需要的单例---------这种模式就是工厂模式
+    function factory(name) {
+        var obj={
+            name:name,
+            set:function () {
+
+            },
+            get:function () {
+
+            }
+        }
+        return obj;
+    }
+    var obj=factory('dyc');
+    var obj1=factory('dyc1');
+</script>

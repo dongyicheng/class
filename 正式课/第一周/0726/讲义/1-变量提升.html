@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 变量提升 （声）
+    * 在JS代码执行之前，浏览器要先过一遍代码，把其中 带 var 和 带 function  关键字内容提前声明 ；
+    * 带 var  是只声明(给个默认值 undefined)  不定义
+    * 带 function 是声明加定义
+    *
+    * 因为 用function 关键字声明的函数 ；在变量提升阶段已经附好值了，所以 我们可以在JS文件中的任意位置调用这个函数
+    *
+    *
+    * 变量提升 只会提升 = 号  左边的部分； 不会提升右边的部分
+    *
+    * var 一个变量， 相当于 给 window添加一个属性
+    * 带var 会进行变量提升 ，不带var 的没有变量提升
+    *
+    * var a = 12;
+    * let a = 12; // 不能重复声明 能重复定义
+    * let 没有变量提升的;
+    *
+    * const a = 12;声明常量用的 不能重复声明  也不能重复定义
+    * const  没有变量提升
+    *
+    * 变量提升 是不看条件成立不成立的； 这个是针对var 来说的
+    * 针对 function 来说 ，在条件语句中的function声明；标准浏览器下是只声明，不定义的，在 IE低版本 是既声明 也 定义的
+    *
+    * */
+
+    // console.log(a,b);
+    // let c = 13;
+    var c;//声明
+    c = 14;//定义
+    var a = 12;
+    var a = 13;
+    var b = 13;
+
+    //let
+    let e = 13;
+    e=23;
+    // console.log(e);
+
+
+    // console.log(a,b);
+    // function sum() {
+    //     console.log(1)
+    // }
+    // sum2();
+    // var sum2 = function sum3() {
+    //     console.log(2)
+    // };
+    // sum2();
+    d = 2;
+    // console.log(d);
+
+    const aa = 14;
+    // aa = 13;
+    // console.log(f,g);
+    console.log(sum2,sum3);
+    if(1 > 2){
+        var f = 12;
+        function sum2() {
+            console.log(12)
+        }
+    }else {
+        var g = 14;
+        function sum3() {
+            console.log(13);
+        }
+    }
+    console.log(sum2,sum3);
+    console.log(f,g);
+
+
+
+
+
+    fn();// 15
+    var n = 13;
+    console.log(n); // 13
+    fn(); // 15
+    console.log(n);//15
+    function fn(){
+        n = 15;
+        console.log(n);
+    }
+    fn(); // 15
+    alert(n);//15
+    // 在变量提升阶段   n :undefined
+    //fn()            n : 15
+    // n = 13;        n : 13
+    //fn()            n : 15
+
+    // 引用数据类型的深入
+
+    var a = {
+        x:1
+    };
+    var b = a;
+    a = {w:1};
+    console.log(b);
+    // b.c = a = {y:1};//点 的 优先级 高于 = 的优先级
+    a.c = a = {y:1};//点 的 优先级 高于 = 的优先级
+
+    console.log(a, b);
+    console.log(b.c);
+
+    var a = 12;
+    var b = a ;
+    a = 13;
+    console.log(b);//12
+
+    var obj = {q:1};
+    var obj2 = obj;
+    obj = {w:1};
+    console.log(obj2)
+
+
+</script>  

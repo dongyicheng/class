@@ -1,0 +1,10 @@
+#div1 {
+  border: #5f5999 2px solid;
+}
+#div1 .oul {
+  width: 200px;
+  height: 600px;
+  background: #fff;
+  list-style: none;
+  background: url("../img/1.jpg");
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #3059fa;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="div1" class="box"></div>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script>
+    /*
+    * 固定时间的运动
+    * */
+    var oDiv=document.getElementById('div1')
+    // var duration=2000;
+    // var time=0;
+    // /*
+    // * 需要知道每20毫秒需要移动的距离
+    // * */
+    // var tarL = utils.win('clientWidth') - oDiv.offsetWidth;
+    // //一共需要移动的距离
+    // var speed=tarL/duration;
+    // //运动的速度
+    // var timer=window.setInterval(function () {
+    //     time+=20;//每20毫秒才能执行一次
+    //     utils.css(oDiv,'left',time*speed)
+    //     if(time >= duration){
+    //         clearInterval(timer);
+    //         utils.css(oDiv,'left',tarL)
+    //     }
+    // },20)
+
+    var duration=2000;
+    var time=0;
+    var tarL=utils.win('clientWidth')-oDiv.offsetWidth;
+
+    var timer=window.setInterval(()=>{
+        time+=20;
+        var curPos=tarL/duration*time;
+        if(time>duration){
+            clearInterval(timer);
+            time=duration;
+        }
+        utils.css(oDiv,'left',curPos)
+    },20)
+
+</script>

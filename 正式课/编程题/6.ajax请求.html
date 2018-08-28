@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="btn">排序</div>
+<ul>
+    <li>姓名:小明1</li>
+    <li>姓名:小红2</li>
+    <li>姓名:小李3</li>
+</ul>
+</body>
+</html>
+<script>
+    //将请求发出去
+var data=null;
+var xhr=new XMLHttpRequest();
+xhr.open('get','../第二周/0802/huawei/data.json',false);
+    xhr.onreadystatechange=function () {
+        if(xhr.readyState==4&&xhr.status==200){
+            data=JSON.parse(xhr.responseText)
+        }
+    };
+    xhr.send();
+    //显示在页面上
+    var oLis=document.getElementsByTagName('li');
+    for (let i = 0; i <oLis.length; i++) {
+        oLis[i].innerHTML='姓名'+data.data[i].name;
+    }
+    // 排序 再点击倒着排
+    var btn=document.getElementsByClassName('btn')[0];
+    var flag=0;
+    btn.onclick=function () {
+        if (flag == 0) {
+            data.data.sort((a, b) => {
+                return a.name.localeCompare(b.name, 'zh')
+            });
+            flag = 1;
+
+        } else {
+            data.data.sort((a, b) => {
+                return b.name.localeCompare(a.name,'zh');
+            });
+            flag = 0;
+        }
+        for (let i = 0; i <oLis.length; i++) {
+            oLis[i].innerHTML='姓名'+data.data[i].name;
+        }
+    }
+
+//----------------------------------------------------------
+
+</script>

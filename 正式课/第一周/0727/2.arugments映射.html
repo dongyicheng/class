@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var name='dyc';
+    (function f(name,age){
+        console.log(arguments[0]);//'zhufeng'
+        arguments[0]='xiaohong';
+        age = age&&100;
+        console.log(name, age);//xiaohong 100
+    })(name);
+    // f('zhufeng',9)
+    console.log(name);
+    //    arguments映射: arguments会和形参建立起一个一一映射的关系, 形参改变 ,arguments也会改变, 反之 arguments改变,形参也改
+//    &&前面不成立给前面  都成立给最后面对
+//    ||前面成立给前面    都不成立给最后面
+</script>

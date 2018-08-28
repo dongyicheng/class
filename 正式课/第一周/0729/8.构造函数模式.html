@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *  类                         实例
+    * 人类                         张三
+    * 狮子类                       辛巴
+    *
+    *
+    * */
+    /*JS的类
+    * 类   Object String Number Boolean Function        Array Date...
+    * 实例 {}   'ssss'    123    true   function sum()  [1,2]
+    *
+    * */
+
+
+    // Array []
+    //原型 prototype: 每个函数都有一个原型 prototype, 指向他的原型对象
+    //每一个类都是一个函数   每个类的实例 都可以通过 __proto__找到他的所属类的原型对象
+
+
+    /*构造函数模式;  创建一个构造函数; 通过new 去创建 这个构造函数(自定义类)的一个实例
+    * 这个实例的__proto__属性指向  这个构造函数(自定义类)的 原型对象
+    * 这个原型对象上有一个constructor 属性  指向  构造函数本身
+    * */
+    function Person(name,age) {
+        this.name=name;
+        this.age=age;
+        this.set=function () {
+            console.log(12);
+        }
+    }
+    Person('jerry',18);
+    console.log(name, age);//jerry 18
+
+
+    var tom=new Person('tom',18);//构造的一个实例  是一个对象
+    //new执行函数  跟普通函数执行区别
+    //new执行会在函数内部自动创建一个对象 (this); 函数执行完, 会把this默认返回
+    //如果手动修改return 值  ;  若return是个值类型  ,  那么默认return的 还是 this; 若 return的是引用数据类型  返回的就这个引用数据类型
+    console.log(tom.name,tom.age);//对象里的内容
+    console.log(tom.__proto__);//实例的__proto__属性指向  这个构造函数(自定义类)的 原型对象
+    console.log(tom.__proto__.constructor == Person);//这个原型对象上有一个constructor 属性  指向  构造函数本身
+
+/*构造函数的函数名  一般首字母要大写
+* 当这个函数通过new 执行时  ; 那么  他就是一个构造函数(自定义类) ; 也就是把它当作一个类去执行
+*
+* 构造函数 和 高级单例模式相似
+*
+* */
+   Person.prototype.getName=function () {
+       console.log(this.name);
+   };
+    tom.getName();
+   /*tom 是Person(自定义类)的一个实例
+   * 是实例的话 就能调用 所属原型类上的方法和属性
+   * */
+
+</script>

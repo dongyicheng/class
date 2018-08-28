@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1,#div2,#div3,#div4{
+            width: 200px;
+            height: 200px;
+            background: #24ccc8;
+            line-height: 200px;
+            text-align: center;
+            border-radius: 50%;
+            user-select: none;
+            cursor: move;
+            position: absolute;
+        }
+        #div2{
+            background: #999999;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">ddd</div>
+<div id="div2">eee</div>
+<div id="div3">eee</div>
+<div id="div4">eee</div>
+</body>
+</html>
+<script src="js/event.js"></script>
+<script src="../js/jquery1.11.3.js"></script>
+<script>
+    let oDiv=document.getElementById('div1')
+    let oDiv1=document.getElementById('div2')
+    class Drag{
+        constructor(ele){//ele是通过new传进来的参数
+            //私有属性
+            //绑定 onmousedown 是在这进行的
+            //把 dragStart 中的 this  指向这个类的实例
+            $(ele).on('mousedown',this.dragStart.bind(this))
+            this.ele=ele;
+            this.$start=$.Callbacks();
+            this.$move=$.Callbacks();
+            this.$end=$.Callbacks()
+
+        }
+        dragStart(e){
+            this.startX=this.ele.offsetLeft
+            this.startY=this.ele.offsetTop
+            this.mx=e.pageX
+            this.my=e.pageY
+            $(document).on('mousemove',this.dragMove.bind(this))
+            $(document).on('mouseup',this.dragEnd.bind(this))
+            this.$start.fire()
+
+        }
+        dragMove(e){
+            let x=e.pageX - this.mx + this.startX
+            let y=e.pageY - this.my + this.startY
+            $(this.ele).css({
+                left:x,
+                top:y
+            })
+            this.$move.fire()
+        }
+        dragEnd(){
+            $(document).off('mousemove');
+            $(document).off('mouseup')
+            this.$end.fire()
+        }
+    }
+    //通过 new 直接实现  oDiv  拖拽
+    let d=new Drag(oDiv)
+    let e=new Drag(oDiv1)
+
+    let oDivs=document.getElementsByTagName('div')
+
+    let n=1;
+    function addZIndex() {
+        this.ele.style.zIndex=n++;
+    }
+    d.$start.add(addZIndex.bind(d))
+    e.$start.add(addZIndex.bind(e))
+    $(oDivs).each((index,item)=>{
+        let ele=new Drag(item);
+        ele.$start.add(addZIndex.bind(ele))
+    })
+
+
+
+</script>

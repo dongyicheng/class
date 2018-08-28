@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1, #div2 {
+            width: 200px;
+            height: 200px;
+            background: #24ccc8;
+            line-height: 200px;
+            text-align: center;
+            border-radius: 50%;
+            user-select: none;
+            cursor: move;
+            position: absolute;
+        }
+
+        #div2 {
+            background: #999999;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">ddd</div>
+<div id="div2">eee</div>
+</body>
+</html>
+
+<script>
+    let oDiv1=document.getElementById('div1');
+    let oDiv2=document.getElementById('div2');
+
+    oDiv1.onmousedown=dragStart;
+    oDiv2.onmousedown=dragStart;
+
+   function dragStart(e) {
+       this.mx=e.pageX;
+       this.my=e.pageY;
+       this.startX=this.offsetLeft;
+       this.startY=this.offsetTop;
+       document.onmousemove=dragMove.bind(this);
+       document.onmouseup=dragEnd.bind(this);
+       zIndex.call(this)
+   }
+   function dragMove(e) {
+       let l=e.pageX-this.mx+this.startX,
+           t=e.pageY-this.my+this.startY;
+       this.style.left=l+'px'
+       this.style.top=t+'px'
+
+       if(!this.prevX){
+           this.prevX=this.mx;
+       }
+       this.speed=e.pageX-this.prevX;
+       this.prevX=e.pageX
+   }
+   function dragEnd() {
+       document.onmousemove=null;
+       document.onmouseup=null;
+       if(!this.running) {
+           fly.call(this)
+       }
+       drop.call(this)
+       this.maxL=(document.documentElement.clientWidth||document.body.clientWidth)-this.offsetWidth
+       this.maxT=(document.documentElement.clientHeight||document.body.clientHeight)-this.offsetHeight
+   }
+   function fly() {
+       this.running = true;
+       clearTimeout(this.flyTimer)
+       this.speed *= 0.98;
+       let l = this.speed + this.offsetLeft
+       if (l >= this.maxL) {
+           l = this.maxL
+           this.speed *= -1;
+       }
+       if(l<=0){
+           l=0;
+           this.speed*=-1;
+       }
+       this.style.left = l + 'px';
+       if (Math.abs(this.speed) <= 0.1) {
+           clearTimeout(this.flyTimer)
+           this.running = false;
+       } else {
+           this.flyTimer = setTimeout(fly.bind(this), 30)
+       }
+   }
+   function drop() {
+       if(!this.flag){
+           this.flag=0
+       }
+       if(!this.dropSpeed){
+           this.dropSpeed=9.8
+       }else{
+           this.dropSpeed+=9.8
+       }
+       this.dropSpeed*=0.98
+       let t=this.offsetTop+this.dropSpeed
+       if(t>=this.maxT){
+           t=this.maxT
+           this.dropSpeed*=-1
+           this.flag++
+       }else{
+           this.flag=0
+       }
+       this.style.top=t+'px'
+       if(this.flag>2){
+           clearTimeout(this.dropTimer)
+       }else{
+           this.dropTimer=setTimeout(drop.bind(this),30)
+       }
+   }
+   function zIndex() {
+       this.style.zIndex++
+   }
+</script>

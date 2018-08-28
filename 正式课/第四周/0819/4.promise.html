@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * Promise
+    * ES6 新增的 类
+    * 回调地狱
+    * */
+    var data=null;
+    var xhr=new XMLHttpRequest();
+    xhr.open('get','data.json')//第三个参数 不写 默认为true 也就是异步执行
+    xhr.onreadystatechange=function () {
+        if (xhr.readyState==4&&/^[23]\d{2}$/.test(xhr.status)){
+            data=xhr.responseText;
+            //请求成功之后才会执行
+        }
+    }
+    xhr.send()
+
+
+    var p=new Promise(function (res,rej) {
+        //res : 处理异步请求成功时 执行的函数
+        //rej : 处理异步请求失败   执行的函数
+        var data=null;
+        var xhr=new XMLHttpRequest();
+        xhr.open('get','data.json')//第三个参数 不写 默认为true 也就是异步执行
+        xhr.onreadystatechange=function () {
+            if (xhr.readyState==4&&/^[23]\d{2}$/.test(xhr.status)){
+                data=xhr.responseText;
+                //请求成功之后才会执行
+                res(data)
+        }
+        if(!/^[23]\d{2}$/.test(xhr.status)){
+                rej()
+        }
+        }
+        xhr.send()
+    }).then(function (data) {
+        console.log('yes');
+    },function (data2) {
+        console.log('no');
+    })
+
+
+    var p=new Promise((resolve,reject)=>{
+        reject();
+        resolve();//只输出no
+
+        // resolve();
+        // reject();//只输出yes
+
+        /*
+        * 一旦状态确定下来 ； 就不会再更改
+        * */
+    })
+    p.then(success,fail);
+    function success() {
+        console.log('yes');
+    }
+    function fail() {
+        console.log('no');
+    }
+    /*
+    * then 是Promise里边执行完成后 ， 相应的要执行的函数；
+    * 需要传入两个实参
+    * 一个是Promise里边代码执行成功后 执行的函数  ； 第二个是 Promise里边代码执行失败后 执行的函数
+    * */
+    var p=new Promise((resolve,reject)=>{})
+</script>

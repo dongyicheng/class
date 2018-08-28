@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul id="box">
+    <li><span>一级菜单1</span>
+        <ul>
+            <li><span>二级菜单1</span></li>
+            <li><span>二级菜单2</span>
+                <ul>
+                    <li><span>三级菜单1</span></li>
+                    <li><span>三级菜单2</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><span>一级菜单2</span>
+        <ul>
+            <li><span>二级菜单1</span></li>
+            <li><span>二级菜单2</span>
+                <ul>
+                    <li><span>三级菜单1</span></li>
+                    <li><span>三级菜单2</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><span>一级菜单3</span>
+        <ul>
+            <li><span>二级菜单1</span></li>
+            <li><span>二级菜单2</span>
+                <ul>
+                    <li><span>三级菜单1</span></li>
+                    <li><span>三级菜单2</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>
+<script src="jquery1.11.3.js">
+</script>
+<script>
+    // var oSpans = document.querySelectorAll('#box li span');
+    // var box = document.querySelector('#box');
+    // [...oSpans].forEach((item)=>{
+    //     var oul = item.nextElementSibling;
+    //     if(oul&&oul.nodeName.toLowerCase() == 'ul'){
+    //         oul.style.display = 'none';
+    //     }
+    // });
+    // box.onclick = function (e) {
+    //     e = e || window.event;
+    //     var tar = e.target || e.srcElement;
+    //     if(tar.nodeName.toLowerCase() == 'span'){
+    //         var oul = tar.nextElementSibling;
+    //         if(oul&&oul.nodeName.toLowerCase() == 'ul'){
+    //             if(oul.style.display == 'none'){
+    //                 oul.style.display = 'block';
+    //             }else {
+    //                 oul.style.display = 'none';
+    //                 [...oul.querySelectorAll('ul')].forEach((item)=>{
+    //                     item.style.display = 'none';
+    //                 })
+    //             }
+    //         }
+    //     }
+    // }
+
+
+    let box=document.getElementById('box'),
+        oSpan=document.getElementsByTagName('span');
+
+    [...oSpan].forEach((item)=> {
+        let oul = item.nextElementSibling
+        if (oul && oul.nodeName.toLowerCase() == 'ul') {
+            oul.style.display='none'
+        }
+    })
+    box.onclick=function (e) {
+        let tar=e.target||e.srcElement;
+        if(tar.nodeName.toLowerCase()=='span'){
+            let oul=tar.nextElementSibling
+            if(oul&&oul.nodeName.toLowerCase()=='ul'){
+                if(oul.style.display=='none'){
+                    oul.style.display='block'
+                }else{
+                    oul.style.display='none';
+                    [...oul.getElementsByTagName('ul')].forEach((item)=>{
+                        item.style.display='none'
+                    })
+
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+    var $box=$('#box'),
+        $oSpan=$('#box span')
+    $.each($oSpan,function (index,item) {
+        let $oul=$(item).next();
+        if($oul.length){
+            $oul.hide()
+        }
+    })
+    $box.on('click',function (e) {
+        let $tar=$(e.target)
+        if($tar[0].nodeName.toLowerCase() == 'span'){
+            let $oul=$tar.next();
+            if($oul.length){
+                if($oul.length){
+                    if($oul.css('display') == 'none'){}
+                    $oul.show()
+                }else{
+                    $oul.hide()
+                    $oul.find().hide()
+                }
+            }
+        }
+    })
+
+
+
+</script>

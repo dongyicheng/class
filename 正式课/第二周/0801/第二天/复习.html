@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 原型 原型链的查找机制
+    *
+    * obj.a
+    * 先去查找自己的私有属性；
+    * 没有的话 通过 __proto__ 去所属类的原型上查找
+    * 若还没有， 再去通过 __proto__  去 基类（Object类）的原型对象上查找
+    * 若仍没有 则是 undefined；
+    * 我们把这种查找机制称为 原型链；
+    *
+    *
+    * 每一函数都有一个prototype的属性，指向自己的原型对象；
+    * 每一个对象都有一个__proto__的属性，指向所属类的原型对象；
+    * 每一个默认的原型对象上都有一个 constructor 属性，指向构造函数本身；
+    *
+    * 普通数组 都是  Array这个类的一个实例
+    * 普通对象 都是  Object这个类的一个实例
+    * 所有函数 都是  Function这个类的一个实例
+    *
+    *
+    * 类  都是函数
+    * 实例 都可以理解成对象
+    *
+    *  [] 他是个对象；但他的所属类时 Array; []首先是个数组，然后才是个对象；
+    *
+    *
+    * */
+
+    function sum() {
+        console.log(12)
+    }
+    sum();// sum 就是个普通函数
+    var s = new sum;// sum 就是一个构造函数
+
+    /*
+    * 函数的三种角色
+    * 首先是个普通函数
+    *       跟作用域、变量提升有关系
+    * 构造函数
+    *       跟this，原型(prototype) 有关系
+    * 普通对象
+    *       跟属性名，属性值有关系；__proto__
+    *
+    * */
+    function Person() {
+        this.name = 'zfpx';
+        this.age = 9;
+    }
+    Person.prototype.getName = function () {
+        console.log(this.name)
+    };
+    Person.prototype.getName1 = function () {
+        console.log(this.name)
+    };
+    Person.prototype.getName2 = function () {
+        console.log(this.name)
+    };
+    Person.prototype.getName3 = function () {
+        console.log(this.name)
+    };
+    Person.prototype.getName4 = function () {
+        console.log(this.name)
+    };
+    var obj = {
+        name: 'zhufeng',
+        // constructor:Person,
+        getName: function () {
+            console.log(10)
+        },
+        getName1:function () {
+            console.log(12)
+        }
+    };
+    // var obj2 = {w:[1,2,3]};
+    // obj2.w = [2,3,4];
+    // console.log(Person.prototype);// 指向默认的 原型对象
+    var per2 = new Person();
+    Person.prototype = obj; // 把Person.prototype 重新指向 obj
+    // 手动修改了 Person类原型的指向；把原来默认的原型指向重新指向新的地址；原型仍然存在
+    // 原来默认的原型上的方法和属性就找不到了
+
+    var per1 = new Person();// 创造 Person类的一个实例
+    //1、先创建一个私有作用域 （同普通函数执行）
+    //2、形参赋值，变量提升 （同普通函数执行）
+    //3、默认开辟一个空的堆内存；让函数中的执行主体（this）指向这个堆内存；
+    //4、代码从上往下 以次执行 （同普通函数执行）
+    //5、默认把 开辟的这个堆内存返回； 手动写return 并且后边是个值类型或者啥也不写；这时 是不能改变默认return的值；若手动改成 return 引用数据类型；则会把默认返回的对象覆盖
+    // 普通函数 不写return 默认返回 undefined
+    console.log(per1.hasOwnProperty('name'));
+    per1.getName();
+    console.log(per1.constructor);
+    // console.log(per1.__proto__);
+    console.log(per2.constructor);
+    //第一步 在自己身上查找
+    //2、在Person类的原型上查找；
+    //3、去Object的原型上查找
+    //4、 f Object(){[native code]}
+
+    Array.prototype = {};
+    /*
+    * 在JS中 我们可以手动修改自定义类的prototype指向，但是不能修改 内置类的原型指向；
+    *
+    *对于类的某个实例来说，我们可以修改这个实例的 __proto__ 指向；修改某个实例的__proto__不会影响 整个类的原型指向;
+    * */
+
+
+</script>  

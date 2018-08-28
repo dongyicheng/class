@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box1 box box3 box box2">
+</div>
+</body>
+</html>
+<script>
+    //获取单个相同类名的元素  getByClass
+    function getByClass(str,context) {
+        str=str.replace(/^ +| +$/g,'');
+        var ary=[];
+        context=context||document;
+        var eles=context.getElementsByTagName('*');
+        var reg=new RegExp('(^| +)'+str+'( +|$)')
+        for (let i = 0; i < eles.length; i++) {
+            reg.test(eles[i].className)?ary.push(eles[i]):null;
+        }
+        return ary;
+    }
+
+    console.log(getByClass('box'));
+    var box=getByClass('box')[0];
+    //多个类名
+    function getByClass2(str,context) {
+        str=str.replace(/^ +| +$/g,'');
+        context=context||document;
+        var classAry=str.split(/ +/);
+        var eles=context.getElementsByTagName('*');
+        for (let i = 0; i < classAry.length; i++) {
+            var ary=[];
+            var reg=new RegExp('(^| +)'+classAry[i]+'($| +)')
+            for (let j = 0; j < eles.length; j++) {
+               reg.test(eles[j].className)?ary.push(eles[j]):null;
+            }
+            eles=ary;
+        }
+        return ary;
+    }
+    console.log(getByClass2('box box1'));
+
+    //判断是否含有该类名
+    function hasClass(str,ele) {
+        str=str.replace(/^ +| +$/g,'');
+        var classAry=str.split(/ +/);
+        for (let i = 0; i < classAry.length; i++) {
+            var reg = new RegExp('(^| +)' + classAry[i] + '( +|$)')
+            if (!reg.test(ele.className)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    console.log(hasClass('box ', box));
+
+    //添加类名
+    function addClass(str,ele) {
+        str=str.replace(/^ +| +$/g,'');
+        var classAry=str.split(/ +/);
+        for (let i = 0; i < classAry.length; i++) {
+            if(hasClass(classAry[i],ele))return;
+            ele.className +=' '+classAry[i]
+        }
+    }
+    addClass('box3 box',box);
+
+    // 删除类名
+    function removeClass(str,ele) {
+        str=str.replace(/^ +| +$/g,'')
+        var classAry=str.split(/ +/);
+        for (let i = 0; i < classAry.length; i++) {
+            var reg=new RegExp('(^| +)'+classAry[i]+'( +|$)','g');
+            ele.className=ele.className.replace(reg,' ')
+        }
+    }
+    removeClass('box box3',box)
+</script>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 320px;
+            height: 430px;
+            margin:30px auto 0;
+            background: #427099;
+            cursor: move;
+            position: relative;
+            padding: 10px;
+        }
+        .box ul{
+            width: 370px;
+        }
+        .box ul li{
+            width: 100px;
+            height: 100px;
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            background-color: sandybrown;
+        }
+        .box img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul>
+        <li>
+            <img src="img/cute-blue-monsters-university-icon000.png" alt="">
+        </li>
+        <li><img src="img/cute-blue-monsters-university-icon001.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon002.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon003.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon004.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon005.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon006.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon007.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon008.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon009.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon010.png" alt=""></li>
+        <li><img src="img/cute-blue-monsters-university-icon011.png" alt=""></li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    let box=document.getElementsByClassName('box')[0],
+        oLis=box.getElementsByTagName('li');
+
+    [...oLis].reverse().forEach((item)=>{
+        item.style.left=item.offsetLeft+'px';
+        item.style.top=item.offsetTop+'px';
+        item.style.position='absolute'
+    })
+
+    box.onmousedown=dragStart;
+    function dragStart(e) {
+        this.tar=e.target||e.srcElement;
+        this.tarName=this.tar.nodeName.toLowerCase();
+        this.oLis=this.tar.parentNode;
+        e=e||window.event;
+        this.mx=e.pageX;
+        this.my=e.pageY;
+        this.startX=this.oLis.offsetLeft;
+        this.startY=this.oLis.offsetTop;
+        document.onmousemove=dragMove.bind(this);
+        document.onmouseup=dragEnd.bind(this);
+        zIndex.call(this);
+        this.bg=this.oLis.style.background;
+
+    }
+    function dragMove(e) {
+        e.preventDefault();
+        if (this.tarName == 'img') {
+            if (this.oLis && this.oLis.nodeName.toLowerCase() == 'li') {
+                let l = e.pageX - this.mx + this.startX,
+                    t = e.pageY - this.my + this.startY;
+                this.oLis.style.left = l + 'px';
+                this.oLis.style.top = t + 'px';
+                this.oLis.style.background = 'red';
+
+            }
+        }
+    }
+        function dragEnd() {
+            if (this.tarName == 'img') {
+                if (this.oLis && this.oLis.nodeName.toLowerCase() == 'li'){
+                    this.oLis.style.left = this.startX + 'px'
+                    this.oLis.style.top = this.startY + 'px'
+                    this.oLis.style.background = this.bg;
+                }
+            }
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+
+        let n = 1;
+
+        function zIndex() {
+            if (this.tarName == 'img') {
+                if (this.oLis && this.oLis.nodeName.toLowerCase() == 'li') {
+                    this.oLis.style.zIndex = n++
+                }
+            }
+        }
+
+</script>

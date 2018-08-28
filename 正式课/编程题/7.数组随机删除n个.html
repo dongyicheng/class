@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    //随机删除n个  返回删除的数组成的新数组
+    var ary=[1,2,3,4];
+    Array.prototype.removeRan=function (n) {
+        if(n>=this.length){
+            return this.splice(0)
+        }
+        let ary=[];
+        for (let i = 0; i < n; i++) {
+            let m=Math.floor(Math.random()*ary.length);//[0,length-1]
+            ary.push(this.splice(m,1)[0]);
+        }
+        return ary;
+    };
+    ary.removeRan(3)
+
+
+
+
+</script>

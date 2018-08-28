@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #3059fa;
+            position: relative;
+            left: 0;
+            border: 10px solid #24ccc8;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" class="box" style="left: 0">珠峰培训</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    /*
+    * 固定步长的运动
+    * 每次移动相同的距离
+    * */
+    var oDiv = utils.getByClass('box')[0];
+    // 每次移动一个像素
+    var tarL = utils.win('clientWidth') - oDiv.offsetWidth;
+    var l = 0;
+    var timer = window.setInterval(function () {
+        l+=10;
+        // oDiv.style.left = l+'px';
+        if(l >= tarL){
+            clearInterval(timer);
+            // utils.css(oDiv,'left',tarL);
+            // return;
+            l = tarL;
+            console.log(l);
+        }
+        console.log(l);
+        utils.css(oDiv,'left',l);
+    },10)
+
+</script>  

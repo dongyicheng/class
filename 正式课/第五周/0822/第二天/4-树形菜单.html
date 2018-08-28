@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<ul id="box">
+    <li>
+        <span>一级菜单1</span>
+        <ul>
+            <li>
+                <span>二级菜单1</span>
+            </li>
+            <li>
+                <span>二级菜单2</span>
+                <ul>
+                    <li>
+                        <span>三级菜单1</span>
+                    </li>
+                    <li>
+                        <span>三级菜单2</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <span>一级菜单2</span>
+        <ul>
+            <li>
+                <span>二级菜单1</span>
+            </li>
+            <li>
+                <span>二级菜单2</span>
+                <ul>
+                    <li>
+                        <span>三级菜单1</span>
+                    </li>
+                    <li>
+                        <span>三级菜单2</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <span>一级菜单3</span>
+        <ul>
+            <li>
+                <span>二级菜单1</span>
+            </li>
+            <li>
+                <span>二级菜单2</span>
+                <ul>
+                    <li>
+                        <span>三级菜单1</span>
+                    </li>
+                    <li>
+                        <span>三级菜单2</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    /*var box = document.getElementById('box'),
+        oSpans = document.getElementsByTagName('span');
+    [...oSpans].forEach((item)=>{
+        //item 是 每一个 span; 目标是让span 的弟弟ul 折住；
+        var oul = item.nextElementSibling;
+        if(oul && oul.nodeName.toLowerCase() == 'ul'){
+            oul.style.display = 'none';
+        }
+    });
+    box.onclick = function (e) {
+        e = e || window.event;
+        var tar = e.target || e.srcElement;
+        // tar 是事件源；判断事件源是不是 span;
+        // 若是 span 我们要让他的ul弟弟 展开或者折住；
+        if(tar.nodeName.toLowerCase() === 'span'){
+            var oul = tar.nextElementSibling;
+            if(oul && oul.nodeName.toLowerCase() === 'ul'){
+                if(oul.style.display == 'none'){
+                    oul.style.display = 'block';
+                }else {
+                    oul.style.display = 'none';
+                    var uls = oul.querySelectorAll('ul');
+                    [...uls].forEach((item)=>{
+                        item.style.display = 'none';
+                    })
+                }
+            }
+        }
+    }*/
+
+    var $box = $('#box'),
+        $oSpans = $('#box span');
+    $.each($oSpans,function (index,item) {
+        var $oul = $(item).next();
+        if($oul.length){
+            $oul.hide();
+        }
+    });
+    $box.on('click',function (ev) {
+        var $tar = $(ev.target);
+        if($tar[0].nodeName.toLowerCase() == 'span'){
+            var $oul = $tar.next();
+            if($oul.length){
+                if($oul.css('display') == 'none'){
+                    $oul.show()
+                }else {
+                    $oul.hide();
+                    $oul.find('ul').hide();
+                }
+            }
+        }
+    })
+
+</script>  

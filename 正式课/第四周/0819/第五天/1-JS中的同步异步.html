@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * JS 是单线程
+    * 同步  异步
+    * 常见的异步
+    *  1、定时器
+    *  2、事件绑定
+    *  3、ajax请求（一般的都是异步）
+    *  4、回调函数也可以理解成 异步
+    * */
+    var oDiv = document.getElementById('div1');
+    console.log(1);
+    var timer = setTimeout(function () {
+        console.log(2)
+    },3000);
+    console.log(3);
+
+    oDiv.onclick = function () {
+        console.log(4);
+    };
+    /*
+    *
+    * 浏览器怎么规划 JS的异步？ 一个是主任务队列  另一个是等待任务队列
+    *
+    * 主任务队列指的是代码从上到下一次执行
+    * 等待任务队列 存放的是咱们的异步代码
+    * 等待任务队列中的代码执行的前提 是 主任务队列中的代码执行完毕
+    * */
+    // 版本1
+    console.log(1);
+    var timer1 = window.setTimeout(function () {
+        console.log(2)
+    },500);
+    console.log(3);
+    var tiemr2 = window.setTimeout(function () {
+        console.log(4);
+        var timer3 = setTimeout(function () {
+            console.log(6)
+        },200)
+    },200);
+    for(var i = 0; i < 900000000; i++){
+        //时间大概是 1500毫秒
+    };
+    console.log(5);
+
+    //----------------------------------------
+    //版本2-----
+    console.log(1);
+    var timer1 = window.setTimeout(function () {
+        console.log(2)
+    },500);
+    console.log(3);
+    for(var i = 0; i < 900000000; i++){
+        //时间大概是 1500毫秒
+    };
+    var tiemr2 = window.setTimeout(function () {
+        console.log(4);
+    },200);
+    console.log(5);
+    //----------------------------------------
+    //版本3-----
+    console.log(1);
+    var timer1 = window.setTimeout(function () {
+        console.log(2)
+    },500);
+    console.log(3);
+    for(var i = 0; i < 900000000; i++){
+        //时间大概是 1500毫秒
+    }
+    var tiemr2 = window.setTimeout(function () {
+        console.log(4);
+    },200);
+    for(var i = 0; i < 900000000; i++){
+        //时间大概是 1500毫秒
+    }
+    console.log(5);
+
+    /*
+    * 主任务队列先执行  依次输出 1 3 执行for  for循环完毕后 再输出  5；这时主任务队列执行完毕，等待任务队列中的代码开始执行，
+    *
+    * */
+
+    console.log(1);
+    setTimeout(function () {
+        console.log(2)
+    },200);
+    while (true){
+
+    }
+
+    console.log(1);
+    setTimeout(function () {
+       console.log(2)
+    },0);
+    console.log(3)
+    /*
+    * 定时器 有自己的默认最小时间，即使手写成0，也不是同步执行；也是个异步执行;
+    * 清除定时器，我们可以混着用；clearInterval 也能清除 timeout
+    * */
+    var timer1 = window.setTimeout(function () {
+        console.log(12)
+    },4000);
+    clearInterval(timer1)
+
+</script>  

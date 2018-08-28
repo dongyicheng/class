@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+*匹配 10-29 的年龄段
+* */
+var reg=/^[12]\d$/
+
+    /*
+    *匹配18-65
+    * */
+    //   var reg2=/^(1[89]|[2-5]\d|6[0-5])$/
+    // //验证
+    // for (let i = 10; i < 70; i++) {
+    //     console.log(reg2.test(i),i);
+    // }
+    /*
+*匹配有效数字
+* +数
+* -数
+* 小数
+* */
+     var reg3=/[+-]?(\d|[1-9]\d+)(\.\d+)?/;
+    // [+-]? ----》代表 正负号可能出现 也可能不出现
+    //(\d|[1-9]\d+)----》代表若是一位数，则可以以0开头；若是 多位数 则必须以1-9之间的数字开头
+    //(\.\d+)?  ----》代表小数点部分，出现 0次或一次
+
+
+    /*
+    *验证手机号
+    * */
+    var reg=/^1\d{10}]/;
+
+    /*
+    * 189 199
+    * */
+    var reg=/^1[89]9\d{8}/;
+
+
+    /*
+    *匹配邮箱  @前面
+    * qq  -----> 最小5位  最大11位
+    * 126  -----> 都行数字字母下划线 最小6 最大18
+    * 163 -----> 都行数字字母下划线 最小6 最大18
+    * */
+    var reg=/^([1-9]\d{4,10}@qq|\w{6,18}@(126|163))\.com$/
+
+// 18-65
+var reg=/^(1[89]|[2-5]\d|6[0-5])$/;
+
+
+
+    /*
+*需求 获取到字符串中所有满足条件的  字符或者字符串 ; 返回找到内容的数组
+* 思路: 利用 全局修饰符的特性  ; 一直查找  直到返回null  停止查找
+* */
+  RegExp.prototype.execAll=function(str) {
+        var temp=this.exec(str);
+        if(!this.global){
+            temp=temp||[];
+            temp.ereorReason='亲没加全局修饰符';
+            return temp;
+        }
+        var ary=[];
+        while(temp){
+            ary.push(temp[0]);
+            temp=this.exec(str);
+        }
+        return ary;
+    }
+    var str='dd126dd111e';
+    var reg9=/(\d+)([a-z])/g;
+    console.log(reg9.execAll(str))
+
+//自动加上g
+    RegExp.prototype.execAll= function (str) {
+        var _this;
+        !this.global?_this = eval(this + 'g'):_this = this;
+        var temp = _this.exec(str);
+        var ary = [];
+        while (temp) {
+            ary.push(temp);
+            temp = _this.exec(str)
+        }
+        return ary;
+    }
+
+    var str='dd126dd111e';
+    var reg9=/(\d+)([a-z])/;
+    console.log(reg9.execAll(str));
+
+    /*把字符串中的每个数字加1*/
+    var str='zhufeng2018zhufeng2019';
+    var reg=/\d/g;
+    var str2=str.replace(reg,function () {
+        var temp=arguments[0];
+        temp=temp*1+1;
+        return temp;
+    })
+    console.log(str2);
+
+
+    /*需求:  根据身份证号码; 展示出这个人的基本信息
+    这个人是xxx年xxx月xxx日出生的
+    是性别 xxx*/
+    // 用分组捕获实现(exec / match)
+    // 用replace替换捕获
+
+    var str='131081199603022524';
+    var reg=/^1\d{5}(\d{4})(\d{2})(\d{2})\d{2}(\d)[\dX]$/;
+    var ary=str.match(reg);
+    var str1=`这个人是${ary[1]}年${ary[2]}月${ary[3]}日出生的;性别${ary[4]%2==1?'男':'女'}`
+    console.log(str1);
+
+    str2=str.replace(reg,function () {
+        var ary=[...arguments]
+        return `这个人是${ary[1]}年${ary[2]}月${ary[3]}日出生的;性别${ary[4]%2==1?'男':'女'}`
+    })
+    console.log(str2);
+
+    /*通过正则 把 下边的日期字符串转化成对应的汉字的年月日时间*/
+    /*
+    *split结合正则
+    * replace
+    * match
+    * */
+    var str="2018/08/08 12:24:34";
+    var str2="今天是2018年8月8日 中午12点24分34秒";//目标字符串
+
+    var ary=str.split(/[:/ ]/);
+    var str3=`今天是${ary[0]}年${ary[1]}月${ary[2]}日 ${ary[3]>10?(ary[3]>14?'下午':'中午'):'上午'}${ary[3]}点${ary[4]}分${ary[5]}秒`;
+    console.log(str3,ary);
+
+    var reg=/(\d{4})\/(\d{2})\/(\d{2}) *(\d{2}):(\d{2}):(\d{2})/;
+    var str4=str.replace(reg,function () {
+        return `今天是${ary[0]}年${ary[1]}月${ary[2]}日 ${ary[3]>10?(ary[3]>14?'下午':'中午'):'上午'}${ary[3]}点${ary[4]}分${ary[5]}秒`
+    })
+    console.log(str4);
+
+    var ary=str.match(reg);
+    var str5=`今天是${ary[1]}年${ary[2]}月${ary[3]}日 ${ary[4]>10?(ary[4]>14?'下午':'中午'):'上午'}${ary[4]}点${ary[5]}分${ary[6]}秒`
+    console.log(str5);
+
+    var str = "https://www.souyidai.com/soeasy/invest/onlinelist?productType=1&pageNo=0&repayMode=-1&orderBy=DEFAULT&t=0.642114887216358";
+    /*
+    * 获取字符串中的参数
+    * */
+     var reg=/[^&?=]+=[^&?=]+/g
+    console.log(str.match(reg));
+    /*
+    * 获取一个字符串出现次数最多的字母  及其 次数
+
+    * */
+    var str='fdfffffdfffffggdgggggggggggdfga'
+    var obj={};
+    for (let i = 0; i < str.length; i++) {
+        if(obj.hasOwnProperty(str[i])){
+           obj[str[i]]++;
+        }else{
+            obj[str[i]]=1
+        }
+        var n=1,m;
+        for (var k in obj) {
+           if(obj[k]>n){
+               n=obj[k];
+               m=k;
+           }
+        }
+    }
+    console.log(n, m);
+
+    //思路2  把字符串(使用split分割成数组, 给数组排序 ; 然后再把数组结合成 字符串)  变成  aaaaaaabbbbbbzzzzzvvvvv------>/(\w)\1*/
+//再用正则  结合 replace  方法求出最大值
+
+    // var str1=str.split('').sort((a,b)=>{return a.localeCompare(b);}).join('');
+    // var reg=/(\w)\1*/g;
+    // var ary=str1.match(reg);
+    // ary=ary.sort((a,b)=>{
+    //     return b.length-a.length
+    // });
+    // // arr.forEach(function (item,index) {
+    // //
+    // // })
+    // console.log(ary, ary[0],ary[0][0],ary[0].length);
+
+    var str1=str.split('').sort((a,b)=>a.localeCompare(b)).join('');
+    var reg=/(\w)\1*/g;
+    var ary=str1.match(reg).sort((a,b)=>{return b.length-a.length});
+    console.log(ary[0].length, ary[0][0]);
+
+
+    /*
+    * 千分符
+    * */
+    var str='12345633';//12,345,633
+    var reg=/(\d)(?=(\d{3})+$)/g;
+    console.log(str.replace(reg, '$1,'));
+
+
+    // var str='12345633';//12,345,633
+    // var reg=/(\d)(?=(\d{3})+$)/g
+    // console.log(str.replace(reg, '$1,'));
+
+</script>

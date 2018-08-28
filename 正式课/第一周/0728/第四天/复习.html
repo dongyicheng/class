@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <p>珠峰</p>
+    <div id="div1">珠峰培训</div>
+    <div>1</div>
+    <div id="div3">2</div>
+    <!--注释-->
+    <div>3</div>
+</body>
+</html>
+<script>
+    /*
+    * 不同数据类型的比较
+    * */
+    [] == ![]; // true
+    [] == false;
+    [].toString() //--- > ''
+    '' == false;
+    0 == 0; // --->
+
+    /*
+    * 1、 对象和对象比较  比较的是对象的地址
+    *
+    * 2、 对象和字符串的比较  先把对象转化成字符串(调用自身的toString方法) 然后再去比较
+    *
+    * 3、null == undefined  true  ; null === undefined false
+    *
+    * 4、 其他情况 是把两边转成数字再去比较；其中 引用数据类型是先转成 字符串 再转成数字
+    *
+    *
+    * */
+    [] == true;// 0 == 1  false
+    var a = {};
+    var b = {};
+    var c = [];
+    var d = [];
+    var str = '[object Object]';
+    var str2 = '';
+    a == str; // true
+    c == str2; //
+    a == b ;// false
+    b == c; // false
+    c == d; // false
+
+
+    /*
+    * 隐式数据类型转化
+    * +  只要碰见字符串  就变成了 字符串的拼接
+    * ！  取反，先把后边的内容转成 布尔类型 ；然后再去取反
+    * -   1 - 'a': 先把两边用Number转化；然后再进行 运算（- * / %）
+    * isNaN(xx)  先把参数转成 number ;然后再去判断
+    * if(条件)  把条件转成 布尔；再去判断
+    * 不同数据数类型比较
+    * */
+
+    function getBigBrother(ele) {
+        var temp = ele.previousSibling;
+        while(temp && temp.nodeType !=1){
+            temp = temp.previousSibling;
+        }
+        return temp;
+    }
+
+    var oDiv3 = document.getElementById('div3');
+    function getEleIndex(ele) {
+        // var ary = [];// 有几个哥哥 ; ele 的索引就是几
+        var n = 0;
+        var temp = getBigBrother(ele);
+        while (temp){
+            // ary.push(temp);
+            // n++;
+            temp = getBigBrother(temp);
+            n++;
+        }
+        // return ary.length;
+        return n;
+    }
+    //返回值 是这个元素的 索引
+    getEleIndex(oDiv3);
+</script>  

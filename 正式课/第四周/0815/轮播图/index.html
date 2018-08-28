@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+        #div1{
+            width: 600px;
+            height: 260px;
+            margin: 50px auto 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .img_box{
+            height: 260px;
+            overflow: hidden;
+        }
+        .img_box li{
+            float: left;
+            width: 600px;
+            height: 260px;
+            position: relative;
+            background:#EFF3EF url("http://www.sucaijishi.com/uploadfile/2014/0524/20140524124241131.gif") no-repeat center;
+        }
+        .img_box li img{
+            width: 100%;
+            height: 100%;
+        }
+        .img_box li p{
+            position: absolute;
+            background: rgba(0,0,0,0.5);
+            width: 100%;
+            padding: 10px;
+            color: #fff;
+            bottom: 0;
+            left: 0;
+        }
+        .btn_box .leftBtn,.btn_box .rightBtn{
+            width: 50px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            position: absolute;
+            top: 80px;
+            font-size: 28px;
+            display: none;
+        }
+        .btn_box .leftBtn{
+            left: 0;
+        }
+        .btn_box .rightBtn{
+            right: 0;
+        }
+        .tip_box{
+            position: relative;
+            text-align: center;
+            top: -75px;
+        }
+        .tip_box li{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            background: #333;
+            color: #EFF3EF;
+            font-size: 20px;
+        }
+    .tip_box li.current{
+        color: salmon;
+        font-size: 24px;
+    }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <ul class="img_box">
+        <li>
+            <img src="" alt="">
+            <p>图片上的字</p>
+        </li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="btn_box">
+    <div class="leftBtn"> < </div>
+    <div class="rightBtn"> > </div>
+    </div>
+    <ul class="tip_box">
+        <li class="tip">1</li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="../../js/utils.js"></script>
+<script src="../animate.js"></script>
+<script src="index.js"></script>

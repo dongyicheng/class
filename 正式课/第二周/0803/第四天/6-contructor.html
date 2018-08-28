@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    *这是个注释
+    * z*/
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.getName = function () {
+        console.log(this.name);
+    };
+    Person.prototype.name = '珠峰培训';
+    var per1 = new Person('小明',18);
+    per1.__proto__.getName = function () {
+        console.log(12);
+    };
+    per1.getName();//12
+    var per2 = new Person('小红',20);
+    per2.getName();//12
+
+    var obj = {
+        getName:function () {
+
+        },
+        getName2:function () {
+
+        },
+        getName3:function () {
+
+        },
+        getName4:function () {
+
+        },
+    };
+    Person.prototype = obj;
+    // Person.prototype = {
+    //     name:'珠峰',
+    //     constructor: Person,
+    //     getName: function () {
+    //         console.log('www.zhufengpeixun.com')
+    //     }
+    // };
+    var per3 = new Person();
+    per3.getName(); // www
+    per2.getName(); //12
+    per1.getName(); //12
+    // per1 和 per2  是在 修改Person原型指向 之前创造出来的实例；
+    // 所以他们的 __proto__ 仍然是指向 原有默认的Person的原型对象
+    // per3  是在修改原型指向之后创造的实例；那么 他的  __proto__ 就是指向 新的原型对象
+    console.log(per1.constructor === Person); // true
+    console.log(per3.constructor === Object); // true
+    console.log(per2.constructor === per3.constructor);// false
+    console.log(per2.constructor === per1.constructor);//true
+
+    /*
+    *
+    * 当我们手动把 自定义类 的原型指向更换之后，要注意constructor的指向问题；
+    * 内置类的默认原型指向 是不能修改的；
+    * */
+    var obj = {};
+    console.log(obj.constructor);
+
+
+</script>  

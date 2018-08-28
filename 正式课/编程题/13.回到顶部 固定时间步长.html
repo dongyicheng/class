@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1{
+            height: 5000px;
+            width: 300px;
+            background: linear-gradient(#f4f4f4,#24ccc8,#3059fa);
+        }
+        .btn{
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+<button class="btn">回到顶部</button>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+   //  /*
+   //   * 固定步长的运动
+   //   * 每次移动相同的距离
+   //   * */
+   //  var oDiv = utils.getByClass('box')[0];
+   //  // 每次移动一个像素
+   //  var tarL = utils.win('clientWidth') - oDiv.offsetWidth;
+   //  var l = 0;
+   //  var timer = window.setInterval(function () {
+   //      l+=10;
+   //      // oDiv.style.left = l+'px';
+   //      if(l >= tarL){
+   //          clearInterval(timer);
+   //          // utils.css(oDiv,'left',tarL);
+   //          // return;
+   //          l = tarL;
+   //      }
+   //      utils.css(oDiv,'left',l);
+   //  },10)
+   //
+   //  /*
+   // * 固定时间的运动
+   // * */
+   //  var oDiv=document.getElementById('div')
+   //  var duration=2000;
+   //  var time=0;
+   //  /*
+   //  * 需要知道每20毫秒需要移动的距离
+   //  * */
+   //  var tarL = utils.win('clientWidth') - oDiv.offsetWidth;
+   //  //一共需要移动的距离
+   //  var speed=tarL/duration;
+   //  //运动的速度
+   //  var timer=window.setInterval(function () {
+   //      time+=20;//每20毫秒才能执行一次
+   //      utils.css(oDiv,'left',time*speed)
+   //      if(time >= duration){
+   //          clearInterval(timer);
+   //          utils.css(oDiv,'left',tarL)
+   //      }
+   //  },20)
+
+
+
+    var btn = utils.getByClass('btn')[0];
+    /*
+    * 固定步长
+    * */
+    btn.onclick=function () {
+        var timer=window.setInterval(()=>{
+            if(utils.scrollT()<0){
+                clearInterval(timer);
+            }
+            document.documentElement.scrollTop-=20
+            document.body.scrollTop-=20
+        },20)
+    }
+
+
+
+
+    btn.onclick=function () {
+        if(this.running)return;
+        this.running=true;
+        var duration=2000;
+        var changeL=utils.scrollT();
+        var speed=changeL/duration
+        this.timer=window.setInterval(()=> {
+            var moveT=speed*30;
+            changeL=utils.scrollT();
+            if(changeL<0){
+                clearInterval(this.timer)
+                this.running=false
+            }
+            document.documentElement.scrollTop-=moveT
+            document.body.scrollTop-=moveT
+        },30)
+    }
+    function btnDis() {
+        var scrT=utils.scrollT();
+        var cliH=utils.win('clientWidth')
+        if(scrT>cliH){
+            btn.style.display='block'
+        }else
+            {btn.style.display='none'}
+
+    }
+
+    window.onscroll=function () {
+        btnDis()
+    }
+
+    window.onmousewheel=function () {
+        clearInterval(btn.timer)
+        btn.running=false
+    }
+</script>

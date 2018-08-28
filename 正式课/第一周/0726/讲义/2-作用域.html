@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    // var ary = [1,2,3];
+    // function sum(arr) {
+    //     arr[0] = 10;
+    //     console.log(arr);//[10,2,3]
+    //     arr = [2,2,3];
+    //     return arr
+    // }
+    //
+    // console.log(sum(ary));
+    // console.log(ary);
+
+
+    /*
+    * 堆内存
+    * 栈内存
+    *
+    * 作用域  函数执行开辟栈内存（作用域）
+    * 私有作用域  ----》 函数执行都会形成一个私有作用域
+    * 全局作用域  ----》 页面一打开就会形成一个全局的作用域
+    *
+    * 私有变量   ----》 在私有作用域里边形成的变量 (通过 var声明； 形参)
+    * 全局变量   ----》 在全局作用域形成的变量（var ; a = 12）
+    *
+    * 作用域链
+    * 每一个私有作用域都会有他的上级作用域，他的上级作用跟他在哪定义的有关系
+    *
+    * */
+
+    //函数执行的一个过程
+    // 函数执行， 先开辟一个私有作用域
+    // 然后再进行变量提升 （var function 提前声明， 先形参赋值， 再变量提升）
+    // 代码从上到下 依次执行
+
+
+    // console.log(a);
+    // var a=12;
+    // function fn(){
+    //     console.log(a);
+    //     var a=13;
+    //     return a = 13;
+    // }
+    // // a = fn();
+    // console.log(fn());
+    // console.log(a)
+
+    // console.log(a);
+    // var a=12;
+    // function fn(){
+    //     console.log(a);
+    //     a=13
+    // }
+    // fn();
+    // console.log(a);
+
+    // console.log(a);
+    // a=12;
+    // function fn(){
+    //     console.log(a);
+    //     var a = 13;
+    // }
+    // fn();
+    // console.log(a)
+
+    // console.log(a);
+    // var a=12;
+    // // function fn(b){
+    // //     console.log(b);
+    // //     b = 13;
+    // // }
+    // function fn(a){
+    //     console.log(a);
+    //     a = 13;
+    // }
+    // fn(a);
+    // console.log(a);
+
+
+
+    // var foo=1;
+    // function bar(){
+    //     // 不管条件是否成立  都要进行变量提升
+    //     // 这时的 foo 属于私有变量 给的默认值是 undefined
+    //     if(!foo){
+    //         var foo=10;
+    //     }
+    //     // if(var i =0){
+    //     //
+    //     // }
+    //     console.log(foo);
+    // }
+    // bar();
+
+
+    // var n=13;
+    // function fn(n){
+    //     alert(n);//13
+    //     // var n = 15;
+    //     var n=14;
+    //     alert(n);//14
+    // }
+    // fn(n);
+    // console.log(n);//13
+    //
+    //
+    // var n = 13;
+    // function fn(n){
+    //     n = 15;
+    //     console.log(n);//15
+    // }
+    // fn();
+    // alert(n);//13
+    //
+    //
+    //
+    // var n = 10;
+    // function outer(){
+    //     function inner(){
+    //         function center(){
+    //             alert(n);
+    //         }
+    //         center();
+    //     }
+    //     inner();
+    //     var n = 15;
+    // }
+    // outer();
+    //
+    //
+    // var n = 10;
+    // function center(){
+    //     alert(n);//10
+    // }
+    // function inner(){
+    //     center();
+    // }
+    // function outer(){
+    //     inner();
+    //     var n = 15;
+    // }
+    // outer();
+    //
+    //
+    //
+    // var n=0;
+    // function a(){
+    //     var n=10;
+    //     b();
+    //     function b(){
+    //         n++;
+    //         alert(n);//11
+    //     };
+    // }
+    // a();
+    // alert(n);//0
+    //
+    // var n=0;
+    // function b(){
+    //     n++;
+    //     alert(n);//1 2
+    // }
+    // function a(){
+    //     var n=10;
+    //     b();
+    // }
+    // //函数的上级作用域 只跟函数在哪个作用域定义的有关系
+    // //跟函数在那里执行 没有任何关系
+    // b();
+    // a();
+    // alert(n);2
+    //
+    //
+    // //
+    // console.log(num,str);//undefined*2
+    // var num = 18;
+    // var str = "lily";
+    // function fn2(){
+    //     console.log(str,num);//"lily" undefined
+    //     num = 19;
+    //     str = "candy";
+    //     var num = 14;
+    //     console.log(str,num);//"candy" 14
+    // }
+    // fn2();
+    // console.log(str,num);//"candy" 18
+    //
+    //
+    //
+    //
+    // alert(a);//undefined
+    // console.log("a" in window); //true
+    // if(!("a" in window)){
+    //     var a = 10;
+    // }
+    // alert(a);//undefined
+    //
+    // console.log(fn);//undefined
+    // if(9==8){
+    //     function fn(){
+    //         alert(2);
+    //     }
+    // }
+    //
+    //
+    f = function(){return true};
+    g = function(){return false};
+    (function (){
+        console.log(g);
+        if(g&&[]==![]){
+            f = function f(){return false};
+            function g(){return true};
+        }
+    })();
+    alert(f());
+    alert(g());
+
+
+</script>

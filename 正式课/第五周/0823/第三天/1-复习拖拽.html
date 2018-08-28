@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: darksalmon;
+            border-radius: 50%;
+            position: absolute;
+            text-align: center;
+            line-height: 100px;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1');
+    // oDiv.onmousedown = function (e) {
+    //     dragStart.call(this,e);
+    // };
+    oDiv.onmousedown = dragStart;
+    function dragStart(e) {
+        // if(this.running)return;
+        e = e || window.event;
+
+        this.DragMove = dragMove.bind(this);
+        this.DragEnd = dragEnd.bind(this);
+        document.onmousemove = this.DragMove;
+        document.onmouseup = this.DragEnd;// 强行改变this指向
+
+        this.startX = this.offsetLeft;
+        this.startY = this.offsetTop;//盒子的初始位置
+
+        this.mx = e.pageX;
+        this.my = e.pageY;// 鼠标的初始位置
+
+        // this.flag = true;
+    }
+    function dragMove(e) {
+        // if(!this.flag)return;
+        e = e || window.event;
+        var x = e.pageX - this.mx,
+            y = e.pageY - this.my;
+        this.style.left = this.startX + x + 'px';
+        this.style.top = this.startY + y + 'px';
+
+        //求速度
+        //this.prevX 存放上次 move触发时 鼠标 x 的距离
+        if(!this.prevX){
+            this.prevX = 0;
+        }
+        this.speed = e.pageX - this.prevX;//两次move触发时移动的距离当作速度
+        this.prevX = e.pageX;
+    }
+    function dragEnd() {
+        // this.flag = false;//控制盒子能不能移动的
+        document.onmousemove = null;
+        document.onmouseup = null;
+        this.maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
+        if(!this.running){// 上一次的fly不停止；新的fly 就不执行
+            fly.call(this);
+        }
+        this.maxT = (document.documentElement.clientHeight||document.body.clientHeight) - this.offsetHeight;//最大的top值
+        drop.call(this);
+        // fly.call(this);
+        // fly.bind(this)();
+    }
+
+    function fly() {
+        this.running = true;
+        clearTimeout(this.flyTimer);
+        this.speed *= 0.98;
+        var l = this.offsetLeft + this.speed;
+        if(l > this.maxL){//右边界
+            l = this.maxL;
+            this.speed *= -1;
+        }
+        if( l < 0){ //左边界
+            l = 0;
+            this.speed *= -1;
+        }
+        this.style.left = l + 'px';
+        //定时器清除
+        if(Math.abs(this.speed) < 0.1){
+            clearTimeout(this.flyTimer);
+            this.running = false;
+        }else {
+            this.flyTimer = setTimeout(fly.bind(this),30)
+        }
+
+    }
+
+    function drop() {
+        if(!this.flag){this.flag = 0}
+        if(!this.dropSpeed){
+            this.dropSpeed = 5;
+        }else {
+            this.dropSpeed += 5;
+        };
+        this.dropSpeed *= 0.98;
+        var t = this.offsetTop + this.dropSpeed;
+        if(t >= this.maxT){
+            t = this.maxT;
+            this.dropSpeed *= -1;
+            this.flag++;
+        }else {
+            this.flag = 0;
+        }
+        this.style.top = t + 'px';
+        if(this.flag > 2){
+            clearTimeout(this.dropTimer)
+        }else {
+            this.dropTimer = setTimeout(drop.bind(this),30);
+        }
+        // this.dropTimer = setTimeout(drop.bind(this),30);
+    }
+
+</script>  

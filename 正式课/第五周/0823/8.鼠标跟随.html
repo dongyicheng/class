@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .litImg{
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 50px;
+        }
+        .litImg img{
+            width: 100%;
+            height: 100%;
+        }
+        .bigImg{
+            width: 400px;
+            height: 400px;
+            display: none;
+            position: absolute;
+        }
+        .bigImg img{
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="litImg">
+    <img src="1.jpg" alt="">
+</div>
+<div class="litImg">
+    <img src="1.jpg" alt="">
+</div>
+<div class="litImg">
+    <img src="1.jpg" alt="">
+</div>
+<div class="bigImg">
+    <img src="1.jpg" alt="">
+</div>
+<div class="bigImg">
+    <img src="1.jpg" alt="">
+</div>
+<div class="bigImg">
+    <img src="1.jpg" alt="">
+</div>
+</body>
+</html>
+<script>
+    let litImg=document.getElementsByClassName('litImg'),
+        bigImg=document.getElementsByClassName('bigImg');
+    // document.onmousemove=function (e) {
+    //     e=e||window.event;
+    //     var tar=e.target||e.srcElement;
+    //     if(tar.parentNode.className=='litImg'){
+    //         var n=[...litImg].indexOf(tar.parentNode)//求出该项索引
+    //         bigImg[n].style.display='block';
+    //         bigImg[n].style.left=e.pageX+20+'px';
+    //         bigImg[n].style.top=e.pageX+20+'px';
+    //     }else{
+    //         [...bigImg].forEach((item)=>{
+    //             item.style.display='none'
+    //         })
+    //     }
+    // }
+
+         [...litImg].forEach((item,index)=>{
+             item.onmouseenter=()=>{
+                 bigImg[index].style.display='block'
+             }
+             item.onmousemove= (e)=> {
+                 e=e||window.event
+                 bigImg[index].style.left=e.pageX+20+'px';
+                 bigImg[index].style.top=e.pageY+20+'px';
+             }
+             item.onmouseleave=()=>{
+                 bigImg[index].style.display='none'
+             }
+         })
+
+
+
+
+
+</script>

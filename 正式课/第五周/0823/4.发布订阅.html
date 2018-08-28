@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1">ddd</div>
+<div id="div2">ddd</div>
+</body>
+</html>
+<script>
+    var oDiv1=document.getElementById('div1')
+    var oDiv2=document.getElementById('div2')
+
+    function on(ele,type,f) {//添加一个频道 给一个元素的不同属性添加事件  每个属性有属于自己的事件池
+        ele[type]=ele[type] ||[];
+        var n=ele[type].indexOf(f)
+        if(n>-1)return//解决重复绑定
+        ele[type].push(f)
+    }
+    function fire(ele,type) {
+        ele[type]=ele[type] ||[];
+        ele[type].forEach((item)=>{
+            item&&item()
+        })
+    }
+    function off(ele,type,f) {
+        var n = ele[type].indexOf(f)
+        if (n != -1) {
+            ele[type].splice(n, 1)
+        }
+    }
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        console.log(2);
+    }
+    function f3() {
+        console.log(3);
+    }
+
+    on(oDiv1,'happy',f1)
+    on(oDiv1,'news',f2)
+    on(oDiv1,'money',f3)
+
+    on(oDiv2,'news',f3)
+    on(oDiv2,'money',f3)
+
+    fire(oDiv2,'news')//3
+    fire(oDiv1,'happy')//1
+</script>

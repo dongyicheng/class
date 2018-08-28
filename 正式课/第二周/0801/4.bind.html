@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * bind
+    * var f2 = f1.bind(obj,1,2,3)
+    * var f3=f1.call（obj,1,2,3）
+    * 改变this指向， 并把改变后的函数返回出去
+    * f2执行时， 再传参数， 会跟bind传的参数（除了第一个参数）结合
+    * */
+    function f1() {
+        console.log(this);//obj
+        console.log(arguments);//[1,2,3]
+    }
+    var obj={name:'dyc'};
+    var f2=f1.bind(obj,1,2,3);
+    console.log(f2);//
+    f2();
+    f2(5,6,7);
+
+    //先确定myBind 的架子
+    //需要一个小函数返回
+    //然后去确定要改变的this指向
+    //在小函数中用call或apply改变  传进来的函数的指向
+    //发现 我们需要用到两次传进来的参数
+    //这时 我们利用的数组的concat
+    Function.prototype.myBind=function myBind() {
+        //this---->f1
+        var _this=arguments[0];
+        var that=this;
+        var ary=[];
+        for (var i = 1; i < arguments.length; i++) {
+            ary.push(arguments[i]);
+        }
+        return  function () {
+            var arr=[];
+            for (var i = 0; i < arguments.length; i++) {
+                arr.push(arguments[i])
+            }
+            that.apply(_this,ary.concat(arr))
+        }
+    };
+    var f3=f1.myBind(obj,1,2,3);
+    f3(4,5,6)
+</script>

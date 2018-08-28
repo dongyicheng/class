@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    function f1() {
+        console.log(this,arguments);
+    }
+    var obj={name:'dyc'}
+
+
+    Function.prototype.myBind=function(...arg) {
+        var that=arg[0];
+        arg.shift();
+        return (...arg2)=>{
+            this.apply(that,arg.concat(arg2))
+        }
+    };
+    var f3=f1.myBind(obj,1,2,3);
+    f3(4, 5, 6);
+
+    // Function.prototype.myBind=function myBind() {
+    //     //this---->f1
+    //     var _this=arguments[0];
+    //     var that=this;
+    //     var ary=[];
+    //     for (var i = 1; i < arguments.length; i++) {
+    //         ary.push(arguments[i]);
+    //     }
+    //     return  function () {
+    //         var arr=[];
+    //         for (var i = 0; i < arguments.length; i++) {
+    //             arr.push(arguments[i])
+    //         }
+    //         that.apply(_this,ary.concat(arr))
+    //     }
+    // };
+    // var f3=f1.myBind(obj,1,2,3);
+    // f3(4, 5, 6);
+    //----------------------------------------------------
+    
+    // Function.prototype.myBind1=function () {
+    //     var ary=[];
+    //     var that=this;
+    //     var _this=arguments[0];
+    //     for (let i = 1; i < arguments.length; i++) {
+    //         ary.push(arguments[i])
+    //     }
+    //     return function () {
+    //         var arr=[];
+    //         for (let i = 0; i < arguments.length; i++) {
+    //             arr.push(arguments[i])
+    //         }
+    //         that.apply(_this,ary.concat(arr))
+    //     }
+    // }
+    //
+    // var f3=f1.myBind1(obj,1,2,3);
+    // console.log(f3(4, 5, 6));
+    
+    
+
+//    es6方法
+//     var myBind=function (...arg) {
+//         var _this=arg[0];
+//         arg.shift();
+//         return (...arg2)=>{
+//             this.apply(_this,arg.concat(arg2))//箭头函数没有this 直接找上级  就是调用mybind的this
+//         }
+//     }
+//     Function.prototype.myBind=myBind;
+//     var f2=f1.myBind(obj,1,2,3)
+//     f2(4, 5, 6);
+
+
+
+
+
+
+</script>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        body{
+            background: salmon;
+        }
+        #div1{
+            height: 2000px;
+            background: #cccccc;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+            /*transition: width 0.2s;*/
+        }
+        .bot{
+            height: 400px;
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+<img src="img/1.jpg" realSrc="img/1.jpg" alt="">
+<img src="img/1.jpg" realSrc="img/2.jpg" alt="">
+<img src="img/1.jpg" realSrc="img/3.jpg" alt="">
+<img src="img/1.jpg" realSrc="img/4.jpg" alt="">
+<div class="bot"></div>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+    var OImg = document.getElementsByTagName('img')[0];
+    var OImgs = document.getElementsByTagName('img');
+    function imgLoad(ele) {
+        if (ele.loaded) return;//undefined说明还没设置此属性  继续下走  设置之后就不会再执行下面的代码
+        var cliH = utils.clientH();
+        var srcH = utils.scrollT();
+        var tarT = utils.offset(ele).t;
+        if (cliH + srcH > tarT) {
+            var realsrc = ele.getAttribute('realsrc');
+            // ele.src=realsrc;
+            //先去用一张不显示的图去加载真正的图片
+            //等这张大图加载完成之后, 再把真实的img标签的src换成这张大图
+            var temp = document.createElement('img');
+            //=>temp=new Image();
+            temp.src = realsrc;
+            temp.onload = function () {
+                ele.src = realsrc;
+                ele.loaded = true;//
+                //通过这种方式 加上属性 不会在行内看见 只能通过打点或者中括号的方法获取
+                // ele.setAttribute('loaded','true');//可以在行内添加上  能看见  只能通过getAttribute获取
+                fadeIn(ele)
+            }
+        }
+    }
+    function loadAll(imgs) {
+        for (let i = 0; i < imgs.length; i++) {
+           imgLoad(imgs[i])
+        }
+    }
+
+    window.onscroll = function () {
+        loadAll(OImgs)
+    };
+
+    //设置图片渐变的方法
+    //先把元素的透明度设置为0  然后用定时器累加一个数  把这个赋给元素的opacity ; 当这个opacity大于1 时 ; 清除定时器
+    function fadeIn(ele) {
+        ele.style.opacity = 0;
+        var opa = 0.1;
+        var timer = setInterval(() => {
+            opa += 0.1;
+            ele.style.opacity = opa;
+            if (opa >= 1) {
+                ele.style.opacity = 1;
+                 clearInterval(timer)
+            }
+        }, 200)
+    }
+
+
+
+</script>

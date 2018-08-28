@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        /*#div1{*/
+            /*height: 2000px;*/
+            /*background-color: #f4f4f4;*/
+        /*}*/
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #outer{
+            position: relative;
+            width: 500px;
+            height: 500px;
+            padding: 20px;
+            border: 10px solid red;
+            margin: auto;
+            background-color: #24ccc8;
+        }
+        #center{
+            position: relative;
+            width: 350px;
+            height: 350px;
+            padding: 10px;
+            margin: auto;
+            border: 10px solid salmon;
+            background-color: palegoldenrod;
+        }
+        #inner{
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            margin: auto;
+            border: 10px solid #3059fa;
+            background-color: #ee2ad6;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <div id="outer">
+        outer
+        <div id="center">center
+            <div id="inner">inner</div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    /*
+    * document.body ---> body
+    * document.documentElement  ---> html
+    * */
+    /*
+    * 获取浏览器一屏的高度
+    * document.documentElement.clientHeight || document.body.clientHeight
+    * 有 <!DOCTYPE html> 这个文档声明时  document.documentElement.clientHeight 这个值是准确的
+    * 没有 <!DOCTYPE html> 这个文档声明时；document.body.clientHeight这个值是准确的
+    * */
+
+    /*
+    * 求 inner盒子外边框 到 body的距离
+    * 思路 先找 inner 外边框 到 center 内边框的距离
+    * 再加上 center的 边框宽度 再加上 center外边框 到 outer的 内边框的距离
+    * 再加上 outer 的边框宽度  再加上  outer外边框 到 body 的 距离
+    * */
+
+    function offset(ele) {
+        var l = ele.offsetLeft;// 先保存元素外边框到上级参照物的内边框的距离
+        var t = ele.offsetTop;
+        var temp = ele.offsetParent;// 用 temp去存储上级参照物
+        while (temp && temp.nodeName.toLowerCase() !== "body") {
+            //判断上级参照物是不是存在,不存在的话说明 ele 就是body;
+            // 如果存在，并且不是body,就接着向上累加 offset值
+            l += temp.offsetLeft + temp.clientLeft;
+            t += temp.offsetTop + temp.clientTop;
+            temp = temp.offsetParent;
+        }
+        return {
+            top:t,
+            left:l
+        };
+    }
+    var inner = document.getElementById('inner');
+    console.log(offset(inner));
+
+
+</script>

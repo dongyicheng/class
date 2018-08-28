@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 集中式  svn
+    * 分布式  git
+    *
+    * git 工作区  缓存区  历史区
+    *
+    * git status   查看工作取得状态
+    * git add  文件名或 .   把工作区的内容提交到缓存区
+    * git commit -m  '备注信息'  把缓存区的内容提交到历史区
+    *
+    *
+    * 对应git 有一个免费的远程服务器可用  gitHub
+    * 怎么把本机的代码提交至远程服务器
+    * 1、在本机初始化自己  个人信息（是你在GitHUB上注册的git 账号）
+    * git config --global user.name renjinhui // 初始化自己的git账号名
+    * git config --global user.email 1227760869@qq.com // 初始化自己的git邮箱
+    * git config --list  查看自己的信息是否初始化成功
+    * // 初始化的操作 只做一次就够了
+    *
+    * 2、再远程服务器上 创造一个自己的库；也就是再gitHub上造一个自己的库 （new repository）
+    *
+    * 3、把自己的本地文件夹和远程库链接起来
+    * 搭建一个桥梁  git remote add 桥梁名  git远程仓库的地址
+    * 查看目前有哪些桥梁   git remote -v
+    *
+    * 4、使用 git push 命令 把本地代码 通过桥梁推送到远程仓库
+    *    git  push 桥梁名 master(分支名)
+    *
+    * 5、使用 git pull  下拉远程库的代码
+    *    git pull 桥梁名  master(分支名)
+    *
+    *
+    *另一种简要方法；
+    * 是直接通过 git clone  把远程仓库 直接克隆到本地；
+    * 这个方法省掉了我们 搭建桥梁的操作；
+    * 有个默认桥梁  origin ；默认桥梁 可以不写
+    * git pull  直接下拉
+    * git push  直接推送
+    *
+    * */
+
+    /*
+    * linux 常用操作
+    * ls: 查看这个文件夹下所有的文件及文件夹
+    * cd: 切换路径
+    * cd ../ 切换到上一级路径
+    * cd 文件路径  --》直接切换到对应的路径
+    * mkdir : 创建文件夹
+    * touch : 创建文件
+    * cat : 查看文件
+    * vi : 编辑文件  需要按 英文字母的i键进入编辑状态；开始编辑文件；按 esc 键退出编辑状态； 输入 :wq  再敲回车键  即可；
+    *
+    * */
+</script>  

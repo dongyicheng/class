@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #inp{
+            outline: none;
+        }
+        #div2{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <input type="text" id="inp">
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <div id="div2">这是个提示</div>
+</body>
+</html>
+<script>
+    /*
+    * 鼠标的常用事件
+    * onclick     单击
+    * onbdlclick  双击
+    * onmouseenter  划入
+    * onmouseover   划入 （存在冒泡）
+    * onmouseleave  离开
+    * onmouseout    离开（存在冒泡）
+    * onmousemove   鼠标滑动
+    * onmousedown   鼠标按下
+    * onmouseup     鼠标抬起
+    * onmousewheel  滚轮滚动
+    *
+    *
+    *
+    * 键盘的常用事件
+    * onkeydown   键盘按下
+    * onkeyup     键盘抬起
+    * onkeypress  键盘按下（不监听系统键）
+    * onkeydown 与 onkeypress 的区别---> onkeydown 监听全键盘，press不监听系统键
+    *
+    * input 常用事件
+    * onfocus   获取焦点
+    * onblur    失去焦点
+    * oninput   监听了input框  value 值的变化  不兼容低版本IE IE中用 onpropertychange
+    * onchange  value 值发生改变 并且是在失去焦点的时候才去触发
+    *
+    *
+    * 系统事件
+    * window.onload // 页面加载完成后触发
+    * window.onresize // 页面可视化窗口大小发生改变
+    * window.onscroll // 页面滚动
+    *
+    * 移动端
+    * touchstart
+    * touchmouve
+    * touchend
+    *
+    *
+    * */
+    var oInp = document.getElementById('inp');
+    /*oInp.onkeydown = function () {
+        console.log('keydown');
+    };
+    oInp.onkeypress = function () {
+        console.log('keypress');
+    };*/
+    // document.onkeydown = function () {
+    //     console.log('keydown');
+    // };
+    // document.onkeypress = function () {
+    //     console.log('press');
+    // }
+    oInp.onfocus = function () {
+        div2.style.display = 'block'
+    };
+    oInp.onblur = function () {
+        div2.style.display = 'none'
+    }
+    oInp.onkeydown = function () {
+        // 先于 input触发 这时value 是输入之前的值
+        console.log(this.value,'down');
+    };
+    /*if(oInp.oninput !== undefined){//先判断input事件 是否存在；
+        oInp.oninput = function () {
+            //先于 keyup 触发  这时的value是输入之后的值
+            this.value = this.value.replace(/\D/g,'');
+            console.log(this.value,'input')
+        };
+    }else {
+        oInp.onpropertychange = function () {
+            var aa = this.value.replace(/\D/g,'');
+            this.value = aa;
+            // this.value = this.value.replace(/\D/g,'');
+            // console.log(this.value = 121,'input')
+        }
+    }*/
+    // oInp.oninput = function () {
+    //     //先于 keyup 触发  这时的value是输入之后的值
+    //     this.value = this.value.replace(/\D/g,'');
+    //     console.log(this.value,'input')
+    // };
+    oInp.onkeyup = function () {
+        // 最火触发
+        // console.log(this.value,'up');
+        // if(/\D/.test(this.value)){
+        //     alert('只要数字')
+        // }
+        // this.value = this.value.replace(/\D/g,'');
+    }
+    oInp.onchange = function () {
+        console.log('change');
+    }
+</script>  

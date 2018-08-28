@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    window.$ = 12;
+</script>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    console.log($);
+    // var qqq = $.noConflict(true);
+    var q = window.$;
+    $ = undefined;
+    console.log($);
+    // console.log(qqq);
+    console.log(jQuery);
+</script>
+<script>
+
+    (function (global,factory) {
+
+    })(typeof window !== 'undefined'?window:this,function(window,noGlobal){
+        var version = '3.3.1',
+            jQuery = function (selector,context) {
+                return new jQuery.fn.init(selector,context)
+                //return 了 init的一个实例 ，这个实例能不能找到JQ原型对象？？
+            };
+        //把jQuery当作对象； 加了一个 fn 属性；
+        // 把原型指向换成后边的对象
+        jQuery.fn = jQuery.prototype = {
+            jquery: version,
+            constructor: jQuery,
+            toArray: function() {
+                return slice.call( this );
+            }
+            /*...*/
+        };
+        jQuery.extend = jQuery.fn.extend = function () {
+
+        };
+        /*
+        * extend JQ 的扩展功能
+        * jQuery.extend 扩展的内容是直接放到 jQuery上（把jQ当做对象）
+        * jQuery.fn.extend  扩展到 jQuery的原型对象上
+        * */
+
+
+        var init = jQuery.fn.init = function (selector,context,root) {
+
+        };
+        // jQuery.fn.init.prototype === init.prototype
+        init.prototype = jQuery.fn;
+        //jQuery.fn.init ---> 指向了JQ的原型
+        /*...*/
+        var  _jQuery = window.jQuery,
+             _$ = window.$;
+        // 让渡 $ jQuery 这两个变量
+        jQuery.noConflict = function( deep ) {
+            if ( window.$ === jQuery ) {
+                window.$ = _$;
+            }
+
+            if ( deep && window.jQuery === jQuery ) {
+                window.jQuery = _jQuery;
+            }
+
+            return jQuery;
+        };
+        if ( !noGlobal ) {
+            window.jQuery = window.$ = jQuery;
+        }
+
+    })
+</script>  

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var data=null;
+    var xhr=new XMLHttpRequest();
+    xhr.open('get','data.json')//第三个参数 不写 默认为true 也就是异步执行
+    xhr.onreadystatechange=function () {
+        if (xhr.readyState==4&&/^[23]\d{2}$/.test(xhr.status)){
+            data=xhr.responseText;
+            //请求成功之后才会执行
+            cb(data)//拿到数据
+        }
+    }
+    xhr.send()
+    function cb(data2) {
+        console.log(data2);
+    }
+    console.log(data);//null
+
+
+    window.onload=function () {
+        //页面所有内容  加载完成  不包含ajax
+        console.log(data);//null
+    };
+    document.ready=function () {
+        //DOM 树 加载完成
+    }
+</script>

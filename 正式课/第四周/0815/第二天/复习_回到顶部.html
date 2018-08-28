@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            height: 5000px;
+            background: linear-gradient(#cc080b,#3059fa,#24ccc8);
+        }
+        .btn{
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            background: #ee2ad6;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <div class="btn">回到顶部</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    var btn = utils.getByClass('btn')[0];
+    /*
+    * 按固定时长 回到顶部
+    * */
+    // var duration = 2000;// 总的运动时间
+    // var interval = 20;// 定时器执行的间隔时间
+    // var times = 0;// 已经运动的时间
+    // var changeL = utils.scrollT();// 要运动的总距离
+    // var step = changeL/duration*interval;//每20毫秒运动的距离
+    // var timer = window.setInterval(function () {
+    //     //让 页面的  scrollTop 减少
+    //     changeL -= step;
+    //     document.documentElement.scrollTop = changeL;
+    //     document.body.scrollTop = changeL;
+    // },interval)
+    var timer = null;
+    function toTop() {
+        // clearInterval(timer);
+        if(timer!=null)return;
+        var interval = 20;// 定时器执行的间隔时间
+        var times = 0;// 已经运动的时间
+        var duration = 1000;// 总的运动时间
+        var changeL = utils.scrollT();// 要运动的总距离
+        var step = changeL/duration*interval;//每20毫秒运动的距离
+        // window.onscroll = null;
+        timer = window.setInterval(function () {
+            //让 页面的  scrollTop 减少
+            changeL -= step;
+            if(changeL <=0 ){
+                clearInterval(timer);
+                timer = null;
+                changeL = 0;
+            }
+            document.documentElement.scrollTop = changeL;
+            document.body.scrollTop = changeL;
+        },interval)
+    }
+
+    btn.onclick = toTop;
+    // btn.onclick = function () {
+    //     toTop();
+    // }
+    window.onscroll = function () {
+        btnDis()
+    };
+    function btnDis() {
+        var scrT = utils.scrollT();
+        var cliH = 300;
+        if(scrT > cliH){
+            btn.style.display = 'block';
+        }else {
+            btn.style.display = 'none';
+        }
+    }
+    window.onmousewheel = function () {
+        clearInterval(timer);
+        timer = null;
+    }
+</script>

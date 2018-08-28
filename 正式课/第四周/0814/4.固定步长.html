@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #3059fa;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="div1" class="box"></div>
+</body>
+</html>
+<script src="../js/utils.js">
+</script>
+<script>
+    /*
+     * 固定步长的运动
+     * 每次移动相同的距离
+     * */
+    var oDiv = utils.getByClass('box')[0];
+    // 每次移动一个像素
+    // var tarL = utils.win('clientWidth') - oDiv.offsetWidth;
+    // var l = 0;
+    // var timer = window.setInterval(function () {
+    //     l+=10;
+    //     // oDiv.style.left = l+'px';
+    //     if(l >= tarL){
+    //         clearInterval(timer);
+    //         // utils.css(oDiv,'left',tarL);
+    //         // return;
+    //         l = tarL;
+    //     }
+    //     utils.css(oDiv,'left',l);
+    // },10)
+
+    var tarL=utils.win('clientWidth') - oDiv.offsetWidth;
+    var l=0;
+    var timer=window.setInterval(()=>{
+        l+=10;
+        if(l>=tarL){
+            clearInterval(timer);
+            l=tarL;
+        }
+        utils.css(oDiv,'left',l)
+    },20)
+</script>

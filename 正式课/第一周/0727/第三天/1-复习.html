@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * git config --global user.name renjinhui
+    * git config --global user.name email
+    * //以上两步是初始化用户信息  只做一次就可以了
+    * git config --list //查看用户信息
+    *
+    * git init
+    * git add . //
+    * git commit -m 'xxxx'
+    * git pull zfpx master // 一般在push之前 都要 pull 一次
+    * git push zfpx master
+    *
+    *
+    * 桥梁名
+    * git remote add zfpx 远程仓库地址
+    * git remote -v  查看有哪些桥梁
+    *
+    *
+    * // 简洁流程
+    * git clone 远程仓库地址
+    * 默认的桥梁名  origin
+    * 默认的分支名  master
+    * git pull
+    *
+    *
+    * // 交作业的流程
+    * 1、你们先 fork 组长的 gitHub 对应的库 ----》 fork 就是一个复制的过程
+    * 2、把自己对应的库 clone 到自己电脑上
+    * 3、写作业
+    * 4、交作业 （提交到自己fork的库）
+    * 5、交到组长那块（ new pull request ---> create pull request）
+    * 6、等组长同意就可以了
+    *
+    * */
+
+    // 变量提升
+    //定义：在代码执行之前，浏览器会把  带 var和 function 的先提前声明，
+    //带var 的 只声明 不定义；带function 声明 + 定义；
+
+    // function f(n) {
+    //     var n = 13;
+    //     m = n;
+    // }
+    // function f1() {
+    //     var x = m;
+    //     x = 14;
+    // }
+    // f(20);
+    // f1();
+    // console.log(m,x);
+    //函数执行的 过程
+    //1、开辟一个栈内存 （私有作用域）
+    //2、形参赋值，变量提升
+    //3、代码从上到下依次执行
+
+    //当函数运行 查找一个变量时，先查看是否是自己的私有变量（形参，var,function ）,若是没有查找到，则去上一级作用域查找；这里的上一级作用域是指的函数在哪里定义的，在哪定义，上级作用域就是谁；这种查找会一直查找到window，若window下也没有这个变量，（若是赋值，则是在window下添加一个属性，若是使用，则直接报错）
+    function a() {
+        function f2() {
+            function f3() {
+                // m = 20;
+                console.log(m);
+            }
+            f3()
+        }
+        f2()
+    }
+    a();
+    console.log(m)
+    //我们把上边这种从私有作用域向上级作用域查找的机制 成为 作用域链
+
+
+
+    /*
+    * 变量提升的特殊情况
+    *
+    * 1、等号右边的不会进行变量提升
+    * var a = function f(){};
+    *
+    * 2、条件语句中的变量提升
+    * 对于var 是没有影响的；也就是不管条件是否成立，都会进行变量提升
+    * 对于function 比较特殊； 在标准浏览器下，只声明 不定义；在IE低版本是既声明又定义
+    * */
+
+    a();
+    var a = 10;
+    var a = 20;
+    console.log(a);//20
+    a();
+    function a() {
+        console.log(a)
+    }
+    a();
+    /*
+    * 变量提升过程---》 var a ; a = xxxfff000
+    * a() ---> a执行 里边输出 a；也就是咱们的xxxfff000
+    * a = 10; ---> 这时的变量 a 从地址变成了 数字10
+    * a = 20； ---> 这时的变量a  从数字10 变成了 20
+    * console.log(a) ---> 输出 数字 20；
+    * a() ---> a执行 相当于 20() ;20 是个数字;不是一个函数，所以直接报错 a is not a function
+    * 下边代码不再执行
+    * */
+
+    /*a();
+    var a = 10;
+    var a = 20;
+    console.log(a);//20
+    // a();
+    function a() {
+        console.log(a)
+    }
+    var a = function a(){
+        console.log(a);
+    };
+    a();
+    //扩展版*/
+
+
+
+</script>

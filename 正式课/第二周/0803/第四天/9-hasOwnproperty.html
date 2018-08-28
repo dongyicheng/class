@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * hasOwnProperty
+    * 查看是否是私有属性的一个方法
+    * */
+    console.log(Array.prototype.hasOwnProperty('toString'));// true
+    console.log(Array.prototype.hasOwnProperty('hasOwnProperty'));//false
+
+
+    var obj = {};
+    /*
+    * in  查看某个对象中 是否有该属性
+    * 不管是私有还是公有 只要有 就是true
+    * */
+    function Person(){
+        this.name = 'zf';
+        this.age = 9;
+    }
+    Person.prototype.getName = function(){
+        console.log(this.name)
+    };
+    var per1 = new Person();
+    name in per1// name age 是per1 的私有属性； getName 属于公有属性
+    console.log('hasOwnProperty' in  obj); // true
+
+    /*
+    * per1 instanceof Person
+    * 查看 这个类（Person）是否在这个实例的原型链上
+    * */
+    console.log(per1 instanceof Person);// true
+    per1.__proto__ === Person.prototype;
+    Person.prototype.__proto__ === Object.prototype
+    console.log(per1 instanceof Array); // false
+    console.log(per1 instanceof Object);// true
+    console.log(({}) instanceof Person);//false
+    console.log(Person instanceof per1); // false
+    console.log(Person instanceof Function); // true
+
+
+    /*
+    * 根据 in  和 hasOwnProperty  可以写出一个检测是否是公有属性的方法
+    * 先用 in 检测 某个对象是否存在这个属性
+    * 再用 hasOwnProperty  是否是他的 私有属性
+    * 满足上边属性 但不满足下边的属性 就证明这个属性是共有的
+    * */
+    // hasPublicProperty;
+    per1.hasOwnProperty('name');//检测 name  是否是 per1 的私有属性
+    Object.prototype.hasPublicProperty = function (attr) {
+        // this  --> obj
+        // if(attr in this){
+        //     // 检测 attr 是否是  this的私有属性
+        //     if(!this.hasOwnProperty(attr)){
+        //         //证明是共有属性
+        //         return ture
+        //     }
+        //     return false
+        // }
+        // return false;
+
+        // //优化1
+        // if(attr in this && !this.hasOwnProperty(attr)){
+        //     return true
+        // }
+        // return false;
+
+        //优化2
+        return attr in this && !this.hasOwnProperty(attr)
+    };
+    var obj = {};
+    obj.hasPublicProperty('toString');
+
+</script>
+
+

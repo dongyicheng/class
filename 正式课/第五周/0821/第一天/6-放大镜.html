@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .litBox{
+            width: 400px;
+            height: 400px;
+            float: left;
+            overflow: hidden;
+            margin-right: 50px;
+            border: 2px dashed darksalmon;
+            position: relative;
+            cursor: move;
+        }
+        .litBox img{
+            width: 100%;
+            height: 100%;
+        }
+        .litBox .mask{
+            width: 25%;
+            height: 25%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+        }
+        .bigBox{
+            width: 400px;
+            height: 400px;
+            float: left;
+            overflow: hidden;
+            border: 2px dashed darksalmon;
+            display: none;
+        }
+        .bigBox img{
+            width: 400%;
+            height: 400%;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <div class="litBox">
+        <img src="img/1.jpg" alt="">
+        <div class="mask"></div>
+    </div>
+    <div class="bigBox">
+        <img src="img/1.jpg" alt="">
+    </div>
+</body>
+</html>
+<script>
+    /*
+    * 思路  保证 小蒙层/小图片  ===  大图片的框/大图片
+    *  4 = 小图片/小蒙层
+    *  小蒙层滑动的距离 是 大图片滑动距离的1/4； 而且两者移动方向是相反的
+    * */
+    var litBox = document.getElementsByClassName('litBox')[0],
+        mask = litBox.getElementsByClassName('mask')[0];
+        bigBox = document.getElementsByClassName('bigBox')[0],
+        bigImg = bigBox.getElementsByTagName('img')[0];
+    /*
+    * 第一步 划过小图 让大图显示
+    * 第二步  获取鼠标相对于小图片的左和上的值
+    * 第三步  边界处理
+    *
+    * 第四步 让大图片跟着移动
+    * */
+    litBox.onmouseenter = function (e) {
+        e = e || window.event;
+        mask.style.display = 'block';
+        bigBox.style.display = 'block';
+        // mask.style.left = e.offsetX - mask.clientWidth/2 + 'px';
+        // mask.style.top = e.offsetY - mask.clientHeight/2 + 'px';
+        this.maxL = this.clientWidth - mask.offsetWidth;
+        this.maxT = this.clientHeight - mask.offsetHeight;
+    };
+    litBox.onmousemove = function (e){
+        e = e || window.event;
+        /*
+        * 要获取 鼠标到小图片的 距离 ； 我们用 鼠标到body的距离 减去 小图片到 body的距离
+        *                                   e.pageX - this.offsetLeft
+        * */
+        /*var l = e.pageX - this.offsetLeft - mask.clientWidth/2,
+            t = e.pageY - this.offsetTop - mask.clientHeight/2;
+        l = l >= this.maxL ? this.maxL : (l <=0 ? 0 : l);
+        t = t >= this.maxT ? this.maxT : (t <=0 ? 0 : t);
+        // 查看 l 是否大于 最大值；大于的话 l就赋值成最大值
+        mask.style.left = l + 'px';
+        mask.style.top = t + 'px';
+        bigImg.style.left = - 4*l + 'px';
+        bigImg.style.top = - 4*t + 'px';*/
+        move.call(this,e);
+
+    };
+    litBox.onmouseleave = function () {
+        mask.style.display = 'none';
+        bigBox.style.display = 'none';
+    };
+
+    function move(e) {
+        var l = e.pageX - this.offsetLeft - mask.clientWidth/2,
+            t = e.pageY - this.offsetTop - mask.clientHeight/2;
+        l = l >= this.maxL ? this.maxL : (l <=0 ? 0 : l);
+        t = t >= this.maxT ? this.maxT : (t <=0 ? 0 : t);
+        // 查看 l 是否大于 最大值；大于的话 l就赋值成最大值
+        mask.style.left = l + 'px';
+        mask.style.top = t + 'px';
+        bigImg.style.left = - 4*l + 'px';
+        bigImg.style.top = - 4*t + 'px';
+    }
+</script>  

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
+<script>
+    /*
+    * call 改变this关键字用的
+    *  f1.call(obj,1,2,3,4);
+    *  先把 f1中的 this 指向改成 obj;然后让 f1执行，并把1，2，3，4传给f1
+    * */
+    Object.prototype.toString.call('str');
+    ({}).toString.call('str');
+    // 先去找到 基类原型上的toString方法，然后把 这个方法中的this改成 "str";
+    //再去 让这个  toString 执行
+
+    /*
+    * 怎么去利用数组的 slice 把类数组 转化 数组
+    * */
+    var oLis = document.getElementsByTagName('li');
+    function toArray(arg) {
+        // return [].slice.call(arg);
+        return Array.prototype.slice.call(arg,0);
+    }
+    var arr = toArray(oLis);
+    // console.log(arr);
+
+    /*
+    * f1.apply(obj,数组或者类数组);
+    * 但是它向函数传参时 也是一项一项传进去的；
+    *
+    * */
+    function f() {
+        console.log(this);
+        console.log(arguments);
+    };
+    var obj = {q:1};
+    // f.call(obj,1,2,3);//
+    // f.apply(obj,[1,2,3]);//
+
+    /*
+    * bind  用法跟call一样；但是返回值是个 新函数
+    *
+    * */
+    var f1 = f.bind(obj,1,2,3,4);
+    f1(); //this --> obj   arguments 1,2,3,4
+    f1(10);// this --> obj  arguments 1,2,3,4,10
+
+
+
+
+    //
+    var f1 = function () {
+        console.log(1);
+        console.log(this);
+    };
+    var f2 = function () {
+        console.log(2);
+        console.log(this);
+    };
+    // f1.call(f2);
+    // 把 f1（call中的 this）中的this 变成 f2 ；
+    // 然后让 f1（call中的this） 执行；
+
+    f1.call.call(f2);
+    // f1.call --->FN
+    //FN.call(f2)--> FN      中的 this 换成 f2; 让 FN     执行
+    //               f1.call中的 this 换成 f2 ;让 f1.call执行
+    // f1.call 执行 是让 call中的 this（f1 ---> f2） 执行; f2执行 输出 2
+
+
+</script>
+
+
+
+
+
+
+
+
+

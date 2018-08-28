@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: sandybrown;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            user-select: none;
+            cursor: move;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 按下鼠标时  记录 鼠标的位置 和 盒子的位置；
+    * 当鼠标移动时，记录鼠标xy轴移动的距离；让盒子相应的移动这么多即可
+    * */
+    var oDiv = document.getElementById('div1');
+    oDiv.onmousedown = function (e) {
+        e = e || window.event;
+        this.startX = this.offsetLeft;
+        this.startY = this.offsetTop;
+        // 盒子的初始位置
+
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        //鼠标的初始位置
+
+        this.canM = true;
+        //用这个属性控制能不能移动; 当是true 才能移动
+    };
+    document.onmousemove = function (e) {
+        if(!oDiv.canM)return;
+        e = e || window.event;
+        var x = e.pageX - oDiv.mx,
+            y = e.pageY - oDiv.my;
+        // x ,y 是鼠标移动的距离
+        oDiv.style.left = oDiv.startX + x + 'px';
+        oDiv.style.top = oDiv.startY + y + 'px';
+    };
+    document.onmouseup = function (e) {
+        //松开时，要让盒子固定到那
+        oDiv.canM = false;
+    }
+</script>  

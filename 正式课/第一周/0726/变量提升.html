@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 变量提升  不管条件是否成立,都会执行(针对var)
+    *          在条件语句中的function声明:标准浏览器下只是声明,不定义  在IE低版本  及声明也定义
+    * 在js代码执行之前, 浏览器要先过一遍代码
+    * var 只声明不定义  给一个undefined
+    * function 声明和定义
+    *
+    * 因为用function 声明的函数在变量声明阶段已经付好值了   so可在任意地方调用
+    *
+    *
+    * 变量提升只会提升等号左边的部分  右边的不会
+    *
+    * var a 相当于给全局添加一个属性 window.a
+    * 带var 会进行变量提升  不带var没有变量提升
+    * **/
+     //let  没有变量提升 不能重复声明   可以重复定义
+     // var a=12
+     // let b=12;//不能重复声明   可以重复定义
+     // b=13;
+
+//     const 声明常量  不能重复声明 也不能重复定义  没有变量提升
+    const c=14;
+    // 变量提升  不管条件是否成立,都会执行(针对var)
+    // *       在条件语句中的function声明:标准浏览器下只是声明,不定义  在IE低版本  及声明也定义
+
+    console.log(a,fn);//undefined*2
+    fn();//报错 fn is not a function
+    if(1>2){
+        var a=10;
+        function fn(){
+            console.log(2);
+        }
+    }
+    fn();
+
+
+
+</script>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*在原型上编写方法(去重，添加，删除) 实现来链式调用*/
+    var ary=[1,2,3,5,4,5,4]
+    Array.prototype.unqie=function () {
+        let obj={};
+        for (let i = 0; i < this.length; i++) {
+            if(obj.hasOwnProperty(this[i])){
+                this.splice(i,1);
+                i--;
+            }else{
+                obj[this[i]]=this[i];
+            }
+        }
+        return this;
+    };
+    Array.prototype.mypush=function () {
+        var arg=arguments;
+        for (let i = 0; i < arg.length; i++) {
+            this[this.length]=arg[i];
+        }
+        return this;
+    }
+    Array.prototype.myPop=function () {
+        this.length--;
+        return this;
+    }
+    console.log(ary.unqie().mypush(1, 2).myPop());
+    /*在原型上编写方法(加法，减法) 实现运算*/
+ Number.prototype.add=function (n) {
+     return this+n;
+ }
+ Number.prototype.min=function (n) {
+     return this-n;
+ }
+    var a=12;
+    console.log(a.add(10).min(9));
+
+
+    // Array.prototype.myUnique=function myUnique() {
+    //     let obj = {};
+    //     //循环数组 判断数组这一项 在不在原来的对象中
+    //     //在就删除  不在就添加到obj中
+    //     for (let i = 0; i < this.length; i++) {
+    //         if (obj.hasOwnProperty(this[i])) {
+    //             this.splice(i, 1);
+    //             i--;
+    //         } else {
+    //             obj[this[i]] = this[i];
+    //         }
+    //     }
+    //     return this;
+    // };
+    // Array.prototype.myPush=function myPush(n) {
+    //     this[this.length] = n;
+    //     return this;
+    // };
+    // Array.prototype.myPop=function myPop() {
+    //     this.length--;
+    //     return this;
+    // };
+    // var arr2=ary.myUnique().myPush(12).myPush(14).myPop().myPop().myPush(14).myUnique();
+    // console.log(arr2);
+    //
+    //
+    //
+    // //12+12-10
+    // Number.prototype.add=function add(n) {
+    //     return this + n;
+    // };
+    // Number.prototype.minus=function minus(n){
+    //     return this - n;
+    // };
+    // var a=12;
+    // console.log(a.add(12).minus(10));
+</script>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 400px;
+            border: 1px solid #ccc;
+            margin: auto;
+        }
+        ul li{
+            border-bottom: 1px solid #ccc;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        ul li:nth-child(2n){
+            background-color: yellow;
+        }
+        ul li:nth-child(2n-1){
+            background-color: sandybrown;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+</body>
+</html>
+<script>
+    /*点击li 弹出我是第几个li*/
+
+    var oLis=document.getElementsByTagName('li')
+/*   第一种   自定义属性*/
+    // for (var i = 0; i < oLis.length; i++) {
+    //     oLis[i].myIndex=i;
+    //     oLis[i].onclick=function () {
+    //         alert(`我是第${this.myIndex+1}个li`)
+    //     }
+    //
+    // }
+/*   第二种    ES6 let 方法*/
+    for (let i = 0; i < oLis.length; i++) {
+        oLis[i].onclick=function () {
+            alert(i+1);
+        }
+
+    }
+/*    第三种    自执行函数1*/
+    // for (var i = 0; i < oLis.length; i++) {
+    //     (function (n) {
+    //         oLis[n].onclick=function () {
+    //             alert(n+1);
+    //         }
+    //     })(i)
+    // }
+ /*第四种    自执行函数2*/
+    // for (var i = 0; i < oLis.length; i++) {
+    //         oLis[i].onclick=(function (n) {
+    //             return function () {
+    //                alert(n+1);
+    //         }
+    //     })(i)
+    // }
+
+
+</script>

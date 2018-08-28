@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 100px;
+            height: 100px;
+            background: #fa866e;
+            position: relative;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script>
+    var oDiv=document.getElementById('div')
+    function move2(ele,duration,obj) {
+        var beginL={};
+        var changeL={};
+        for (var k in obj) {
+            if (obj.hasOwnProperty(k)) {
+                beginL[k] = utils.css(ele, k);
+                changeL[k]=obj[k]-beginL[k];
+            }
+        }
+        var times=0;
+        var timer = setInterval(function () {
+            times+=20;
+            if(times>=duration){
+                clearInterval(timer);
+                times=duration;
+            }
+            for (var k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    var curPos = linear(times, changeL[k], duration, beginL[k])
+                    utils.setCss(ele,k,curPos)
+                }
+            }
+        },20)
+
+    }
+    function linear(time,changeL,duration,beginL) {
+        return changeL/duration*time + beginL;
+    }
+
+    move2(oDiv,2000,{left:300,top:400,opacity:0.5})
+
+
+</script>

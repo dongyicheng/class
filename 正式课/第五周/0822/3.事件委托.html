@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 700px;
+            height: 400px;
+            margin: auto;
+            border: 1px solid #000;
+        }
+        #box nav{
+            width: 200px;
+            float: left;
+        }
+        #box nav a{
+            display: block;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            box-sizing: border-box;
+        }
+        #box nav a.current{
+            background: #427099;
+            color: white;
+        }
+        #box section{
+            width: 500px;
+            height: 400px;
+            float: left;
+            background: #0c80dc;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <nav>
+        <a class="current" href="javascript:;">导航1</a>
+        <a href="javascript:;">导航2</a>
+        <a href="javascript:;">导航3</a>
+        <a href="javascript:;">导航4</a>
+        <a href="javascript:;">导航5</a>
+        <a href="javascript:;">导航6</a>
+        <a href="javascript:;">导航7</a>
+        <a href="javascript:;">导航8</a>
+    </nav>
+    <section>
+        导航1内容
+    </section>
+</div>
+</body>
+</html>
+<script>
+    /*
+    * 事件委托 : 给元素一个个绑定太浪费性能
+    * 直接给父亲绑定 , 利用事件的冒泡(点击儿子元素会触发到父亲的点击事件) , 找到点击的事件源  ;  判断事件源是不是要找的元素 , 就执行相应操作
+    * */
+    let box=document.getElementById('box'),
+        sec=document.getElementsByTagName('section')[0],
+        oAs=document.getElementsByTagName('a')
+    box.onclick=function (e) {
+        e=e||window.event
+        let tar=e.target||e.srcElement
+        if(tar.nodeName.toLowerCase()=='a'){
+            let str=tar.innerHTML+'内容'
+            sec.innerHTML=str;
+            [...oAs].forEach(function (item) {
+                item.className=''
+            })
+            tar.className='current'
+        }
+    }
+
+
+
+
+
+    // let box=document.getElementById('box'),
+    //     section=document.getElementsByTagName('section')[0],
+    //     oAs=box.getElementsByTagName('a')
+    // box.onclick=function (e) {
+    //     e=e||window.event;
+    //     let tar=e.target||e.srcElement;//知道点击的是谁
+    //     // console.log(tar);//点不到box 显示点击的DOM元素
+    //     if(tar.nodeName.toLowerCase() == 'a'){
+    //         let str=tar.innerHTML + '内容'
+    //         section.innerHTML=str;
+    //         [...oAs].forEach((item)=>{
+    //             item.className=''
+    //         })
+    //         tar.className = 'current';
+    //     }
+    // }
+
+
+</script>

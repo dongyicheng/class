@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 函数里边的两个特殊属性  this(函数的执行主体)  arguments(实参集合)
+    * this 的指向问题
+    * 1、看函数执行时 前边有没有点，有点，点前边是谁，this就是谁；没有的就是默认window
+    * 2、自执行函数的 this 是指向window的；
+    *
+    * 3、DOM事件绑定的this是指向绑定的DOM元素；
+    * */
+    (function () {
+        console.log(this) //window
+    })();
+    div1.onclick = function () {
+        console.log(this) // div1
+    };
+
+
+
+    function f() {
+        console.log(this)
+    };
+    var obj = {fn:f};
+    //f : xxxfff000
+    //obj.fn : xxxfff000
+    console.log(obj.fn == f);
+    obj["fn"]();//obj
+    var ary = [function () {
+        console.log(this)
+    }];
+    ary[0]();
+    f();//window
+    f();
+    obj.fn();
+    f()
+</script>  

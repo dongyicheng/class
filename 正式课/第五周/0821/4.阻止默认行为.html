@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="http://www.baidu.com" id="btn">百度</a>
+<input type="text" id="inp">
+</body>
+</html>
+<script>
+    /*
+    * 1.阻止默认行为
+    * */
+    var oA=document.getElementById('btn')
+    var inp=document.getElementById('inp');
+    /*
+    * 默认先执行  click  事件   ;  然后在执行自己的默认行为
+    * 跳转或者刷新  都属于 a标签的默认行为
+    * 阻止默认行为
+    * 1.在结构上阻止   <a href="javascript:;"></a> or javascript:void 0 ; or javascript:null; or javascript:undefined
+    * 2.JS阻止默认行为  执行的时候 return false
+    *                 e.preventDefault() 标准浏览器   e.returnValue=false IE(谷歌也有)
+    *                 e.preventDefault?e.preventDefault():e.returnValue=false;
+    * */
+    oA.onclick=function (e) {
+        e=e||window.event;
+        alert(12)//先弹出 在执行页面调转
+        // return false;
+        e.preventDefault?e.preventDefault():e.returnValue=false;//标准
+
+    }
+    inp.onkeydown=function (e) {
+        e=e||window.event;
+        e.preventDefault?e.preventDefault():e.returnValue=false;
+        console.log(this.value);//阻止了默认行为   什么都打不上去了
+        var n=e.keyCode
+        if((n>=48&&n<=57)||(n>=96&&n<=105||n==8)){
+            this.value+=e.key;//只能写上数字 (上面的和小键盘) 使用删除键
+        }
+    }
+
+    inp.onkeydown=function (e) {
+        e=e||window.event;
+        console.log(this.value);//阻止了默认行为   什么都打不上去了
+        var n=e.keyCode;
+        if((n>=48&&n<=57)||(n>=96&&n<=105||n==8)){
+            //只能写上数字 (上面的和小键盘)  使用删除键
+        }else {
+            e.preventDefault?e.preventDefault():e.returnValue=false;
+        }
+    }
+</script>

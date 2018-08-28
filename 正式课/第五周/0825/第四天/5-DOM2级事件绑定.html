@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 标准浏览器下
+    * oDiv.addEventListener('click',fn,false)
+    * 'click' --> 事件类型  标准浏览器不加on
+    * fn ---> 是指的对应的回调函数
+    * false ---> 是在冒泡阶段触发对应的回调函数
+    * 当绑定多个函数时，执行顺序 跟绑定顺序一致
+    *
+    *
+    * DOM0级事件绑定  当我们想要移除绑定的事件时直接把 值改成 null即可
+    * DOM2级事件移除
+    * oDiv.removeEventListener('click',fn,false);
+    *
+    *
+    * IE低版本
+    * oDiv.attachEvent('onclick',fn)
+    * 'onclick'  ---> 对应的回调函数 必须 加 on
+    * fn  ---> 指的对应的回调函数
+    * 绑定多个函数，执行顺序时乱序（倒序）
+    *
+    * oDiv.detachEvent('onclick',fn)
+    * */
+
+    //DOM2级事件绑定  支持一个操作对应多个回调函数
+    //DOM0级事件绑定  只支持一个回调函数
+    var oDiv = document.getElementById('div1');
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        console.log(2);
+    }
+    /*oDiv.onclick = f1;
+    oDiv.onclick = f2;*/
+
+    oDiv.addEventListener('click',f1,false);
+    oDiv.addEventListener('click',f2,false);
+    //对应回调函数执行的顺序 --》 跟绑定的先后顺序一致
+    oDiv.onclick = function(){
+        console.log('DOM0');
+    };
+    oDiv.onclick = null;
+    oDiv.removeEventListener('click',f2,false);
+</script>  

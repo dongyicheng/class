@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    *继承： 子类继承父类的方法或属性
+    *
+    * */
+
+    /*
+    * 原型继承：让子类的原型指向父类的一个实例
+    * F2继承了F1的方法； 那么称F2是F1的子类
+    *
+    * 会丢失子类默认原型上的方法
+    * */
+    function F1() {
+        this.name='zf';
+        this.age='px'
+    }
+    F1.prototype.getName=function () {
+        console.log(this.name);
+    };
+    function F2(){
+        this.name='zg';
+        this.age='5000';
+    }
+    F2.prototype.getAge=function () {
+        console.log(this.age);
+    };
+    F2.prototype=new F1;
+    var f2=new F2;
+    f2.getName();//'zg'
+    // f2.getAge();//报错
+
+    /*
+    * call继承
+    * 可以把父类的私有属性继承过来  不能继承公有属性
+    * */
+    function Person1() {
+        this.name='zf'
+        this.age=9;
+        this.getAge=function () {
+            console.log(100);
+        }
+    }
+    Person1.prototype.getName=function () {
+        console.log(this.name);
+    }
+    function Person2() {
+        Person1.call(this);
+        this.name='zg';
+        this.age=5000;
+    }
+    Person2.prototype.getAge=function () {
+        console.log(this.age);
+    }
+    var per2=new Person2();
+    per2.getAge();//100
+
+
+    /*寄生组合式
+    *
+    * 这种方式会影响父类原型上的方法
+    * */
+    function Person1() {
+        this.name='zf';
+        this.age=9;
+        this.getAge=function () {
+            console.log(100);
+        }
+    }
+    Person1.prototype.getName=function () {
+        console.log(this.name);
+    };
+    function Person2() {
+        Person1.call(this);
+        this.name='zg';
+        this.age=5000;
+    }
+    Person2.prototype.getAge=function () {
+        console.log(this.age);
+    };
+    Person2.prototype=Person1.prototype;
+    // Person2.prototype=Object.create(Person1.prototype);
+    var per2=new Person2;
+    // per2的私有：name age getAge
+    //per2的公有： getName
+    var per1=new Person1;
+
+    Person2.prototype.getSex=function () {
+        console.log(12);
+    };
+    per1.getSex();//12
+    per2.getSex();//12
+    //这种方式会影响父类原型上的方法
+
+
+    /*
+    * 创造一个空对象  但是空对象的__proto__是指向传进来的对象
+    *
+    * */
+    var obj={q:1};
+    var obj2=Object.create(obj);
+    console.log(obj2);//{}
+    console.log(obj2.__proto__);//{q:1}
+
+
+    /*class继承*/
+    class A{
+        //class 声明的类  只能通过 new 执行
+        constructor(){
+            this.a=12;
+            this.b=13;
+            //私有属性
+        }
+        //公有属性  只能加函数 不能加静态属性 ；age=1 不可以报错 不能有’=‘
+        grtName(){
+            console.log(12);
+        }
+        getAge(){
+            console.log(13);
+        }
+        static getAge2(){//把B当做对象 添加属性
+            console.log('getAge2');
+        }
+    }
+    class B extends A{
+        constructor(){
+            super();//把父类的所有属性继承过来
+            this.c=12;
+            this.d=13;
+        }
+        getsex(){
+            console.log('sex');
+        }
+        static getName2(){//把B当做对象 添加属性
+            console.log('getName2');
+        }
+    }
+    var b=new B;
+    console.log(b);//a b c d
+    console.log(b.getAge(),b.getsex());//13  'sex'
+    B.getAge2();//'getAge2'      也会把A当做对象时储存的继承过来
+
+
+
+</script>

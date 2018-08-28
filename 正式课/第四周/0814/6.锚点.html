@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            height: 2000px;
+            background: linear-gradient(#cccccc,#333333,#999999);
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<a class="btn" href="#div1">回到顶部</a>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script>
+    var btn = utils.getByClass('btn')[0];
+    /*
+    * 固定步长
+    * */
+    btn.onclick = function () {
+        var timer = window.setInterval(function () {
+            // 控制 document.documentElement.scrollTop 或
+            // document.body.scrollTop
+            var tarT = utils.scrollT();
+            tarT-=10;
+            if(tarT <=0){
+                clearInterval(timer);
+                tarT = 0;
+            }
+            document.documentElement.scrollTop = tarT;
+            document.body.scrollTop = tarT;
+        },20)
+    }
+
+
+    var duration = 1000;
+    btn.onclick = function () {
+        var changT = utils.offset(btn).t - utils.clientH();
+        var speed = changT/duration;
+        var time = 0;// 记录运动的时间
+        var timer = window.setInterval(function () {
+            time+=30;
+            var moveL = time*speed;// 运动的距离
+            if(time>=duration){
+                clearInterval(timer);
+                moveL = changT;
+            }
+            document.documentElement.scrollTop = changT - moveL;
+            document.body.scrollTop = changT - moveL;
+        },30)
+    }
+
+
+    var btn = utils.getByClass('btn')[0];
+    /*
+    * 按固定市场回到顶部
+    * */
+    var timer = null;
+
+
+    function toTop() {
+        //clearInterval(timer);
+        if (timer != null)return;
+        var interval = 20;//定时器执行的时间间隔
+        var times = 0;//已经运动的时间
+        var changeL = utils.scrollT();
+        var duration = 400;//总的运动使劲啊
+        var step = changeL/duration*interval;
+        timer = window.setInterval(function () {
+            //让页面的scrollTop减少
+            changeL -= step;
+            if (changeL <= 0){
+                clearInterval(timer);
+                timer = null;
+                changeL = 0;
+            }
+            document.documentElement.scrollTop = changeL
+        },interval);
+    }
+
+    function toTop2() {
+        //clearInterval(timer);
+        if (timer != null)return;
+        var interval = 20;//定时器执行的时间间隔
+        var times = 0;//已经运动的时间
+        var changeL = utils.scrollT();
+        var duration = 400;//总的运动使劲啊
+        var step = changeL/duration*interval;
+        timer = window.setInterval(function () {
+            //让页面的scrollTop减少
+            changeL -= step;
+            if (changeL <= 0){
+                clearInterval(timer);
+                timer = null;
+                changeL = 0;
+            }
+            document.documentElement.scrollTop = changeL
+        },interval);
+    }
+    btn.onclick = function () {
+        toTop2();
+    };
+    window.onscroll = btnDis;
+    function btnDis() {
+        var scrT = utils.scrollT();
+        var cliH = utils.clientH();
+        if (scrT > cliH){
+            btn.style.display = 'block'
+        } else {
+            btn.style.display = 'none'
+        }
+    }
+    window.onmousewheel = function () {//滚动滑轮事件
+        clearInterval(timer);
+        timer = null
+    }
+</script>

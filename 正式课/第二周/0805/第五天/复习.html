@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 求数组中的最小值
+    * */
+    var ary = [12,45,78,345,2,456];
+    /*
+    * 1、 先用 sort排序（升序）； 然后求数组的第一项就是最小值
+    * */
+
+    /*
+    *2、假设法
+    * 假设第一个就是最小的；然后循环数组，用每一项跟当前的最小值比较；
+    * 比当前最小值小；就把当前最小值换成当前项的值；
+    * 循环完成之后，这个个最小值 就是数组中的最小的值
+    * */
+
+    /*
+    * 3、
+    * str = ary.toString()  Math.min(eval(str))
+    * Math.min(1,2,3,4)
+    * */
+    var str = ary.join(',');
+    var str2 = `Math.min(${str})`;
+    console.log(eval(str2));
+    // eval(`Math.min(${str})`);//eval("Math.min(1,2,3,4)")
+    // eval(`Math.min(${ary.toString()})`);
+    // eval('Math.min('+ary.toString()+')');
+
+    /*
+    * 4、
+    * apply : f1.apply(obj,[1,2,3])
+    * */
+    console.log(Math.min.apply(Math, ary));// --->2
+    console.log(Math.min.apply(null, ary));// --->2
+    //Math.min(12,45,78,345,2,456)
+
+    // function f() {
+    //     console.log(arguments)
+    // }
+    // f(1,2,3,4);
+    // f.call(null,1,2,3,4);
+    // f.apply(null,[1,2,3,4])
+
+    /*
+    * 5、用 es6的扩展运算符（...）
+    *
+    * */
+    Math.min(...ary);// 相当于 把  ary 展开; 就是去掉外层的中括号
+
+    // function fn(...a) {
+    //     console.log(a);
+    //     return eval(a.join('+'))
+    //     console.log(arguments);
+    // };
+    // fn(1,2,3,4); //---> [1,2,3,4]
+    // fn(1,2); //----> [1,2]
+    function fn(b,...a) {
+        console.log(b,a);
+        console.log(arguments);
+    };
+    fn(1,2,3,4); //---> 1,[2,3,4]
+    fn(1,2); //----> 1,[2]
+
+    var ary2 = [1,2,3],ary3 = [4,5,6];
+    var ary4 = ary2.concat(ary3);
+    var ary5 = [...ary2,...ary3];
+    console.log(ary4, ary5);
+
+
+    /*
+    * 箭头函数
+    *
+    * */
+    function f1() {
+        console.log(112)
+    };
+    var f2 = function () {
+        console.log(22);
+    };
+    var f3 = () => {
+        console.log(333);
+    };
+    f3();
+
+    (function () {
+
+    })();
+    (()=>{
+
+    })();
+    div1.onclick = function () {
+
+    };
+    div1.onclick = ()=>{
+
+    }
+    /*
+    * 跟普通函数的区别：
+    * 箭头函数里边没有  this ; 他的this是向上级作用域查找；
+    * call,apply,bind；
+    * 也不能用 new 做运算；
+    * */
+    ary.sort(function (a,b) {
+        return a - b;
+    });
+    ary.sort((a,b)=>{
+        return a - b;
+    });
+
+
+    var f4 = ()=>{
+        console.log(this)
+    };
+    var f5 = function () {
+        console.log(this)
+    };
+    var obj = {q:1,f:f4,f2:f5};
+    obj.f(); //  ---- > window
+    obj.f2();//  -----> obj
+
+</script>
+
+
+
+
+
+
+
+
+
+

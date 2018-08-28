@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 1、原型继承
+    * */
+    function Person() {
+        this.name = 'zf'
+    }
+    function Son() {
+
+    }
+    Son.prototype = new Person;
+    // 让子类的原型 指向父类的一个实例
+    var son1 = new Son();
+    son1.hasOwnProperty('name');//false
+
+    /*
+    * 2、call 继承
+    * */
+
+    function Father() {
+        this.name = 'zf';
+        this.age = 9;
+    }
+    function Son() {
+        Father.call(this);//把 Father 中的this指向改成 Son 中的this 指向
+        this.sex = '男';
+    };
+    var son1 = new Son();
+    // new Son 时；开辟了一个空的堆内存；把son中的this指向到这个堆内存；
+    // Father.call(this)是让 Father当作普通函数执行，
+    // 并把其中的this 也指向到刚开辟的堆内存
+    console.log(son1.name);//zf
+    son1.hasOwnProperty('name');//true
+    console.log(son1);
+
+    /*
+    * 寄生组合式
+    * */
+    function Father() {
+        this.name = 'zf';
+        this.age = 9;
+    };
+    Father.name2 = 'zf';
+    function Son() {
+        Father.call(this);// 利用 call 继承私有
+        this.sex = '男';
+    };
+    Son.prototype.getName = function(){};//在默认的原型对象上添加了一个属性
+    // Son的prototype 指向默认的原型对象；
+    Son.prototype = Father.prototype;//这种写法 ，当我们修改Son的原型上的属性时；Father的也会跟着修改；
+    Son.prototype = Object.create(Father.prototype);
+    // 它是让 Son的prototype指向了一个空的对象（不是普通的对象）；这个对象的 __proto__指向了 Father的原型对象
+    var obj = {q:1};
+    var obj2 = Object.create(obj);
+    // obj2 是个空对象；但是这个obj2.__proto__ == obj
+
+
+    /*
+    * class 继承
+    * */
+
+    class A{
+        constructor(){
+            this.a = 12;
+            this.b = 13;// 私有属性
+        }
+        getName(){ //公有属性
+            console.log(1)
+        }
+        static getName(){  //把A当作对象来处理
+            console.log(2)
+        }
+    };
+    var a = new A;
+    console.dir(a);
+    A.getName();//2
+    // A.getName();// A上没有getName ;Function.prototype
+    a.getName();//1
+    a.hasOwnProperty('getName');//false
+    A.hasOwnProperty('getName');//true
+    a.hasOwnProperty('a');//true
+
+    class B extends A{
+        constructor(){
+            super(); //所有私有属性继承过来
+            this.c = 14;
+            this.d = 15;
+        }
+        getAge(){
+            console.log('age');
+        }
+        static getAge(){
+            console.log('static age');
+        }
+    }
+    var b = new B;
+    B.getName();//2
+    b.getName();//1
+    b.getAge();//age
+    B.getAge();//static age
+
+
+</script>  

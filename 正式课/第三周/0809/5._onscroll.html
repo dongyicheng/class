@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            height: 2000px;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+        .bottom{
+            height: 200px;
+            background-color: #3059fa;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<img src="第三天/img/1.jpg" alt="">
+<!--
+1.jpg当做默认图   2.jpg  当做真正的图片链接
+-->
+<div class="bottom"></div>
+</body>
+</html>
+<script>
+    //window.onresize 监听 浏览器可视窗口的变化
+    //window.onscroll 监听 页面滚动事件
+    window.onscroll=function () {
+
+    }
+    /*
+    * 图片的懒加载
+    * 只有当页面滚动到图片位置显示的时候 才会去加载图片; 一开始  图片的位置可以放一张小的默认图
+    * 优势: 提升页面的加载速度
+    *      在移动端省流量
+    *
+    *实现的原理: 监听页面滚动 , 当页面滑到图片位置的时候 , 再让图片显示(图片的src换成真正的连接)
+    * */
+
+    /*
+    * 需求是  当页面滑动  图片的头部刚刚露出来时 ; 让图片的连接换成 img/2.jpg
+    * */
+    function imgLoad(ele) {
+        var tarT=ele.offsetTop;
+        var cliH=document.documentElement.clientHeight||document.body.clientHeight;
+        var scrH=document.documentElement.scrollTop;
+        if(scrH+cliH>tarT){
+            //说明头部已经露出来了
+            ele.src='img/2.jpg'
+        }
+    }
+    var img=document.getElementsByTagName('img')[0];
+    window.onscroll=function () {
+        imgLoad(img);
+    }
+
+</script>

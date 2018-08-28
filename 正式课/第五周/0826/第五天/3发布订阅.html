@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 订阅
+    *
+    * 发布
+    *
+    * 取消订阅
+    * */
+    var ary = [];// 报社订阅人的名单
+    function on(f) { //on 自己起的名 这个函数是用来把订阅人加入到名单里
+        ary.push(f)
+    }
+
+    //发布
+    function fire() {//循环每一个人， 对每一个人进行发报纸（每一个人执行）
+        ary.forEach((item) => {
+            item && item();
+        })
+    }
+
+    //取消订阅
+    function off(f) {
+        var n = ary.indexOf(f);
+        if(n !== -1){// 查看这个人确实是在名单里边
+            ary.splice(n,1)// 把这个人从这个名单中移除掉
+        }
+    }
+
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        console.log(2);
+    }
+    on(f1);
+    on(f2);// 在名单里加了两个人
+
+    fire();
+    off(f2);// 把 f2从名单中移除
+    fire();
+</script>  

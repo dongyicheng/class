@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    // function sum() {
+    //     var arg = arguments;
+    //     var total = 0;
+    //     for(var i = 0; i < arg.length; i++){
+    //         // isNaN(xxx)  --> Number(xxx)  再去判断
+    //         // if(!isNaN(arg[i]) && typeof arg[i] == 'number'){
+    //         //     total += arg[i];
+    //         // }
+    //         if(!isNaN(arg[i])){
+    //             total += Number(arg[i]);
+    //             // total += parseFloat(arg[i]);
+    //         }
+    //     }
+    //     return total
+    // }
+    // sum(1,5,23,2,'12');
+    // sum(1,5);
+    //
+    // for(var i = 0; i < oLis.length;i++){
+    //
+    // };
+    //
+    // var i = 0;
+    // while (i < oLis.length){
+    //     var n = i%3;
+    //     // switch (true){
+    //     //     case n==0:
+    //     //         break;
+    //     //     case n==1:
+    //     //         break;
+    //     //     default:
+    //     //
+    //     // } ;
+    //     switch (n){
+    //         case 0:
+    //             //n === 0
+    //             break;
+    //         case 1:
+    //             break;
+    //         default:
+    //
+    //     }
+    //     i++;
+    // }
+    //
+    //
+    // oLis.length = 3;
+    // for(var i = 0; i < oLis.length; i++ ){
+    //     if(i%2){
+    //         //奇数行
+    //     }else {
+    //         //偶数行
+    //     }
+    //     oLis[i].myIndex = i;
+    //     oLis[i].onclick = function () {
+    //         alert(`我是第${this.myIndex+1}个li`)
+    //     }
+    // }
+    //
+    // var total = 0;
+    // for(var i = 0; i <= 100; i++){
+    //     if(i%5 == 0 || i%7 == 0){
+    //         total += i;
+    //     }
+    // }
+    //
+    // function sum(n) {
+    //     var total = 0;
+    //     for(var i = 0; i <= n; i++){
+    //         if(i%5 == 0 || i%7 == 0){
+    //             total += i;
+    //         }
+    //     }
+    //     return total;
+    // }
+    //
+    // function sum2(n) {
+    //     if(n <=0){
+    //         return 0;
+    //     }
+    //     if(n%5 == 0 || n%7 == 0){
+    //         return n + sum2(n-1)
+    //     }
+    //     // else{
+    //     //     return sum2(n-1)
+    //     // }
+    //     return sum2(n-1)
+    // }
+
+    var oP = document.createElement('p');
+    oP.innerHTML = '这是个p标签';
+    // document.body.appendChild(oP);
+    console.log(oP.toString());
+    document.body.innerHTML = 'oP';
+    // document.body.innerHTML = '<p>这是P</p>';
+
+    for(var i = 0; i < ary.length;i++){
+        //确定循环用的轮数
+        for(var j = i+1; j < ary.length; j++){
+            //ary[i] 本轮的当前项
+            if(ary[i] == ary[j]){
+                ary.splice(j,1);
+                j--;
+            }
+        }
+    }
+    function removeRep(arr) {
+        var ary = arr.slice();
+        // var ary = arr.slice(0);
+        // var ary = arr.concat([],[],[],[],[]);
+        for(var i = 0; i < ary.length;i++){
+            //确定循环用的轮数
+            for(var j = i+1; j < ary.length; j++){
+                //ary[i] 本轮的当前项
+                if(ary[i] == ary[j]){
+                    ary.splice(j,1);
+                    j--;
+                }
+            }
+        }
+        return ary;
+    }
+
+    function removeRep2(arr) {
+        //利用新作一个数组 新数组中存储不重复的项
+        var ary = [];
+        for(var i = 0; i < arr.length; i++){
+            if(ary.indexOf(arr[i]) == -1){
+                ary.push(arr[i])
+            }
+        }
+        return ary;
+    }
+
+    function removeRep3(arr) {
+        var obj = {},ary = [];
+        for(var i = 0; i < arr.length; i++){
+            obj[arr[i]] = arr[i];
+        }
+        for(var k in obj){
+            // ary.push(k);
+            ary.push(obj[k])
+        }
+        return ary;
+    }
+
+    function getStr() {
+        var ranStr = '.....';
+        var str = '';
+        // var n = Math.round(Math.random()*(61-0)+0);
+        for(var i = 0; i < 4; i++){
+            var n = Math.round(Math.random()*61);
+            if(str.indexOf(ranStr[n]) == -1){
+                str += ranStr[n];
+            }else {
+                i--;
+            }
+        }
+        return str
+    }
+
+
+</script>

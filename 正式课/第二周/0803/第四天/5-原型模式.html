@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 原型模式 ； 以构造函数模式为基础，添加了原型的概念；
+    * */
+
+    /*
+    *三句必须背熟的话
+    * 1、每一个函数都有一个 prototype(原型)的属性，指向自己的原型对象
+    * 2、每一个对象都有一个__proto__的属性，指向所属类的原型；
+    * 3、每一个默认的原型对象 都有一个 constructor 的属性，指向这个函数本身
+    * */
+
+    function Person(name,age) {
+        var sex = '男';
+        this.name = name;
+        this.age = age;
+    };
+    var per1 = new Person('小明',18);
+    // per1 的所属类 就是 咱们 Person（自定义类）；
+
+    console.log(Person.prototype);
+    //每一个函数都有一个 prototype属性 指向自己的原型对象
+
+    console.log(per1.__proto__ === Person.prototype);
+    //每一个对象 都有一个__proto__的属性；指向所属类的原型对象；
+
+    console.log(Person.prototype.constructor === Person);
+    // 每一个默认的原型对象上都有一个constructor属性，指向函数本身
+
+    Person.prototype.getName = function () {
+        console.log(this.name);
+        console.log(this.name2);
+        //          per1.name2// 没有name2 属性； 去所属原型上找；接着再通过__proto__ 向上查找；默认的原型对象都是 Object类的实例； Object.prototype上也没有；
+    };
+    Person.prototype.name = '珠峰培训';
+
+    console.log(per1.name); //小明
+    //per1 {name:'xm',age:19,__proto__:}
+    per1.getName();// 小明 undefined;
+    // per1 自己身上没有 个体Name这个属性，那么他就通过 自己的__proto__ 找到 所属类的原型对象；在这个原型对象上查找对应属性；
+
+    // 以上的这种查找属性的机制；现在自己身上查找；没有的话就通过__proto__去所属类的原型上查找，再没有就去这个 原型对象 所属类的原型对象上查找；直到找到该属性，或者在Object类的原型上都没有没有，直接返回undefined；  这种查找机制 就是原型链
+
+    // 作用域链 是查找  变量的一种机制
+    // 原型链  是查找   属性的一种机制
+
+
+    var ary = [1,2,3];
+    var ary2 = [2,3,4];
+
+</script>  

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+
+    var obj = {};
+    obj[1] = 'age';
+    var name = 'zf';
+    var age = 9;
+    name = (function (name,age) {
+        console.log(arguments);
+        arguments[1] = 'zg';
+        console.log(arguments,age);
+        age = age || this.age;
+        console.log(name,age)
+    })(name)
+</script>  

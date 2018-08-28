@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1, #div2 {
+            width: 200px;
+            height: 200px;
+            background: #24ccc8;
+            line-height: 200px;
+            text-align: center;
+            border-radius: 50%;
+            user-select: none;
+            cursor: move;
+            position: absolute;
+        }
+
+        #div2 {
+            background: #999999;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">ddd</div>
+<div id="div2">eee</div>
+</body>
+</html>
+<script>
+    // let oDiv=document.getElementById('div1');
+    // oDiv.onmousedown=dragStart;
+    //
+    // function dragStart(e) {
+    //     e=e||window.event;
+    //     this.startX=this.offsetLeft;
+    //     this.startY=this.offsetTop;
+    //     this.mx=e.pageX;
+    //     this.my=e.pageY;
+    //     // this.flag=true;
+    //     document.onmousemove=dragMove.bind(this);
+    //     document.onmouseup=dragEnd.bind(this)
+    // }
+    // function dragMove(e) {
+    //     // if(!this.flag)return
+    //     e=e||window.event;
+    //     let x=e.pageX-this.mx,
+    //         y=e.pageY-this.my;
+    //     this.style.left=this.startX + x + 'px';
+    //     this.style.top=this.startY + y + 'px';
+    //
+    //     //速度
+    //     if(!this.prevX){
+    //         this.prevX=0;
+    //     }
+    //     this.speed=e.pageX - this.prevX
+    //     this.prevX=e.pageX;
+    // }
+    // function dragEnd() {
+    //     // this.flag=false;
+    //     document.onmousemove=null;
+    //     document.onmouseup=null;
+    //     if(!this.running) {
+    //         fly.call(this)//上次未执行完  不可执行新的
+    //     }
+    //     drop.call(this);
+    //     this.maxL=(document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth
+    //     this.maxT=(document.documentElement.clientHeight||document.body.clientHeight) - this.offsetHeight
+    //
+    // }
+    //
+    // function fly(e) {
+    //     this.running=true;
+    //     clearTimeout(this.flyTimer)
+    //     this.speed*=0.98;
+    //     let l=this.offsetLeft + this.speed
+    //     if(l>this.maxL){
+    //         l=this.maxL;
+    //         this.speed *=-1;
+    //     }
+    //     if(l<0){
+    //         l=0;
+    //         this.speed*=-1;
+    //     }
+    //     this.style.left=l+ 'px';
+    //     if(Math.abs(this.speed)<0.1){
+    //         clearTimeout(this.flyTimer)
+    //         this.running=false
+    //     }else{
+    //         this.flyTimer=setTimeout(fly.bind(this),30)
+    //     }
+    // }
+    //
+    // function drop() {
+    //     if (!this.flag) {
+    //         this.flag = 0//判断球是否不动了
+    //     }
+    //     if (!this.dropSpeed) {
+    //         this.dropSpeed = 9.8;
+    //     } else {
+    //         this.dropSpeed += 9.8;
+    //     }
+    //     this.dropSpeed *= 0.98;
+    //     let t = this.offsetTop + this.dropSpeed;
+    //     if (t >= this.maxT) {
+    //         t = this.maxT
+    //         this.dropSpeed *= -1;
+    //         this.flag++
+    //     } else {
+    //         this.flag = 0
+    //     }
+    //     this.style.top = t + 'px';
+    //     if (this.flag > 2) {
+    //         clearTimeout(this.dropTimer)
+    //     } else {
+    //         this.dropTimer = setTimeout(drop.bind(this), 30)
+    //     }
+    // }
+    //--------------------------------------------------------------------
+
+
+    let oDiv = document.getElementById('div1');
+    let oDiv1 = document.getElementById('div2');
+
+    oDiv.onmousedown = dragStart;
+    oDiv1.onmousedown = dragStart;
+
+    function dragStart(e) {
+        e = e || window.event;
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        this.startX = this.offsetLeft;
+        this.startY = this.offsetTop;
+        document.onmousemove = dragMove.bind(this);
+        document.onmouseup = dragEnd.bind(this)
+        addZIndex.call(this)
+    }
+
+    function dragMove(e) {
+        e = e || window.event;
+        let x = e.pageX - this.mx,
+            y = e.pageY - this.my,
+            l = x + this.startX + 'px',
+            t = y + this.startY + 'px';
+        this.style.left = l;
+        this.style.top = t;
+
+        if (!this.prevX) {
+            this.prevX = this.mx;
+        }
+        this.speed = e.pageX - this.prevX
+        this.prevX = e.pageX
+    }
+
+    function dragEnd() {
+        document.onmousemove = null;
+        document.onmouseup = null;
+        if (!this.running) {
+            fly.call(this)
+        }
+        drop.call(this)
+        this.maxL = (document.documentElement.clientWidth || document.body.clientWidth) - this.offsetWidth
+        this.maxT = (document.documentElement.clientHeight || document.body.clientHeight) - this.offsetHeight
+    }
+
+    let n = 1;
+
+    function addZIndex() {
+        this.style.zIndex = n++;
+    }
+
+    // oDiv.addEventListener('mousedown',addZIndex,false)
+    // oDiv1.addEventListener('mousedown',addZIndex,false)
+    function fly() {
+        this.running = true;
+        clearTimeout(this.flyTimer)
+        this.speed *= 0.98;
+        var l = this.offsetLeft + this.speed
+        if (l >= this.maxL) {
+            l = this.maxL;
+            this.speed *= -1
+        }
+        if (l <= 0) {
+            l = 0;
+            this.speed *= -1
+        }
+        this.style.left = l + 'px';
+        if (Math.abs(this.speed) < 0.1) {
+            clearTimeout(this.flyTimer)
+            this.running = false;
+        } else {
+            this.flyTimer = setTimeout(fly.bind(this), 30)
+        }
+    }
+
+    function drop() {
+        if (!this.flag) {
+            this.flag = 0
+        }
+        if (!this.dropSpeed) {
+            this.dropSpeed = 9.8
+        } else {
+            this.dropSpeed += 9.8
+        }
+        this.dropSpeed *= 0.98;
+        let t = this.dropSpeed + this.offsetTop
+        if (t > this.maxT) {
+            t = this.maxT
+            this.dropSpeed *= -1
+            this.flag++
+        } else {
+            this.flag = 0
+        }
+        this.style.top = t + 'px'
+        if (this.flag > 2) {
+            clearTimeout(this.timer)
+        } else {
+            this.dropTimer = setTimeout(drop.bind(this), 30)
+        }
+    }
+</script>

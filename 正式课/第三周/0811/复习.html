@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    var reg=/\\w/;//把斜杠给转化了
+    var reg1=/\\\w/;
+    console.log(reg.test('w'));//false
+    console.log(reg.test('\w'));//false
+    console.log(reg.test('\\w'));//true
+    console.log(reg1.test('\\q'));//true
+    console.log(reg1.test('\q'));//false
+
+
+    var reg=/(\w)(\w)\1///\1代表匹配到的第一个分组的字符
+    console.log(reg. test('qwq'));//true
+    console.log(reg. test('qww'));//false
+
+
+    var reg=/^w$/;
+    var reg1=/^w$/m;//m 多行匹配
+    console.exec('qrsw\nw')// w
+    console.exec('qrsww')//null
+
+    //execAll 把没加g 的直接加上
+    RegExp.prototype.execAll= function (str) {
+        var temp = this.exec(str);
+        if (!this.global) {
+            //若没有全局修饰符  有g global这个属性的属性值为true; 没有的话为false
+            //在这里可以新造一个正则; 使用this + g  拼接的一个新正则
+            var _this = eval(this + 'g');
+            // temp=temp||[];//不能给null添加属性  所以如果是null赋值成[]
+            // temp.errorReason='你没加全局修饰符';
+            // return temp;
+        } else {
+            _this = this;
+        }
+        var ary = [];
+        while (temp) {
+            ary.push(temp);
+            temp = _this.exec(str)
+        }
+        return ary;
+    }
+        var str='dd126dd111';
+        var reg9=/(\d+)([a-z])/;
+        console.log(reg9.execAll(str));
+
+    /*
+       * 千分符
+       * */
+    var reg=/(\d)(?=(\d{3})+$)/g
+    console.log(str.replace(reg, '$1,'));//$1在replace里代表第一个分组
+
+
+    var reg=/(\w)(\w)\1///\1代表匹配到的第一个分组的字符
+    console.log(reg. test('qwq'));//true
+    console.log(reg. test('qww'));//false
+
+
+
+
+    /*
+    * 获取一个字符串出现次数最多的字母  及其 次数
+
+    * */
+    var str='fdfffffdfffffggdgggggggggggdfga'
+    var obj={};
+    for (let i = 0; i < str.length; i++) {
+        if(obj.hasOwnProperty(str[i])){
+            obj[str[i]]++;
+        }else{
+            obj[str[i]]=1
+        }
+        var n=1,m;
+        for (var k in obj) {
+            if(obj[k]>n){
+                n=obj[k];
+                m=k;
+            }
+        }
+    }
+    console.log(n, m);
+
+    //思路2  把字符串(使用split分割成数组, 给数组排序 ; 然后再把数组结合成 字符串)  变成  aaaaaaabbbbbbzzzzzvvvvv------>/(\w)\1*/
+    //再用正则  结合 replace  方法求出最大值
+
+    var str1=str.split('').sort((a,b)=>{return a.localeCompare(b);}).join('');
+    var reg=/(\w)\1*/g;
+    var ary=str1.match(reg);
+    ary=ary.sort((a,b)=>{
+        return b.length-a.length
+    });
+    // arr.forEach(function (item,index) {
+    //
+    // })
+    console.log(ary, ary[0],ary[0][0],ary[0].length);
+
+
+</script>

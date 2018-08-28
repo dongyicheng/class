@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #fa9752;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            user-select: none;
+        }
+        #div2{
+            width: 400px;
+            height: 400px;
+            border: 2px dashed darksalmon;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" draggable="true">珠峰培训</div>
+    <div id="div2"></div>
+    <input type="file" accept="text/directory">
+    <!--
+        accept:支持上传的格式  image/png,image/gif
+    -->
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1');
+    var oDiv2 = document.getElementById('div2');
+
+    //开始拖拽
+    oDiv.ondragstart = function (e) {
+        console.log('start');
+    };
+    oDiv.ondragover = function (e) {
+        console.log('over');
+    };
+    oDiv.ondragend = function () {
+        console.log('end');
+    };
+    //以上三个是给拖动元素绑定的
+
+    //给目标元素绑定的
+    oDiv2.ondragenter = function (e) {
+        console.log('enter');
+    };
+    oDiv2.ondragleave = function (e) {
+        console.log('leave');
+    };
+    oDiv2.ondragover = function(e){
+        e.preventDefault();
+    };
+    // drop 必须配合 dragover 使用； dragover里要阻止默认事件
+    oDiv2.ondrop = function (e) {
+        e.preventDefault();
+        console.log(e);
+        var file = e.dataTransfer.files[0];//获取 拖拽的 元素
+        var name = file.name; // 获取文件的名字
+        var type = file.type; // 获取文件的类型
+        if(!/image\/\w+/.test(type))return;// 判断是不是图片
+        /*var url = window.URL.createObjectURL(file);// 创造出 文件的路径
+        this.innerHTML = `<img src="${url}"><p>${name}</p>`;
+        console.log(url);*/
+
+        var reader = new FileReader(); // 调用 原生JS的文件读取
+        reader.readAsDataURL(file);//把图片转成base64格式的
+        reader.onload = (e)=>{//图片加载完后
+            console.log(e.target.result);// 存储的是转码后的 base64字符串
+            this.innerHTML = `<img src="${e.target.result}"><p>${name}</p>`;
+        }
+    }
+
+</script>  

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * 订阅
+    *
+    * 发布
+    *
+    * 取消订阅
+    * */
+    let ary=[];//存储 订阅人 的名单 ---->事件池
+    function on(f) {
+        ary.push(f)//在名单上加人
+    }
+    function fire() {//发布
+        ary.forEach((item)=>{
+            item&&item()// 让名单里的人 执行 ; 也就是给名单上的人去送报纸
+        })
+    }
+
+    function off(f) {//取消发布
+        let n=ary.indexOf(f);//从名单上找到对应的人
+        ary.splice(n,1)//把这个人名单上移除
+    }
+
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        console.log(2);
+    }
+    function f3() {
+        console.log(3);
+    }
+    on(f1);
+    on(f2);
+    on(f3);
+    fire();//1 2 3
+    off(f2);// 1 3
+</script>

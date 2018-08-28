@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1,#div2{
+            height: 5000px;
+            background: linear-gradient(#24ccc8,#3059fa,#cc080b);
+        }
+    </style>
+</head>
+<body>
+<div id="div2">珠峰培训</div>
+<div id="div1">珠峰培训</div>
+<a class="btn">回到顶部</a>
+<!--<a href="#div1">回到顶部</a>-->
+</body>
+</html>
+<script  src="js/utils.js"></script>
+<script>
+    var btn = utils.getByClass('btn')[0];
+    /*
+    * 固定步长
+    * */
+    btn.onclick = function () {
+        var timer = window.setInterval(function () {
+            // 控制 document.documentElement.scrollTop 或
+            // document.body.scrollTop
+            var tarT = utils.scrollT();
+            tarT-=10;
+            if(tarT <=0){
+                clearInterval(timer);
+                tarT = 0;
+            }
+            document.documentElement.scrollTop = tarT;
+            document.body.scrollTop = tarT;
+        },20)
+    }
+
+    var duration = 1000;
+    btn.onclick = function () {
+        var changT = utils.offset(btn).t - utils.clientH();
+        var speed = changT/duration;
+        var time = 0;// 记录运动的时间
+        var timer = window.setInterval(function () {
+            time+=30;
+            var moveL = time*speed;// 运动的距离
+            if(time>=duration){
+                clearInterval(timer);
+                moveL = changT;
+            }
+            document.documentElement.scrollTop = changT - moveL;
+            document.body.scrollTop = changT - moveL;
+        },30)
+    }
+</script>  

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1,#div2,#div3{
+            width: 200px;
+            height: 200px;
+            background: #3059fa;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/event.js"></script>
+<script src="js/drag.js"></script>
+<script>
+    var  oDiv = document.getElementById('div1');
+    on(oDiv,'mousedown',dragStart);
+    on(oDiv,'myFly',fly);
+    function fly() {
+        //初速度
+        // 根据速度 设置盒子的位置
+        clearTimeout(this.flyTimer);
+        this.speed *= 0.98;
+        var l = this.offsetLeft + this.speed;
+        //需要一个边界
+        var maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
+        // l = l > maxL ? maxL : (l < 0 ? 0 : l);
+        if(l > maxL){
+            l = maxL;
+            this.speed *= -1;
+        }else if(l < 0){
+            l = 0;
+            this.speed *= -1;
+        }
+        this.style.left = l + 'px';
+        if(Math.abs(this.speed) > 0.1){
+            this.running = true;
+            this.flyTimer = setTimeout(fly.bind(this),30);
+        }else {
+            this.running = false;
+        }
+    }
+    // on(oDiv,'onmousedown',dragStart);
+    /*
+    * 这里 我们做一个约定，只要是自己的事件 我们同意用 my开头
+    * */
+</script>  

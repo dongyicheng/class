@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 闭包：它是一种保护机制，保护里边的变量不受外界的影响；
+    * 函数执行，形成一个私有作用域，这个私有作用域就是闭包；
+    * 不销毁的私有作用域才是闭包；
+    * */
+    function f() {
+        return 10;
+    }
+    f();
+    //栈内存：销毁，当这个作用域没有用处时，就销毁；没有用：跟外界没有任何关系了
+    // 私有作用域销毁，函数执行完成之后，看这个作用是否还有用处，没有用就直接销毁
+    // 全局作用域的销毁， 只有在关闭页面的时候销毁
+
+    //堆内存：函数体，对象的键值对 。。。
+    // 销毁： 没有用的时候；在浏览器查看到这个堆内存没有用处时，就销毁
+
+    //  所有匿名函数 都不会进行变量提升
+    //  自执行函数也不会变量提升
+    //  return 后边的 也不会有变量提升
+    //  等号 右边不进行变量提升
+
+    var obj = {q:1,w:2};
+    obj = {e:1};
+
+    //
+    var a = 13;
+    var fn = (function () {
+        var a = 12;
+        var b = 10;
+        console.log(a);
+        return function () {
+            var a = 13;
+            console.log(a,b)
+        }
+    })();
+    // (function w() {
+    //     var a = 12;
+    //     return function e() {
+    //         console.log(a)
+    //     }
+    // })();
+    console.log(fn);
+    fn();
+    fn();
+
+    // var a = function () {
+    //
+    // };
+    // div1.onclick = function () {
+    //
+    // };
+    // var obj = {d:function () {
+    //
+    // }}
+    // (function () {
+    //
+    // })()
+    function sum() {
+        return function () {
+            console.log(11)
+        }
+    }
+
+    var a = sum();
+
+    /*
+    * 闭包的形式
+    *
+    *
+    *
+    * */
+    // 形式1
+    var fn = (function () {
+        var a = 19;
+        return function () {
+            var a = 12;
+            console.log(a)
+        }
+    })();
+    // 形式2
+    var obj = (function () {
+        var q = 10;
+        var fn = function () {
+            console.log(12);
+            console.log(q);
+        };
+        return {
+            f:fn
+        }
+    })();
+    obj = {f:xxxfff000};
+    obj.f();
+
+    // obj 存储的是返回的对象—{f:xxxfff000}, 想让 xxxfff000执行，我们就要先找到这个xxxfff000 然后加小括号 让他执行；obj.f 就是咱们的 xxxfff000
+    console.log(obj.f());
+    // 形式3
+    var sum = function () {
+        var a = 12;
+        return function () {
+            console.log(a);
+        }
+    };
+    var sum2 = function () {
+        var a = 12;
+        return function () {
+            var a = 13;
+            console.log(a);
+        }
+    };
+    sum();// 销毁
+    sum()();// 暂时性不销毁
+    var qq = sum(); //不销毁
+    var qq2 = sum2();// 可以销毁
+    qq();//销毁
+    var a = qq();// 销毁
+</script>  

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*js中所有的数据类型， 他们的原型链终点都是 Object.prototype
+    * 也就是说 Object.prototype上的方法  所有数据类型都能使用
+    *
+    * */
+
+    // var mypush=function (ary,n) {
+    //     ary[ary.length]=n;
+    // };
+    var mypush=function (n) {
+        this[this.length]=n;
+        return this.length;
+    };
+    [].__proto__.mypush=mypush;
+    Array.prototype.mypush=mypush;
+    var ary=[1,2,3];
+    console.log(ary.mypush(10),ary);//4  [1,2,3,10]
+
+
+    var myPush2=function () {
+        for (let i = 0; i < arguments.length; i++) {
+            this[this.length]=arguments[i];
+        }
+        return this.length;
+    };
+    Array.prototype.myPush2=myPush2;
+    console.log(ary.myPush2(10, 20, 30),ary);
+
+    /*
+    * instanceof 查看数据类型
+    * */
+    var ary=[];
+    console.log(ary instanceof Array);//true
+    console.log(ary instanceof Object);//true
+    /*
+    * hasOwnProperty; 查看某属性  是否私有
+    *
+    * */
+    /*
+    * in 属性是否属于某个对象
+    * 不区分共有 私有
+    * 所以 可以调用到的 方法或属性  用in判断 结果都是true
+    * */
+
+    //检测是否为公有属性
+    var ary=[];
+
+    Object.prototype.hasPubProperty=function(obj) {
+        if(obj in this && !this.hasOwnProperty(obj)){
+            return true;
+        }
+        return false;
+    }
+    console.log(ary.hasPubProperty('toString'));
+
+    /*
+    * 基类----> Object
+    * */
+
+
+    function Fn() {
+        this.x = 100;
+        this.y = 200;
+        this.getX = function () {
+            console.log(this.x);
+        }
+    }
+    Fn.prototype = {
+        y: 400,
+        getX: function () {
+            console.log(this.x);
+        },
+        getY: function () {
+            console.log(this.y);
+        },
+        sum: function () {
+            console.log(this.x + this.y);
+        }
+    };
+    var f1 = new Fn;
+    var f2 = new Fn;
+    console.log(f1.getX === f2.getX);//false
+    console.log(f1.getY === f2.getY);//true
+    console.log(f1.__proto__.getY === Fn.prototype.getY);//true
+    console.log(f1.__proto__.getX === f2.getX);//false
+    console.log(f1.getX === Fn.prototype.getX);//false
+    console.log(f1.constructor);//Object  自己身上没有 ---> 往所属原型上查找 这个原型是手动修改的新原型地址, 这个新地址上没有constructor属性 , 则继续向新原型所属类的原型(Object.prototype)上查找 有这个属性 指向Object类
+    console.log(Fn.prototype.__proto__.constructor);//Object
+    f1.getX();//100
+    f1.__proto__.getX();//undefined
+    f2.getY();//200
+    Fn.prototype.getY();//400
+    f1.sum();//300
+    Fn.prototype.sum();//undefined+ 400 =NaN
+
+
+
+
+    /*手动修改了原型的指向 指向了新的地址 原来默认的原型上的方法和属性就找不到了 原型仍然存在
+    *
+    * 在js中,可以手动修改自定义类的prototype指向 , 但不能修改 内置类的指向;
+    *
+    * 对于类的某个实例, 可以修改这个实例的 __proto__指向  不会影响这个类的指向
+    *
+    *
+    * */
+</script>

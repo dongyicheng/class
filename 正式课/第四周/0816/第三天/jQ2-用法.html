@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <script src="js/jquery-3.3.1.js"></script>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+</body>
+</html>
+<script>
+    // var oLis = document.getElementsByTagName('li');
+    // for(let i = 0; i < oLis.length; i++){
+    //     oLis[i].onclick = function () {
+    //         alert(i+1);
+    //     }
+    // }
+    console.log($('ul>li'));
+    $('ul>li').click(function () {
+        console.log($(this).index()+1);
+    })
+    // $('ul>li').on('click',function () {
+    //
+    // });
+    // $('ul>li').click = function () {
+    //
+    // };
+    /*
+    * $() 参数接受 css 选择器
+    *     参数接受 原生JS对象
+    *
+    *
+    * */
+
+    var oDiv = document.getElementById('div1');
+    console.log($(oDiv));// 把原生对象 转成 JQ 对象
+    console.log($('ul>li')[0]);
+    console.log($($('ul>li')[0]));
+    console.log($('ul>li').eq(0));
+    console.log($('ul>li').get(-1))
+    // console.log($('').eq.call(oDiv, 0));
+</script>  

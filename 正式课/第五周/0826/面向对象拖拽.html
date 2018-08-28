@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #div{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: #0c80dc;
+            line-height: 200px;
+            cursor: move;
+            position: absolute;
+            text-align: center;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div">ddd</div>
+</body>
+</html>
+<script>
+    let oDiv=document.getElementById('div');
+    class Drag{
+        constructor(ele){
+            this.ele=ele;//oDiv  这个元素放到实例的一个属性上 , 是为了下边函数能够调用到
+            ele.onmousedown=this.dragStart.bind(this);//this是这个类的实例
+        }
+        dragStart(e) {
+            this.mx=e.pageX;
+            this.my=e.pageY;
+            this.startX=this.ele.offsetLeft;
+            this.startY=this.ele.offsetTop;
+            document.onmousemove=this.dragMove.bind(this);//dragMove 中的this 已经变成了 这个类的实例
+            document.onmouseup=this.dragEnd.bind(this)
+        }
+        dragMove(e) {
+            e.preventDefault();
+            let x = e.pageX - this.mx,
+                y = e.pageY - this.my;
+            this.ele.style.left = x + this.startX + 'px';
+            this.ele.style.top = y + this.startY + 'px';
+        }
+        dragEnd() {
+            document.onmousemove=null;
+            document.onmouseup=null;
+        }
+    }
+    var drag1=new Drag(oDiv)//通过new 传入的实参  可以在类的 constructor 接收到
+
+
+</script>

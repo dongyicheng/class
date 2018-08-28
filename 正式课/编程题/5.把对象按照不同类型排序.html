@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary=[
+        {name:'小红',age:18,hobby:'sleep'},
+        {name:'小明',age:10,hobby:'eat'},
+        {name:'李四',age:14,hobby:'play'}
+    ];
+
+    /*根据数字排序*/
+    var arr=ary.sort((a,b)=>{
+        return a.age-b.age;
+    })
+    console.log(arr);//排好序的对象
+
+    var arr2=ary.sort((a,b)=> {
+        return a.hobby.localeCompare(b.hobby)//用前面的和后面的首字母比较  前面字母靠前返回1  后面字母考前返回-1 一样为0
+    })
+    console.log(arr2);//按abcd的顺序排序
+
+    var arr3=ary.sort((a,b)=>{
+        return a.name.localeCompare(b.name,'zh')//'zh'按中文拼音
+    })
+    console.log(arr3);
+</script>

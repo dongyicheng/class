@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 变量提升（声）
+    * 在当前作用域，代码执行之前，浏览器会统一的预览一遍代码，把其中的带 var 和 function 关键字的提前声明；把 var 声明的 只声明 不定义（给一个undefined默认值）； 带function的 声明加定义
+    * */
+
+    console.log(a); //undefined
+    console.log(f); // 对应的函数体
+    console.log(f2);
+    var a = 13;
+    function f() {
+        console.log(12);
+    }
+    var f2 = function () {
+        console.log(13);
+    };
+
+    console.log(b);
+    console.log(f1);
+    if(false){
+        var b = 15;
+        function f1() {
+            console.log(11);
+        }
+    }
+    var fn = function () {
+
+    };
+    (function () {
+        console.log(12)
+    })();
+    div1.onclick = function () {
+
+    };
+    setInterval(function () {
+
+    },1000);
+    function f3() {
+        console.log(a);
+        return function f8() {
+            console.log(16);
+        };
+        var a = 10;
+        console.log(1)
+    }
+    f3();
+    /*
+    * 变量提升的特殊情况
+    * 1、只提升 等号 左边的内容
+    * 2、不管条件是否成立 都要进行变量提升;对于 function声明比较特殊，在标准浏览器下，只声明不定义；在IE低版本　是　既声明又定义；
+    * 3、所有的匿名函数 都是不会进行变量提升的；
+    * 4、return 后边的内容是不会进行变量提升的；但是return 下边的代码是可以进行变量提升的
+    * 5、所有的自执行函数，都不会进行变量提升；
+    * */
+    // console.log(b1);
+    // console.log(a1);
+
+    //变量提升阶段 做了 var a1 ； var b1;
+    // 代码执行
+    var a1 = 12;// 给window添加了一个 a1 的属性； // a1 = 12
+    b1 = 13;    // 也是给window添加一个 b1的属性；// b1 = 13
+    var b1 = 14;                              // b1  = 14;
+    console.log(a1,b1);//12 14
+    console.log(window.a1,window.b1);//12 14
+
+    /*
+    * es6 的声明
+    * let const : 没有变量提升；不会给window添加属性；
+    * let a = 12; 不能重复声明；不管上边是怎么声明过的;但是能重复定义
+    * const  b = 12; 声明一个常量； 不能重复声明；也不能重复定义
+    *
+    * */
+
+</script>  

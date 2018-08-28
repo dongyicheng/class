@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: sandybrown;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 50%;
+            user-select: none;
+            cursor: move;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    var $oDiv = $('#div1');
+    $oDiv.on('mousedown',function (ev) {
+        dragStart.call(this,ev);
+        //初版是在外边直接给document绑定move,
+        //这次 我们在 onmousedown 中绑定
+        this.DragMove = dragMove.bind(this);
+        this.DragEnd = dragEnd.bind(this);
+        // $(document).on('mousemove',(ev) => {
+        //     this.DragMove(ev)
+        // });
+        $(document).on('mousemove',this.DragMove);
+        $(document).on('mouseup',this.DragEnd);
+
+
+        // document.onmousemove = this.DragMove;
+        // document.onmouseup = this.DragEnd;
+    });
+
+    function dragStart(e) {
+        this.startX = this.offsetLeft;
+        this.startY = this.offsetTop;
+        this.mx = e.clientX;
+        this.my = e.clientY;
+    }
+    function dragMove(e) {
+        var x = e.clientX - this.mx,
+            y = e.clientY - this.my;
+        $(this).css({
+            left:this.startX + x,
+            top: this.startY + y
+        });
+        //要求出初始速度
+        if(!this.prevX){
+            this.prevX = 0;
+        }
+        this.speed = e.clientX - this.prevX;//两次move之间的时间差当作单位时间
+        this.prevX = e.clientX;
+    }
+    function dragEnd(e) {
+        $(document).off('mousemove');
+        $(document).off('mouseup',this.DragEnd);
+        this.maxL = (document.documentElement.clientWidth||document.body.clientWidth) - this.offsetWidth;
+        fly.call(this);
+    }
+
+    //左右弹性动画
+    function fly() {
+        var $this = $(this);
+        this.speed *= 0.98;// 初始速度
+        var l = $this.offset().left + this.speed;
+        /*边界问题
+        * 如果 l 大于 可视窗口宽度 - 盒子的宽度；已经到达最右边；这时 让 speed*-1
+        * */
+        if(l > this.maxL){
+            this.speed *= -1;
+            l = this.maxL;
+        }
+        if(l < 0){
+            this.speed *= -1;
+            l = 0;
+        }
+        $this.css({left:l});
+        this.flyTimer = setTimeout(fly.bind(this),30);
+        if(Math.abs(this.speed) < 0.1){
+            clearTimeout(this.flyTimer);
+        }
+    }
+
+</script>  

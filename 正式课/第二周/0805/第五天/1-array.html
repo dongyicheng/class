@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 从数组中随机删除 n项； 并把删除的 n项 组成一个新数组返回；
+    * 在数组的原型上添加;
+    * 改变原有数组
+    * */
+    var ary = [1,2,3,4];
+    /*
+    * 从数组中删除 n项； 这个n 是个次数；
+    * 随机删除 就是要 产生随机数，然后对应的删除该项
+    * 随机数的范围要在数组的最大索引之内
+    * 把删除的项组成新数组返回
+    * */
+    Array.prototype.removeRan = function (n) {
+        // n是要删除 的  次数；
+        if(n>=this.length){
+            // this 是要操作的数组
+            //当要删除的项数超过数组长度时；我们把数组中的所有项都删除；
+            // 返回一个 所有项组成的新数组；原有数组变成 空数组
+            let ary = this.splice(0);
+            return ary;
+        };
+        let ary = [];
+        for(let i = 0; i < n; i++){
+            let m = Math.floor(Math.random()*this.length);//[0,length-1]
+            ary.push(this.splice(m,1)[0]);
+        }
+        return ary;
+    };
+    var arr = ary.removeRan(2);
+    console.log(arr);
+</script>  

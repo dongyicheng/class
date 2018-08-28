@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <a href="http://www.baidu.com" id="btn">百度一下</a>
+    <!--<a href="javascript:;" id="btn1">百度一下</a>-->
+    <input type="text" id="inp">
+</body>
+</html>
+<script>
+    /*
+    *<a href="##" id="btn">百度一下</a>
+    <a href="javascript:;" id="btn1">百度一下</a>
+    在结构上 阻止默认行为
+    *
+    * */
+    var btn = document.getElementById('btn');
+    btn.onclick = function (e) {
+        //点击事件是在 默认事件 执行之前 执行的
+        alert('qqq');
+        console.log(e);
+        // e.preventDefault  通过JS阻止默认事件
+        e.preventDefault();
+        e.returnValue = false;
+        /*
+        * 阻止默认行为的 兼容性写法
+        * */
+        try {
+            e.preventDefault()
+        }catch (e) {
+            e.returnValue = false
+        }
+    }
+    // inp.onkeydown = function (e) {
+    //     e.preventDefault();
+    // }
+</script>  

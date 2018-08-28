@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        body{
+            background: salmon;
+        }
+        #div1{
+            height: 2000px;
+            background: #cccccc;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+        .bot{
+            height: 400px;
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <img src="瀑布流/img/default.gif" realSrc="img/2.jpg" alt="">
+    <div class="bot"></div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    /*
+    * 懒加载原理： 不在可视区域的图片不加载；只有出现在可视区域中时，才去加载;
+    * 什么时候才算是出现在可视区域；
+    * 出现到可视区域之后，怎么让他加载真正的图片
+    * */
+    var oImg = document.getElementsByTagName('img')[0];
+
+    /*
+    * 出现在可视区域  图片的顶部刚刚出现在页面下方
+    * */
+    // oImg.onclick = function(){
+    //     console.log("这是一个点击事件")
+    // };
+    window.onscroll = function () {
+        // 监听 页面的滚动 事件
+        // console.log("页面滚动了")
+        //我们要用 页面滚动的距离 跟 图片距离body的 距离  做个比较
+        //要把一屏的高度也算上
+        var sT = utils.scrollT();// 页面滚动的距离
+        var cT = utils.clientH();// 一屏的高度
+        var tarT = utils.offset(oImg).t;// 图片到body的距离
+        if(sT + cT > tarT){// 说明图片出来了
+            var realSrc = oImg.getAttribute('realSrc');
+            //先用一个自定义属性把真正的路径保存起来
+            // 然后等条件符合的时候再把这个真实路径赋值给图片的src属性
+            oImg.src = realSrc;
+        }
+
+    };
+</script>  

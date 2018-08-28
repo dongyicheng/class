@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    #div1{
+        width: 800px;
+        height: 200px;
+        margin: 20px auto 0;
+        border: 1px dashed #3059fa;
+        overflow: hidden;
+    }
+    #div1 ul{
+
+    }
+    #div1 li{
+        width: 200px;
+        height: 200px;
+        float: left;
+    }
+    #div1 img{
+        width:100% ;
+        height: 100%;
+    }
+</style>
+<body>
+<div id="div1">
+    <ul class="ul_box">
+        <li><img src="第三天/img/1.jpg" alt=""></li>
+        <li><img src="第三天/img/2.jpg" alt=""></li>
+        <li><img src="第三天/img/3.jpg" alt=""></li>
+        <li><img src="第三天/img/4.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script >
+    var oDiv=document.getElementById('div1');
+    var oUl=document.getElementsByClassName('ul_box')[0];
+    oUl.innerHTML += oUl.innerHTML;
+    oUl.style.width=utils.getCss(oUl,'width')*2+'px';
+    var timer=window.setInterval(function () {
+        var n=oDiv.scrollLeft;
+        oDiv.scrollLeft+=1;
+        if (n==oDiv.scrollLeft){
+            oDiv.scrollLeft=0;
+        }
+    },20)
+</script>

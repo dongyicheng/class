@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <script src="js/utils.js"></script>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1');
+    utils.setCss(oDiv,'height','200px');
+    utils.setGroup(oDiv,{height:'300',width:'400px',background:'pink'});
+    console.log(utils.getcss(oDiv, 'background-color'));
+</script>

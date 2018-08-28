@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: #24ccc8;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script src="js/animate.js"></script>
+<script>
+    var oDiv = document.getElementById('div1');
+    function f1(){
+        alert('over');
+    }
+    myAnimate(oDiv,3000,{left:400,top:300,opacity:0.5},'easeOut',f1);
+</script>  

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #div1{
+        width: 100px;
+        height: 100px;
+        background: #3059fa;
+        position: relative;
+        left: 100px;
+    }
+</style>
+<body>
+<div id="div1" class="box"></div>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script>
+    var oDiv=utils.getByClass('box')[0];
+    // var duration=2000;//总的运动时长
+    // // var changeL=400;//总的运动距离=目标值 - 初始值
+    // var beginL=utils.css(oDiv,'left');
+    // var tarT=800;
+    // var changeL=tarT-beginL;
+    // var times=0;
+    // timer = setInterval(function () {
+    //     times+=20;
+    //     if(times>=duration){
+    //         clearInterval(timer);
+    //         times=duration;
+    //     }
+    //     //time*speed 运动距离
+    //     //当前位置 = 运动距离 + 初始值
+    //     // var curPos= times*speed+beginL;
+    //     var curPos=linear(times,changeL,duration,beginL)
+    //     oDiv.style.left=curPos+'px';
+    // },20)
+    //
+    // function linear(time,changeL,duration,beginL) {
+    //     return changeL/duration*time + beginL;
+    // }
+    //
+    //
+    // /*
+    // * move 需要知道
+    // * 动哪个元素  ;
+    // * 动哪个属性
+    // * 多长时间能动完 ;
+    // * 到哪里停止
+    // * */
+    // function move(ele,duration,attr,tar) {
+    //     var beginL=utils.css(ele,attr);
+    //     var changeL=tar-beginL;
+    //     var times=0;
+    //     var timer = setInterval(function () {
+    //         times+=20;
+    //         if(times>=duration){
+    //             clearInterval(timer);
+    //             times=duration;
+    //         }
+    //         //time*speed 运动距离
+    //         //当前位置 = 运动距离 + 初始值
+    //         // var curPos= times*speed+beginL;
+    //         var curPos=linear(times,changeL,duration,beginL)
+    //         // ele.style[attr]=curPos+'px';
+    //         utils.setCss(ele,attr,curPos)
+    //     },20)
+    // }
+    // move(oDiv,3000,'top',300);
+    // function linear(time,changeL,duration,beginL) {
+    //     return changeL/duration*time + beginL;
+    // }
+
+var oDiv=document.getElementById('div1');
+function move(ele,attr,tar,duration) {
+    var beginL=utils.css(ele,attr);
+    var changeL=tar-beginL;
+    var time=0;
+    var timer=window.setInterval(function () {
+        time+=20;
+        if(time>duration){
+            clearInterval(timer);
+            time=duration;
+        }
+        var curPos=linear(time,beginL,changeL,duration);
+        utils.css(ele,attr,curPos);
+        console.log(time,curPos);
+    },20)
+}
+    move(oDiv,'top',300,3000);
+function linear(time,beginL,changeL,duration) {
+    return beginL+changeL/duration*time;
+
+}
+
+</script>

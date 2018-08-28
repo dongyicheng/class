@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 单例模式 就是一个普通的对象;
+    * 避免 命名冲突；实现模块化开发最基本的模式；
+    * var obj = {name:'',setName:function(){}};
+    * 在对象中，我们把 obj 称为对象名； 在这里 它还有另一个名称 （命名空间）；
+    * 每一个 命名空间之间 是相互独立 互不影响的；
+    * */
+    // var name = '小明';
+    // var name = '小红';
+    // person1.qq = 12;
+    var person1 = {
+        name: "小明",
+        setName:function () {
+            person2.setName();
+        },
+        setAge: function () {
+            console.log(this.name)
+        }
+    };
+    person1.setName();
+    //Uncaught TypeError: Cannot read property 'setName' of undefined --->
+    // setName 前边  的 这个属性或变量 是个 undefined
+    var person2 = {
+        name: '小红',
+        setName: function () {
+            console.log(this.name);
+        }
+    };
+    person2.setName();
+    // var f = person2.setName;
+    // f();
+    person1.setName();// 这行 执行 的时候，person2已经定义好了
+    // 先去 person1中找到 setName属性
+    // 让对应的属性值执行 也就是其对应的函数体执行；
+    // 该函数体执行，让里边的 person2.getName执行；
+    // 找到person2.getName  让其对应的函数体执行
+    // 也就是 执行 console.log(this.name)
+    // 这个this是指向 person2 ; 所以输出 小红
+
+    /*
+    * 不同命名空间 之间 属性的相互调用 通过  命名空间.属性名
+    *
+    * 同一个命名空间中，可以通过 this调用自己属性； 也可以通过 命名空间.属性名
+    * */
+
+
+    /*
+    * 高级单例模式
+    * 先去执行一个自执行函数； 让自执行函数 返回一个命名空间;
+    * 让想外界用什么属性就返回什么属性，不想暴露给外界的，直接不返回就可以了
+    * */
+    var person3 = (function () {
+        var name = '小明';
+        var setName = function () {
+            getName(name);
+            console.log(name)
+        };
+        var getName = function () {
+            console.log(122);
+        };
+        return {
+            init: function(){
+                setName();
+                getName();
+            },
+            setName: setName
+        }
+    })();
+    person3.setName();
+
+    var person4 = (function () {
+        var banner = function () {
+            console.log('set banner')
+        };
+        var title = function () {
+            console.log('set title')
+        };
+        return {
+            init:function () {
+                banner();
+                title();
+            },
+            title: title
+        }
+    })();
+
+    person3.init();
+    person4.init();
+    person4.title('小红');
+</script>  

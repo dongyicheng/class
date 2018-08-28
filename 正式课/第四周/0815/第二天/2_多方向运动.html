@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: #24ccc8;
+            position: relative;
+            left: 800px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    var oDiv = document.getElementById('div1');
+    function move(ele,duration,attr,tar) {
+        var beginL = utils.css(ele,attr);
+        var changeL = tar - beginL;
+        var times = 0;
+        var timer = setInterval(function () {
+            times += 20;
+            if(times >= duration){
+                clearInterval(timer);
+                times = duration;
+            }
+            var curPos = linear(times,changeL,duration,beginL);
+            // ele.style[attr] = curPos + 'px';
+            utils.setCss(ele,attr,curPos);
+        },20);
+    }
+
+    function linear(time,changeL,duration,beginL) {
+        return changeL/duration*time + beginL;
+    }
+    function move2(ele,duration,obj){
+        var beginL = {};
+        var changeL = {};
+        for(var k in obj){
+            if(obj.hasOwnProperty(k)){
+                beginL[k] = utils.css(ele,k);
+                changeL[k] = obj[k] - beginL[k];
+            }
+        }
+        var times = 0;
+        var timer = setInterval(function () {
+            times += 20;
+            if(times >= duration){
+                clearInterval(timer);
+                times = duration;
+            }
+            for(var k in obj){
+                if(obj.hasOwnProperty(k)){
+                    var curPos = linear(times,changeL[k],duration,beginL[k]);
+                    utils.setCss(ele,k,curPos);
+                }
+            }
+        },20);
+
+    }
+    move2(oDiv,6000,{left:300,top:300,opacity:0.5})
+</script>  

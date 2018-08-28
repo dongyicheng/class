@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            position: relative;
+            left: 200px;
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            border: 2px dashed darksalmon;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+
+    var oDiv=document.getElementById('div1')
+    function move(ele,attr,tarL,duration) {
+        var beginL=utils.css(ele,attr);
+        var changeL=tarL-beginL;
+        var time=0;
+        var timer=window.setInterval(()=>{
+            time+=20;
+            if(time>=duration){
+                clearInterval(timer);
+                time=duration
+            }
+            var curPos=linear(changeL,duration,time,beginL)
+            utils.css(ele,attr,curPos)
+        },20)
+    }
+function linear(changeL,duration,time,beginL) {
+    return changeL/duration*time+beginL;
+}
+move(oDiv,'left',500,5000)
+
+
+
+
+
+    function move2(ele,obj,duration) {
+        var beginL={};
+        var changeL={};
+        var time=0;
+        for (var k in obj) {
+            if(!obj.hasOwnProperty(k))return;
+              beginL[k]=utils.css(ele,k);
+              changeL[k]=obj[k]-beginL[k];
+        }
+        var timer=window.setInterval(()=>{
+            time+=20;
+            if(time>=duration){
+                clearInterval(timer)
+                time=duration
+            }
+            for (var k in obj) {
+                if(!obj.hasOwnProperty(k))return;
+                var curPos=linear(changeL[k],duration,time,beginL[k])
+                utils.css(ele,k,curPos)
+            }
+        },20)
+    }
+    function linear(changeL,duration,time,beginL) {
+        return changeL/duration*time+beginL;
+    }
+    move2(oDiv,{left:300,top:400,opacity:0.5},2000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

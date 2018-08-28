@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <p class="box">1</p>
+    <p class="box box2">2</p>
+    <p class="box2 box3">3</p>
+    <p class="box box4">4</p>
+    <p class="box3">5</p>
+    <p class="box box3 box4">6</p>
+</div>
+</body>
+</html>
+<script>
+    function getByClass(str,context) {
+        context = context || document;
+        var arr = [];
+        var eles = context.getElementsByTagName("*");
+        for(var i = 0; i < eles.length; i++){
+            var ary = eles[i].className.split(/ +/g);
+            if(ary.indexOf(str) != -1){
+                arr.push(eles[i]);
+            }
+        }
+        return arr;
+    }
+
+    function getByClass(str,context) {
+        context = context || document;
+        var classAry = str.split(/ +/g);
+        var eles = context.getElementsByTagName("*");
+        if(!classAry[0].length){
+            classAry.shift()
+        }
+        !classAry[classAry.length-1] ? classAry.pop() : null;//开头和结尾如果有空格  则删掉
+        // var reg = new RegExp("(^| +)"+str+"( +|$)");
+        // ['box','box1','box2','box3']
+        for(var k = 0; k < classAry.length; k++){
+            var ary = [];
+            var reg = new RegExp("(^| +)"+classAry[k]+"( +|$)");
+            for(var i = 0; i < eles.length; i++){
+                if(reg.test(eles[i].className)){
+                    ary.push(eles[i])
+                }
+            }
+            // ary 存放的是 满足 ‘box’ 这个类名的元素
+            eles = ary;
+        }
+        // return eles
+        return ary
+
+    }
+    function getByClass(str,context) {
+        context = context || document;
+        str=str.replace(/^ +| +$/g,'')//将开头和结尾的空格删掉
+        var classAry = str.split(/ +/g);
+        var eles = context.getElementsByTagName("*");
+        for(var k = 0; k < classAry.length; k++){
+            var ary = [];
+            var reg = new RegExp("(^| +)"+classAry[k]+"( +|$)");
+            for(var i = 0; i < eles.length; i++){
+                if(reg.test(eles[i].className)){
+                    ary.push(eles[i])
+                }
+            }
+            // ary 存放的是 满足 ‘box’ 这个类名的元素
+            eles = ary;
+        }
+        // return eles
+        return ary
+
+    }
+    console.log(getByClass('box box2'));
+    // console.log(getByClass('   box box2'));;
+
+</script>

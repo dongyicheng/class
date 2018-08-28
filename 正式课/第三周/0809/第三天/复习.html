@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            height: 1500px;
+            width: 50px;
+            background: #24ccc8;
+            border: 10px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+    </div>
+    <table>
+        <tr>
+            <td>
+                <div></div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    /*
+    * clientWidth  盒子（不包含边框）的宽 + 左右padding
+    * clientLeft   左边框的宽度
+    *
+    *
+    * offsetWidth  clientWidth + 左右border
+    * offsetParent 上级参照物 （有定位的父级），若所有父级都没有定位；那么这个盒子的offsetParent 就是 body; body.offsetParent === null;在table标签中需要注意offsetParent 的特殊性
+    * offsetLeft   盒子外边框到上级参照物内边框的距离
+    *
+    *
+    * scrollWidth 在内容没有溢出的情况下 === clientWidth
+    *             在内容溢出时，但没有设置overflow属性  ===  内容 + 左padding
+    *             在内容溢出时，设置overflow属性 ===   内容 + 左右padding
+    * scrollLeft  左边的卷去的宽度
+    * scrollTop   上边卷去的高度
+    *
+    * 13个属性中  只有scrollTop和scrollLeft 是可以修改的；其他的都是只读属性
+    *
+    * 浏览器可视窗口的高度
+    * document.documentElement.clientHeight || document.body.clientHeight
+    * */
+    // window.onresize = function () {
+    //     // 监听可视窗口变化的
+    //     console.log(document.documentElement.clientWidth||document.body.clientWidth)
+    // }
+    // document.body.onresize = function () {
+    //     // 监听可视窗口变化的
+    //     console.log(document.documentElement.clientWidth||document.body.clientWidth)
+    // }
+
+    /*
+    * 获取整个文档的高度
+    * document.documentElement.scrollHeight || document.body.scrollHeight
+    *
+    * */
+    console.log(document.documentElement.scrollHeight);
+
+
+
+    /*
+    * 求当前盒子的外边框 到 body内边框的 距离
+    * */
+
+    function offset(ele) {
+        var l = ele.offsetLeft;// 存储的是ele到父级参照物内边框的left距离
+        var t = ele.offsetTop; //
+        var temp = ele.offsetParent;// 存储的是ele的父级参照物
+        while (temp){
+            l += temp.offsetLeft + temp.clientLeft;
+            t += temp.offsetTop + temp.clientTop;
+            temp = temp.offsetParent;
+        }
+        return {
+            left:l,
+            top:t
+        }
+    }
+
+    console.log(offset(div1));
+</script>  

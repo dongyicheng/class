@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div">
+    ft
+    <p class="box">1</p>
+    <p class="box1">2</p>
+    <p class="box2">3</p>
+    <p class="box box1">4</p>
+</div>
+</body>
+</html>
+<script>
+    /*
+    * children:元素子节点
+    * childNodes:所有子节点
+    * */
+    //children在IE中  把注释节点也算在其中  需要作判断
+    var oDiv=document.getElementById('div');
+    function children(ele) {
+        //先拿到所有子节点  再从这些子节点中筛选出元素子节点
+        // var childs=ele.childNodes;
+        //优化 直接循环children  可以减少循环次数
+        var childs=ele.children;
+        var ary=[];
+        for (let i = 0; i < childs.length; i++) {
+            if(childs[i].nodeType == 1){
+                ary.push(childs[i])
+            }
+        }
+        return ary;
+    }
+
+    /*
+    * 写一个 根据一个类名获取元素的函数
+    *
+    * */
+
+    /*
+    * @str 类名
+    * @content 上下文
+    * */
+    //IE下没有 getClassName 这个方法
+    function getByClass(str,context) {
+        /*先去拿到context下  所有元素节点
+        * 然后再从这些节点中筛选出  有str这个类名的
+        * */
+        context=context||document;
+        str=str.replace(/^ +| +$/g,'');//把前面和后面的空格去掉
+        var ary=[];//存放符合条件的元素
+        // var eles=children(context);//只能获取到儿子辈
+        var eles=context.getElementsByTagName('*');
+        //把context下所有的标签获取到
+        //筛选根据元素的类名中是否含有 str
+        for (let i = 0; i < eles.length; i++) {
+          //用正则判断 eles[i].className 中是否含有str这个类名
+            var reg=new RegExp("^ *"+str+"* $")//只可以匹配到单个类名的所有情况
+            var reg=new RegExp('(^| +)'+str+'( +|$)');
+            //以str开头 的满足
+            //以str结尾的满足
+            //str前面是空格 满足
+            //str后面是空格 满足
+
+            if (reg.test(eles[i].className)){
+             ary.push(eles[i])
+            }
+        }
+        return ary;
+    }
+    getByClass('box',oDiv)//所有含有box的元素拿到
+</script>

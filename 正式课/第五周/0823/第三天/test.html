@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #smallImg{
+        width: 200px;
+        height: 200px;
+    }
+    #bigImg{
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        display: none;
+    }
+</style>
+<body>
+<img src="http://cms-bucket.nosdn.127.net/2018/08/03/1dead9e7a3094b23bc84c391398858d2.jpeg?imageView&thumbnail=453y225&quality=85" id="smallImg">
+<img src="http://cms-bucket.nosdn.127.net/2018/08/03/1dead9e7a3094b23bc84c391398858d2.jpeg?imageView&thumbnail=453y225&quality=85" id="bigImg">
+</body>
+</html>
+<script>
+    let smallImg = document.getElementById("smallImg");
+    let bigImg = document.getElementById("bigImg");
+    smallImg.onmouseenter = function(e){
+        e = e|| window.event;
+        bigImg.style.display = "block"
+
+    };
+    smallImg.onmousemove =function(e){
+        bigImg.style.left = e.pageX +"px";
+        bigImg.style.top = e.pageY + 20 +"px";
+    };
+    smallImg.onmouseleave= function(e){
+        bigImg.style.display = "none"
+    };
+
+
+    var obj = {
+        fn:(function(){return 1})()
+    }
+
+</script>

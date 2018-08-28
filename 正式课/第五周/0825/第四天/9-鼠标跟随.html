@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .litBox{
+            width: 200px;
+            height: 100px;
+        }
+        .litBox img{
+            width: 100%;
+            height: 100%;
+        }
+        .bigBox{
+            width: 600px;
+            height: 300px;
+            display: none;
+            position: absolute;
+        }
+        .bigBox img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="litBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/25/f6855107b8704c50844b299901a4f5a8.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+    <div class="bigBox">
+        <img src="http://cms-bucket.nosdn.127.net/2018/08/25/f6855107b8704c50844b299901a4f5a8.jpeg?imageView&thumbnail=453y225&quality=85" alt="">
+    </div>
+</body>
+</html>
+<script>
+    /*
+    * 滑进小图  让大图显示 并且让大图跟着鼠标移动
+    * */
+    var litB = document.getElementsByClassName('litBox')[0],
+        bigB = document.getElementsByClassName('bigBox')[0];
+    litB.onmouseenter = function () {
+        bigB.style.display = 'block';
+    };
+    litB.onmousemove = function (e) {
+        bigB.style.left = e.pageX + 20 + 'px';
+        bigB.style.top = e.pageY + 20 + 'px';
+    };
+    litB.onmouseleave = function () {
+        bigB.style.display = 'none';
+    }
+</script>  

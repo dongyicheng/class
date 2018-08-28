@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var data = null;
+    var xhr =  new  XMLHttpRequest();
+    xhr.open('get','data.json');//第三个参数 不写 默认就是true 也就是异步执行
+    xhr.onreadystatechange = function () {
+        // console.log(xhr.readyState);
+        if(xhr.readyState == 4 && /^[23]\d{2}$/.test(xhr.status)){
+            data = xhr.responseText;
+            // 请求成功之后才会执行
+            qqq(data);
+        }
+    };
+    xhr.send();
+    console.log(data);
+    function qqq(data2){
+        console.log(data2)
+    };
+
+
+
+
+
+
+
+
+
+
+    window.onload = function () {
+        //页面所有内容 加载完成 不包含ajax
+        // console.log(data);
+    };
+    document.ready = function () {
+        // DOM 树 加载完成
+    };
+    // console.log(data);
+</script>  

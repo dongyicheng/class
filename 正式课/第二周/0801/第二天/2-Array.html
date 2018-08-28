@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    // unique
+    var ary = [12,23,23,23,23,7,12];
+    function unique(ary) {
+        let obj = {};
+        // 循环 数组 ；然后 判断数组的 这一项 在不在原来的对象中
+        // 如果在， 就把该项删除
+        // 如果不在，就把这项添加到 obj中
+        for(let i = 0; i < ary.length; i++){
+            if(obj.hasOwnProperty(ary[i])){
+                ary.splice(i,1);
+                i--;
+            }
+            // else {
+            //     obj[ary[i]] = ary[i]
+            // }
+            obj[ary[i]] = ary[i];
+        }
+        return ary;
+    }
+    // unique(ary);
+    console.log(ary);
+    // Array.prototype.myUnique = unique;
+    // [].myUnique(ary);
+    Array.prototype.myUnique = function myUnique() {
+        let obj = {};
+        for(let i = 0 ; i < this.length; i++){
+            if(obj.hasOwnProperty(this[i])){
+                this.splice(i,1);
+                i--;
+            }
+            obj[this[i]] = this[i];
+        }
+        return this;
+    };
+    //sort,reverse
+    // var arr = ary.sort(function (a,b) {
+    //     return a - b
+    // });
+    // console.log(arr === ary);
+    // var arr2 = ary.myUnique();
+    // console.log(ary === arr2);//true
+
+    // var arr = ary.reverse();
+    // var arr = ary.reverse().pop();
+    // var arr = ary.reverse().pop().push(12);
+    // pop返回的是一个数字，不是数组 ； 而 push 是数组中的方法
+    // ary.pop()
+    // console.log(arr);
+
+    var arr = ary.myUnique().pop();
+    // 这种能通过连续打点的方式调用的形式，我们称为链式调用；
+    // 实现链式调用的关键 是看返回值 是否仍然是该类的一个实例；
+    // 若每个函数返回值都是this; 那么 我们就能实现连续的链式调用；
+
+
+    var ary = [12,23,23,23,23,7,12];
+    Array.prototype.myPush = function (m) {
+        this[this.length] = m;
+        //ary[ary.length] = m;
+        return this;
+    };
+    Array.prototype.myPop = function () {
+        this.length--;
+        // this.length = this.length - 1;
+        return this;
+    };
+    var arr2 = ary.myUnique().myPush(12).myPush(14).myPop().myPop().myPush(14).myUnique();
+    console.log(arr2);
+
+
+    var a = 12;
+    // a.parseInt('12');
+    // 12+12-10
+    Number.prototype.add = function (n) {
+        //this 是个引用数据类型
+        var total = this + n ;
+        // this += n;
+        // this = new Number(this + n);
+        // 9++;
+        // 9 = 9 + 1;
+        return total;
+    };
+    Number.prototype.minus = function (m) {
+        return this - m;
+    };
+    console.log(a.add(12).minus(10));
+    //a 是不会发生任何改变；
+
+</script>  

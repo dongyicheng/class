@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #3059fa;
+            border-radius: 50%;
+            cursor: move;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script>
+    /*
+    * 拖拽思路 ---》 摁住一个元素，滑动鼠标， 让这个元素跟着 鼠标移动，当鼠标松开时，元素停止移动
+    *  1、给要拖动的元素 绑定一个 onmousedown事件； 记录 鼠标的初始位置 和元素的初始位置
+    * 2、在鼠标移动的时候，去算 鼠标移动的距离， 用这个距离 去 设置元素当前的位置
+    * 3、在鼠标抬起 时，要让元素停止移动
+    * */
+    var oDiv = document.getElementById('div1');
+    /*oDiv.onmousedown = function (e) {
+        e = e || window.event;
+        var tar = e.target || e.srcElement;
+        this.startX = this.offsetLeft;
+        this.startY = this.offsetTop;
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        document.onmousemove = function (e) {
+            e = e || window.event;
+            var l = e.pageX - oDiv.mx + oDiv.startX,
+                t = e.pageY - oDiv.my + oDiv.startY;
+            oDiv.style.left = l + 'px';
+            oDiv.style.top = t + 'px';
+        };
+        document.onmouseup = function () {
+            //让元素停止运动；
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    };*/
+    oDiv.onmousedown = dragStart;
+    function dragStart(e) {
+        e = e || window.event;
+        var tar = e.target || e.srcElement;
+        this.startX = this.offsetLeft;
+        this.startY = this.offsetTop;
+        this.mx = e.pageX;
+        this.my = e.pageY;
+        document.onmousemove = dragMove.bind(this);//把 dragMove 中的this 强行指向 oDIV
+        document.onmouseup = dragEnd;
+    }
+    function dragMove(e) {
+        e = e || window.event;
+        var l = e.pageX - this.mx + this.startX,
+            t = e.pageY - this.my + this.startY;
+        this.style.left = l + 'px';
+        this.style.top = t + 'px';
+    }
+    function dragEnd() {
+        document.onmousemove = null;
+        document.onmouseup = null;
+    }
+
+
+    //鼠标丢失问题 把oDiv 换成  document
+    // 松手 元素移动不停止
+</script>  

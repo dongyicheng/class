@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: darksalmon;
+            border-radius: 50%;
+            position: absolute;
+            text-align: center;
+            line-height: 100px;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/drag.js"></script>
+<script src="js/event.js"></script>
+<script>
+    /*
+    * 约定  所有 以 my 开头的事件  都是自己定义的事件；其他的全是 原生事件
+    * */
+    var oDiv = document.getElementById('div1');
+    // oDiv.onmousedown = dragStart;
+    on(oDiv,'onmousedown',dragStart);
+    // off(oDiv,'mousedown',dragStart);
+    // on(oDiv,'mousedown',dragStart);
+
+    function fly() {
+        this.running = true;
+        clearTimeout(this.flyTimer);
+        this.speed *= 0.98;
+        var l = this.offsetLeft + this.speed;
+        if(l > this.maxL){
+            l = this.maxL;
+            this.speed *= -1;
+        }
+        if( l < 0){
+            l = 0;
+            this.speed *= -1;
+        }
+        this.style.left = l + 'px';
+        if(Math.abs(this.speed) < 0.1){
+            clearTimeout(this.flyTimer);
+            this.running = false;
+        }else {
+            this.flyTimer = setTimeout(fly.bind(this),30)
+        }
+
+    }
+    function drop() {
+        if(!this.flag){this.flag = 0}
+        if(!this.dropSpeed){
+            this.dropSpeed = 5;
+        }else {
+            this.dropSpeed += 5;
+        };
+        this.dropSpeed *= 0.98;
+        var t = this.offsetTop + this.dropSpeed;
+        if(t >= this.maxT){
+            t = this.maxT;
+            this.dropSpeed *= -1;
+            this.flag++;
+        }else {
+            this.flag = 0;
+        }
+        this.style.top = t + 'px';
+        if(this.flag > 2){
+            clearTimeout(this.dropTimer)
+        }else {
+            this.dropTimer = setTimeout(drop.bind(this),30);
+        }
+    }
+    // fire(oDiv,'mousedown');
+
+</script>  

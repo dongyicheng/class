@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script src="animate.js"></script>
+<script>
+    var oDiv=document.getElementById('div');
+    function f1() {
+        alert('over')
+    }
+    myAnimate(oDiv,2000,{left:400,top:300,opacity:0.1},'easeInOut',f1)
+</script>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        .litBox{
+            width: 200px;
+            height: 200px;
+            margin-left: 200px;
+            position: relative;
+            float: left;
+            cursor: move;
+            border: 2px dashed sandybrown;
+            margin-right: 50px;
+        }
+        .litBox .mask{
+            width: 150px;
+            height: 150px;
+            background: rgba(0,0,0,0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .bigBox{
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+            float: left;
+            position: relative;
+            border: 2px dashed sandybrown;
+            display: none;
+        }
+        .bigBox img{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+    <div class="litBox">
+        <img src="https://img13.360buyimg.com/n1/s450x450_jfs/t23950/96/1943654876/159432/ab6c313d/5b6d3557N77ea59df.jpg" alt="">
+        <div class="mask"></div>
+    </div>
+    <div class="bigBox">
+        <img src="https://img13.360buyimg.com/n1/s450x450_jfs/t23950/96/1943654876/159432/ab6c313d/5b6d3557N77ea59df.jpg" alt="">
+    </div>
+</body>
+</html>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    /*
+    * 思路  有两个盒子 ；一个盒子放小图  一个盒子放大图
+    * 划过小盒子时 让大盒子显示 ；小盒子中 蒙层盖住的部分/小图 === 右边的框/大图
+    * 蒙层的移动方向 跟  大图的移动方向是相反的
+    * */
+    var litBox = document.getElementsByClassName('litBox')[0],
+        mask = litBox.getElementsByClassName('mask')[0],
+        bigBox = document.getElementsByClassName('bigBox')[0],
+        bigImg = bigBox.getElementsByTagName('img')[0];
+    //划过小盒子  让大盒子 和小蒙层 显示
+    litBox.onmouseenter = function () {
+        mask.style.display = 'block';
+        bigBox.style.display = 'block';
+        this.maxL = this.clientWidth - mask.offsetWidth;
+        this.maxT = this.clientHeight - mask.offsetHeight;
+        this.n = mask.offsetWidth / bigBox.clientWidth;
+        //存储的是  比例 = 小蒙层/大框框
+        // 移动比例  小蒙层移动的距离 应该是 大图在大筐筐里边移动距离的 1/比例
+    };
+    litBox.onmouseleave = function () {
+        mask.style.display = 'none';
+        bigBox.style.display = 'none';
+    };
+
+    //划过 要让小蒙层跟着鼠标移动
+    litBox.onmousemove = function (e) {
+        //需要求出 鼠标到 小图片左上角的距离
+        var l = e.pageX - this.offsetLeft - mask.offsetWidth/2,//鼠标 到盒子左边的距离; 减去蒙层宽的一半； 让鼠标位于 蒙层x轴的中间
+            t = e.pageY - this.offsetTop - mask.offsetHeight/2;//鼠标 到盒子左上边的距离; 减去蒙层高的一半； 让鼠标位于 蒙层y轴的中间
+
+        //接下来 需要我们判定边界
+        /*var maxL = this.clientWidth - mask.offsetWidth,
+            maxT = this.clientHeight - mask.offsetHeight;*/
+        l = l > this.maxL ? this.maxL : (l < 0 ? 0 : l);
+        t = t > this.maxT ? this.maxT : (t < 0 ? 0 : t);
+        mask.style.left = l + 'px';
+        mask.style.top = t + 'px';
+
+        //让大图在大盒子中移动
+        console.log(this.n);
+        bigImg.style.left = -l/this.n + 'px';
+        bigImg.style.top = -t/this.n+ 'px';
+
+    };
+
+
+
+
+</script>  

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    //1
+    var str= "我是MT";
+    test();
+    function test() {
+        console.log(str);
+        var str= "哈哈哈";
+        console.log(str);
+    }
+    console.log(str);
+
+
+    //2
+    console.log(a);
+    a=12;
+    function fn(a){ //function fn(){
+        console.log(a);
+        a=13
+    }
+    fn();
+    var a;
+    console.log(a);
+
+    //3
+    function test(){
+        if("a" in window){
+            var a = 10;
+        }
+        console.log(a); //undefined
+    }
+    test();
+
+    //4
+    var a = 1;
+    function fn() {
+        console.log(a);
+        var a = 5;
+        console.log(a);
+        a++;
+        var a ;
+        fn3();
+        fn2();
+        console.log(a);
+        function fn2() {
+            console.log(a);
+            a = 20;
+        }
+        return fn2
+    }
+    function fn3() {
+        console.log(a);
+        a = 200;
+    };
+    fn();
+    fn()();
+    console.log(a);
+
+
+    //5
+    var n = 10;
+    function outer(){
+        console.log(n);
+        var n = 15;
+        inner();
+    };
+    function inner(){
+        ++n;
+        console.log(n);
+        function center(){
+            n+=2;
+            console.log(n);
+        }
+        center(n);
+    }
+    outer();
+
+// 引用数据类型的深入
+//     var a = {
+//         x:1
+//     };
+//     a = a.c = {y:1};
+//     console.log(a.c);
+//
+//     var a = {
+//         x:1
+//     };
+//     var b = a;
+//     b.c = a = {y:1};
+//     console.log(a.c);
+//
+//     var a = {
+//         x:1
+//     };
+//     var b = a;
+//     a.c = a = {y:1};
+//     // b.c = a = {y:1};
+//     console.log(b.c,a.c);
+
+    console.log(a);//undefined
+    var a=12;
+    function fn(){
+        console.log(a);//undefined
+        var a=13;
+    }
+    fn();
+    console.log(a)//12
+
+
+
+    // var a = b = c = 12;  只给a变量提升
+    console.log(a,b,c);// 3*undefined
+    var a=10,b=20,c=30;// 这种相当于 三个 var ;
+    function f(a){
+        console.log(a,b,c);// 10 undefined 30
+        var b = a = c = 100;
+        console.log(a,b,c)// 100 100 100
+    }
+    f(10,20);
+    console.log(a,b,c);// 10 20 100
+
+
+//
+    a();
+    var a = c = function() {
+        console.log(2)
+    };
+    a();
+    function a() {
+        console.log(1)
+    };
+    a();
+
+
+//
+    var foo=1;
+    function bar(){
+        if(!foo){// ! Boolean(foo) ---> !false  -->true
+            var foo=10;
+        }
+        console.log(foo);// 10
+    }
+    bar();
+
+
+    var foo=1;
+    function bar(){
+        if(!foo){// ! Boolean(1) ---> !true  -->false
+            foo=10;
+        }
+        console.log(foo);// 1
+    }
+    bar();
+
+
+    function a() {
+        console.log(1)
+    };
+    function c() {
+        console.log(2)
+    }
+    (function () {
+        b(); c();
+        var b = c = function a() {
+            console.log(3)
+        };
+        function b(){
+            console.log(4)
+        }
+        b();
+    })(a);
+    c();
+
+
+    //
+    var n=5;
+    function a(n){
+        n++;
+        console.log(n);
+        n=10;
+        b();
+        function b(){
+            n++;
+            alert(n);
+        };
+    }
+    a();
+    alert(n);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>  

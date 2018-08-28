@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 800px;
+            height: 200px;
+            border: 1px dashed #ee2ad6;
+            margin: auto;
+            overflow: hidden;
+        }
+        .box ul{
+            width: 800px;
+            height: 200px;
+            list-style: none;
+            overflow: hidden;
+        }
+        .box ul li {
+            width: 200px;
+            height: 200px;
+            float: left;
+        }
+        .box ul li img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="js/utils.js"></script>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <div class="box">
+        <ul>
+            <li><img src="img/1.jpg" alt=""></li>
+            <li><img src="img/2.jpg" alt=""></li>
+            <li><img src="img/3.jpg" alt=""></li>
+            <li><img src="img/4.jpg" alt=""></li>
+        </ul>
+    </div>
+</body>
+</html>
+<!--<script src="js/utils.js"></script>-->
+<script>
+    /*
+    * 实现图片的无缝滚动
+    *
+    * */
+    var box = document.getElementsByClassName('box')[0];
+    var oUl = document.getElementsByTagName('ul')[0];
+    oUl.innerHTML+=oUl.innerHTML;
+    utils.setCss(oUl,'width',utils.css(oUl,'width')*2);
+
+    //box.scrollWidth ---> 内容 + 左右padding
+    //box.clientWidth ---> 盒子的宽 + 左右padding
+    var maxL = box.scrollWidth - box.clientWidth;//最大可卷曲的宽度;
+    var timer = setInterval(function () {
+        // box.scrollLeft++;
+        box.scrollLeft = Math.ceil(box.scrollLeft) + 1;
+        if(Math.ceil(box.scrollLeft) >= maxL){// 证明已经滚动到最左边了
+            box.scrollLeft = 0;
+        }
+    },5)
+
+</script>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    // 闭包:他是一种保护机制, 保护里边的变量不受外界影响;
+//    函数执行,形成一个私有作用域, 这个私有作用域就是闭包
+//    不销毁的私有作用域才是闭包
+
+    function f(){
+        return 10;
+    }
+    f();
+//    栈内存:销毁,当作用域没有用处时, 就销毁; 跟外界没有任何关系了
+//    私有作用域销毁,函数执行完成之后,看这个作用域是否有用,没有用直接销毁
+//    全局作用域的销毁 , 只有在关闭页面时销毁
+
+
+//    堆内存: 函数体 , 对象键值对 ....
+//    销毁: 没有用的时候, 在浏览器查看这个对内存没有用处是,就销毁
+
+
+    //所有匿名函数都不会进行变量提升
+    //自执行函数也不会有变量提升
+    //return后面也不会有变量提升
+    //等号右边不进行变量提升
+    var obj={q:1,w:2}
+    obj=null;//浏览器定时查看时销毁
+
+
+    var a=13;
+    var fn=(function () {
+        var a=12;
+        return function () {
+            a = 13;
+            console.log(a);
+        }
+        });
+
+        // 闭包的形式
+    //形式1
+    var fn=(function(){
+    var a=19;
+    return function () {
+        console.log(a);
+    }
+    })();
+
+    //形式2
+    var obj=(function () {
+        var q=10;
+        var fn=function () {
+            console.log(12);
+            console.log(q);
+        };
+        return {
+        f:fn
+        }
+    })();
+
+    //obj 存储的是返回的对象 - {f:xxxfff000},想让xxxfff000执行 就要先找到xxxfff000  然后加小括号   让他执行; obj.f就是xxxfff000
+
+    console.log(obj.f());
+
+    //形式3
+    var  sum= function(){
+    var a=12;
+    return function () {
+        console.log(a);
+    }
+    };
+    sum();//销毁
+    sum()();//暂时性不销毁
+    var qq=sum()//不销毁
+    qq();//销毁
+    var a=qq();//销毁
+
+
+    function fn() {
+        var i = 5;
+        return function (n) {
+            console.log(n*(--i))
+        }
+    }
+    var f = fn();
+    f(10);//40 第一个作用域不销毁
+    fn()(10);//40
+    fn()(20);//80
+    f(20);//60  继续使用上一个没销毁的
+
+
+    var i=2;
+    function fn() {
+        i+=2;
+        return function (n) {
+            console.log(n + (--i));
+        }
+    }
+    var f=fn();
+    f(2);
+    f(3);
+    fn()(2);
+    fn()(3);
+    f(4)
+</script>

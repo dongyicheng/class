@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * Promise
+    * es6 新增的 类；
+    * 回调地狱
+    * */
+    /*var data = null;
+    var xhr =  new  XMLHttpRequest();
+    xhr.open('get','data.json');
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && /^[23]\d{2}$/.test(xhr.status)){
+            data = xhr.responseText;// data name = zf;
+            ajax(name)
+        }
+    };
+    xhr.send();*/
+
+    /*var p = new Promise(function (res, rej) {
+        //res : 处理  异步请求成功时 执行的函数
+        //rej : 处理  异步请求失败时 执行的函数
+        var data = null;
+        var xhr =  new  XMLHttpRequest();
+        xhr.open('get','data1.json');
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState == 4 && /^[23]\d{2}$/.test(xhr.status)){
+                data = xhr.responseText;
+                res(data)
+            }
+            if(!/^[23]\d{2}$/.test(xhr.status)){
+                rej();
+            }
+        };
+        xhr.send();
+    }).then(function (data) {
+        console.log('yes')
+    },function (data2) {
+        console.log('no')
+    })*/
+
+
+    var p = new Promise((resolve, reject)=>{
+        reject();
+        resolve(); // 只输出 no
+
+        // resolve();
+        // reject();  //只输出 yes
+        /*
+        * 一旦状态确定下来  ；就不会再更改
+        * */
+
+
+    });
+    p.then(success,fail);
+    function success() {
+        console.log('yes');
+        console.log(p)
+    };
+    function fail() {
+        console.log('no');
+        console.log(p);
+    };
+
+    /*
+    * then是Promise里边执行完成后，相应的要执行的函数；需要传入两个实参，第一个是 Promise 里边代码执行成功后 执行的函数；第二个参数 是Promise里边代码执行失败后 执行的函数
+    * */
+    var p = new Promise((resolve, reject)=>{
+        // resolve({q:1});//输出{q: 1, w: 2}
+        reject({q:1});//输出undefined
+    });
+    p.then((data)=>{
+        data.w=2;
+        return data;
+    },()=>{
+        return new Promise(function (resolve,reject) {
+            resolve();
+            reject();
+        })
+    }).then((data)=>{
+        console.log(data)
+    },()=>{
+        console.log(22)
+    })
+
+
+
+</script>  

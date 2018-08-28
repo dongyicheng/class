@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    $ = function () {
+        alert(1)
+    }
+</script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    console.log($);
+    $.noConflict(0);
+    console.log($);
+    console.log(jQuery);
+</script>
+<script>
+    (function (global,factory) {
+
+    })(typeof window !== 'undefined'?window:this,function(window,noGlobal){
+        var version = '3.3.1',
+            jQuery = function (selector,context) {
+                return new jQuery.fn.init(selector,context)
+                //return 了 init的一个实例 ，这个实例能不能找到JQ原型对象？？
+                // init2.__proto__ === jQuery.fn.init.prototype
+                // init2.__proto__ === jQuery.prototype
+            };
+        //把jQuery当作对象； 加了一个 fn 属性；
+        // 把原型指向换成后边的对象
+        jQuery.fn = jQuery.prototype = {
+            jquery: version,
+            constructor: jQuery,
+            toArray: function() {
+                return slice.call( this );
+            }
+            /*...*/
+        };
+        jQuery.extend = jQuery.fn.extend = function () {
+
+        };
+        /*
+        * extend JQ 的扩展功能
+        * jQuery.extend({qq:11}) 扩展的内容是直接放到 jQuery上（把jQ当做对象）
+        * jQuery.fn.extend({www:111})  扩展到 jQuery的原型对象上
+        * */
+
+
+        var init = jQuery.fn.init = function (selector,context,root) {
+
+        };
+        // jQuery.fn.init.prototype === init.prototype
+        init.prototype = jQuery.fn;
+        //jQuery.fn.init ---> 指向了JQ的原型
+        /*...*/
+        var  _jQuery = window.jQuery,
+            _$ = window.$;
+        // 让渡 $ jQuery 这两个变量
+        jQuery.noConflict = function( deep ) {
+            if ( window.$ === jQuery ) {
+                window.$ = _$;
+            }
+
+            if ( deep && window.jQuery === jQuery ) {
+                window.jQuery = _jQuery;
+            }
+
+            return jQuery;
+        };
+        if ( !noGlobal ) {
+            window.jQuery = window.$ = jQuery;
+        }
+
+    })
+</script>

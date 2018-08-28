@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    *
+    * ary.sort((a,b)=>{return a - b})
+    * */
+
+    let ary = [
+        {age:12,name:'夏明'},
+        {age:14,name:"小红"},
+        {age:1,name:"小李"}
+        ];
+    //把数组按照年龄 升序排序
+
+    ary.sort((a,b)=>{
+        return a.age - b.age
+    });
+
+    // 把数组以姓名的 拼音排序
+    ary.sort(function (a,b) {
+        // {} {}
+        return a.name.localeCompare(b.name,'zh');
+    });
+    console.log(ary);
+
+</script>  

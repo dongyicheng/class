@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .imgBox{
+            background: #fa866e;
+            width: 480px;
+            height: 640px;
+            padding: 10px 0 0 10px;
+            margin: 20px auto;
+        }
+        .imgBox li{
+            width: 150px;
+            height: 150px;
+            float: left;
+            position: relative;
+            margin: 0 10px 10px 0;
+            background: #427099;
+        }
+        .imgBox img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<ul class="imgBox">
+    <li><img src="img/cute-blue-monsters-university-icon000.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon001.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon003.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon004.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon005.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon006.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon007.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon008.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon009.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon010.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon011.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon012.png" alt=""></li>
+</ul>
+</body>
+</html>
+<script src="js/drag.js"></script>
+<script src="js/event.js"></script>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    let oLis=document.getElementsByTagName('li');
+
+    [...oLis].reverse().forEach((item)=>{
+        item.style.left=item.offsetLeft+'px';
+        item.style.top=item.offsetTop+'px';
+        item.style.position='absolute';
+        on(item,'mousedown',dragStart);
+        on(item,'myIndex',addZIndex);
+        on(item,'myHit',isHit);
+        on(item,'myPos',changePos)
+    });
+    let n=1;
+    function addZIndex(){
+        this.style.zIndex=n++;
+    }
+    function isHit(){
+        this.ls=this.offsetLeft;
+        this.rs=this.ls+this.offsetWidth;
+        this.ts=this.offsetTop;
+        this.bs=this.ts+this.offsetHeight;
+        this.ary=[];
+        [...oLis].forEach((item)=>{
+            if(item===this)return;
+            item.ls=item.offsetLeft;
+            item.rs=item.ls+item.offsetWidth;
+            item.ts=item.offsetTop;
+            item.bs=item.ts+item.offsetHeight;
+            if(this.ls>item.rs||this.rs<item.ls||this.ts>item.bs||this.bs<item.ts){
+                item.style.background=''
+            }else{
+                item.style.background='#6C7599';
+                this.ary.push(item);
+            }
+        })
+    }
+    function changePos(){
+        this.ary=this.ary||[];
+        this.ary.forEach((item)=>{
+            let l=this.offsetLeft-item.offsetLeft,
+                t=this.offsetTop-item.offsetTop;
+            item.style.background='';
+            item.instance=Math.pow(l,2)+Math.pow(t,2)
+        })
+        this.ary.sort((a,b)=>{
+            return a.instance-b.instance;
+        })
+        if(!this.ary.length){
+            $(this).animate({
+                left:this.startX,
+                top:this.startY
+            },200)
+        }else{
+            $(this).stop(true,true).animate({
+                left:this.ary[0].offsetLeft,
+                top:this.ary[0].offsetTop
+            },200);
+            $(this.ary[0]).stop(true,true).animate({
+                left:this.startX,
+                top:this.startY
+            },200)
+        }
+    }
+</script>

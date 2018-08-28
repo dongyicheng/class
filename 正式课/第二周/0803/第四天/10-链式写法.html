@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var ary = [1,2,3,4,5];
+    // ary.sort(function (a, b) {
+    //     return a - b;
+    // }).push(20);
+    ary.sort().reverse().push(10);
+    //ary.sort() ---> 返回改变后原数组
+    //ary.reverse() ---> 返回也是改变后的原数组
+    //ary.push()
+
+    Array.prototype.mypush = function (n) {
+        this[this.length] = n;
+        return this;
+    };
+    Array.prototype.myPop = function(){
+        this.length--;
+        return this;
+    };
+
+    ary.myPush(10).mypush(20).reverse().myPop().myPop();
+    ary.pop().toFixed(2).replace('.','-----').split('').pop();
+
+    /*
+    * 链式调用的关键在于 返回值也要是该类的一个实例;
+    * 当我们直接 return this 时，就可以一直链式调用的方法了;
+    * */
+</script>  

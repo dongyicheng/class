@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    var $start = $.Callbacks();//产生一个事件池
+    var $move = $.Callbacks();//产生一个事件池
+    var $end = $.Callbacks();//产生一个事件池
+
+    function f1(a) {
+        console.log(1,a);
+    }
+    function f2(a) {
+        console.log(2,a);
+    }
+    function f3(a) {
+        console.log(3,a);
+    }
+    $(div1).on('click',f1);
+
+    $(div1).off('click',f1);
+
+    $start.add(f1);
+    $start.add(f2);
+    $start.add(f3);
+
+    $start.fire();
+    $start.remove(f2);
+    $start.fire('qqq');
+
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 200px;
+            height: 200px;
+            background-color: #5f5999;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+
+</div>
+</body>
+</html>
+<script src="../js/utils.js"></script>
+<script>
+    var oDiv=document.getElementById('div')
+    document.onkeydown=function (e) {
+        let l=utils.css(oDiv,'left'),
+            t=utils.css(oDiv,'top');
+        switch (e.keyCode){
+            case 37: utils.css(oDiv,{left:l-10})
+                break;
+            case 38:utils.css(oDiv,{top:t-10})
+                break
+            case 39:utils.css(oDiv,{left:l+10})
+                break
+            case 40:utils.css(oDiv,{top:t+10})
+                break;
+
+        }
+    }
+
+
+
+</script>

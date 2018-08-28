@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*用forEach求数组的和*/
+    var ary=[1,2,3,4,5,6,7];
+    // var total=0;
+    // ary.forEach(function (item,index) {
+    //     total+=item;
+    // });
+    // console.log(total);
+    // console.log(ary);//没改变 原数组
+
+
+    /*map
+    *
+    * map 有返回值； 返回值是由回调函数内的return确定的  ； 没有return默认返回undefined组成的数组
+    *
+    * */
+    var c=ary.map(function(item,index){
+        console.log(item, index);
+        console.log(arguments);
+        // 箭头函数没有arguments
+        return 12;
+    })
+    console.log(c,ary);//[12组成的数组 有几个数就循环几遍 就有几个数
+                       //ary不变
+
+    var arr=ary.map((item)=>{
+        return item*2;
+    });
+    console.log(arr);//[每个数*2]
+</script>

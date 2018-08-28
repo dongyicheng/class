@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+    * call 改变this关键字用的
+    *
+    * f1.call(obj): 先把f1中的this指向改成obj; 再让f1执行
+    *
+    * */
+    "use strict";//严格模式
+    // 写到某个js文件中  只对当前这个js文件起作用
+    // 写到某个函数  只对当前函数起作用
+    function f1() {
+        console.log(this);
+    }
+    var  obj ={
+        name:'dyc'
+    }
+    f1.call(obj);//obj
+    f1.call()//window    严格模式==》undefined
+    f1.call(null);//window   严格模式==》null
+    f1.call(undefined)//window  严格模式==》undefined
+
+    f1()//window  严格模式==》undefined
+    window.f1()//window  严格模式==》window
+
+    //严格模式下 属性名不能重 ； 非严格模式  属性名可以重复
+    var obj={
+        name:'dyc';
+        name:'dyc1';
+    }
+
+    //严格模式下  不存在arguments映射
+    function f2(n,m) {
+        arguments[0]=10;
+        console.log(n, m);//1 2
+    }
+    f2(1,2)
+
+
+    function f2(n,m) {
+        console.log(this);//obj
+        console.log(n + m);//3
+    }
+    f2.call(obj,1,2,3)//第一个参数改变this指向   后面这写参数是传给f2的实参
+
+</script>

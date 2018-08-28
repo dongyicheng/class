@@ -1,0 +1,45 @@
+/*
+混合
+*/
+.public,
+.oul2 {
+  list-style: none;
+  width: 400px;
+  height: 400px;
+  background: #5f5999;
+}
+.public li {
+  color: #fff;
+  font-size: 24px;
+}
+.oul2 {
+  list-style: none;
+  width: 400px;
+  height: 400px;
+  background: #5f5999;
+}
+.oul2 li {
+  color: #fff;
+  font-size: 24px;
+}
+.oul3 {
+  width: 300px;
+  height: 200px;
+  background: #9715a2;
+}
+.box_1 {
+  width: 100px;
+  height: 200px;
+}
+.box_2 {
+  width: 200px;
+  height: 400px;
+}
+.box_3 {
+  width: 300px;
+  height: 600px;
+}
+.box_4 {
+  width: 400px;
+  height: 800px;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <input type="text" id="inp">
+</body>
+</html>
+<script>
+    /*
+    * 事件绑定
+    * DOM0级事件绑定
+    * DOM2级事件绑定
+    * */
+
+    /*
+    * 事件对象 ---> 系统会给绑定的函数默认传进来一个对象；
+    *
+    * */
+    var oDiv = document.getElementById('div1');
+    var oInp = document.getElementById('inp');
+    function f1(e){
+        e = e || window.event;//兼容IE低版本的一种写法
+        console.log(e);
+        e.target; //--> 是指的事件源（也就是具体行为是作用到谁身上的）
+        e.srcElement; //--> 也是事件源为了兼容IE低版本的一种写法
+
+        e.clientX; //是指的鼠标操作的位置 到 浏览器可视窗口左上角的 x轴距离
+        e.clientY; //是指的鼠标操作的位置 到 浏览器可视窗口左上角的 y轴距离
+
+        e.pageX;  //是指的鼠标操作的位置 到 body 左上角的 x轴距离
+        // e.pageX = e.clientX + (document.documentElement.scrollTop||document.body.scrollTop)
+        e.pageY;  //是指的鼠标操作的位置 到 body 左上角的 x轴距离
+    }
+    f1(12);
+    oDiv.onclick = f1;
+    // oDiv.onclick = function (e) {
+    //     console.log(2);
+    // };
+    oInp.onkeydown = function (e) {
+        console.log(e);
+        // e.key  按下键的值
+        // e.keyCode  值对应的键盘码
+        // e.keyCode == 13  代表按下了回车键
+    };
+
+</script>  

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    var ary=[12,23,455,615,53];
+    /*去除一个最大值 去除一个最小值
+    * 求平均值
+    * */
+    ary.sort((a,b)=>{return a-b});
+    ary.shift();
+    ary.pop();
+    var num=eval(ary.join("+"))/ary.length;
+    console.log(num.toFixed(2));//'177.00'  toFix保留两位小数  结果为字符串
+
+
+    //第一种思路  应用es6的扩展运算符
+
+    function f(...arg) {
+        arg.sort((a,b)=>{return a-b});
+        arg.shift();
+        arg.pop();
+        return eval(arg.join("+"))/arg.length
+    }
+    f(1,2,3,4,5,5)
+    //第二种     做一个空数组, 把arguments中的数组放到数组里
+    function f1() {
+        var ary=[];
+        for (let i = 0; i < arguments.length; i++) {
+           ary.push(arguments[i])
+        }
+        ary.sort((a,b)=>{return a-b});
+        ary.shift();
+        ary.pop();
+        return eval(ary.join("+"))/ary.length;
+    }
+    f1(1,5,3,8,2,7,67,6);
+
+    //第三种     把arguments的__proto__指向数组的原型
+    function f2() {
+        var arg=arguments;
+        arg.__proto__=Array.prototype;
+        arg.sort((a,b)=>{return a-b}).shift();
+        arg.pop();
+        return eval(arg.join('+'))/arg.length;
+    }
+    f2(1,2,3,4,5);
+
+
+    //第四种     通过call或者apply让类数组利用数组的方法
+    function f3() {
+        // var arr=[].concat.call(arguments);//[Arguments(5)]不可以使用 直接把整个arguments传过去了
+        var ary=[].slice.call(arguments);
+        //利用数组的slice 把arguments中的内容 复制一分到ary
+        ary.sort((a,b)=>{return a - b});
+        ary.shift();
+        ary.pop();
+        return eval(ary.join('+'))/ary.length;
+    }
+    var num=f3(1,2,3,4,5);
+    console.log(num);
+
+    /*类数组调用数组的方法
+    * 先去通过数组 找到对应的方法 然后用call先改变方法里的this指向
+    * 再去让方法执行
+    * 有些方法可以用 但有些方法不能用
+    * 会改变原有数组方法 也会改变arguments
+    * */
+</script>

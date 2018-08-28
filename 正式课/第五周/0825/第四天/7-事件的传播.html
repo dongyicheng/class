@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #outer{
+            width: 400px;
+            height: 400px;
+            background: #ee2ad6;
+            margin: auto;
+        }
+        #center{
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            background: aqua;
+        }
+        #inner{
+            width: 100px;
+            height: 100px;
+            background: #3059fa;
+            margin: auto;
+            /*margin-left: 300px;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="outer">
+        outer
+        <div id="center">
+            center
+            <div id="inner">
+                inner
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    /*
+    * 事件的传播
+    * 事件的捕获和冒泡
+    * */
+    var outer = document.getElementById('outer'),
+        center = document.getElementById('center'),
+        inner = document.getElementById('inner');
+    // outer.onclick = function (e) {
+    //     console.log('outer');
+    // };
+    // center.onclick = function (e) {
+    //     console.log('center');
+    // };
+    // inner.onclick = function (e) {
+    //     e.stopPropagation();// 阻止冒泡
+    //     e.cancelBubble = true;//IE低版本 中的阻止冒泡
+    //     console.log('inner');
+    // };
+    /*
+    * 我们发现 点击 inner  会把  center 和 outer的click事件都执行了；
+    * 这里是利用了事件的 冒泡传播机制
+    * DOM0级事件 都是在冒泡阶段执行的
+    * e.stopPropagation();// 阻止冒泡
+    *
+    *
+    * 事件的传播机制 分成两个阶段  捕获   冒泡
+    *
+    * 捕获 ： 当点击inner时，浏览器从最外层开始查找 点击的事件源
+    * 冒泡：  找到点击的元素之后， 再一层一层的向外层传递
+    * */
+    function f1(){
+        console.log(1);
+    }
+    function f2(){
+        console.log(2);
+    }
+    function f3(){
+        console.log(3);
+    }
+    function f4(){
+        console.log(4);
+    }
+    outer.addEventListener('click',f1,false);// false 代表回调函数在冒泡阶段触发
+    outer.addEventListener('click',f2,true);// true 代表回调函数在捕获阶段触发
+    inner.addEventListener('click',f3,false);
+    inner.addEventListener('click',f4,true);// 再点击的元素上，false和true是不起作用的，只跟绑定的先后顺序有关系；
+
+    /*
+    * 点击inner  之后的输出顺序 ---> 2 - 3 - 4 - 1;
+    * */
+    /*outer.onmouseenter = function () {
+        console.log('outer');
+    };
+    inner.onmouseenter = function () {
+        console.log('inner');
+    };*/
+
+    outer.onmouseover = function () {
+        console.log('outer');
+    };
+    inner.onmouseover = function () {
+        console.log('inner');
+    };
+
+
+</script>  

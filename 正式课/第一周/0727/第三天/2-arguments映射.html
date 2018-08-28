@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    function f(name, age) {
+        console.log(arguments[0]);
+        arguments[0] = 'xiaohong';
+        age = age && 100;
+        console.log(name,age,arguments)
+    }
+    var name = 'zhufeng',age = 9;
+    // f('zhufeng',9);
+    f(name,age);
+    //arguments映射 ： arguments 会跟 形参建立起一个一一映射的关系，形参改变，那么 arguments 对应的值也会跟着改变， 同样的 arguments改变，对应的形参也会跟着改变
+    // &&  前边成立给后边 ；前边不成立跟前边
+    // || 前边成立给前边 ； 前边不成立给后边
+
+
+    // arguments映射的前提是  arguments中有对应项; 当没有时, 形参后面跟不存在的arguments项之间没有任何映射; 映射关系是在函数刚执行建立的, 后期不再重新建立
+</script>  

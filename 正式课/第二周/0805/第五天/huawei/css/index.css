@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ul_til_box{
+    width: 1000px;
+    height: 50px;
+    margin: auto;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+.ul_til_box h2{
+    float: left;
+    line-height: 50px;
+}
+.ul_til_box ul li{
+    float: left;
+    width: 200px;
+    line-height: 50px;
+    text-align: center;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.content_box{
+    width: 1000px;
+    margin: auto;
+    overflow: hidden;
+}
+.li_box{
+    width: 1200px;
+    overflow: hidden;;
+}
+.li_box li{
+    float: left;
+    width: 200px;
+    margin-right: 50px;
+    border: 2px solid #ccc;
+    margin-top: 10px;
+}
+.li_box li .img_box{
+    width: 100%;
+    height: 200px;
+
+}
+.li_box li .img_box img{
+    width: 100%;
+}
+.li_box li .common_class{
+    text-align: center;
+    height: 50px;
+}
+.li_box li .common_class span{
+    color: #24ccc8;
+}

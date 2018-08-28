@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #cc080b;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #outer{
+            width: 200px;
+            height: 200px;
+            background: #24ccc8;
+        }
+        #inner{
+            width: 100px;
+            height: 100px;
+            background: #3059fa;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">dd</div>
+<div id="outer">
+    outer
+    <div id="inner">
+        inner
+    </div>
+</div>
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1')
+    //DOM0级事件绑定  会存在覆盖的问题 ; 下边的会把上面的覆盖
+    oDiv.onclick=function () {
+        console.log(1);
+    }
+    oDiv.onclick=function () {
+        console.log(2);
+    }
+    //只会输出 2
+
+
+    //DOM2级事件绑定
+    // 支持绑定多个函数
+    // 只有三个函数 都相同时 才会处理成重复绑定 , 这时就不再往事件池中添加
+    //第一个参数 事件类型(没有'on')
+    //第二个参数 对应要执行的函数
+    //第三个参数 布尔值 --> true 代表绑定的事件 在捕获阶段触发 ; false 代表绑定的事件在冒泡阶段触发;  一般都是false
+    oDiv.addEventListener('click',function () {
+        console.log(3);
+    },false)
+
+    function f1() {
+        console.log(4);
+    }
+    oDiv.addEventListener('click',f1,true)
+    oDiv.addEventListener('click',f1,true)//只输出一次4
+    oDiv.addEventListener('click',f1,false)//4 4
+    //移除 三个参数完全一样的
+    //只能移除能找到地址的函数 , 绑定的匿名函数没办法移除掉
+    //不写函数名  直接把函数写上  无法移除  找不到地址(地址不一样)
+    oDiv.removeEventListener('click',f1,false)
+    oDiv.addEventListener('click',function () {
+        console.log(3);
+    },false)
+    oDiv.removeEventListener('click',function () {
+        console.log(3);
+    },false)//移除不了
+    /*
+    * IE低版本的DOM2级绑定(只有IE有)
+    * ele.attachEvent('onclick',function(){})
+    * 只有两个参数  第一个参数是事件类型  必须加 on
+    * 第二个是对应执行的函数
+    * 不会处理重复绑定
+    *     * */
+
+    // oDiv.attachEvent()
+    // oDiv.detachEvent()
+
+
+    function f1(){
+        console.log(1);
+    }
+    function f2(){
+        console.log(2);
+    }
+    function f3(){
+        console.log(3);
+    }
+    function f4(){
+        console.log(4);
+    }
+
+    outer.addEventListener('click',f1,true);
+    outer.addEventListener('click',f2,false);
+
+    inner.addEventListener('click',f3,true);
+    inner.addEventListener('click',f4,false);
+</script>

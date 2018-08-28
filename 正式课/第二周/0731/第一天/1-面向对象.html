@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 类           实例
+    * Array        []
+    * */
+    /*
+    *
+    * 单例模式
+    *
+    * var obj = {
+    *
+    * }
+    * obj 在单例模式中 被称为 ‘命名空间’； 多个命名空间直接相互独立；
+    *
+    * var obj2 = {
+    *
+    * }
+    *
+    *
+    * 高级单例模式； 具有一定的隐私空间；外界只能访问到你自执行函数返回的内容；
+    *
+    * var obj = (function(){
+    *      var name = 'zfpx';
+    *      function set1(){
+    *           set2(name)
+    *      }
+    *      function set2(){
+    *
+    *      }
+    *      function set3(){
+    *      }
+    *      return {
+    *           f:set1
+    *      }
+    * })()
+    * obj.f()
+    *
+    * 可以通过单例模式 实现简单的模块化开发；
+    *
+    * var up = (function(){
+    *   var name = 'zfpx';
+    *   var setDate = function(){
+    *
+    *   };
+    *   var banner = function(){
+    *
+    *   }
+    *   return {
+    *       init:function(){
+    *           setData();
+    *           banner()
+    *       }
+    *   }
+    * })()
+    * up.init();
+    * */
+
+    /*
+    * 工厂模式； 利用函数去批量生产 命名空间； 本身就是一个函数
+    * var obj ={name:'xh',age:'12'};
+    * var obj2 ={name:'xm',age:'14'};
+    * var obj3 ={name:'zs',age:'15'};
+    *
+    * function factory(name,age){
+    *   var obj = {
+    *       name: name,
+    *       age: age
+    *   }
+    *   return obj;
+    * }
+    * var obj = factory('xh',12);
+    * */
+
+    /*
+    * 构造函数模式
+    * */
+    // function Person(name,age) {
+    //     this.name = name;
+    //     this.age = age;
+    // };
+    // var obj1 = Person('xh',12);
+    // console.log(obj1);
+    //
+    // var obj2 = new Person('xm',16);
+    // console.log(obj2);
+    //
+    // var obj3 = new Person('xm',16);
+    // console.log(obj3);
+    // console.log(obj2 == obj3);//false
+
+
+    /*
+    * 原型模式
+    * 利用构造函数
+    * 原型： prototype
+    *
+    *
+    * 每一个函数都有一个属性：prototype  这属性指向函数自己的原型对象
+    * 每一个对象都有一个 __proto__ 的属性，指向 所属类的 原型对象
+    * 每一个默认的原型对象都有一个属性 constructor ;指向所属的函数本身
+    * */
+    function Person() {
+        this.name = 'zhufeng';
+        this.age = 9;
+    }
+
+    console.log(Person.prototype.constructor === Person);
+    Person.prototype.getName = function () {
+        console.log(this.name);
+    };
+    console.log(Person.prototype.getName());
+
+    // var per1 = new Person();
+    var per1 = new Person; // 当构造函数不需要传参数的时候，后边括号可以省略；
+    // var per2 = new Person();
+    // per1 称为  Person 这个类的一个实例； 同时他也是一个对象；
+    console.log(per1.__proto__ === Person.prototype);
+    console.log(per1);
+    per1.getName();
+
+</script>  

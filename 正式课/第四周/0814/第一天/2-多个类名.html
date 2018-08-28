@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">
+        <p class="box">1</p>
+        <p class="box box2">2</p>
+        <p class="box2 box3">3</p>
+        <p class="box box4">4</p>
+        <p class="box3 box">5</p>
+        <p class="box box3 box4">6</p>
+    </div>
+</body>
+</html>
+<script>
+    /*ele.className.split(/ +/);
+    var ary = ['box','box3','box4'];
+    ary.indexOf('box');
+    function getByClass(str,context) {
+        context = context || document;
+        var arr = [];
+        var eles = context.getElementsByTagName("*");
+        for(var i = 0; i < eles.length; i++){
+            var ary = eles[i].className.split(/ +/g);
+            if(ary.indexOf(str) != -1){
+                arr.push(eles[i]);
+            }
+        }
+        return arr;
+    }*/
+
+    function getByClass(str,context) {
+        context = context || document;
+        // var ary = [];
+
+        var classAry = str.split(/ +/g);
+        var eles = context.getElementsByTagName("*");
+        if(!classAry[0].length){
+            classAry.shift()
+        }
+        !classAry[classAry.length-1] ? classAry.pop() : null;
+        // var reg = new RegExp("(^| +)"+str+"( +|$)");
+        // ['box','box1','box2','box3']
+        for(var k = 0; k < classAry.length; k++){
+            var reg = new RegExp("(^| +)"+classAry[k]+"( +|$)");
+            var ary = [];
+            for(var i = 0; i < eles.length; i++){
+                if(reg.test(eles[i].className)){
+                    ary.push(eles[i])
+                }
+            }
+            // ary 存放的是 满足 ‘box’ 这个类名的元素
+            eles = ary;
+        }
+        // return eles
+        return ary
+
+    }
+
+
+    function getByClass2(str,context) {
+        context = context || document;
+        str = str.replace(/^ +| +$/g,'');
+        var classAry = str.split(/ +/g);
+        var eles = context.getElementsByTagName("*");
+        for(var k = 0; k < classAry.length; k++){
+            var reg = new RegExp("(^| +)"+classAry[k]+"( +|$)");
+            var ary = [];
+            for(var i = 0; i < eles.length; i++){
+                if(reg.test(eles[i].className)){
+                    ary.push(eles[i])
+                }
+            }
+            // ary 存放的是 满足 ‘box’ 这个类名的元素
+            eles = ary;
+        }
+        // return eles
+        return ary
+
+    }
+    console.log(getByClass('   box   box3    '));
+    console.log(getByClass2('   box   box3    '));
+    // console.log(getByClass('   box box2'));;
+
+</script>  

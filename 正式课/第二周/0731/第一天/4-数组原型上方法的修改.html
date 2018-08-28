@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+
+    /*JS中所有的数据类型， 他们的原型链 终点站 都是 Object.prototype;
+    * 也就是说 Object.prototype 上的方法； 所有数据类型都能使用
+    *
+    * */
+    // var myPush = function (ary,n) {
+    //     ary[ary.length] = n;
+    // };
+    var myPush =  function (n) {
+        //怎么拿到这个数组  ---> 通过 this 可以获取到 要操纵的数组
+        this[this.length] = n;
+        return this.length;
+    };
+    var myPush2 =  function (n) {
+        for(let i = 0; i < arguments.length; i++){
+            this[this.length] = arguments[i];
+        }
+        return this.length;
+    };
+    // [].__proto__.myPush = myPush;
+    Array.prototype.myPush2 = myPush2;
+    var ary = [1,2,3];
+    // ary.myPush(10); // ary = [1,2,3,10]
+    // console.log(ary.myPush(10), ary);
+    console.log(ary.myPush2(10,20,30,40), ary);
+
+
+    Array.prototype.pop = function () {
+        console.log('this is my pop')
+    };
+    ary.pop();
+
+    /*
+    * instanceof 查看数据类型
+    * */
+    var ary = [];
+    var obj = {};
+    console.log(obj instanceof Array);  // false
+    console.log(ary instanceof Array);  // true
+    console.log(ary instanceof Object); // true
+    console.log(/dd/ instanceof Object); // true
+    // 查看 这个变量的类型 在不在 对应的原型链上
+
+
+    /*
+    * hasOwnProperty ； 查看某属性 是否是私有的
+    * */
+    function  Person() {
+        this.name = '';
+        this.age = '';
+    };
+    Person.prototype.getName = function () {
+        console.log(this.name);
+    };
+    var per1 = new Person(); // {name:'',age:''}
+    per1.getName();
+
+    console.log(per1.hasOwnProperty('name'));; // true
+    console.log(per1.hasOwnProperty('getName'));;//false
+
+    /*
+    * in  属性 是否属于 某个对象
+    * 不区分 私有属性 或者 共有属性
+    * 可以调用到的方法或者属性 用 in  判断 结果都是true
+    * */
+    console.log('getName' in per1);
+    console.log('toString' in per1);
+    per1.toString()
+
+    /*
+    * 写一个 判断某个属性或方法是否是 公有属性或方法
+    * */
+
+    // per1.hasPublicProperty('getName'); // getName 是不是 per1 的公有属性 true
+    per1.hasOwnProperty('getName'); // false;
+    per1.hasOwnProperty('name'); // true;
+
+    Object.prototype.hasPublicProperty = function (str) {
+        //要判断某个属性 是否属于 这个对象的公有属性，首先要判断，这个属性在不在对应的原型链上，若在，再去判断 他是否是公有属性；
+        return str in this && !this.hasOwnProperty(str);
+
+        // var a = 1 > 2 ? true : false;
+
+        // return 1>2 ?' ok' : 'no';
+        // if(str in this && !this.hasOwnProperty(str)){
+        //     // 在原型链上 而且也不是私有属性；
+        //     return true
+        // }
+        // return false;
+    };
+    console.log(per1.hasPublicProperty('getName'));
+    console.log(per1.hasPublicProperty('name'));
+
+    /*
+    * 基类 ---->  Object 类
+    * */
+
+
+</script>

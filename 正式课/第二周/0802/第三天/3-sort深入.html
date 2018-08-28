@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var ary = [
+        {name:'张红',age:18,hobby:'play'},
+        {name:'张三',age:10,hobby:'pleep'},
+        {name:'李四',age:14,hobby:'eat'}
+    ];
+    var str = 'qwrwer';
+    // str[0]
+    // str.charAt(0)
+    /*
+    * 根据age排序
+    * ()=>{}
+    * */
+    var f1 = function () {
+
+    };
+    var f2 = () => {};
+    var arr = ary.sort(function (a,b) {
+        return a.age - b.age;
+    });
+    console.log(arr);
+
+    var arr2 = ary.sort((a,b) => {
+        return a.hobby.localeCompare(b.hobby);
+    });
+    console.log(arr2);
+
+    var arr3 = ary.sort(function (a,b) {
+        return a.name.localeCompare(b.name,'zh');
+        // 'zh' 按汉语拼音
+        // return a.name.charCodeAt(0);
+    });
+
+</script>  

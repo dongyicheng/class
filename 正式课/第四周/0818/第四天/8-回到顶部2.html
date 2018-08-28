@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1{
+            height: 5000px;
+            width: 300px;
+            background: linear-gradient(#f4f4f4,#24ccc8,#3059fa);
+        }
+        #btn{
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <button id="btn">回到顶部</button>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+    /*
+    * 固定时间回到顶部
+    * */
+    var btn = document.getElementById('btn');
+
+    btn.onclick = function () {
+        // clearInterval(this.timer);
+        if(this.running)return;
+        this.running = true;
+        var duration = 3000;
+        var changeL = utils.scrollT();// 当前页面卷上去的高度
+        var speed = changeL/duration;
+        this.timer = window.setInterval(() => {
+            var moveL = speed*30;
+            changeL = utils.scrollT();
+            if(changeL <= 0){
+                clearInterval(this.timer);
+                this.running = false;
+            }
+            document.documentElement.scrollTop -= moveL;
+            document.body.scrollTop -= moveL;
+        },30)
+    };
+    function btnDis() {
+        var scrT = utils.scrollT();
+        if(scrT > 400){
+            btn.style.display = 'block';
+        }else {
+            btn.style.display = 'none';
+        }
+    };
+    window.onscroll = function () {
+        btnDis();
+    };
+    window.onmousewheel = function () {
+        clearInterval(btn.timer);
+        btn.running = false;
+    }
+</script>  

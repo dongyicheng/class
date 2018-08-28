@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var ary = [12,23,545,7678,34];
+    /*
+    * 去除一个最大值 去除一个最小值；
+    * 然后求平均数
+    * */
+    ary.sort((a,b)=>{return a-b});
+    ary.shift();
+    ary.pop();
+    var num = eval(ary.join("+"))/ary.length;
+    console.log(num.toFixed(2),num);
+    //toFixed() 返回结果是字符串；
+
+
+    // 第一种思路  应用es6 的扩展运算符
+    // 第二种思路  做一个空数组，把arguments中的数据放到数组里；
+    // 第三种思路  把arguments的__proto__指向数组的原型
+    // 第四种思路  通过call或apply让类数组利用数组的方法
+    function f(...arg) {
+        arg.sort((a,b)=>{return a - b});
+        arg.shift();
+        arg.pop();
+        return eval(arg.join('+'))/arg.length;
+    };
+    function f1() {
+        var ary = [];
+        for(let i = 0 ; i < arguments.length; i++){
+            ary.push(arguments[i])
+        }
+        ary.sort((a,b)=>{return a - b});
+        ary.shift();
+        ary.pop();
+        return eval(ary.join('+'))/ary.length;
+    }
+    function f2() {
+        // console.dir(arguments)
+        arguments.__proto__ = Array.prototype;
+        // arguments.__proto__ = [].__proto__;
+        // 这一行， 让 arguments 的__proto__ 从原来的 Object.Prototype 指向 Array的 prototype;
+        arguments.sort((a,b) => {return a - b}).shift();
+        arguments.pop();
+        return eval(arguments.join('+'))/arguments.length
+    }
+    function f3() {
+        // ({}).toString.call('qqq');
+        var ary = [].slice.call(arguments);
+        var num = Math.max.apply(Math,ary);
+        // var arr = [].splice.call(arguments,1,2);
+        // var ary2 = [].valueOf.call(arguments);
+        // var ary = [].concat.call(arguments);
+        // [].valueOf.call(arguments)
+        // [].concat([],{})
+        // 利用数组的 slice 把arguments中的内容 复制一份到 ary;
+        // console.log(ary2);
+        ary.sort((a,b)=>{return a - b});
+        ary.shift();
+        ary.pop();
+        return eval(ary.join('+'))/ary.length;
+    }
+    /*
+    * 类数组调用数组的方法
+    * 先去通过数组找到对应的方法，然后用call先改变方法里边的this指向，
+    * 然后再去让这个方法执行
+    * 有些方法可以用，但有些方法不能用；
+    * 会改变原有数组的方法; 也会改变 arguments
+    *
+    *
+    * */
+    function f4() {
+        [].pop.call(arguments);
+        console.log(arguments);
+    }
+
+    /*
+    *
+    * 非数组怎么调用数组的方法
+    * 先找到这个方法；
+    * [].slice()// slice 中的this 是前边的空数组
+    * [].slice.call(obj)  通过call 把 slice 中的this 换成 obj
+    * arguments.slice
+    * [1].slice() ---> 复制的 slice中的 this
+    * [].slice.call(arguments) ---> 先把 slice的this 换成 arguments;然后再去复制 this
+    * */
+
+    var num = f4(1,2,3,4);
+    console.log(num);
+</script>  

@@ -1,0 +1,45 @@
+/*
+混合
+*/
+@w:200px;
+@h:200px;
+.public{
+  list-style: none;
+  width: @w * 2;
+  height: @h * 2;
+  background: #5f5999;
+  li{
+    color:#fff;
+    font-size: 24px;
+  }
+}
+.oul2{
+  .public;//所有的都拿过来(自己的,儿子的下面的)
+}
+
+.pub(@a:300px){
+  //加上括号  这个样式不会被编译 可以在下面用到
+  //可以传参数  可以设置默认值  ;  传的话就是传的参数  , 没传就为默认值
+  width: @a;
+  height: 200px;
+  background: #9715a2;
+}
+.oul3{
+  //.pub(500px);
+  .pub;
+}
+
+//extend 编译后的先后顺序 跟extend 的样式表定义的先后顺序一致
+.oul2:extend(.public){
+  //extend 只是获取 这个类名下的 自己的样式(儿子孙子的的不会拿) ;
+}
+
+// 循环
+.w(@n) when(@n<5){
+  .box_@{n}{
+    width: @n * 100px;
+    height: @n * 200px;
+  }
+  .w(@n + 1)
+}
+.w(1);

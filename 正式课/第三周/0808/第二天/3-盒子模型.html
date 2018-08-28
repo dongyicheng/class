@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 300px;
+            height: 300px;
+            border: 10px solid #cc080b;
+            border-top-width: 20px;
+            border-right-width: 40px;
+            padding: 20px;
+            margin: auto;
+            background-color: #f4f4f4;
+            /*overflow: scroll;!*溢出 滚动*!*/
+        }
+        .box{
+            position: relative;
+            width: 500px;
+            height: 500px;
+            background-color: #24ccc8;
+            border: 20px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div id="div1">
+            珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训
+        </div>
+    </div>
+    <table>
+        <tead>
+            <tr>
+                <th></th>
+            </tr>
+        </tead>
+        <tbody>
+        <tr>
+            <td></td>
+        </tr>
+        </tbody>
+        <tr>
+            <td>
+                <div><div id="td_div"></div></div>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>
+<script>
+    /*
+    * css 盒子模型 width height padding margin border
+    * display: flex
+    * */
+
+    /*
+    * JS 盒子模型
+    * 通过 ele.style.xxx这种方法  我们只能获取到元素的行内样式
+    *
+    *
+    * client
+    * offset
+    * scroll
+    * */
+
+
+    //clientWidth  盒子宽度 + 左右的padding
+    //clientHeight 盒子高度 + 上下的padding
+    //clientLeft   盒子左边框的宽度
+    //clientTop    盒子上边框的宽度
+    var oDiv = document.getElementById('div1');
+    console.log(oDiv.clientWidth);
+    console.log(oDiv.clientLeft);
+    // console.dir(oDiv.style.border);
+
+    //offsetWidth clientWidth + 左右border
+    //offsetHeight clientHeight + 上下border
+    //offsetLeft 元素的外边框距离上级参照物的内边框的left值
+    //offsetTop  元素的外边框距离上级参照物的内边框的top值
+    //offsetParent  上级参照物（有定位的父级元素）
+    // 在table标签中需要注意特殊情况 td 的offsetParent 是 table
+    // td里边的标签的 offsetParent 是  这个 td；
+    console.log(td_div.offsetParent);
+    console.log(oDiv.offsetWidth);
+    /*
+    * 结合client 和 offset  我们可以求出 元素的右边框的宽度 和 下边框的宽度
+    * clientRight = oDiv.offsetWidth - oDiv.clientWidth - oDiv.clientLeft
+    * */
+
+    //scroll
+    //scrollWidth
+    // 当元素内容没有溢出时； 结果是等同于 clientWidth
+    // 当元素内容溢出时； 结果是 左padding + 内容的宽度
+    // 若设置了overflow 则结果是 左右padding + 内容的宽度
+    //scrollHeight
+    //scrollTop  卷上去的高度
+    //scrollLeft 卷过去的宽度
+
+    /*
+    * 13个属性 除了 offsetParent ;其他的属性值都是数字
+    * 其中只有 scrollTop 和 scrollLeft 是可以修改的
+    * 其他都是只读属性
+    * */
+
+
+
+</script>  

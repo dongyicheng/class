@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 300px;
+            height: 300px;
+            border: 10px solid #cccccc;
+            padding: 20px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * css 盒子模型  width  height  padding  margin  border
+    * display : flex
+    * */
+
+    /*
+    * JS 盒子模型
+    *通过 ele.style.xxx这种方法  只能获取到元素的行内样式
+    *
+    *
+    * client
+    * offset
+    * scroll
+    * */
+
+    //clientWidth  盒子宽度+左右的padding
+    //clientHeight  盒子高度+上下的padding
+    //clientLeft  盒子左边框的宽度
+    //clientTop   盒子上边框的宽度
+    var oDiv=document.getElementById('div1');
+    console.log(oDiv.clientWidth);
+    console.log(oDiv.clientLeft);
+
+    //offsetWidth  clientWidth + 左右border
+    //offsetHeight  clientHeight + 上下border
+    //offsetLeft   元素的外边框距离上级参照物的内边框left值
+    //offsetTop    元素的外边框距距离上级参照物的内边框top值
+    //offsetParent   上级参照物(有定位的父级元素)
+    // 在table标签中需要注意特殊情况  td 的offsetParent 是 table(没有定位)
+    // td 里面的标签的 offsetParent  是  这个 td(没有定位)
+    console.log(oDiv.offsetWidth);
+/*
+* 结合client  和  offset  可以求出  元素右边框和下边框宽度
+* clientRight = ODiv.offsetWidth - oDiv.clientWidth - oDiv.clientLeft
+ * */
+
+//scroll
+//scrollWidth
+//scrollHeight
+    // 当元素内容没有溢出时  ;  结果是等同于 clientHeight ;
+    // 当元素内容溢出时  结果是 上padding + 内容的高度
+    //若设置了 overflow(hidden(隐藏) / scroll(滚动条)) 则结果是 上下padding + 内容的高度
+//scrollTop  卷上去的高度
+//scrollLeft  卷过去的宽度
+
+    /*
+    * 13个属性  除了offsetParent ;其他的属性值都是数字
+    * 其中有scrollTop 和 scrollLeft 是可以修改的
+    * 其他的都是只读的
+    * */
+</script>

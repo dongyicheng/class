@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 思路 操纵数据
+    * 1、先获取数据  2、把数据变成可看的DOM元素放到页面上  3、点击实现排序 （每次点击都把拿到的数据按照需求排序；把排好序的数据 再执行第二步）
+    *
+    * 操纵DOM
+    * 1、先获取数据  2、把数据变成可看的DOM元素放到页面上  3、点击实现排序 （获取所有的li标签，按照需求把li放到一个数组中排序；把排好序的数组，循环添加到页面中（appendChild））
+    * */
+    
+    //DOM  映射
+    var oDivs = document.getElementsByTagName('div');
+    document.body.innerHTML = '<div></div><div></div>';
+    console.log(oDivs);
+
+</script>  

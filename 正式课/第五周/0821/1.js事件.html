@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1{
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            background: darkorange;
+            cursor: pointer;
+            padding: 20px;
+        }
+        #inp{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+<input type="text" id="inp" placeholder="这是个注释">
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1');
+    var oInp = document.getElementById('inp');
+    /*
+    * 事件:系统天生自带 , 跟绑定与否没关系
+    *
+    * JS 中的常用事件
+    *
+    * [鼠标的常用事件]
+    *    onclick      点击(pc端是点击 , 移动端是单击 有300ms延迟)
+    *    ondblclick    双击(大约在300ms内 连续点击两次才可以)
+    *    onmouseover  鼠标滑过
+    *    onmouseout   鼠标滑出
+    *    onmouseenter 鼠标进入
+    *    onmouseleave 鼠标离开
+    *    onmousemove  鼠标滑动
+    *    onmousedown  鼠标按下
+    *    onmouseup    鼠标松开
+    *    onmousewheel 滚轮滑动
+    *
+    * [键盘常用事件]
+    *    onkeydown    键盘按下
+    *    onkeyup      键盘松开
+    *    onkeypress   键盘按下(有的键监听不到)
+    *
+    * [input框常用事件]
+    *    onfocus      获取焦点
+    *    onblur       失去焦点
+    *    onchange     监听内容变化(内容改变 并且 失去焦点 才能触发)
+    *    oninput      监听input内容变化(只要改变就能触发)
+    *                 不兼容低版本IE IE中用  onpropertychange
+    *
+    * [系统事件]
+    * window.onload   页面资源加载完毕(包括图片, 不含ajax)
+    * window.onscroll 滚动条滚动
+    * window.onresize 可视窗口大小发生改变
+    * $(docunment).ready  JQ的事件  DOM树加载完成
+    *
+    * [移动端事件]
+    * ontouchstart      触碰开始
+    * ontouchmove       按下后滑动
+    * ontouchend        触碰结束
+    * oncick          点击(有大概300毫秒延迟)
+    * */
+    inp.onkeydown=function () {
+        console.log(this.value);//输出空  因为按下时还没有内容
+    }
+    inp.onkeyup=function () {
+        console.log(this.value);//输出写入内容
+
+    }
+    /*input 的值输入  是在 keydown 之后   keyup 之前做的*/
+    inp.onkeyup = function () {
+      this.value = this.value.replace(/\D+/g,'');
+      //使得输入框中 输入非数字时 都替换成空
+     }
+
+     if(oInp.oninput !==undefined){//先判断有没有这个方法
+        this.value = this.value.replace(/\D+/g,'');
+     }else{
+        oInp.onpropertychange=function () {
+            this.value = this.value.replace(/\D+/g,'');
+        }
+     }
+</script>

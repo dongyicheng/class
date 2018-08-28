@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * test exec
+    *
+    * */
+    var str = '^abc$';
+    var reg = /^abc$/;
+    // var reg2 = new RegExp('abc');
+    var reg3 = new RegExp(str);
+    console.dir(reg);
+    console.dir(reg3);
+    console.log(reg3.test('abcd'));
+
+    var str = 'wwww';
+    var reg4 = new RegExp('^a'+str+'c$');
+    var reg5 = new RegExp(`^a${str}c$`);
+    console.dir(reg4);
+
+
+    var reg6 = new RegExp('\\d');
+    var reg7 = /\d/;
+    console.log(reg6.test('123'));
+    console.log(reg7.test('123'));
+
+    //str.split(/\d+/)
+    //str.match(/\d+/)
+    //str.match(/\d+/g)
+    //str.replace(/\d+/g,',')
+    //str.replace(/\d+/g,function(){arguments})
+    //str.replace(/\d+/g,'$1,$2__$3')
+
+    'zhufeng123zhufneg123'.replace(/(\d+)([a-z]+)/g,'$1shuzi--$2zimu')
+
+    /*
+    * JS 盒子模型  scrollTop   scrollLeft
+    * clientWidth  clientLeft
+    * offsetLeft
+    * offset() ---> 盒子外边框 到 body 的 left 值
+    *
+    * scrollWidth
+    * */
+
+
+</script>

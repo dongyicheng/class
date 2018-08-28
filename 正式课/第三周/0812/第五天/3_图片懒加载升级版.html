@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        body{
+            background: salmon;
+        }
+        #div1{
+            height: 2000px;
+            background: #cccccc;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+        }
+        .bot{
+            height: 400px;
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+<img src="瀑布流/img/default.gif" realSrc="https://developer.mozilla.org/@api/deki/files/840/=ScrollHeight.png?3333333" alt="">
+<div class="bot"></div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    /*
+    * 懒加载原理： 不在可视区域的图片不加载；只有出现在可视区域中时，才去加载;
+    * 什么时候才算是出现在可视区域；
+    * 出现到可视区域之后，怎么让他加载真正的图片
+    * */
+    var oImg = document.getElementsByTagName('img')[0];
+    // console.log(oImg.getAttribute('realSrc'));
+    // oImg.setAttribute('realSrc',"img/2.jpg");
+
+    var flag = false;// 默认false 时代表没有加载图片；true 表示加载过图片了；
+    /*window.onscroll = function () {
+        if(flag)return;
+        var sT = utils.scrollT();
+        var cT = utils.clientH();
+        var tarT = utils.offset(oImg).t;
+        if(sT + cT > tarT){
+            var realSrc = oImg.getAttribute('realSrc');
+            oImg.src = realSrc;
+            flag = true;
+        }
+        console.log(12);
+    };*/
+
+    // 写一个load函数；去做图片的懒加载
+    function loadImg(ele) {
+        if(ele.loaded)return;
+        var scrollT = utils.scrollT();//卷去高度
+        var clientH = utils.clientH();//一屏的高度
+        var tarT = utils.offset(ele).t;//ele到body的top值
+        if(scrollT+clientH > tarT){
+            var realSrc = ele.getAttribute('realSrc');
+            // ele.src = realSrc;ele.setAttribute('loaded',true); // 这种我们只能通过getAttribute获取
+            //ele.loaded = true; //通过这种方式加上属性，我们只能通过打点或者中括号的方式获取
+            //先去用一张不显示的图去加载真正的图片；
+            //等这张大图加载完成之后，再去把真实img标签的src换成这张大图
+            // var temp = new Image();
+            var temp = document.createElement('img');
+            temp.src = realSrc;
+            temp.onload = function(){ //图片加载完成 的一个事件
+                ele.src = realSrc;
+                ele.loaded = true;
+            };
+        }
+    }
+    window.onscroll = function () {
+        loadImg(oImg);
+    };
+    window.onload = function () {
+
+    }
+</script>  

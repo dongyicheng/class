@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 2000px;
+            padding: 20px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+    var oDiv = document.getElementById('div1');
+    console.log(oDiv.style.width);
+    /*
+    * 通过 oDiv.style 只能获取行内设置的样式
+    * */
+    // window.getComputedStyle(ele,':after') ele-->元素
+    // 获取的是一个大对象，里边包含了该元素当前所有的样式
+    // 第一个参数要获取样式的元素
+    // 第二参数是要查看的 该元素的 某个 伪类；可以不写，也可以写null
+    // 通过这个函数获取到的对象 是不能修改元素对应样式的；
+    // var obj = getComputedStyle(oDiv);
+    // console.log(obj.width); // 不能修改的 ;是个只读的属性
+    // obj.width = '300px';
+
+    /*
+    * 这个方法在IE6-8是不兼容的
+    * 那么在IE6-8 下 我们用 currentStyle这个属性
+    * */
+
+    function getCss(ele,attr) {
+        var res = null;
+        if(window.getComputedStyle){
+            res = window.getComputedStyle(ele)[attr];
+        }else {
+            res = ele.currentStyle[attr];
+        }
+        return res;
+    }
+
+    console.log(getCss(oDiv, 'width'));
+
+    /*
+    * navigator.userAgent //查看浏览器信息的
+    *
+    * */
+
+    function getCss(ele,attr) {
+        var str = navigator.userAgent;
+        var res = null;
+        if(/MSIE *[6-8]/.test(str)){
+            //IE 6-8
+            res = ele.currentStyle[attr]
+        }else {
+            res = getComputedStyle(ele)[attr];
+        }
+        return res;
+    }
+
+    /*
+    * 目前的返回结果都是字符串；需要把一些带单位的字符串转成纯数字
+    * */
+    function getCss(ele,attr) {
+        var str = navigator.userAgent;
+        var res = null;
+        if(/MSIE *[6-8]/.test(str)){
+            //IE 6-8
+            res = ele.currentStyle[attr]
+        }else {
+            res = getComputedStyle(ele)[attr];
+        }
+        /*
+        * 先用parseFloat  处理这个字符串 若是 NaN ；则直接返回之前的字符串
+        * */
+        // if(!isNaN(parseFloat(res))){
+        //     res = parseFloat(res);
+        // }
+        /*
+        *
+        * 用正则处理 --->
+        * /[+-]?(\d|[1-9]\d+)(\.\d+)?(px|rem|em|pt)?/
+        * */
+        var reg = /^[+-]?(\d|[1-9]\d+)(\.\d+)?(px|rem|em|pt)?$/;
+        res = reg.test(res) ? parseFloat(res) : res;
+        return res;
+    }
+
+    console.log(getCss(oDiv, 'padding'));
+
+
+    /*
+    * 设置样式
+    *
+    *
+    * */
+    function setCss(ele,attr,value) {
+        //常用的需要加单位的属性
+        var reg = /width|height|padding|margin|left|top|bottom|right|fontsize/i;
+        if(reg.test(attr)){
+            value = parseFloat(value) + 'px';
+        }
+        ele.style[attr]=value;
+    }
+    setCss(oDiv,'backgroundColor','#333');
+
+    /*
+    * 批量设置样式
+    * */
+    function setGroup(ele,obj){
+        if(Object.prototype.toString.call(obj) == '[object Object]'){
+            for(var k in obj){
+                if(obj.hasOwnProperty(k)){
+                    setCss(ele,k,obj[k])
+                }
+            }
+        }
+    }
+    // setGroup(oDiv,{width:300,height:300,color:'#fff',background:'#333'});
+    setGroup(oDiv,[200,300,400]);
+
+    /*
+    * 综合 方法
+    * css
+    * */
+
+    function css(...arg) {
+        //把传进来的实参都放进arg这个数组中
+        if(arg.length == 2){
+            if(typeof arg[1] == 'string'){
+                return getCss(arg[0],arg[1])
+            }
+            setGroup(arg[0],arg[1])
+        }else {
+            setCss(arg[0],arg[1],arg[2]);
+        }
+    }
+
+
+    console.log(utils.getCss(oDiv, 'margin'));
+
+</script>  

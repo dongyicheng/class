@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+
+</div>
+</body>
+</html>
+<script src="第三天/js/jquery-3.3.1.js"></script>
+<script>
+    var oLis=document.getElementsByTagName('li');
+    for (let i = 0; i < oLis.length; i++) {
+        oLis[i].onclick=function () {
+            alert(i+1)
+        }
+    }
+
+    $('ul>li').click(function () {
+        console.log($(this).index() + 1);
+    })
+
+    /*
+    * $() 参数接受 css 选择器
+    *     参数接受 原生JS对象
+    * */
+
+    var oDiv=document.getElementById('div1')
+    $(oDiv);//把原生对象 转化成 JQ 对象
+    $('ul>li')[0];//把 JQ对象转化成原生对象
+    $($('ul>li')[0])////把原生对象 转化成 JQ 对象
+    $('ul>li').eq(0);//JQ对象 拿到索引0
+
+</script>

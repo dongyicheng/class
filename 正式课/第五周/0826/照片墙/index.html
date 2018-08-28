@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .imgBox{
+            margin: auto;
+            border: 2px dashed #427099;
+            width: 480px;
+            height: 640px;
+            padding: 10px 0 0 10px;
+            background: #fa866e;
+            list-style: none;
+            cursor: move;
+            position: relative;
+        }
+        .imgBox li{
+            float: left;
+            width: 150px;
+            height: 150px;
+            margin: 0 10px 10px 0;
+            background: #427099;
+        }
+        .imgBox li img{
+            width: 100%;
+            height: 100%;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+<ul class="imgBox">
+    <li><img src="img/cute-blue-monsters-university-icon000.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon001.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon002.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon003.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon004.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon005.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon006.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon007.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon008.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon009.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon010.png" alt=""></li>
+    <li><img src="img/cute-blue-monsters-university-icon011.png" alt=""></li>
+</ul>
+</body>
+</html>
+<script src="js/event.js"></script>
+<script src="js/drag.js"></script>
+<script src="js/jquery1.11.3.js"></script>
+<script>
+    /*
+    * 1.拖拽对应的图片  让对应的图片移动
+    * 2.判断碰撞  跟谁碰  谁就变色
+    * 3.把拖动的图片跟  距离它最近的一张交换位置
+    * */
+    //给每个li加定位
+    var oLis=document.getElementsByTagName('li');
+    [...oLis].reverse().forEach((item)=>{
+        //每一个 li 的当位置 可以用他的offset值进行定位
+        item.style.left=item.offsetLeft+'px';
+        item.style.top=item.offsetTop+'px';
+        item.style.position='absolute';
+        //item 直接脱离文档流  不倒着添加的话  会自动往前占位  最终都会跑到第一张
+        on(item,'mousedown',dragStart)
+        //on 是 event.js的方法
+        //dragStart 是event中的方法
+        on(item,'myIndex',addZIndex);//给这个元素 myindex 事件池增加事件
+        on(item,'myHit',isHit);//给这个元素绑定碰撞函数
+        on(item,'myChangePos',changePos)
+    });
+    /*function setPosition() {
+           var ary = [];
+           [...oLis].forEach((item)=>{
+               var obj = {};
+               obj.l = item.offsetLeft;
+               obj.t = item.offsetTop;
+               ary.push(obj);
+           });
+           [...oLis].forEach((item,index)=>{
+               item.style.position = 'absolute';
+               item.style.left = ary[index].l + 'px';
+               item.style.top = ary[index].t + 'px';
+           })
+       }
+       setPosition();*/
+    /*
+    * 提升拖动元素的zIndex
+    * */
+    var n=1;
+    function addZIndex(){
+        this.style.zIndex=n++;
+    }
+
+    /*
+    * 接下来 处理碰撞问题
+    * */
+    function isHit(){
+        //判断是否发生碰撞
+        this.sl=this.offsetLeft;//拖动元素的 左边 到盒子的距离
+        this.el=this.sl+this.offsetWidth;//拖动元素的 右边 到盒子的距离
+        this.st=this.offsetTop;//拖动元素的 上边 到盒子的距离
+        this.et=this.st+this.offsetHeight;//拖动元素的 下边 到盒子的距离
+        //需要 拿拖动元素  跟其他所有元素作比较 ; 查看是否碰撞
+        this.ary=[];//存放跟 拖动元素 碰撞上的 元素
+        [...oLis].forEach((item)=>{
+            if(item===this)return;
+            item.sl=item.offsetLeft;
+            item.el=item.sl+item.offsetWidth;
+            item.st=item.offsetTop;
+            item.et=item.st+item.offsetHeight;
+            if(this.sl>item.el||this.el<item.sl||this.st>item.et||this.et<item.st){
+                //撞不上的
+                item.style.background='';//设为空 会用css默认的 ; 把碰不到的恢复成原来的背景色
+            }else{
+                item.style.background='#6f9998';
+                this.ary.push(item);//把能碰撞上的 元素 放到 this.ary中
+            }
+        })
+    }
+    function changePos() {
+        //距离拖动元素 最近的那个li交换位置
+        this.ary = this.ary || [];
+        this.ary.forEach((item) => {
+            var l = this.offsetLeft - item.offsetLeft;
+            //l 是拖动元素 距离当前碰撞元素的 横向差值
+            //t 是拖动元素 距离当前碰撞元素的 纵向差值
+            var t = this.offsetTop - item.offsetTop;
+            item.style.background = '';//让发生碰撞的元素松手时  让颜色恢复
+            item.instance = Math.pow(l, 2) + Math.pow(t, 2);
+        });
+        //再根据 每个元素的instance排序
+        this.ary.sort((a, b) => {
+            return a.instance - b.instance;
+        })
+        //用this.ary[0] 跟拖动的元素交换位置
+        //this.startX  this.startY  存储的是 item 的位置
+        //若数组为空,则直接回到原来的位置 ; 否则交换位置
+        if (!this.ary.length) {
+            $(this).animate({
+                left:this.startX,
+                top:this.startY
+            },200);
+            // this.style.left = this.startX + 'px';
+            // this.style.top = this.startY + 'px';
+        } else {
+            $(this).animate({
+                left:this.ary[0].offsetLeft,
+                top:this.ary[0].offsetTop
+            },200);
+            // this.style.left = this.ary[0].offsetLeft + 'px';
+            // this.style.top = this.ary[0].offsetTop + 'px';
+            $(this.ary[0]).animate({
+                left:this.startX,
+                top:this.startY
+            },200);
+            // this.ary[0].style.left = this.startX + 'px';
+            // this.ary[0].style.top = this.startY + 'px';
+        }
+    }
+</script>

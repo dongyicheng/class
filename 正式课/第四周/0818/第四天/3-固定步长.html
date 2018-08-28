@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            position: relative;
+            left: 200px;
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            border: 2px dashed darksalmon;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+    /*
+    * 固定步长的运动
+    * */
+    var oDiv = document.getElementById('div1');
+    /*var l = 0;
+    var timer = setInterval(function () {
+        if(l >= 400){
+            clearInterval(timer);
+            return;
+        }
+        l += 10;
+        oDiv.style.left = l+ 'px';
+    },20)*/
+
+    function move(ele,attr,tar) {
+        // var l = parseFloat(ele.style.left);
+        var l = utils.css(ele,attr);
+        var timer = setInterval(function () {
+            if(l >= tar){
+                clearInterval(timer);
+                return;
+            }
+            l += 10;
+            ele.style[attr] = l+ 'px';
+        },20)
+    }
+    move(oDiv,'left',400);
+    move(oDiv,'top',400);
+</script>

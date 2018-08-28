@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /*html,body{*/
+        /*width:100%;*/
+        /*height: 100%;*/
+        /*overflow: scroll;*/
+        /*}*/
+        #div1 {
+            height: 2000px;
+            background: #24ccc8;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+
+        }
+
+        .bottom {
+            height: 200px;
+            background: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+<!--
+1.jpg 当作默认图   2.jpg  当作真正的图片链接
+-->
+<img src="img/1.jpg" realsrc="img/2.jpg" alt="">
+<div class="bottom"></div>
+</body>
+</html>
+<script src="utils.js"></script>
+<script>
+    var img = document.getElementsByTagName('img')[0]
+    // var flag=false;//默认false 是代表没有加载图片; true表示加载过图片了
+    // var img=document.getElementsByTagName('img')[0];
+    // function imgLoad(ele) {
+    //     if (flag)return;
+    //     var cliH=utils.clientH();
+    //     var srcH=utils.scrollT();
+    //     var tarT=utils.offset(img).t;
+    //     if(cliH+srcH>tarT){
+    //         var realsrc=ele.getAttribute('realsrc');
+    //         ele.src=realsrc;
+    //         flag=true;
+    //     }
+    // }
+    // window.onscroll=function () {
+    //     imgLoad(img);
+    // };
+
+
+    //写一个load函数; 做图片的懒加载
+    function imgLoad(ele) {
+        if (ele.loaded) return;//undefined
+        var cliH = utils.clientH();
+        var srcH = utils.scrollT();
+        var tarT = utils.offset(ele).t;
+        if (cliH + srcH > tarT) {
+            var realsrc = ele.getAttribute('realsrc');
+            // ele.src=realsrc;
+            //先去用一张不显示的图去加载真正的图片
+            //等这张大图加载完成之后, 再把真实的img标签的src换成这张大图
+            var temp = document.createElement('img');
+            //=>temp=new Image();
+            temp.src = realsrc;
+            temp.onload = function () {
+                ele.src = realsrc;
+                ele.loaded = true;//通过这种方式 加上属性 不会在行内看见 只能通过打点或者中括号的方法获取
+                // ele.setAttribute('loaded','true');//可以在行内添加上  能看见  只能通过getAttribute获取
+                fadeIn(ele)
+            }
+        }
+    }
+
+    window.onscroll = function () {
+        imgLoad(img)
+    };
+
+    //设置图片渐变的方法
+    //先把元素的透明度设置为0  然后用定时器累加一个数  把这个赋给元素的opacity ; 当这个opacity大于1 时 ; 清除定时器
+    function fadeIn(ele) {
+        ele.style.opacity = 0;
+        var opa = 0.1;
+        var timer = setInterval(() => {
+            opa += 0.1;
+            ele.style.opacity = opa;
+            if (opa >= 1) {
+                ele.style.opa = 1;
+                clearInterval(timer)
+            }
+        }, 200)
+    }
+
+</script>

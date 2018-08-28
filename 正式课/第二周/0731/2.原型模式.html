@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    /*
+   * 原型模式
+   * 利用构造函数的原型
+   * 原型(prototype)
+   *
+   * 每一个函数都一个属性:prototype 这个属性指向函数自己的原型对象
+   * 每一个对象都有一个__proto__的属性,指向 所属类的原型对象
+   * 每一个默认的原型对象都有一个属性, constructor, 指向函数本身
+   *
+   * 所有的实例都是一个对象
+   * 所有的类都 是一个函数
+   *
+   * Object的原型也是个对象, 是对象就有一个__proto__的属性指向所属类Object的原型; 也就是指向他自己, 这时js默认把这个指向改成null
+   *
+   * */
+    function Person() {
+        this.name='dyc';
+        this.age=9;
+    }
+
+    console.log(Person.prototype.constructor==Person);//true
+
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    var per= new Person('dyc',14);
+    var per1=new Person('dyc1',18)
+
+    /*
+    * js中的内置类  对应的实例  有两种创造方式
+    * 字面量(直接量) var ary=[1,2]; var obj={}
+    * 通过构造函数  var ary2= new Array(1,2); var obj2=new Object()
+    *
+    *
+    * js中的自定义类   对应的实例  只能痛过new创建
+    *
+    * */
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+<div id="div2">珠峰培训</div>
+</body>
+</html>
+<script>
+    var oDiv1 = document.getElementById('div1');
+    var oDiv2 = document.getElementById('div2');
+
+    function on(ele,type,f) {//type 对应报社的某个频道
+        ele[type] = ele[type] || [];
+        var n = ele[type].indexOf(f);
+        if(n > -1)return;//解决重复绑定
+        ele[type].push(f)
+    }
+    function fire(ele,type) {
+        ele[type].forEach((item)=>{
+            item && item();
+        })
+    }
+    function off(ele,type,f) {
+        var n = ele[type].indexOf(f);
+        if(n != -1){
+            ele[type].splice(n,1);
+        }
+        // ele[type][n] = null;
+    }
+
+    function f1() {
+        console.log(1);
+    }
+    function f2() {
+        console.log(2);
+    }
+    function f3() {
+        console.log(3);
+    }
+    on(oDiv1,'myhappy',f1);
+    on(oDiv1,'news',f2);
+    on(oDiv1,'money',f3);
+
+    on(oDiv2,'news',f3);
+    on(oDiv2,'money',f3);
+
+    fire(oDiv2,'news');
+    fire(oDiv1,'happy');
+
+    off(oDiv1,'news',f1);
+</script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    function Person() {
+        this.a = 12;
+        this.b = 13;
+    }
+    var per = new Person();
+    Person.prototype.constructor === Person;
+    Person.prototype.getName = function () {
+        console.log(12);
+    };
+    Person.prototype.age = 15;
+    Person.getName2 = function () {
+        console.log('getName2');
+    };//Person 当作普通对象
+    function FN() {
+        Person.call(this);
+        this.c = 13;
+    }
+    FN.prototype = Person.prototype;
+    // var f = new Fn();// 私有 a,b,c  公有getName age
+    // Person.getName2();//
+
+
+
+
+
+
+    class Person2{
+        constructor(){
+            this.a = 12;
+            this.b = 13;
+        }
+        getName(){
+            console.log(12);
+        }
+        getAge(){
+            console.log('age');
+        }
+        static getAge2(){
+            console.log('getAge2');
+        }
+        static getAge3(){
+            console.log('getAge3');
+        }
+    }
+    var per2 = new Person2();
+    // Person2.prototype.constructor === Person2;
+    console.log(per2.hasOwnProperty('a'));
+
+    class Person3 extends Person2{
+        constructor(){
+            super();
+            this.c = 14;
+            this.d = 15;
+        }
+        getSex(){
+            console.log('getSex');
+        }
+    }
+    var per3 = new Person3();
+    console.dir(Person3);
+    console.log(per3);
+
+
+    class A{
+        //class 声明的类 只能通过 new 执行
+        constructor(){
+            this.a = 12;
+            this.b = 13;
+            this.fn = function () {
+
+            }
+            //私有属性
+        }
+        //公有属性
+        getName(){
+            console.log(12)
+        }
+        getAge(){
+            console.log(13)
+        }
+        static getAge2(){
+            console.log('getAge2')
+        }
+    }
+    class B extends A{
+        constructor(){
+            super();// 把父类的属性继承过来
+            this.c = 12;
+            this.d = 13;
+        }
+        getSex(){
+            console.log('sex')
+        }
+        static getName2(){
+            console.log('getName2')
+        }
+        //把B当作对象 添加属性
+    }
+    // var b = new B;
+    // console.log(b);
+    // console.log(A);
+    // console.log(B);
+    B.getAge2();// 也会把A当作对象是存储的方法继承过来
+
+
+    // function FN() {
+    //     this.age = 12;
+    // }
+    // FN.prototype.getName = function () {
+    //     console.log(12)
+    // };
+    // FN.getName2 = function () {
+    //     console.log(13)
+    // };
+    // var f = new FN;
+    // f.getName2();
+    // FN.getName2();
+
+
+</script>  

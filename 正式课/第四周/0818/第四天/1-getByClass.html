@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <div class="boxq">珠峰培训1</div>
+    <div class=" box  box1">珠峰培训2</div>
+    <!-- /^box  +/  /^box$/-->
+    <div class=" box ">珠峰培训3</div>
+    <div class="box1 box">珠峰培训4</div>
+</body>
+</html>
+<script>
+    // document.getElementsByClassName('boxq');
+    // document.getElementsByClassName('box box1');
+    // document.getElementsByClassName('box1 box');
+    //单个类名
+    function getByClass(str,context) {
+        str = str.replace(/^ +| +$/g,'');// 去除首尾空格
+        var ary = [];// 存放符合要求的元素
+        context = context || document;// 容错机制
+        // 先获取元素  再从这些元素中查找含有这个类名的元素
+        var eles = context.getElementsByTagName("*");//context 下所有元素；
+        for(var i = 0 ; i < eles.length; i++){
+            //查看每一个元素的类名中是否含有 str 这个类名
+            // eles[i].className.indexOf(str) != -1 ? ary.push(eles[i]) : null;
+            var reg = new RegExp('(^| +)'+str+'( +|$)');
+            // /^box$/ /^box +/ / +box$/ / +box +/
+            if(reg.test(eles[i].className)){
+                ary.push(eles[i])
+            }
+        }
+        return ary;
+    }
+    // getByClass('box',document);
+    console.log(getByClass('box'));
+    console.log(getByClass('box '));
+
+    //多个类名
+    function getByClass2(str,context) {
+        str = str.replace(/^ +| +$/g,'');
+        var classAry = str.split(/ +/g);// 把字符串拆成不同类名组成的数组
+        var ary = [];//存放符合要求的元素
+        context = context || document;
+        var eles = context.getElementsByTagName("*");
+        for(var i = 0; i < classAry.length; i++){
+            ary = [];
+            var reg = new RegExp("(^| +)"+classAry[i]+"( +|$)");
+            for(var k = 0; k < eles.length; k++){
+                if(reg.test(eles[k].className)){
+                    ary.push(eles[k])
+                }
+            }
+            // 第一次循环完毕后  ary里边存储的都是含有 box 的元素
+            eles = ary;
+        }
+        return ary;
+    }
+
+    console.log(getByClass2(' box box1  '));;// 既包含box又包含 box1的元素
+
+</script>  

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #div{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: #0c80dc;
+            line-height: 200px;
+            cursor: move;
+            position: absolute;
+            text-align: center;
+            user-select: none;
+        }
+        #div2{
+            width: 400px;
+            height: 400px;
+            border: 2px dashed rebeccapurple;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="div" draggable="true">ddd</div>
+<div id="div2">ddd</div>
+</body>
+</html>
+<script>
+    let oDiv=document.getElementById('div');
+    let oDiv2=document.getElementById('div2');
+
+    //开始拖拽
+    oDiv.ondragstart=function (e) {//e : DragEvent
+        console.log('start');
+        //在拖拽元素上按下鼠标即触发
+    };
+    oDiv.ondragover=function (e) {
+        console.log('over');
+        //按下鼠标在元素自己的范围内移动 即触发 ; 鼠标移出本元素 不再触发
+    };
+    oDiv.ondragend=function (e) {
+        console.log('end');
+        //松开鼠标 即触发
+    }
+    //以上三个是给拖动元素绑定的
+
+    //给目标元素绑定的
+    oDiv2.ondragenter=function (e) {
+        console.log('enter');
+        //拖动元素进入目标元素 即触发
+    }
+    oDiv2.ondragleave=function (e) {
+        console.log('leave');
+        //拖动元素离开目标元素 即触发
+    }
+
+    oDiv2.ondragover=function (e) {
+        e.preventDefault();
+    }
+    //drop 要配合 dragover 使用; dragover 里要阻止默认事件
+    oDiv2.ondrop=function (e) {
+        console.log('drop');
+    }
+
+    oDiv2.ondrop = function (e) {
+        e.preventDefault();
+        var file = e.dataTransfer.files[0];//获取 拖拽的 元素
+        var name = file.name; // 获取文件的名字
+        var type = file.type; // 获取文件的类型
+        if(!/image\/\w+/.test(type))return;// 判断是不是图片  type:"image/png"
+        console.log(file);
+        var url = window.URL.createObjectURL(file);// 创造出 文件的路径
+        this.innerHTML = `<img src="${url}"><p>${name}</p>`;
+        console.log(url);
+
+        var reader = new FileReader(); // 调用 原生JS的文件读取
+        reader.readAsDataURL(file);//把图片转成base64格式的
+        reader.onload = (e)=>{//图片加载完后
+            console.log(e.target.result);// 存储的是转码后的 base64字符串
+            this.innerHTML = `<img src="${e.target.result}"><p>${name}</p>`;
+        }
+    }
+</script>

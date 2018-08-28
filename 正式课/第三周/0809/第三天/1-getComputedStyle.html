@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            margin: auto;
+            opacity: .5;
+            /*box-sizing: border-box;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" style="background: #24ccc8">珠峰培训</div>
+</body>
+</html>
+<!--<script>
+    /*
+    * getComputedStyle
+    * */
+    var oDiv = document.getElementById('div1');
+    console.log(oDiv.style);
+    //这种方式只能获取行内设置的样式
+
+    //怎么获取oDiv的宽高？
+    console.log(oDiv.clientWidth);
+
+    console.log(window.getComputedStyle(oDiv, null));
+    // 通过 window.getComputedStyle(ele,null) 获取到的是个对象
+    // IE6-8 不支持 getComputedStyle 这个方法； -&#45;&#45;》 currentStyle &ndash;&gt; ele.currentStyle
+    // ele 是要获取样式的 元素； 第二个参数是这个元素对应的伪类 可以省略
+    // 对象中存储是ele 当前所有的样式
+    var styleObj = window.getComputedStyle(oDiv);
+    console.log(styleObj.height);
+    console.log(styleObj.width);
+    console.log(styleObj.padding);
+
+    /*
+    * 函数功能：  实现获取某个元素对应的样式的样式值
+    *
+    * */
+    function getCss(ele,attr) {
+        return window.getComputedStyle(ele)[attr];
+    }
+
+    console.log(getCss(oDiv, 'height')); // -&ndash;&gt; 200px
+
+
+
+
+
+</script>-->
+<!--<script src="js/2.js"></script>-->

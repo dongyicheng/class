@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * call 改变this
+    * f1.call(obj,1,2,3)
+    * f1中的this 指向 obj;  让f1(call 中的 this)执行
+    *
+    * apply:
+    * f1.call(obj,数组或者类数组)
+    *
+    * bind
+    * var f2 = f1.bind(obj,1,2,3)
+    * */
+    console.log(Object.prototype.toString.call('qqq'));;
+    console.log(({}).toString.call('qqq'));;
+    // '[object String]';
+
+
+    //数组中的最大值和最小值
+    var ary = [12,34,5,56,76,898,90,345];
+
+    //1、先排序 然后拿头和尾
+    // ary.sort(function (a,b) {
+    //     return a - b;
+    // });
+    // var max = ary[ary.length-1],min = ary[0];
+
+    //2、假设法
+    // 先假设第一个是最大的；
+    // 然后循环数组，挨个比较；
+    // var max = ary[0];
+    // for(let i = 1; i < ary.length; i++){
+    //     if(ary[i] > max){
+    //         max = ary[i]
+    //     }
+    // }
+    // console.log(max);
+
+    // console.log(Number.MAX_VALUE);
+    // var max = Number.MIN_VALUE;
+    // for(let i = 0; i < ary.length; i++){
+    //     if(ary[i] > max){
+    //         max = ary[i]
+    //     }
+    // }
+    // console.log(max);
+    var ary = [12,34,5,56,76,898,90,345];
+    var str = ary.toString();
+    // console.log(eval(str));
+    // var max = Math.max(eval(str));
+    console.log('Math.max(' + str + ')');
+    console.log(`Math.max(${str})`);
+    Math.max(12,34,5,56,76,898,90,345);
+    var max = eval('Math.max('+str+')');
+    console.log(max);
+
+    // var max = Math.max.apply(Math,ary);
+    // var max = Math.max.apply(null,ary);
+    // Math.max(1,2,3,4,4);
+    // console.log(max);
+
+
+
+
+    // var arr = [1,2,3,4,5];
+    // function f() {
+    //     console.log(arguments)
+    // }
+    // f.apply(null,arr);
+    // f(1,2,3,4,5);
+
+    var max = Math.max(...ary);
+    console.log(max);
+    /*
+    * ...   扩展运算符
+    * */
+    eval(ary.join('+'));
+    function f(b,c,...a) {
+        //a 是个数组
+        // eval(arguments.join("+"));
+        // console.log(a,arguments)
+        console.log(a,b,c);
+        // return eval(a.join('+'));
+    }
+    f(1,2,3,4,5);
+
+    /*
+    * 箭头函数
+    *
+    * */
+    ary.sort(function (a, b) {
+        return a - b;
+    });
+    ary.sort((a,b) => {
+        return a - b;
+    })
+    var fn1 = function (a,b) {
+        console.log(12)
+    };
+    var fn2 = (a,b)=>{
+        console.log(12);
+    };
+    (function () {
+        
+    })() 
+    (()=>{
+        
+    })();
+
+    /*
+    * 区别：
+    *  箭头函数没有this； 往上级作用域查找this
+    *  没有arguments
+    *  箭头函数不能当作构造函数用
+    * */
+    // function f4() {
+    //     console.log(this);
+    //     var f3 = ()=>{
+    //         console.log(this);
+    //     };
+    //     var obj = {f:f3};
+    //
+    //     obj.f()
+    // }
+    // var obj2 = {f:f4,q:1};
+    // // f4()
+    // obj2.f();
+    // var f3 = ()=>{
+    //     console.log(this);
+    // };
+    // var obj = {f:f3};
+    //
+    // obj.f()
+
+    var myBind = function (...arg) {
+        // var that = this;
+        var _this = arg[0];
+        arg.shift();
+        // var ary = [];
+        // for(var i = 1; i < arguments.length; i++){
+        //     ary.push(arguments[i])
+        // }
+        return (...arg2) => {
+            // var arr = [];
+            // for(var i = 0; i < arguments.length; i++){
+            //     arr.push(arguments[i])
+            // }
+            this.apply(_this,arg.concat(arg2))
+        }
+        // return function (...arg2) {
+        //     // var arr = [];
+        //     // for(var i = 0; i < arguments.length; i++){
+        //     //     arr.push(arguments[i])
+        //     // }
+        //     that.apply(_this,arg.concat(arg2))
+        // }
+    }
+    Function.prototype.myBind = myBind;
+
+    function f1(...a) {
+        console.log(this);
+        console.log(arguments);
+        console.log(a);
+    };
+    var obj = {name:'zfpx'};
+    var f2 = f1.myBind(obj,1,2,3);
+    f2();
+    console.log(f2);
+
+    var f3 = f1.bind(obj,1,2,3);
+    console.log(f3);
+
+ //----------------------------------------------------------------
+
+
+</script>

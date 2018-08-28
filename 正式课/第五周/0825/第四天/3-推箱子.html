@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: darksalmon;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/utils.js"></script>
+<script>
+
+    /*
+    * 按键盘的 上下左右键 ； 要让 盒子向对应的方向移动
+    * 思路 ： 给document绑定键盘按下事件；通过监听按下键的键值码 来控制盒子的移动方向
+    * */
+    var oDiv = document.getElementById('div1');
+    document.onkeydown = function (e) {
+        e = e || window.event;
+        var l = utils.css(oDiv,'left'),
+            t = utils.css(oDiv,'top');
+        switch(e.keyCode){
+            case 37:
+                utils.css(oDiv,{
+                    left: l - 10
+                });
+                break;
+            case 38:
+                utils.css(oDiv,{
+                    top: t - 10
+                });
+                break;
+            case 39:
+                utils.css(oDiv,{
+                    left: l + 10
+                });
+                break;
+            case 40:
+                utils.css(oDiv,{
+                    top: t + 10
+                });
+                break;
+        }
+    }
+
+
+</script>  

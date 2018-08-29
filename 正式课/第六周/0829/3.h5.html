@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords">
+    <title>Title</title>
+    <style>
+        progress{
+            width: 180px;
+            height: 25px;
+            color: #24ccc8;
+            background: #3059fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        progress::-webkit-progress-bar{
+            background-color: #d7d07a;
+        }
+        progress::-webkit-progress-value{
+            background-color:orange;
+        }
+
+    </style>
+</head>
+<body>
+<progress value="20" min="0" max="200"></progress>
+<input type="text" list="data">
+<dataList id="data">
+    <option value="1"></option>
+    <option value="2"></option>
+    <option value="9"></option>
+</dataList>
+<form action="">
+    <!--pattern 值是个正则  意思是这个输入框的内容要满足这个正则  不满足的话会自动跳出弹框-->
+    <input type="text" pattern="\d{5}">
+    <input type="text" pattern="\d{2}" id="inp">
+    <!--写两个 必须两个都满足-->
+    <input type="number">
+    <!--number  多了两个小箭头  调整数字大小-->
+    <input type="password" autofocus>
+    <!--password 自动把输入的字符变成点点-->
+    <!--autofocus  自动把光标定位在文本框  好几个都加了 默认在第一个-->
+    <button id="btn">提交</button>
+
+    <video src=""></video>
+    <audio src=""></audio>
+</form>
+</body>
+</html>
+<script>
+    /*
+    * section  代表一个模块  一般是一个独立的整体
+    * article aside  用来表示一篇文章块  文章下边可能有个广告  可以用aside
+    * nav  用来作为导航栏的外边框  里边一般是一些a标签
+    * header  一般用来代表 一个页面的头部
+    * main  表示一个页面的主体部分
+    * footer  表示一个页面的页尾
+    * progress 表示一个进度条
+    *
+    * dataList
+    * */
+let inp=document.getElementById('inp'),
+    btn=document.getElementById('btn');
+btn.onclick=function () {
+    console.dir(inp);
+    inp.setCustomValidity('');
+    if(inp.checkValidity()){//inp.checkValidity()  验证通过与否 ; true 为通过 ; false 为未通过
+        // alert('yes')
+        inp.setCustomValidity('')
+    }else{
+        // alert('no')
+        inp.setCustomValidity('请输入两位数字')
+        //inp.setCustomValidity()  设置默认提示语
+    }
+}
+//inp.oninput    监听input内容变化(不兼容)
+//inp.onpropertychange()  监听input内容变化(兼容)
+
+    /*
+    * 一个页面只能有一个 H1 标签   提高页面搜索几率
+    * seo 搜索引擎
+    *
+    * video 加视频
+    * audio 音频
+    * */
+
+</script>

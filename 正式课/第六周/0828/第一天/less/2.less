@@ -1,0 +1,31 @@
+@color:#fff;
+@b:200px;
+@c:300px;
+@img:'../imgs/';
+@box:div2;
+@a:name;
+@name:200px;
+//变量 @qqq:值  用变量左运算时，需要注意用空格 隔开；
+#div1{
+  @b:200px;
+  @c:400px;
+  .oul1{
+    list-style: none;
+    width: @c + @b;
+    height: 100%;
+    background: @color;
+    li{
+      text-align: center;
+      background: #fa9752;
+      font-size: 40px;
+    }
+  }
+  .oul2{
+    background: url("@{img}1.jpeg");
+  }
+}
+#@{box}{
+  width: @c * 3;
+  //height: @b * 3;
+  height: @@a;
+}

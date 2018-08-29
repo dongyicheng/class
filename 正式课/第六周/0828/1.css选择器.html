@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/less">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            margin: auto;
+            width: 400px;
+            overflow: hidden;
+            li{
+                width: 50px;
+                height: 50px;
+                float: left;
+                background: #a6a8ff;
+                margin-right: 10px;
+                margin-top: 10px;
+                &:nth-child(1){//第一个孩子
+                    background: #fff000;
+                }
+                /*&:nth-child(odd){//奇数*/
+                    /*background: #24ccc8;*/
+                /*}*/
+                /*&:nth-child(even){//偶数数*/
+                    /*background: #fa866e;*/
+                /*}*/
+                /*&:nth-child(2n){//偶数*/
+                    /*background: #24ccc8;*/
+                /*}*/
+                /*&:nth-child(2n+1){//奇数*/
+                    /*background: #24ccc8;*/
+                /*}*/
+                &:nth-of-type(1){//第一个孩子
+                    background: #24ccc8;
+                }
+            }
+            & :nth-child(1){//ul的第一个儿子以及ul所有孩子的第一个儿子都起作用
+                background: #333333;
+            }
+            & :nth-of-type(2){//第二个 p 和 第二个 li 都起作用(不同类型的第二个都起作用)
+                /*background: #24ccc8;*/
+            }
+            & :only-child{//查看下面所有的  只有一个儿子的
+                /*background: #992022;*/
+            }
+            & :only-of-type{//查看下面  类型只有一个的起作用
+
+            }
+            & :empty{//内容为空的
+
+            }
+            & :not(li){//下面所有元素不是 li 的
+
+            }
+            li[class=zf]{//li里class为zf的
+
+            }
+        }
+        #div1{
+            background: #ff0bc4;
+            height: 200px;
+            &:target{//目标伪类选择器
+                background: rebeccapurple;//锚点定位 点击使目标元素执行操作
+            }
+        }
+    </style>
+    <script src="js/less.js"></script>
+</head>
+<body>
+<ul>
+    <p>91</p>
+    <p>92</p>
+    <li>1
+        <div>98</div>
+        <div>99</div>
+    </li>
+    <li class="zf">2
+        <div>20</div>
+    </li>
+    <li class="aa">3</li>
+    <li class="ee">4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+</ul>
+<div id="div1"></div>
+<a href="#div1">A</a>
+</body>
+</html>
+<script>
+    
+</script>

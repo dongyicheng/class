@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 1、支持嵌套的写法
+    * 2、支持变量 （值，属性名）
+    * width:@w; .box_@{n}  @img:'../../imgs/' url('@{img}1.png');
+    * 3、混合   .pub{width:100px}   #div1{.pub}
+    * 4、函数   .w(@a:200px,@b:200px){width:@a,height:@b}    #div1{.w(300px)}
+    * 5、循环   类似于JS的递归
+    * .w(@n) when (@n < 5){
+    *     .box_@{n}{
+    *       width:@n * 100px
+    *     }
+    *     .w(@n + 1);
+    * }
+    *
+    * */
+</script>  

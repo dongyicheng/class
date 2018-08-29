@@ -1,0 +1,27 @@
+/*
+混合
+*/
+.public,
+.oul3 {
+  list-style: none;
+  width: 400px;
+  height: 600px;
+  background: #fa9752;
+}
+.public li {
+  color: #fff;
+  font-size: 24px;
+}
+#pub,
+.oul3 {
+  border: 10px solid skyblue;
+  background: #fa9752;
+}
+#pub li {
+  color: #3059fa;
+}
+/*
+.oul3{
+  .public;
+  background: #3059fa;
+}*/

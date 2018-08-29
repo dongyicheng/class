@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#box,
+#box2 {
+  width: 800px;
+  height: 300px;
+  font-size: 25px;
+  overflow: hidden;
+  margin: auto;
+  position: relative;
+}
+#box .img_box,
+#box2 .img_box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#box .img_box li,
+#box2 .img_box li {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#box .img_box li img,
+#box2 .img_box li img {
+  width: 100%;
+  height: 100%;
+}
+#box .img_box li p,
+#box2 .img_box li p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  color: #f4f4f4;
+}
+#box .leftBtn,
+#box2 .leftBtn,
+#box .rightBtn,
+#box2 .rightBtn {
+  position: absolute;
+  width: 50px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  top: 50%;
+  margin-top: -50px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 25px;
+  color: #fff;
+  right: 0;
+  z-index: 20;
+  display: none;
+}
+#box .leftBtn,
+#box2 .leftBtn {
+  left: 0;
+}
+#box .tip_box,
+#box2 .tip_box {
+  position: relative;
+  top: -80px;
+  text-align: center;
+  z-index: 30;
+}
+#box .tip_box .tip,
+#box2 .tip_box .tip {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #161616;
+  display: inline-block;
+  margin: 5px;
+  background: #fff;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+}
+#box .tip_box .tip.current,
+#box2 .tip_box .tip.current {
+  background: orange;
+  color: white;
+}

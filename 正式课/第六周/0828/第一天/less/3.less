@@ -1,0 +1,40 @@
+/*
+混合
+*/
+@w:200px;
+@h:300px;
+
+.public{
+  list-style: none;
+  width: @w * 2;
+  height: @h * 2;
+  background: #fa9752;
+  li{
+    color: #fff;
+    font-size: 24px;
+  }
+}
+#pub{
+  border:10px solid skyblue;
+  background: #fa9752;
+  li{
+    color:#3059fa;
+  }
+}
+/*
+.oul3{
+  .public;
+  background: #3059fa;
+}*/
+
+//extend  只是获取 这个类名或ID下的 自己的样式；儿子的不会拿
+// extend 编译后的先后顺序 跟 extend 的样式表定义的先后顺序 一致
+
+.oul3:extend(#pub){
+
+}
+.oul3:extend(.public){
+
+}
+
+

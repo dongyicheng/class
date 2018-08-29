@@ -1,0 +1,18 @@
+#div1 .oul1 {
+  list-style: none;
+  width: 600px;
+  height: 100%;
+  background: #ffffff;
+}
+#div1 .oul1 li {
+  text-align: center;
+  background: #fa9752;
+  font-size: 40px;
+}
+#div1 .oul2 {
+  background: url("../imgs/1.jpeg");
+}
+#div2 {
+  width: 900px;
+  height: 200px;
+}

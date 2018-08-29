@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style type="text/less">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            margin: auto;
+            width: 450px;
+            overflow: hidden;
+            //& 代表ul
+            li{
+                width: 50px;
+                height: 50px;
+                float: left;
+                background: #3059fa;
+                margin-right: 10px;
+                margin-top: 10px;
+              &:nth-child(1){
+                  background: #fa9752;
+                }
+                /* &:nth-child(odd){// & 代表 li
+                   //odd 代表奇数
+                   background: #fa9752;
+               }
+               &:nth-child(even){// & 代表 li
+                   //even 代表偶数
+                   background: #fae419;
+               }*/
+                /*&:nth-child(2n){// & 代表 li
+                    background: #fae419;
+                }
+                &:nth-child(2n+1){// & 代表 li
+                    background: #fa6c78;
+                }*/
+                /*&:nth-child(3n){// & 代表 li
+                    background: #fae419;
+                }
+                &:nth-child(3n+1){// & 代表 li
+                    background: #fa6c78;
+                }
+                &:nth-child(3n+2){// & 代表 li
+                    background: #fa5ff3;
+                }*/
+                /*&:nth-of-type(1){
+                    background: #fa9752;
+                }*/
+            }
+            /*& :nth-child(1){// 第一个儿子
+                background: #fa9752;
+            }
+            & :nth-of-type(2){ // 第二个 div 和 第二个 li 都起作用
+                background: #24ccc8;
+            }*/
+            /*& :nth-child(1){
+                background: #fa9752;
+            }*/
+            /*& :nth-child(1){// 第一个儿子
+                background: #faf415;
+            }*/
+            /*& :nth-of-type(1){
+                background: #faf415;
+            }*/
+            /*#div1 .box{
+
+            }
+            #div1.box{
+
+            }*/
+
+            /*& :only-child{
+                background: #fa9752;
+            }*/
+           /* & :only-of-type{
+                background: #fa9752;
+            }*/
+            /*& :empty{
+                height: 20px;
+                background: #24ccc8;
+            }
+            & :not(li){
+                background: #fa2f0c;
+            }*/
+            /*li[class=zf]{
+                background: #24ccc8;
+            }*/
+            li[class|=zf]{
+                background: #24ccc8;
+            }
+
+        }
+        #div1,#div2,#div3{
+            background: #3059fa;
+            height: 200px;
+        }
+        & :target{
+            border: 10px solid #fa9752;
+            /*background: #24ccc8;*/
+        }
+    </style>
+    <script src="../js/less.js"></script>
+</head>
+<body>
+    <ul>
+        <div>,</div>
+        <li>
+            <div>92</div>
+            <span>93</span>
+        </li>
+        <li class="zf">2</li>
+        <li class="zf zf-px">3</li>
+        <li class="zf-px">4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+    </ul>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <a href="#div2">A</a>
+</body>
+</html>
+<script>
+
+</script>  

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords">
+    <title>珠峰培训</title>
+    <style>
+        progress{
+            width: 180px;
+            height: 25px;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #24ccc8;
+            background: #3059fa;
+        }
+        progress::-webkit-progress-bar{
+            background-color: #d7334a;
+        }
+        progress::-webkit-progress-value{
+            background-color:orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+    <progress value="20" min="0" max="100"></progress>
+
+    <input type="text" list="dataL">
+    <dataList id="dataL">
+        <option value="1"></option>
+        <option value="2"></option>
+        <option value="3"></option>
+    </dataList>
+
+    <form action="">
+        <!--pattern 值是个正则  意思就是这个输入框的内容需要满足这个正则-->
+        <!--<input type="text" pattern="\d{5}">-->
+        <!--<input type="text" pattern="\d{2}">-->
+        <!--<input type="number">-->
+        <!--<input type="password" autofocus>
+        <input type="password" autofocus>
+        <input type="password" autofocus>-->
+        <input type="text" pattern="\d{2}" id="inp">
+        <button id="btn">提交</button>
+    </form>
+    <video src=""></video>
+</body>
+</html>
+<script>
+    /*
+    * section 代表一个模块 一般是一个独立的整体
+    * article aside 用来表示一篇文章块 文章下边可能有个广告 可以用aside表示
+    * nav 一般用来导航栏的外边框 里边一般都是一些a标签
+    * header  一般用来便是 一个页面的头部
+    * main    表示一个页面的主体部分
+    * footer  表示一个页面的页尾
+    * */
+    var inp = document.getElementById('inp');
+    var btn = document.getElementById('btn');
+    btn.onclick = function () {
+        // console.dir(inp);
+        //inp.checkValidity()  返回值若是 true  则表示验证通过；false表示 验证不通过
+        inp.setCustomValidity('');
+        if(inp.checkValidity()){
+            // alert('yes')
+            inp.setCustomValidity('');
+        }else {
+            // alert('no')
+            //setCustomValidity  设置默认的提示
+            inp.setCustomValidity('请输入两位数字')
+        }
+    }
+    // inp.oninput
+    // inp.onpropertychange //实时监听 input框的值的变化
+
+    /*
+    * 一个页面中只能有一个 H1 标签  提高页面搜索机率
+    * seo
+    * */
+</script>  

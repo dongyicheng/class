@@ -1,0 +1,27 @@
+//函数 传参 支持默认值  函数执行后边需要加  分号
+#pub(@a:300px,@b:300px){
+  width: @a;
+  height: @b;
+  background: #fa9752;
+}
+
+//#pub{
+//  width: 400px;
+//  height: 600px;
+//  background: #ccc;
+//}
+#div1{
+  #pub(200px);
+  //#pub();
+}
+
+// 循环
+.w(@n,@cor:#ccc) when(@n < 5){
+  .box@{n}{
+    width: @n * 100px;
+    height: @n * 200px;
+    background: @cor
+  }
+  .w(@n + 1,@cor);
+}
+.w(1,#ccc);

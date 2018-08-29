@@ -1,0 +1,25 @@
+#div1 {
+  width: 200px;
+  height: 300px;
+  background: #fa9752;
+}
+.box1 {
+  width: 100px;
+  height: 200px;
+  background: #cccccc;
+}
+.box2 {
+  width: 200px;
+  height: 400px;
+  background: #cccccc;
+}
+.box3 {
+  width: 300px;
+  height: 600px;
+  background: #cccccc;
+}
+.box4 {
+  width: 400px;
+  height: 800px;
+  background: #cccccc;
+}

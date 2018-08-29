@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .div3{
+            width: 400px;
+            height: 400px;
+        }
+        .div3 img{
+            width: 100%;
+            height: 100%;
+            transition: all 1s;
+        }
+        .div3:hover  img{
+            /*box-shadow: -5px -5px 5px 0 #000;*/
+            /*transform: translate(100px,200px);*/
+            animation: move 2s;
+        }
+        @keyframes move {
+            0%{
+                transform: translate(0,0);
+            }
+            50%{
+                transform: translate(300px,300px);
+            }
+            100%{
+                transform: translate(0,0);
+            }
+        }
+        @-webkit-keyframes move {
+            0%{
+                transform: translate(0,0);
+            }
+            50%{
+                transform: translate(300px,300px);
+            }
+            100%{
+                transform: translate(0,0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="div3">
+    <img src="http://pic-bucket.nosdn.127.net/photo/0001/2018-08-27/DQ6H24UT00AP0001NOS.jpg" alt="">
+</div>
+</body>
+</html>
+<script>
+</script>  

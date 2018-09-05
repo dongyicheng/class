@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            height: 200px;
+            width: 500px;
+            margin: 0 auto;
+        }
+        ul li{
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: cornflowerblue;
+            margin-left: 10px;
+        }
+        li:nth-child(1){
+            background: #fa866e;
+        }
+        /*li:nth-of-type(1){*/
+            /*background: #ff0bc4;*/
+        /*}*/
+        /*ul :nth-child(2){*/
+            /*background: #333333;*/
+        /*}*/
+        /*ul :nth-of-type(1){*/
+            /*background: #999999;*/
+        /*}*/
+        /*input{*/
+            /*width: 200px;*/
+            /*height: 20px;*/
+        /*}*/
+        div{
+            padding: 2px;
+            position: relative;
+            top: -20px;
+            color: #bbb;
+        }
+        input{
+            position: relative;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <div>22</div>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<input type="text">
+<div>hahahaha</div>
+</body>
+</html>
+<script>
+    /*
+    * localStorage
+    *
+    * */
+    //都是请求数据的方法
+    window.localStorage;//(H5)关闭页面不清除  容量较大 ; 而且不会发给后台 , 不占用带宽
+    window.sessionStorage;//(H5)关闭页面就清除
+    document.cookie;//相比上面两个 有大小限制  最多5kb  而且占用带宽,因为会把cookie中的内容全部发给后台
+
+
+    //设置cookie
+    document.cookie='aaa=12'//直接在后面加上
+    //删除cookie  把这个 cookie 的过期时间设置成今天之前的
+</script>

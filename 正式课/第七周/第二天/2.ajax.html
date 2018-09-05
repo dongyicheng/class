@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    /*post 可以在 send里直接传参数  get不可以*/
+    let xhr=new XMLHttpRequest();
+    xhr.open('post','1.xml?name="珠峰"',false);// ?后面传的参数会接在路径后面
+    xhr.onreadystatechange=function () {
+        console.log(xhr.readyState);
+        xhr.getResponseHeader('data');//从响应头拿到对应数据的值
+    };
+    let str=encodeURIComponent('珠峰');
+    xhr.setRequestHeader('name',str);//在请求头中
+    //目前发送给后台的是以字符串 ; 怎么把他转成 key value (from data) 的形式
+    //需要设置请求头  content-type : application/x-www-form-urlencoded
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    xhr.send('name1=12&a=34');//在请求体中 目前发送给后台的是以字符串
+</script>

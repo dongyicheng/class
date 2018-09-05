@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    /*
+    * ajax  async javascript and xml
+    *
+    * xml是一种数据传输的格式
+    *
+    * */
+
+    let oDiv=document.getElementById('div');
+    //创建一个ajax实例
+    let xhr=new XMLHttpRequest();
+    //刚创建时 xhr的readyState是0
+    xhr.open('get','./1.json',false);//同步
+    //open readyState从0到1AZ
+    xhr.onreadystatechange=function () {
+        console.log(xhr);
+    }
+    xhr.send();
+
+    //当传送的是xml类型的文件时
+    //父节点.appendChild(newEle)
+    let ele = xhr.responseXML.children[0];
+    oDiv.appendChild(ele);//可以将结构加到页面上
+
+    /*
+    * 返回的结果
+    * response : 是个字符串
+    * responseText : 也是字符串
+    * responseXml : 有的话 就是一个对象  ;  没有的话就是个null
+    * */
+</script>

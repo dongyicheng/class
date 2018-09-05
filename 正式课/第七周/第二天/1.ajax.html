@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    let xhr=new XMLHttpRequest();//readyState=0
+    xhr.open('get','1.xml?name="珠峰"',false);//请求方式  借口  同步
+    //open 执行完成 变成1
+    // 2 3 4 都是http重置的
+    xhr.onreadystatechange=function () {
+        console.log(xhr.readyState);//4
+    };
+    xhr.setRequestHeader('name','zhufeng');//设置请求头   不能设置中文报错
+    // xhr.setRequestHeader('name','珠峰');//不能设置中文报错 Value is not a valid ByteString.
+    //需要把中文转成  计算机支持的字符
+
+    /*
+     escape  ---->  unescape  (基本不用)
+     */
+    let str=escape('珠峰');
+    //后台语言不支持这种转译方式
+    xhr.setRequestHeader('name',str);
+    console.log(str);//"%u73E0%u5CF0"
+    unescape(str);//珠峰
+
+    /*encodeURI ---> decodeURI  (不常用  支持多次转译  不能转译一些特殊字符)*/
+    let str1=encodeURI('珠峰');
+    xhr.setRequestHeader('name',str1);
+    console.log(str1);//%E7%8F%A0%E5%B3%B0
+    decodeURI(str1);//珠峰
+
+    /*encodeURIComponent ---> decodeURIComponent  (最常用)
+    *支持encodeURI 不能转译的字符
+    * */
+    let str2=encodeURIComponent('珠峰');
+    xhr.setRequestHeader('name',str2);
+    console.log(str2);//%E7%8F%A0%E5%B3%B0(跟上面一样)
+    decodeURIComponent(str2);//珠峰
+
+    xhr.send()
+
+
+
+
+</script>

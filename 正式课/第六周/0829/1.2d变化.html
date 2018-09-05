@@ -83,9 +83,11 @@
         @keyframes move3 {
             0%{
                 transform: rotate(0) scale(0.2);
+                transform-origin: left;
             }
             100%{
-                transform: rotate(360deg) scale(1);
+                transform: rotateX(360deg) scale(1);
+                transform-origin: left;
             }
         }
         @keyframes move4 {
@@ -160,4 +162,8 @@
         let str = window.location.href.replace(/#img\d/g, '');
         window.location.href = str;
     }
+    /*
+    * 使用CSS3的transform  改变元素的位置后
+    * 再通过js获取元素位置时 , 还是元素  原始的位置
+    * */
 </script>

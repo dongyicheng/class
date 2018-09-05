@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var oDiv = document.getElementById('div1');
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        console.dir(xhr.readyState);
+        console.log(xhr.getAllResponseHeaders());
+    };
+    xhr.open('post','./1.json',false);// 0 ---> 1
+    // var b = 12;
+    // xhr.send(`q=1&w=${b}`);
+    xhr.send({q:12});
+    // console.log(xhr);
+    /*
+    * xhr的readyState 刚建立实例时状态时 0； 然后紧接着绑定了 onreadystatechange
+    * 再open时 把 xhr的readyState  从0 变成 1；触发 onreadystatechange
+    * 当请求发出去之后，由于是个同步过程；整个JS代码不再往下执行；等着http的请求成功；
+    * 当http请求成功之后；再回来执行 JS代码； 这时的 readyState 已经变成了 4；再触发一次
+    * onreadystatechange事件
+    *
+    * */
+
+    /*
+    * ajax 的事件
+    * xhr.open()  ---> 打开链接
+    * xhr.abort()  ---> 中断请求
+    * xhr.setRequestHeader(key,value) ---> 设置请求头;key是属性名  value是属性值
+    * xhr.getResponseHeader(key) ---> 获取响应头中对应key 的 value值
+    * xhr.getAllResponseHeaders() --->  获取所有的响应头
+    *
+    * */
+</script>  

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    /*
+    * TCP协议  三次握手 四次挥手
+    *
+    * 客户端  服务器端 交互模式  --->  应答模式
+    * 应答模式  --->  客户端发起请求   服务器端回应请求
+    *
+    * //三次握手
+    * 客户端先去发起请求  --->  查看对应这个地址的服务端是否存在
+    * 服务器端存在  , 就告诉客户端  --->  我在 , 我能听到你说话 , 你能不能听到我说话
+    * 客户端能接受到服务器端  ---> 我能听到你说话  , 我要干嘛...
+    *
+    * 传送数据...
+    *
+    * //四次挥手
+    * 我已经说清楚了我要的东西
+    * 1.客户端会说一声  我这边的要的东西说完了, (我不再要新的东西了)
+    * 2.服务端听到之后 ; 好的我知道了  ; 我不再接听你说的话了
+    * 数据没传完 ; 还要接着传
+    * 服务端传完了  ;  并且给完了全部数据
+    * 3.这时告诉客户端 , 我要关闭通道了 ;
+    * 4.客户端说 可以关闭了
+    *
+    * */
+</script>

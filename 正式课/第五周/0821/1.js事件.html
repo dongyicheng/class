@@ -25,6 +25,11 @@
 <script>
     var oDiv = document.getElementById('div1');
     var oInp = document.getElementById('inp');
+
+
+
+
+
     /*
     * 事件:系统天生自带 , 跟绑定与否没关系
     *
@@ -66,24 +71,24 @@
     * ontouchend        触碰结束
     * oncick          点击(有大概300毫秒延迟)
     * */
-    inp.onkeydown=function () {
-        console.log(this.value);//输出空  因为按下时还没有内容
-    }
-    inp.onkeyup=function () {
-        console.log(this.value);//输出写入内容
-
-    }
-    /*input 的值输入  是在 keydown 之后   keyup 之前做的*/
-    inp.onkeyup = function () {
-      this.value = this.value.replace(/\D+/g,'');
-      //使得输入框中 输入非数字时 都替换成空
-     }
-
-     if(oInp.oninput !==undefined){//先判断有没有这个方法
-        this.value = this.value.replace(/\D+/g,'');
-     }else{
-        oInp.onpropertychange=function () {
-            this.value = this.value.replace(/\D+/g,'');
-        }
-     }
+    // inp.onkeydown=function () {
+    //     console.log(this.value);//输出空  因为按下时还没有内容
+    // }
+    // inp.onkeyup=function () {
+    //     console.log(this.value);//输出写入内容
+    //
+    // }
+    // /*input 的值输入  是在 keydown 之后   keyup 之前做的*/
+    // inp.onkeyup = function () {
+    //   this.value = this.value.replace(/\D+/g,'');
+    //   //使得输入框中 输入非数字时 都替换成空
+    //  }
+    //
+    //  if(oInp.oninput !==undefined){//先判断有没有这个方法
+    //     this.value = this.value.replace(/\D+/g,'');
+    //  }else{
+    //     oInp.onpropertychange=function () {
+    //         this.value = this.value.replace(/\D+/g,'');
+    //     }
+    //  }
 </script>

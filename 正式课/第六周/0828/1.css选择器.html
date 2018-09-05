@@ -20,7 +20,7 @@
                 background: #a6a8ff;
                 margin-right: 10px;
                 margin-top: 10px;
-                &:nth-child(1){//第一个孩子
+                &:nth-child(1){//第一个li
                     background: #fff000;
                 }
                 /*&:nth-child(odd){//奇数*/
@@ -35,12 +35,12 @@
                 /*&:nth-child(2n+1){//奇数*/
                     /*background: #24ccc8;*/
                 /*}*/
-                &:nth-of-type(1){//第一个孩子
-                    background: #24ccc8;
+                &:nth-of-type(1){//第一个li
+                    /*background: #24ccc8;*/
                 }
             }
             & :nth-child(1){//ul的第一个儿子以及ul所有孩子的第一个儿子都起作用
-                background: #333333;
+                /*background: #333333;*/
             }
             & :nth-of-type(2){//第二个 p 和 第二个 li 都起作用(不同类型的第二个都起作用)
                 /*background: #24ccc8;*/
@@ -73,14 +73,13 @@
 </head>
 <body>
 <ul>
-    <p>91</p>
-    <p>92</p>
+    <div>91</div>
     <li>1
-        <div>98</div>
-        <div>99</div>
+        <!--<div>98</div>-->
+        <!--<div>99</div>-->
     </li>
     <li class="zf">2
-        <div>20</div>
+        <!--<div>20</div>-->
     </li>
     <li class="aa">3</li>
     <li class="ee">4</li>

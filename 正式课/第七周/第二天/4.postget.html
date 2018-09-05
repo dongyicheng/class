@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    /*
+    * get 系列  把参数放到url后面
+    *
+    * get
+    * head  只获取请求头
+    * delete 删除对应的内容
+    *
+    *
+    * post 系列  把参数放到请求体当中(send(参数))
+    * post
+    * put  给后台添加数据
+    * */
+    let xhr = new XMLHttpRequest();//ActiveObject --->IE6
+    xhr.open('get','1.xml');
+    xhr.onreadystatechange=function () {
+        console.log(xhr.response);//是个字符串  获取的后台给的数据
+        xhr.responseText;//是个字符串
+        xhr.responseXML;//是个后台给的结构 ; 若后台给的是
+    };
+    xhr.send()
+</script>

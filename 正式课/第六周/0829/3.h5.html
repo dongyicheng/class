@@ -76,6 +76,26 @@ btn.onclick=function () {
 //inp.oninput    监听input内容变化(不兼容)
 //inp.onpropertychange()  监听input内容变化(兼容)
 
+    inp.focus=function () {
+        //获取焦点
+    }
+    inp.blur=function () {
+        //失去焦点
+    }
+    inp.onchange=function () {
+        //内容发生变化 , 并且失去焦点  触发
+    }
+    if(inp.oninput!==undefined){
+        inp.oninput=function () {
+            //实时监听value值变化
+        }
+    }else{
+        inp.onpropertychange=function () {
+
+        }
+    }
+
+
     /*
     * 一个页面只能有一个 H1 标签   提高页面搜索几率
     * seo 搜索引擎
@@ -83,5 +103,6 @@ btn.onclick=function () {
     * video 加视频
     * audio 音频
     * */
+
 
 </script>

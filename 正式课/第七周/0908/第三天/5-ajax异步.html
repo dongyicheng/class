@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('get','./1.xml?',true);//异步的过程
+    xhr.onreadystatechange = function () {
+        // console.dir(xhr.readyState);
+        // 1 --》2 ； 2 --》3 ； 3--》4 都是http改变的状态码
+        // for(var i = 0; i < 999999999; i++){
+        //     if(i=== 9    99999998){
+        //         console.log(xhr.readyState);
+        //     }
+        // };
+
+    };
+    xhr.setRequestHeader('name','zhu');
+    xhr.send();//  ??? 代码send 执行的时间
+    for(var i = 0; i < 999999999; i++){
+        if(i=== 999999998){
+            console.log(xhr.readyState);
+        }
+    }
+    console.dir(xhr.readyState);
+</script>  

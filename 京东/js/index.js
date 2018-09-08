@@ -104,5 +104,4 @@ function timeCount(TatT,hBox,mBox,sBox) {
 
 let timer=window.setInterval(function () {
     timeCount(tarT,$hBox,$mBox,$sBox);
-    console.log($hBox,$mBox, $sBox);
 },1000);

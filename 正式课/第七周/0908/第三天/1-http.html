@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * 从浏览器地址栏输入地址，敲完回车；都要经历哪些过程？
+    * 敲完回车，是要根据对应的服务器去获取对应的内容；
+    * 服务器的地址都是IP地址；---->   一个 IP 可以对应多个域名
+    * 在地址栏输入的都是域名，通过域名查找IP,都要经历哪些过程？
+    * 1、先在浏览器的缓存区查找对应的IP；
+    * 2、若在缓存区没找到，则去操作系统中查找；
+    * 3、在本地区的DNS（domain name system）服务器中查找；分布式的系统
+    * 4、。。。--->  顶级域名服务器中查找---> https://money.163.com (.com 称为顶级域名) ； 在顶级域名服务器中；根据自己的机制；查找到了对应的IP；把找到的IP地址往回缓存
+    * ----------------------- 查找IP
+    * 5、浏览器根据查找到的IP地址，去对应的服务器获取内容（文件还是源代码？） 获取到的是文件中的源代码；不是文件；
+    *
+    * 6、浏览器先渲染 DOM 树
+    *   根据css渲染样式
+    *   根据JS 修改或添加DOM结构
+    * */
+
+
+    /*
+    * http事务  一个完整的   --->  请求 + 响应 ;
+    * 一般情况下  一个页面是需要很多次 HTTP事务的；
+    * .js .css  img  ... 都是一个http 请求；
+    * 一个页面的http 越少越好！  减少页面的http请求次数；
+    * 雪碧图，合并压缩 js 和 css 文件；
+    * */
+
+    /*
+    * 常用的顶级域名
+    * .com
+    * .cn
+    * .net
+    * .gov
+    * .edu
+    * .org
+    * ....
+    * */
+
+    /*
+    * 一个完整的http事务 ---》 http://money.163.com ---》  是指的 这个http从请求开始，到响应结束； 是指这个html文档请求完成； 页面没有加载完成 是因为 请求过来的这个文档中其他的http请求没有结束；
+    *
+    * */
+
+    /*
+    * http 的 headers
+    *
+    * general
+    *   Request URL: http://money.163.com/ 请求网址
+        Request Method: GET   请求的方法
+        Status Code: 200 OK   请求的状态
+        Remote Address: 111.202.43.97:80  请求的服务器IP地址
+        Referrer Policy: no-referrer-when-downgrade
+    *
+    *
+    * response Headers  响应头  ----》  服务器设置的
+    *   Age: 149
+        Cache-Control: max-age=300
+        Connection: keep-alive
+        Content-Encoding: gzip
+        Content-Type: text/html; charset=GBK
+        Date: Sat, 08 Sep 2018 02:18:16 GMT  // 服务器响应时间
+        Expires: Sat, 08 Sep 2018 02:23:16 GMT
+        Last-Modified: Sat, 08 Sep 2018 02:17:01 GMT
+        P3P: CP=CAO PSA OUR
+        Server: nginx
+        Transfer-Encoding: chunked
+        Vary: Accept-Encoding
+        X-Via: 1.1 PSsddzwt3jn27:5 (Cdn Cache Server V2.0), 1.1 houwangtong44:11 (Cdn Cache Server V2.0)
+    *
+    *
+    * request headers
+    *   Accept-Encoding: gzip, deflate, br
+        Accept-Language: zh-CN,zh;q=0.9
+        Connection: keep-alive
+        Content-Length: 526
+        Content-Type: application/x-www-form-urlencoded
+        Host: blackhole.m.jd.com
+        Origin: https://www.jd.com
+        Referer: https://www.jd.com/
+        User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36
+    *
+    * */
+    /*
+    * http中所有的数据交互（不管是前端给后台的；还是后台传给前端的） 把这些数据统称为  http报文
+    *
+    * */
+
+
+
+
+</script>  

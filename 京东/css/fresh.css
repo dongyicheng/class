@@ -824,13 +824,108 @@ div.aside a div .aside_close {
 }
 .bgcolor .img_table > div .table_tab .table_body .table_item_body {
   width: 1100px;
-  padding-top: 20px;
+  padding: 30px;
 }
-.bgcolor .img_table > div .table_tab .table_body .table_item_body a {
-  padding: 20px 0 20px;
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box {
+  float: left;
+  width: 220px;
 }
-.bgcolor .img_table > div .table_tab .table_body .table_item_body a img {
-  width: 1170px;
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a {
+  display: block;
+  position: relative;
+  padding: 40px 20px 0;
+  height: 305px;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.25s ease;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a:hover {
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a:hover .good_btn {
+  display: block;
+  height: 40px;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_price {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  margin-left: -90px;
+  width: 180px;
+  height: 30px;
+  text-align: center;
+  background: #ff541f;
+  -moz-border-radius: 0 0 15px 15px;
+  border-radius: 0 0 15px 15px;
+  font-family: Arial;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_price span.price_jd {
+  margin: 0 5px;
+  font-size: 20px;
+  color: #fff;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_price span.price_m {
+  margin: 0 5px;
+  font-size: 14px;
+  color: #ffb7a9;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: line-through;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a img {
+  margin-bottom: 13px;
+  width: 180px;
+  height: 180px;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_desc {
+  margin-bottom: 14px;
+  height: 54px;
+  line-height: 1.7;
+  white-space: normal;
+  font-size: 16px;
+  color: #222;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_good {
+  padding-top: 0;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_good p {
+  margin-bottom: 7px;
+  font-size: 14px;
+  color: #909090;
+  text-align: center;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_good .item_line {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: #ddd;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .item_good .item_line i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  height: 3px;
+  background: #ff541f;
+  transition: width 0.25s ease;
+}
+.bgcolor .img_table > div .table_tab .table_body .table_item_body .table_item_box > a .good_btn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  background: #ff541f;
+  color: #fff;
+  transition: height .25s ease;
 }
 .bgcolor .fresh_special {
   margin-bottom: 78px;

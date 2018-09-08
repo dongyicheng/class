@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    //JQ get
+    //1 接口
+    //2 请求参数
+    //3 回调函数
+    // $.get('./2.json?age=9',{name:'珠峰'},function (data) {
+    //     console.log(data);
+    // });
+    $.ajax({
+        type:'get',
+        url:'./1.json',
+        data:{name:'珠峰'},
+        dataType:'json',
+        success:function (data) {
+            console.log(data);
+        },
+        error:function (res) {
+            console.log(res);
+        }
+    });
+
+    $.post('./1.json',{name:'珠峰',age:9},function (data) {
+        console.log(data);
+    })
+</script>  

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    // 创建一个ajax 实例  ajax(async javascript and xml);
+    // 全局刷新 和 局部刷新
+    // 全局刷新的优点  --->  数据在后台直接渲染好后发送给前台；前台只要做渲染就可以了
+    // 缺点  只能整个页面的刷新
+    // 局部刷新  只更新页面中某一部分的数据
+    //
+
+
+    //创建一个ajax 实例
+    var xhr = new XMLHttpRequest();//readyState 0
+    //open
+    xhr.open('get','./1.xml',false);//readyState 1
+    //监听请求状态
+    xhr.onreadystatechange = function () {
+        console.dir(xhr.readyState);
+        //xhr.readyState 请求状态
+        //0 UNSENT
+        //1 OPENED
+        //2 HEADERS_RECEIVE
+        //3 LOADING
+        //4 DONE
+    };
+    xhr.setRequestHeader('name','zhu'); //位置需要在 请求发出去之前执行；而且不允许写汉字；
+    //发送请求
+    xhr.send();
+    console.log(12);
+    console.log(xhr.getResponseHeader('date'));
+
+    // xhr.setRequestHeader(key,value) --> 设置请求头
+    // xhr.getResponseHeader(key) ----> 获取某个响应头
+    // xhr.getAllResponseHeaders() ----> 获取所有的响应头 是个大字符串
+
+    //汉字转化
+    var str  = '珠峰';
+    //escape(str)
+    //unescape() 基本不使用
+
+    //encodeURI(str)  //转码
+    //decodeURI       //解码
+
+    //encodeURIComponent(str) 多转义了一些特殊字符；比如 :  /
+    //decodeURIComponent  最常用
+</script>  

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * ajax 中的事件
+    * */
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','./1.json');
+    xhr.onabort = function(){ // 只要请求中断（abort执行）
+        console.log('abort');
+    };
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState ==2){
+            // xhr.abort();
+        }
+        // console.dir(xhr.response);
+    };
+    xhr.timeout = 1000;// ajax请求事件若超过一秒；则关闭请求
+    xhr.ontimeout = function(){
+        console.log('超时的逻辑代码');
+    };
+    xhr.send();// send虽然执行了；但是 需要等着主队列的代码都执行完，才会把请求发送出去
+    // xhr.abort();// 放到上边 中断请求； ---> cancel 中断http 的请求
+    // for(var i=0; i<99999999;i++){
+    //
+    // }
+    // xhr.abort();// 放到下边 不能中断http 请求；但能中断JS的执行
+    // console.dir(xhr);
+
+    /*
+    * abort() ---> 中断ajax中JS执行
+    * onabort事件  只要 abort 执行 ；就会触发这个事件
+    *
+    *
+    * timeout --->  设置超时 ；单位是毫秒；
+    * ontimeout事件  只要请求事件超过设置的事件 就会触发这个事件
+    * */
+</script>

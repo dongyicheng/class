@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * get 系列
+    *   get
+    *   head 只获取响应头
+    *   delete 删除后台对应的某个属性
+    * post系列
+    *   post
+    *   put 给后台添加对应数据
+    * get  post 的区别
+    * 1、传参的方式
+    *       get 是把参数拼接到 url后边
+    *       post 是把请求参数放到请求体当中
+    * 2、传参的大小限制
+    *       get 谷歌10kb IE2kb;大小限制 是因为浏览器对url大小的限制造成的
+    *       post 没有大小限制
+    * 3、post方式要相对于get方式安全
+    * 4、get方式是有缓存的，post没有缓存
+    *
+    * */
+    var xhr = new XMLHttpRequest();
+    xhr.open('get','./1.json');
+    xhr.onreadystatechange = function(){
+    };
+    xhr.send();
+</script>  

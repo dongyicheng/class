@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * xml json
+    *
+    * */
+    var  xhr = new XMLHttpRequest(); // readyState = 0
+    xhr.open('get','./1.xml?name=珠峰',false);// 请求方式  接口  同步
+    // open 执行完 变成 1
+    // 2 3 4  都是http重置的
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+    };
+    // xhr.setRequestHeader('name','zhufeng');//
+    // xhr.setRequestHeader('name','珠峰');// 报错 Value is not a valid ByteString.
+    // 不能写中文；；
+    //需要我们把中文转成 计算机支持的字符
+    // var str = escape('珠峰');// unescape('%u73E0%u5CF0')
+    // 后台语言一般不支持这种转义方式
+    var str = encodeURI('珠峰');
+    /*
+    * escape  ---  unescape  基本不用
+    *
+    * encodeURI  ---  decodeURI  不常用  支持多次转义  不转义一些特殊字符
+    *
+    * encodeURIComponent  ---  decodeURIComponent   常用  支持encodeURI不转义的字符
+    *
+    *
+    *
+    * */
+    xhr.setRequestHeader('name',str);
+    xhr.send('name1=12');
+
+</script>  

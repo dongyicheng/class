@@ -19,7 +19,7 @@
     * get 系列  把参数放到url后面
     *
     * get
-    * head  只获取请求头
+    * head  只获取响应头
     * delete 删除对应的内容
     *
     *
@@ -32,7 +32,22 @@
     xhr.onreadystatechange=function () {
         console.log(xhr.response);//是个字符串  获取的后台给的数据
         xhr.responseText;//是个字符串
-        xhr.responseXML;//是个后台给的结构 ; 若后台给的是
+        xhr.responseXML;//是个后台给的结构 ; 若后台给的是JSON数据，那么 这个属性值 就是个 null;
     };
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
     xhr.send()
+
+    // post  get 的区别
+    /*
+    * 1、两者的传参的方式； get是在url上拼接 post是在请求体中传参
+    *
+    * 2、参数的的大小限制也不一样； 由于 url 的大小有限制，所以get传参大小有限制；谷歌 10kb ，IE 2kb
+    * post 是把参数放到了请求体当中；所以大小没有明确限制；
+    *
+    * 3、post 比 get 传参相对安全一点；
+    *
+    * 4、get方式请求的数据有缓存(访问了一次之后 在本地有缓存)； post 是没有缓存的；
+    *
+    * */
+
 </script>

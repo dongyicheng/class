@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('post','./1.xml',true);
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && /^2\d{2}|^304/.test(xhr.status)){
+            //0 UNSENT
+            //1 OPENED
+            //2 HEADER-RECEIVED
+            //3 LOADING
+            //4 DONE
+
+            //2xx  代表成功
+            //301  永久重定向
+            //302  临时重定向
+            //304  从缓存去获取数据
+
+            //400  参数错误
+            //404  路径错误
+            //405  请求方式 （跟后台要求的不一样）
+
+            //5xx  都是后台的问题
+        }
+    };
+    xhr.send('name=1&age=2');
+
+</script>  

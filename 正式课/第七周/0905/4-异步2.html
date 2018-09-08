@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var  xhr = new XMLHttpRequest();
+    xhr.open('post','./1.xml?name=珠峰&a=12&b=13',true);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+        // debugger;
+        // xhr.abort();// 中断 ajax 进程；直接让 readyState 变成4
+        // console.log(xhr.response)
+    };
+    var str = encodeURI('珠峰');
+    xhr.setRequestHeader('name',str);
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    xhr.onabort = function(){
+        console.log('被打断');
+    };
+    xhr.timeout = 1000;
+    xhr.ontimeout = function(){
+        console.log('超时');
+    };
+    xhr.send('name1=12&a=34&b=45');
+    // xhr.abort();
+    // console.log(xhr.response);
+
+
+</script>  

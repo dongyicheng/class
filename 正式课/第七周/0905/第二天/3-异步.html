@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+
+    var  xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+        /*
+        * 最初 readyState 是 0 ；
+        * open时，把readyState从0 变成 1  触发一次这个函数
+        * 然后 等send发出去之后；由于时异步请求；主队列接着执行；等主队列执行完成之后；
+        * http 触发的readyState的变化才会体现出来；
+        * 先把readyState 从1 变成 2 触发这个函数
+        * 再把readyState 从2 变成 3 (等着上次函数执行完毕)
+        * 最后再把readyState 从3 变成 4；（等着上次函数执行完毕）
+        * http请求结束
+        *
+        * */
+        debugger
+        // var i = 0;
+        // for(;i <999999999;i++){
+        //     if(i == 9999999){
+        //         console.log('33333');
+        //     }
+        // }
+        if(xhr.readyState == 3){
+            console.log('wwwww');
+            // xhr.abort();
+        }
+    };
+    xhr.open('post','./1.xml?name=珠峰&a=12&b=13',true);
+    var str = encodeURI('珠峰');
+    xhr.setRequestHeader('name',str);
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    // xhr.abort();
+    xhr.onabort = function(){
+        console.log('被打断');
+    };
+    xhr.timeout = 1000; // 请求时间的上限（单位时毫秒）
+    xhr.ontimeout = function(){
+        console.log('超时');
+    };
+    xhr.send('name1=12&a=34&b=45');
+    // xhr.abort();// 这时的 readyState 变成4 ； 表示请求已经完成，不管成功或是失败
+
+    // console.log(123);
+
+
+
+
+
+
+
+</script>  

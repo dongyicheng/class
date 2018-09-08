@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script src="../js/jquery-3.3.1.js"></script>
+<script>
+    let xhr=new XMLHttpRequest();
+    //get 方式的缓存  通过url+随机数解决
+    xhr.open('get','1.xml?t='+Math.random());
+    xhr.onreadystatechange=function () {
+
+    };
+    xhr.send();
+
+    $.ajax({
+        type:'get',
+        url:'1.xml',
+        data:{q:12,w:13},
+        async:true,//同步异步 默认异步
+        dataType:'json',//获取的数据要是一个JSON数据
+        cache:true,//支持使用缓存 ; 针对get有作用(默认true 缓存)
+        success:function (data) {
+            console.log(data);
+        },
+        error:function (res) {
+            console.log(res);
+        }
+    });
+
+
+    //easy-mock  模拟接口的网站
+
+    //JQ get
+    //1.接口
+    //2.请求参数
+    //3.回调函数
+    $.get('https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af7603/ajax/userInfo',{q:12,w:13},function (data) {
+        console.log(data);
+    })
+
+    $.post('1.xml',{q:12,w:13},function (data) {
+        console.log(data);
+    })
+</script>

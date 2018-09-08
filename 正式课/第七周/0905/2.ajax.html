@@ -23,9 +23,23 @@
         xhr.getResponseHeader('data');//从响应头拿到对应数据的值
     };
     let str=encodeURIComponent('珠峰');
-    xhr.setRequestHeader('name',str);//在请求头中
-    //目前发送给后台的是以字符串 ; 怎么把他转成 key value (from data) 的形式
+    xhr.setRequestHeader('name',str);//要传的数据在请求头中
+
+    //目前发送给后台的是以字符串 ; 把send里的转成 key value (from data) 的形式
     //需要设置请求头  content-type : application/x-www-form-urlencoded
     xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
     xhr.send('name1=12&a=34');//在请求体中 目前发送给后台的是以字符串
+
+
+    // xhr.abort();
+    /*
+    * xhr.open();
+    * xhr.setRequestHeader(key,value)// 设置相应的请求头
+    * xhr.getResponseHeader(key) // 获取相应的响应头
+    * xhr.getAllResponseHeaders() // 获取所有的响应头
+    * xhr.send("name=12") // get请求时 参数不起作用；post请求时才起作用
+    *
+    * xhr.abort() // 中断请求 ---》 只在异步请求时才起作用
+    *
+    * */
 </script>

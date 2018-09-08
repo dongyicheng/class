@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+    var xhr = new XMLHttpRequest();
+    //get方式的缓存 我们通过url+随机数来解决
+    xhr.open('get','./1.xml?t='+Math.random());
+    xhr.onreadystatechange = function(){
+        console.log(xhr.responseXML);
+    };
+    // xhr.send();
+    $.ajax({
+        type:'POSt',
+        url:'./1.xml',
+        data:{q:12,w:13},
+        async:true,
+        dataType:'XML',// 获取的数据要是一个JSON数据
+        cache:true,// 支持使用缓存； 针对get有作用
+        success:function (data) {
+            console.log(data)
+        },
+        error:function (res) {
+            console.log(res)
+        }
+    });
+    // $.get('https://www.easy-mock.com/mock/5b8f8ee9f9900e4a46af75fc/ajax/userInfo?q=12&w=13',{q:12,w:13},function (data) {
+    //     console.log(data);
+    // })
+</script>  

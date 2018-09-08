@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    var  xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+        console.log(xhr.getResponseHeader('date'));// 获取响应头中的对应项的值
+        console.log(xhr.getAllResponseHeaders());// 获取所有的响应头 是个大字符串
+    };
+    xhr.open('post','./1.xml?name=珠峰&a=12&b=13',false);// 在路径后边
+    var str = encodeURI('珠峰');
+    xhr.setRequestHeader('name',str);//在请求头中
+    xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    xhr.abort();
+    xhr.send('name1=12&a=34&b=45'); // 在请求体中
+    //目前发送给后台的是以传字符串； 怎么把他转成key value 的形式；
+    //需要我们设置请求头 content-type: application/x-www-form-urlencoded
+
+    // xhr.abort();
+    /*
+    * xhr.open();
+    * xhr.setRequestHeader(key,value)// 设置相应的请求头
+    * xhr.getResponseHeader(key) // 获取相应的响应头
+    * xhr.getAllResponseHeaders() // 获取所有的响应头
+    * xhr.send("name=12") // get请求时 参数不起作用；post请求时才起作用
+    *
+    * xhr.abort() // 中断请求 ---》 只在异步请求时才起作用
+    *
+    * */
+
+
+
+
+
+
+
+
+</script>  

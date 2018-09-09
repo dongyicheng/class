@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/ajax.js"></script>
+<script>
+
+    /*var p1 = new Promise(function (resolve,reject) {
+        ajax({
+            type:'get',
+            url:'./1.json',
+            success:function(data){
+                resolve(data);
+            },
+            error:reject
+        });
+        console.log(111)
+    });
+    var p2 = new Promise(function (resolve,reject) {
+        ajax({
+            type:'post',
+            url:'./1.json',
+            success:function(data){
+                resolve(data);
+            },
+            error:reject
+        });
+        console.log(222);
+    });
+    p1.then((data)=>{
+        console.log(1,data);
+        return p2;
+    },()=>{}).then((data)=>{
+        // console.log(2,data);
+        },()=>{});
+*/
+    /*ajax({
+        type:'get',
+        url:'./1.json',
+        success: function (d) { /// success && success(data)
+            let p = d[0].name;
+            console.log(p);
+            ajax({
+                type:'post',
+                data:{name:p},
+                url:'./1.json',
+                success:function (dat) {
+                    let p2 = dat[1].age;
+                    console.log(p2);
+                    ajax({
+                        type: 'post',
+                        data:{age:p2},
+                        url: './1.json',
+                        success:function (data) {
+                            console.log('成功结束');
+                        }
+                    })
+                }
+            })
+        }
+    });*/
+    /*var p1 = new Promise(function (resolve, reject) {
+        ajax({
+            type:'get',
+            url:'./1.json',
+            // success:resolve,
+            success:function (data) {
+                // console.log(1);
+                resolve(data);
+            }
+        })
+    });
+    p1.then((data)=>{
+        let p1 = data[0].name;
+        console.log(p1);
+        return new Promise(function (resolve, reject) {
+            ajax({
+                type:'post',
+                url:'./1.json',
+                data:{name:p1},
+                success:resolve
+            });
+        })
+    },()=>{}).then((data)=>{
+        let p2 = data[1].age;
+        console.log(p2);
+        ajax({
+            type:'post',
+            url:'./1.json',
+            data:{age:p2},
+            success:function () {
+                console.log('成功结束');
+            }
+        })
+    })*/
+
+    var p1 = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            resolve(1)
+        },2000)
+    }).then((data)=>{
+        console.log(data);
+        // setTimeout(function () {
+        //     console.log(2);
+        // },1000);
+        // return setTimeout(function () {
+        //     console.log(2);
+        // },1000);
+    }).then((data)=>{
+        console.log(data);
+        // console.log(q);
+    }).catch(function (e) {
+        console.log(e);
+    })
+
+    P
+
+</script>  

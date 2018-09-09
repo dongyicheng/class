@@ -95,34 +95,3 @@ function ajax(options) {
     }
     xhr.send(str);
 };
-ajax({
-    type:'post',
-    url:'./1.json?n=12&',
-    data:{name:'珠峰'},
-    success:function (d) {
-        console.log(d);
-    },
-    error:function (res) {
-        console.log(res);
-    }
-});
-ajax.get = function(url,data,fn,dataType){
-    // 1 四个参数都正常传
-    // let obj = {type:'get',url,data,success:fn,dataType};// 属性名和属性值一样时可以简写
-    // 2 不传参数时 ---data就是传进来的那个函数； 只要判断data是不是函数 就可以了
-    let obj = {};
-    if(data instanceof Function){
-        obj = {type:'get',url,success:data,dataType:fn}
-    }else {
-        obj = {type:'get',url,data,success:fn,dataType};
-    }
-    ajax(obj);
-};
-
-/*ajax.get('./1.json',{name:'珠峰培训'},function(data){
-    console.log(data);
-},'json');*/
-//
-ajax.get('./1.json',function(data){
-    console.log(data);
-});

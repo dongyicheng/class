@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script src="ajax.js">
+    var p = new Promise(function (resolve,reject) {
+        ajax({
+            type:'get',
+            url:'./1.json',
+            // success:resolve,// success && success(data)
+            success:function(data){
+                // data[19] = 1233;
+                resolve(data);
+            },
+            error:reject
+        });
+    });
+    let p2 = p.then((data)=>{
+        console.log(l);
+        return new Promise(function (resolve,reject) {
+            setTimeout(function () {
+                resolve('success')
+            },1000);
+            reject(data);//走这 执行.then的第二个函数
+        })
+    },()=>{});
+    // 可以理解成 p2 = new Promise(function (resolve,reject) {
+    //                     setTimeout(function () {
+    //                         resolve('success')
+    //                     },1000);
+    //                     reject(data);
+    //                 })
+    p2.then(data=>{
+        console.log(data);
+    },res=>{
+        setTimeout(function () {
+            console.log(res,q);
+        },2000);
+        //走这  计时器没执行就会直接 执行下面第一个函数 因为计时器成功执行 就算成功
+        //so  会先输出下面的data没传参 所以是undefined  然后报错 没定义q
+    }).then((data)=>{
+        console.log(data);
+    },()=>{})
+</script>

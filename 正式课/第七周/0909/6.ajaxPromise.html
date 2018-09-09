@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    function ajaxPromise(options) {
+        let {type='get',url,data={},dataType='json',cache=false}=options;
+        //data参数处理
+        let str='';
+        for (var k in data) {
+            if(data.hasOwnProperty(k)){
+                str+=`${k}=${obj[k]}&`
+            }
+        }
+        str = str.slice(0,str.length-1);
+        //处理 url
+        //判断是否是get请求
+        let isGet=null;
+        if(/get|head|delete/.test(type)){
+            isGet=true;
+        }else{
+            isGet=false;
+        }
+        if(isGet){
+            if(url.indexOf('?')===-1){
+                url+=`?${str}`;
+            }else{
+                url.replace(/&$/,'')
+                url+=`&${str}`;
+            }
+            cache ? null : url+=`&t=${Math.random()}`
+        }
+
+        return new Promise(function (resolve,reject) {
+            //这里面是做原生ajax；
+            let xhr=new XMLHttpRequest();
+            xhr.open(type,url);//默认异步
+            xhr.onreadystatechange=function () {
+                if(xhr.readyState==4&&/^2\d{2}|304/.test(xhr.status)){
+                    //成功获取数据
+                    //根据不同的数据类型处理数据
+                    let data=null;
+                    switch (dataType){
+                        case 'json':
+                            data=JSON.parse(xhr.responseText);
+                            break;
+                        case 'xml':
+                            data=xhr.responseXML;
+                            break;
+
+                        default:
+                            data=xhr.responseText;
+                    }
+                    resolve(data)
+                }
+                if(xhr.readyState==4&&/^[45]\d{2}/.test(xhr.status)){
+                    //获取失败
+                    reject(xhr);
+                }
+            };
+            if(!isGet){
+                xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+            }
+            xhr.send(str);
+        })
+    }
+
+    ajaxPromise({
+        type:'type',
+        url:'1.json',
+        cache:false,
+        data:{},
+        dataType:'json'
+    }).then((data)=>{
+        console.log(data);
+    },(res)=>{
+        console.log(res);
+    })
+</script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/ajax.js"></script>
+<script>
+    var p = new Promise(function (resolve,reject) {
+        /*setTimeout(function () {
+            resolve('success')
+        },3000);
+        setTimeout(function () {
+          reject('fail')
+        },2000);*/
+        // resolve(123);
+        // reject(123);
+        ajax({
+            type:'get',
+            url:'./2.json',
+            success:resolve,// success && success(data)
+            success:function(data){
+                // data[19] = 1233;
+                resolve(data);
+            },
+            error:reject
+        })
+    });
+    var p2 = p.then((data)=>{
+        console.log(data);
+        throw new Error('失败了');
+        console.log(2);
+        // console.log(this);
+        // return data;
+    },(res)=>{
+        console.log(res);
+        return 'success';
+    });
+    p2.then(function (data) {
+        console.log('p2suc',data);
+        if(Math.random() > 0.5){
+            throw new Error('大于0.5；是个失败')
+        }
+        return 'then3 success'
+    },function (res) {
+        console.log('p2fail',res);
+    }).then(data=>{
+        console.log(data);
+    },res=>{
+        console.log(res);
+    });
+    // console.dir(p2);
+    /*
+    * Promise 是原生 JS 的一个类；为了解决JS中异步的问题；
+    * Promise  接受一个参数；这个参数是个回调函数;
+    * 这个回调函数接收两个参数；
+    * 第一个参数是用来异步执行成功之后执行的回调函数
+    * 第二个参数是用来异步执行失败之后执行的回调函数
+    * 两个回调函数执行只能其中的一个；只要其中一个执行了；那么另一个就不在执行；
+    * 让成功或者失败函数执行是由自己的代码逻辑决定的；
+    *
+    * then 是Promise 原型上的函数 ；他接收两个函数作为参数；
+    * 第一个函数是个成功的回调，第二个函数是个失败的回调；
+    * then 返回的是一个新的Promise实例
+    *
+    *
+    * 后边的then执行成功函数或者失败函数，只跟上个then中函数执行的结果有关系；若上个then中函数（不论是成功函数或者失败函数）执行成功；则走下个then的成功函数；执行失败，就走下个then 的失败函数
+    * 后边的then中的函数接收的参数是上个then中函数执行完的返回结果;
+    *
+    *
+    *
+    * Promise的实例有三种状态  pending  resolved  rejected
+    * pending ---> 实例创建完成时就是个pending；
+    * resolve执行后 ---> resolved
+    * reject执行后 --->  rejected
+    * */
+
+
+</script>  

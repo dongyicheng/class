@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script src="js/ajax.js"></script>
+<script>
+var p1 = new Promise(function (resolve,reject) {
+    ajax({
+        type:'get',
+        url:'./1.json',
+        success:function(data){
+            resolve(data);
+        },
+        error:reject
+    });
+    console.log(111)
+});
+var p2 = new Promise(function (resolve,reject) {
+    ajax({
+        type:'post',
+        url:'./2.xml',
+        dataType:'xml',
+        success:function(data){
+            resolve(data);
+        },
+        error:reject
+    });
+    console.log(222);
+});
+Promise.all([p1,p2]).then((res)=>{
+    //all 用法  传一个数组 数组中的每一项都是一个promise实例
+    // then中的成功函数 只有当数组中多有实例都成功，才会只能；
+    // 否则 执行失败函数
+    console.log(res);
+}).catch((e)=>{
+    console.log(e);
+})
+
+
+</script>  

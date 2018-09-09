@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    //p1成功了在执行p2
+    var p1 = new Promise(function (resolve,reject) {});
+    var p2 = new Promise(function (resolve,reject) {});
+    p1.then((data)=>{
+        console.log(1,data);
+        return p2;
+    },()=>{}).then((data)=>{
+        // console.log(2,data);
+    },()=>{});
+
+
+
+
+    ajax({
+        type:'get',
+        url:'./1.json',
+        success: function (d) {
+            let p = d[0].name;
+            console.log(p);
+            ajax({
+                type:'post',
+                data:{name:p},
+                url:'./1.json',
+                success:function (dat) {
+                    let p2 = dat[1].age;
+                    console.log(p2);
+                    ajax({
+                        type: 'post',
+                        data:{age:p2},
+                        url: './1.json',
+                        success:function (data) {
+                            console.log('成功结束');
+                        }
+                    })
+                }
+            })
+        }
+    })
+    var p1 = new Promise(function (resolve, reject) {
+        ajax({
+            type:'get',
+            url:'./1.json',
+            // success:resolve,
+            success:function (data) {
+                // console.log(1);
+                resolve(data);
+            }
+        })
+    });
+    p1.then((data)=>{
+        let p1 = data[0].name;
+        console.log(p1);
+        return new Promise(function (resolve, reject) {
+            ajax({
+                type:'post',
+                url:'./1.json',
+                data:{name:p1},
+                success:resolve
+            });
+        })
+    },()=>{}).then((data)=>{
+        let p2 = data[1].age;
+        console.log(p2);
+        ajax({
+            type:'post',
+            url:'./1.json',
+            data:{age:p2},
+            success:function () {
+                console.log('成功结束');
+            }
+        })
+    })
+
+
+    //用不到reject时 可以不写  在最后加上一个catch即可
+    var p1 = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            resolve(1)
+        },2000)
+    }).then((data)=>{
+        console.log(data);
+        // setTimeout(function () {
+        //     console.log(2);
+        // },1000);
+        // return setTimeout(function () {
+        //     console.log(2);
+        // },1000);
+    }).then((data)=>{
+        console.log(data);
+        // console.log(q);
+    }).catch(function (e) {
+        console.log(e);
+    })
+</script>

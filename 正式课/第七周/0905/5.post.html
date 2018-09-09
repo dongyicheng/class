@@ -19,22 +19,22 @@
     xhr.open('post','1.xml');
     xhr.onreadystatechange=function () {
         if(xhr.readyState == 4&&/^2\d{2}|^304/.test(xhr.status)){
-            //0 unset
-            //1 opened
-            //2 headers_received
-            //3 loading
-            //4 done
-
-            //2xx 代表成功
-            //301 永久重定向
-            //302 临时重定向
-            //304 从缓存区去获取数据
-
-            //400 参数错误
-            //404 路径错误
-            //405 请求方式(跟后台要求的不一样)
-
-            //5xx 都是后台的问题
+            // 0 unset
+            // 1 opened
+            // 2 headers_received
+            // 3 loading
+            // 4 done
+            //
+            // 2xx 代表成功
+            // 301 永久重定向
+            // 302 临时重定向
+            // 304 从缓存区去获取数据
+            //
+            // 400 参数错误
+            // 404 路径错误
+            // 405 请求方式(跟后台要求的不一样)
+            //
+            // 5xx 都是后台的问题
         }
     }
 </script>

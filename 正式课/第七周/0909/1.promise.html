@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    /*
+    * Promise 是原生 JS 的一个类  ； 为了解决JS中异步的问题
+    * Promise 接受一个参数 ；这个参数是个回调函数
+    *   这个回调函数接受两个参数
+    *   第一个参数是用来异步执行成功之后执行回调函数
+    *   第一个参数是用来异步执行失败之后执行回调函数
+    *
+    *   两个回调函数执行 只执行其中一个 ； 只要其中一个执行另一个不再执行
+    *   让成功或失败函数执行是有自己的代码逻辑决定的
+    *
+    *   then 是promise 原型上的函数 ； 他接收两个函数作为参数 ；
+    *   第一个函数是个成功的回调
+    *   第二个函数是个失败的回调
+    *   then 返回的是一个新的Promise实例 ， so 可以个连续写then
+    *   后面的then执行成功或者失败  只跟上个函数执行结果有关系  ；若上个then中函数（不论是成功函数或者失败函数）执行成功；则走下个then的成功函数；执行失败，就走下个then 的失败函数
+    *   后面的then中的函数接受的参数是上个then中函数执行返回的结果
+    *
+    *
+    *   promise的实例有三种状态  分别是pending  resolved rejected
+    *   pending ---》 实例创建完成就是个pending
+    *   resolve执行后 ---》 resolved
+    *   reject执行后 ---》 rejected
+    * */
+    var p = new Promise(function (resolve,reject) {
+        /*setTimeout(function () {
+            resolve('success')
+        },3000);
+        setTimeout(function () {
+          reject('fail')
+        },2000);*/
+        // resolve(123);
+        // reject(123);
+        ajax({
+            type:'get',
+            url:'./2.json',
+            success:resolve,// success && success(data)
+            error:reject
+        })
+    });
+    var p2 = p.then((data)=>{
+        console.log(data);
+        throw new Error('失败了');//走这 报错结束后面的不再执行
+        console.log(2);
+        // console.log(this);
+        // return data;
+    },(res)=>{
+        console.log(res);
+        return 'success';
+    });
+    p2.then(function (data) {
+        console.log('p2suc',data);
+        if(Math.random() > 0.5){
+            throw new Error('大于0.5；是个失败')
+        }
+        return 'then3 success'
+    },function (res) {
+        console.log('p2fail',res);//走这 Error: 失败了
+    }).then(data=>{
+        console.log(data);//走这 undefined
+    },res=>{
+        console.log(res);
+    });
+
+    let p=new Promise(function (resolve,reject) {
+        reject(123);//状态是 rejected 下面的不再执行
+        resolve(123);
+    })
+    p.then((data)=>{
+        console.log(data);
+    },(res)=>{
+        console.log(res);
+    }).then((data)=>{
+        console.log(data);
+    },()=>{
+        console.log(1);
+    })
+
+</script>

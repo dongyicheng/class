@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    /*
+    * race
+    * */
+    let p=new Promise(function (resolve,reject) {
+        setTimeout(function () {
+            resolve(12)
+        },2000)
+    })
+    let p2=new Promise(function (resolve,reject) {
+        setTimeout(function () {
+            resolve(34)
+        },1000)
+    })
+    Promise.race([p,p2]).then((res)=>{
+        //传一个数组  数组中的每一项  也是一个promise实例
+        //只要有一个实力执行了 ； 其他实例就不执行了
+        console.log(res);
+    }).catch((res)=>{
+        console.log(res);
+    })
+</script>

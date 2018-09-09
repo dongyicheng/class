@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id=div></div>
+</body>
+</html>
+<script>
+    var p1 = new Promise(function (resolve,reject) {
+        ajax({
+            type:'get',
+            url:'./1.json',
+            success:function(data){
+                resolve(data);
+            },
+            error:reject
+        });
+        console.log(111)
+    });
+    var p2 = new Promise(function (resolve,reject) {
+        ajax({
+            type:'post',
+            url:'./2.xml',
+            dataType:'xml',
+            success:function(data){
+                resolve(data);
+            },
+            error:reject
+        });
+        console.log(222);
+    });
+    Promise.all([p1,p2]).then((res)=>{
+        //all 用法 传一个数组 数组的每一项是promise的一个实例
+        //then 中的成功函数  只有当数组中的所有实例都成功 才能执行 ； 否则执行失败的
+        console.log(res);
+    }).catch((e)=>{
+        console.log(e);
+    })
+
+    let p = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            resolve('成功了')
+        },1000)
+    });
+    p.then(function (data) {
+        return setTimeout(function () {
+            console.log(data);
+
+        },1000)
+    }, function (res) {
+        console.log(res);
+    });
+</script>

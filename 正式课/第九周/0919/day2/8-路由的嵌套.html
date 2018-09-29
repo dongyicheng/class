@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .current{
+            color: #cc080b;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/home" tag="button">首页</router-link>
+        <router-link to="/list" tag="button">列表页</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<template id="list">
+    <div>
+        <h2>列表页</h2>
+        <!--to 后边要写全路径 不能简写-->
+        <router-link to="/list/detail">去详情页</router-link>
+        <router-link to="/list/detail2">去详情页2</router-link>
+        <router-link to="/list/detail3">去详情页3</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template:"<h2>首页</h2>"
+    };
+    let list = {
+        template:"#list"
+    };
+    let detail = {
+        template:"<h2>详情页</h2>"
+    };
+    let detail2 = {
+        template:"<h2>详情页2</h2>"
+    };
+    let detail3 = {
+        template:"<h2>详情页3</h2>"
+    };
+    const routes = [
+
+        {
+            path:'/home',
+            component:home
+        },
+        {
+            path:'/list',
+            component:list,
+            redirect:'/list/detail',
+            children:[
+                {
+                    // path:'detail', // '/list/detail'
+                    path:'/list/detail',
+                    component:detail
+                },
+                {
+                    // path:'detail', // '/list/detail'
+                    path:'/list/detail2',
+                    component:detail2
+                },
+                {
+                    // path:'detail', // '/list/detail'
+                    path:'/list/detail3',
+                    component:detail3
+                }
+            ]
+        }
+    ];
+    const router = new VueRouter({
+        routes,
+        linkActiveClass:'current',
+        mode:'hash'
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+        methods: {}
+    })
+</script>  

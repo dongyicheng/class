@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--<button id="btn" onclick="fn()">按钮</button>-->
+        <!--<button id="btn" v-on:click="fn()">按钮</button>-->
+        <button id="btn" @click="fn()">按钮</button>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // function fn() {
+    //     alert(1)
+    // }
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            fn(){alert(123)}
+        }
+    })
+</script>  

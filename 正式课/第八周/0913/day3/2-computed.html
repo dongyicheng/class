@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="name">
+    <h3>{{msg}}</h3>
+    <h3>{{msg}}</h3>
+    <h3>{{msg}}</h3>
+    <h3>{{fn()}}</h3>
+    <h3>{{fn()}}</h3>
+    <h3>{{fn()}}</h3>
+    <h3>{{fn()}}</h3>
+    <input type="checkbox" v-model="checkAll" >全选
+    <input type="checkbox" v-for="item in ary" v-model="item.a">
+    <!--input type="checkbox" v-model="a">css
+    <input type="checkbox" v-model="b">js
+    <input type="checkbox" v-model="c">vue
+    <input type="checkbox" v-model="d">react-->
+    <h1>{{msg2}}</h1>
+    <h1>{{msg3}}</h1>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'珠峰培训',
+            ary:[{a:true},{a:true},{a:true},{a:true}],
+            // checkAll:true,
+        },
+        methods: {
+            fn(){
+                console.log('fn');
+                let str = this.name.split('').reverse().join('');
+                return  str;
+            }
+        },
+        computed:{
+            msg3(){
+                return this.name + 'wwww';
+            },
+            msg2:{
+                get(){
+                   let str =  this.name + '10000';
+                   return str
+                },
+                set(val){
+                    // console.log(val);
+                    this.name = val;
+                }
+            },
+            msg:{
+                get(){
+                    // this 指向 vm 实例；
+                    // msg 时依赖于 this.name 的；
+                    console.log('get');
+                    let str = this.name.split('').reverse().join('');
+                    return  str;
+                },
+                set(val){
+                    console.log(val);
+                }
+            },
+            checkAll:{
+                get(){
+                   return this.ary.every((item)=>{
+                        return item.a;
+                    })
+                },
+                set(val){
+                    this.ary.forEach((item)=>{
+                        item.a = val;
+                    });
+                    console.log(val);
+                }
+            }
+        },
+        filters:{},
+        created(){
+
+        }
+    })
+</script>  

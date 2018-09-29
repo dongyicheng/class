@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        [v-cloak]{
+            /*所有行间有 v-cloak 的元素 的样式*/
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id='app' v-cloak>
+<table class="table table-bordered text-center">
+    <thead>
+    <tr>
+        <th><input type="checkbox">全选</th>
+        <th>商品</th>
+        <th></th>
+        <th></th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>小计</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(item,i) in list">
+        <td><input type="checkbox"></td>
+        <td>
+            <!--行内属性  VUE中用 v-bind 去绑定
+            简写 直接写 :
+            -->
+            <!--<img v-bind:src="item.pic" alt="">-->
+            <img :src="item.pic" alt="">
+        </td>
+        <td><p>{{item.title}}</p></td>
+        <td><p>{{item.desc}}</p></td>
+        <td>
+            {{item.price | toFixed()}}
+        </td>
+        <!--min=1 是表示最小值为1-->
+        <!--<td><input type="text" v-model="item.count"  @input="change(item.count,i)"></td>-->
+        <!-- v-model.trim 修饰符 去除首尾空格
+             v-model.number 修饰符 把字符串转成数字
+         -->
+        <td><input type="text" v-model="item.count"  @input="change(item)"></td>
+        <!--<td>{{(item.count*item.price/100).toFixed(2)}}</td>-->
+        <td>{{item.count*item.price | toFixed()}}</td>
+        <!--<td><button class="btn btn-danger" @click="remove(i)">删除</button></td>-->
+        <td><button class="btn btn-danger" @click="remove(item)">删除</button></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        created(){
+          //一进来就执行  这个里面的this 也是指向 这个vm 实例的
+         this.getData();
+        },
+        data:{
+            list:[]
+        },
+        methods:{
+            // getData:function () {},//这是下面的完整写法
+            getData(){
+                axios.post('data.json',{name:'zf'}).then((data)=>{
+                    console.log(data);
+                    this.list=data.data;
+                }).catch((res)=>{
+                    console.log(res);
+                })
+            },
+            // change(n,index){
+            //     //把n处理成 大于 0 的正整数
+            //     n=n.replace(/\D/g,'');
+            //     n=n<0?1:n;
+            //     this.list[index].count=n;
+            // }
+            change(item){
+                //把n处理成 大于 0 的正整数
+                let n=item.count;
+                n=n.replace(/\D/g,'');
+                n=n<0?1:n;
+                item.count=n
+            },
+            // remove(i){
+            //     this.list=this.list.filter((item,index)=>{
+            //         return i !==index;
+            //     })
+            // }
+            remove(item){
+                this.list=this.list.filter((item1)=>{
+                    return item !== item1 ;
+                })
+            }
+        },
+        filters:{
+            toFixed(val,n){
+                n=n || 2;
+                return "￥"+(val/100).toFixed(n);
+            }
+        }
+    })
+</script>

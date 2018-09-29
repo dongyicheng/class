@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <model>
+        <template name="qqq"><!--写一个template标签 可以只写一个name 使得标签里面都出现在对应slot中 并且template不会渲染页面-->
+            <div>template</div>
+            <div>template</div>
+            <div>template</div>
+            <div>template</div>
+        </template>
+        <div slot="default">用户自己的结构</div>
+        <div slot="qqq"></div><!--不想用它原有的结构 直接让他的内容为空 直接覆盖掉 再让这个div display:none-->
+        <template slot="qqq"></template><!--template盖不掉-->
+    </model>
+</div>
+</body>
+</html>
+<template id="model">
+    <div>
+        <h2>title</h2>
+        <div class="content"></div>
+        <footer>
+            <slot name="default"></slot>
+            <slot name="qqq">
+                <div>默认slot</div><!--上面没有对应的slot的name  就显示默认内容-->
+            </slot>
+        </footer>
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let model={
+        template:'#model'
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        components:{model,}
+    })
+</script>

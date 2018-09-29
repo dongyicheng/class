@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <!--<div class="div1">珠峰培训</div>-->
+    <!--<div>-->
+        <!--{{name-->
+        <!--}}-->
+    <!--</div>-->
+    <div id="app">
+        <!--
+        两个大括号  小胡子语法
+        能写 变量  也能写表达式 ；不能写JS语句
+        -->
+        <!--{{name}}-->
+        <!--{{3>2?name='煮饭呢给':null}}-->
+        <!--<h1 v-text="name"></h1>-->
+        <!-- v-text === {{}} -->
+
+        <!--视图驱动数据  我们用 表单元素  input  textarea-->
+        <input type="text" v-model="name">
+        <!--<h1>{{name}}</h1>-->
+        <!--<h2>{{name}}</h2>-->
+
+        <textarea cols="30" rows="10" v-model="age"></textarea>
+        <h1>{{name+"的年龄是"+age}}</h1>
+        <h2>{{name+"的年龄是"}}{{age}}</h2>
+        <h3 v-text="name"></h3>
+    </div>
+</body>
+</html>
+<script>
+    /*
+    * 渐进式  框架
+    *
+    *
+    * 库  JQ  zepto  animate.css  --->  我们调用库
+    * 框架 vue  react bootstrap angular 有自己一套独立的解决方案
+    * 每一个框架 都有自己的一个核心库   --->框架调用 我们写的代码
+    *
+    *
+    *  渐进增强  优雅降级；
+    *
+    *
+    *  渐进式
+    *  本身有自己的一套核心代码；
+    *  vue全家桶  vue vue-router axios vueX(状态管理器)
+    *
+    *  Object.defineProperty
+    *
+    *  MVC  数据单向
+    *  M  model
+    *  v  view
+    *  C  controller
+    *
+    *  MVVM 双向 （通过数据改变视图  通过视图改变数据）
+    *  M model
+    *  V view
+    *  vm view-model
+    * */
+</script>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    // console.log(Vue);
+    // el 是指的对哪个元素实行VUE;这个元素不能是 html 或者 body
+    // 指令  行内的VUE自定义的属性  vue的指令都是 v- 开头的
+    let a = 2018;
+    let vm = new Vue({
+        el:'#app', // css 选择器
+        data:{
+            name:`珠峰培训${a}`, // 最终会把数据方案 vm上;vm代理data中的数据
+            age:12
+        }
+    })
+</script>

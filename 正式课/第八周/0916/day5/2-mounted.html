@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <h3 v-for="val in ary" ref="h3">{{val}}</h3>
+        <!--{{test}}-->
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            ary:[1,2,3]
+        },
+        methods: {
+
+        },
+        created(){
+            debugger;
+        },
+        mounted(){
+            console.log(this.$refs.h3.length);
+            this.ary = [4,5,6,7]; // vue 的DOM 是异步的
+            console.log(this.$refs.h3.length);
+            this.$nextTick(()=>{
+                console.log(this.$refs.h3.length);
+            })
+        },
+        // computed:{
+        //     test(){
+        //         if(this.$refs.h3){
+        //             console.log(this.$refs.h3.length);
+        //         }
+        //         console.log(this.ary);
+        //         return 123
+        //     }
+        // },
+        // updated(){
+        //     console.log(this.$refs.h3.length);
+        // }
+    })
+</script>  

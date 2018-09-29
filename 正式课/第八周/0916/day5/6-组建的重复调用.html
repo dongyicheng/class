@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <grand></grand>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let uncle = {
+        template:'<h2>这是个叔叔</h2>',
+    };
+    let son = {
+        template:'<h3>这是个儿子<uncle></uncle></h3>',
+        components:{
+            uncle
+        }
+    };
+    let parent = {
+        template:'<h2>这是个父亲<son></son></h2>',
+        components:{
+            son
+        }
+    };
+    let grandP = {
+        template:'<h1>这个是个爷爷<parent></parent></h1>',
+        components:{
+            parent
+        }
+    };
+    /*
+    * 理论上  组件可以无限级调用
+    * */
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        components:{
+            grand:grandP
+        }
+    })
+</script>  

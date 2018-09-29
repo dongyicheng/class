@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .mask{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            top: 0;
+            left: 0;
+        }
+        .content{
+            position: relative;
+            width: 600px;
+            height: 400px;
+            top:50%;
+            margin:-200px auto 0;
+            background: #fff;
+        }
+        header{
+            text-align: center;
+            font-size: 30px;
+        }
+        main{
+            text-align: center;
+            font-size: 25px;
+        }
+        footer{
+            text-align: right;
+            font-size: 20px;
+            position: absolute;
+            width: 100%;
+            bottom: 50px;
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="flag = !flag">显示弹框</button>
+    <model v-show="flag"  :data="modelData"  @my-show="fn">
+        <div class="title">这是个title</div>
+        <div class="my-content">组件内容</div>
+        <h2 slot="qqq">slot对应</h2>
+        <div>这个是在 qqq 下方的</div>
+    </model>
+</div>
+</body>
+</html>
+<template id="mask">
+    <div class="mask">
+        <div class="content">
+            <!-- slot 会把这个组件包含的结构整个拿过来 -->
+            <h1>title</h1>
+            <div class="dddd">
+                <slot name="default"></slot>
+            </div>
+            <h3>========================</h3>
+            <slot name="qqq">
+                <div>slot</div>
+            </slot>
+            <!--<slot></slot> 这种写法 其实带着一个 默认的 name 属性  值式 default-->
+            <footer>这个尾部</footer>
+        </div>
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let model = {
+        template:'#mask',
+        data(){
+            return {
+
+            }
+        },
+        props:['data'],
+        methods:{
+            cancel(){
+                this.$emit('my-show',false);
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: false,
+            flag1: false,
+            modelData:{
+                title:'这个是父组件传递title',
+                content:"<h1> 自定义的结构</h1>"
+            }
+        },
+        methods: {
+            fn(val){
+                //val 是子组件传进来的
+                this.flag = val;
+            }
+        },
+        components:{
+            model
+        }
+    })
+</script>  

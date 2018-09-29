@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="app">
+    <!--path query name  params   这四个词是vue-router 定死的-->
+
+    <!-- 用query传参  path 和 name 都可以使用 -->
+    <router-link :to="{path:'/home',query:{sex:12,age:13}}">首页</router-link>
+    <router-link to='/home'>首页</router-link>
+    <router-link :to="{path:'/list2',query:{sex:12,age:13}}">列表页2</router-link>
+
+    <!--若用 params 传参 则只能用 name-->
+    <router-link :to="{name:'myName',params:{sex:12,age:13}}">列表页</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    /*
+    * 通过点击按钮 获取后台的数据，根据后台的数据  决定去跳转哪个路由
+    * */
+
+    /*
+    * 点击首页的跳转按钮  2s 后跳到列表页2
+    * */
+    const home = {
+        template:"<h2>首页 <button @click='fn'>跳转到列表页2</button></h2>",
+        methods:{
+            /*
+            * $route 中存的都是咱们需要的参数
+            *
+            * $router 中存的都是 跳转的方法
+            * */
+            fn(){
+                setTimeout(()=>{
+                    // this.$router.go(-1000) //go 负几 就是往回条几次
+                    // this.$router.back()
+                    /*
+                    * 再路由历史中新增一次跳转*/
+                    // this.$router.push({path:'/list2',query:{name:1234}})
+                    // this.$router.push('/list2'); 不传数据 直接放路由
+
+                    /* 当前路由在哪   replace 只是把当前路由替换掉了； 再点回退按钮时  是从当前路由往回跳转  */
+                    // this.$router.replace({path:'/list2',query:{name:1234}});
+                    // this.$router.replace('/list2')
+
+
+                },2000);
+
+            }
+        }
+    };
+    const list = {
+        template:"<h2>列表页</h2>",
+    };
+    const list2 = {
+        template:"<h2>列表页2</h2>",
+    };
+    const routes = [
+        {
+            path:'/home',
+            component:home
+        },
+        {
+            path:'/list/:sex/:age',
+            name:'myName',
+            component:list
+        },
+        {
+            path:'/list2',
+            component:list2
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+        methods: {}
+    })
+</script>  

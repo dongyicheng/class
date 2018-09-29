@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--<router-link to="/home"
+                     active-class="current"
+                     tag="button"
+        >首页</router-link>
+        &lt;!&ndash;query 传参    组件中获取&#45;&#45;&#45;&#45;》 this.$route.query  &ndash;&gt;
+        <router-link to="/home?name=12&age14"
+                     :to="{path:'/home',query:{name:12,age:14}}"
+                     active-class="current"
+                     tag="button"
+        >首页</router-link>-->
+        <!--路径传参    获取参数 this.$route.params-->
+        <router-link to="/home/12/14"
+                     :to="{name:'home123',params:{name:12,age:14}}"
+                     active-class="current"
+                     tag="button"
+        >首页</router-link>
+        <router-link to="/list" tag="button">列表页</router-link>
+        <transition>
+            <keep-alive>
+                <router-view></router-view>
+                <!--<router-view name='aaa'></router-view>-->
+                <!--<router-view name='bbb'></router-view>-->
+                <!--<router-view name='ccc'></router-view>-->
+                <!--<router-view v-for="val in ary" :name="val"></router-view>-->
+            </keep-alive>
+        </transition>
+
+
+    </div>
+</body>
+</html>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    /*
+    * 1、声明组件
+    * 2、根据组件配置路由映射表
+    * 3、把路由映射表注入到 一个 router 实例中
+    * 4、把router实例注入到 vue的根实例中
+    *
+    * 路由传参  query   params
+    *
+    * 路由的嵌套
+    *
+    * 编程式的路由切换  this.$router.push({path:''})   this.$router.replace({path:''})
+    *
+    *
+    * */
+    const home = {
+        template:'<h2>首页</h2>',
+        created(){
+            let til = this.$route.meta.til;
+            document.title = til;
+        }
+    };
+    const list = {
+        template:'<h2>列表页</h2>'
+    };
+    const routes = [
+        /*{
+            path:'/home',
+            component:home,
+            children:[
+                {
+                    path:'/home/list',
+                    component:list
+                    //一般情况下 是一个路由配一个视图，他也支持一个路由配多个视图
+                    // components:{
+                    //     default:list1,
+                    //     aaa:list2
+                    // }
+                }
+            ]
+        },*/
+        {
+            path:'/list',
+            component:list,
+            meta:{
+                til:'列表页'
+            }
+        },
+        {
+            path:'/home/:name/:age',
+            name:'home123',
+            meta:{
+                til:'首页'
+            },
+            component:home
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+
+    //导航守位  beforeEach跳转前触发回调函数  afterEach 跳转后触发回调函数
+    router.beforeEach((to,from,next)=>{
+        let til = to.meta.til;
+        document.title = til;
+        next();
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        router,
+        data: {
+            ary:['aaa','bbb','ccc']
+        },
+        methods: {}
+    })
+</script>  

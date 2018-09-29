@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <template v-show="!flag">
+            <h2>珠峰培训</h2>
+        </template>
+        <div v-show="flag">珠峰培训</div>
+
+        <div v-if="i%2" v-for="i in 10">{{i}}</div>
+        <div v-if="i" v-for="i in ary">{{i}}</div>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag:true,
+            ary:[0,1,0,1,0,1]
+        },
+        methods: {}
+    })
+</script>  

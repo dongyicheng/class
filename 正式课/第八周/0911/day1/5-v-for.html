@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--<ul>
+            &lt;!&ndash;要循环谁  就把v-for加到谁身上  val in ary  val 代表数组中的每一项； 当需要索引时， 我们写俩参数 用括号包起来；前边的参数是数组中的项，后边的是该项对应的索引&ndash;&gt;
+            &lt;!&ndash;<li>
+                姓名：{{ary[1].name}}
+            </li>&ndash;&gt;
+            <li v-for="(val,i) in ary">
+                {{i+1}}姓名：{{val.name}}
+                <br/>
+                <span v-for="(v,i) in val.user">用户{{i+1}}：{{v}}<br></span>
+            </li>
+            <div>{{ary.school}}</div>
+            &lt;!&ndash;<li v-for="(v,i) of ary">
+                姓名：{{v.name}}{{i+1}}
+            </li>&ndash;&gt;
+        </ul>-->
+        <ul>
+            <li v-for="(val,key,index) in obj">
+                {{key}}:{{val}} {{index}}
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            ary:[
+                {name:'小明',user:['id1','id2']},
+                {name:"小红",user:['id11','id12','id13']},
+                {name:"小花",user:['id21','id22','id23']}
+                ],
+            obj:{name:'珠峰',age:9,sex:'男'}
+        }
+    });
+    vm.$set(vm.ary,'school','珠峰');
+</script>  

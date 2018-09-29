@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--根据输入内容决定显示的提示信息-->
+    <input type="" v-model="name2">
+    <h3>{{msg2}}</h3>
+
+
+    <input type="text" v-model="name">
+    {{name+'123456'}}
+    {{fn()}}
+    {{name | myFilter}}
+    {{msg}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'',
+            name2:'',
+            msg2:''
+        },
+        methods:{
+          fn(){
+              return this.name+'123456'
+          }
+        },
+        computed:{
+            msg(){//简写  只有get 没有set
+
+                    return this.name+'123456'
+            },
+        //     msg2:{
+        //         //computed 不支持异步
+        //         get(){
+        //             setTimeout(()=>{
+        //                 let n=this.name2.length;
+        //                 if(n<=2){
+        //                     return '名字不能少于两位'
+        //                 }else if(n>=4){
+        //                     return '名字不能超过三位'
+        //                 }else{
+        //                     return '正确'
+        //                 }
+        //             },500)
+        //         },
+        //         set(){},
+        //
+        //
+        //     }
+        },
+        watch:{
+            //只能监听data中有的 ; 可以支持异步
+          name2(cur,prev){
+              //两个参数  第一个是当前的输入值 第二个是上次的输入值
+              setTimeout(()=>{
+                  if(cur.length>=4){
+                      this.msg2='名字太长'
+                  }
+              },200)
+          }
+        },
+        filters:{
+            myFilter(val){
+                return val + '123456'
+            }
+        }
+
+    })
+</script>

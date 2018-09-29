@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <son ref="son"></son>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 子父组件之间   子组件先渲染完毕  父组件最后才能渲染完毕
+    *
+    * */
+    let son = {
+        template:'<div>子组件{{name}}</div>',
+        data(){
+            return{
+                name:''
+            }
+        },
+        mounted(){
+            // alert('son');
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        components:{
+            son
+        },
+        mounted(){
+            // alert('parent');
+            this.$refs.son.name = '珠峰';
+            console.log(this.$refs.son.$el.innerHTML);
+            this.$nextTick(()=>{
+                //
+                console.log(this.$refs.son.$el.innerHTML);
+            })
+        },
+        methods: {}
+    })
+</script>  

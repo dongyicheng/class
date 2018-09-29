@@ -49,7 +49,7 @@
         // reject(123);
         ajax({
             type:'get',
-            url:'./2.json',
+            url:'./1.json',
             success:resolve,// success && success(data)
             error:reject
         })
@@ -78,18 +78,18 @@
         console.log(res);
     });
 
-    let p=new Promise(function (resolve,reject) {
-        reject(123);//状态是 rejected 下面的不再执行
-        resolve(123);
-    })
-    p.then((data)=>{
-        console.log(data);
-    },(res)=>{
-        console.log(res);
-    }).then((data)=>{
-        console.log(data);
-    },()=>{
-        console.log(1);
-    })
+    // let p=new Promise(function (resolve,reject) {
+    //     reject(123);//状态是 rejected 下面的不再执行
+    //     resolve(123);
+    // })
+    // p.then((data)=>{
+    //     console.log(data);
+    // },(res)=>{
+    //     console.log(res);
+    // }).then((data)=>{
+    //     console.log(data);
+    // },()=>{
+    //     console.log(1);
+    // })
 
 </script>

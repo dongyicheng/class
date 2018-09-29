@@ -39,16 +39,35 @@ Promise.prototype.then = function (res,rej) {
     let self = this;
     console.log(self.status);
     if(self.status == 'resolved'){
-        res(self.value);
+        // res(self.value);
+        return new Promise(function (res2,rej2) {
+            let val = res(self.value);
+            res2(val);
+        })
+        //
     }
     if(self.status == 'rejected'){
-        rej(self.reason);
+        // rej(self.reason);
+        return new Promise(function (res2,rej2) {
+            let val = rej(self.reason);
+            res2(val);
+        })
     }
 
     if(self.status == 'pending'){
         //处理异步函数的；
-        self.resCallbacks.push(res);//把成功的回调函数存储到self.resCallbacks
-        self.rejCallbacks.push(rej);//把失败的回调函数存储到self.rejCallbacks
+        // self.resCallbacks.push(res);//把成功的回调函数存储到self.resCallbacks
+        // self.rejCallbacks.push(rej);//把失败的回调函数存储到self.rejCallbacks
+        return new Promise(function (res2,rej2) {
+            self.resCallbacks.push(function (value) {
+                let val = res(value);
+                res2(val);
+            });
+            self.rejCallbacks.push(function(reason){
+                let val = rej(reason);
+                res2(val)
+            });
+        })
     }
 };
 
@@ -57,12 +76,13 @@ var p2 = new Promise(function (res,rej) {
     setTimeout(function () {
         res(123);
     },2000);
-    console.log(1234);
+    // res(123);
+    // console.log(1234);
 }).then((data)=>{
     console.log(data);
+    return 666
 },(res)=>{
     console.log(res);
-});
-// console.log(p2.status);
-
-
+}).then((data)=>{
+    console.log(data);
+},()=>{});

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        [v-cloak]{
+            /*所有行间有 v-cloak 的元素 的样式*/
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id='app' v-cloak>
+<table class="table table-bordered text-center">
+    <thead>
+    <tr>
+        <th><input type="checkbox" v-model="checkAll" @change="checkAllFn">全选</th>
+        <th>商品</th>
+        <th></th>
+        <th></th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>小计</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(item,i) in list">
+        <td><input type="checkbox" v-model="item.isSelect" @change="checkOneFn"></td>
+        <td>
+            <img :src="item.pic" alt="">
+        </td>
+        <td><p>{{item.title}}</p></td>
+        <td><p>{{item.desc}}</p></td>
+        <td>
+            {{item.price | toFixed()}}
+        </td>
+        <!--<td><input type="text" v-model="item.count"  @input="change(item.count,i)"></td>-->
+        <td><input type="text" v-model="item.count"  @input="change(item)"></td>
+        <td>{{item.count*item.price | toFixed()}}</td>
+        <!--<td><button class="btn btn-danger" @click="remove(i)">删除</button></td>-->
+        <td><button class="btn btn-danger" @click="remove(item)">删除</button></td>
+    </tr>
+    <tr>
+        <td colspan="8" class="text-right" @click="clearCart"><button class="btn btn-danger">清空购物车</button></td>
+    </tr>
+    <tr>
+        <td colspan="8" class="text-right"><h2>总价:{{total | toFixed()}}</h2></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        created(){
+         this.getData();
+        },
+        data:{
+            list:[],
+        },
+        methods:{
+            getData(){
+                axios.post('data.json',{name:'zf'}).then((data)=>{
+                    console.log(data);
+                    this.list=data.data;
+                    this.checkOneFn();
+                }).catch((res)=>{
+                    console.log(res);
+                })
+            },
+            change(item){
+                //把n处理成 大于 0 的正整数
+                let n=item.count;
+                n=n.replace(/\D/g,'');
+                n=n<0?1:n;
+                item.count=n
+            },
+            remove(item){
+                this.list=this.list.filter((item1)=>{
+                    return item !== item1 ;
+                })
+            },
+            clearCart(){
+                this.list=[];
+                this.checkAll=false;
+            }
+        },
+        filters:{
+            toFixed(val,n){
+                n=n || 2;
+                return "￥"+(val/100).toFixed(n);
+            },
+        },
+        computed:{
+            total:{
+                get(){
+                    let tol=this.list.reduce((prev,next)=>{
+                        if(!next.isSelect)return prev;
+                        return prev + next.count * next.price
+                    },0);
+                    return tol;
+                },
+                set(){}
+            },
+            checkAll:{
+                  get(){
+                      if(this.list.length==0)return false;
+                      return this.list.every((item)=>{
+                          return item.isSelect;
+                      })
+                  },
+                  set(val){
+                      this.list.forEach((item)=>{
+                          item.isSelect=val;
+                      })
+                  }
+              }
+
+        }
+    })
+</script>

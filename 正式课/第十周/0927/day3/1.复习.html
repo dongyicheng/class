@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+     // node  :
+     //1.基于V8 引擎的运行环境； 性能高
+     //2.单线程  避免了线程之间频繁的切换；对于内存消耗比较小；
+     //3.非阻塞I/o 操作；由于node的底层采用的是多线程的机制；
+    // 4.有强大第三方包管理库；NPM；
+
+    // node是一个工具，最终需要部署在服务器；给js提供运行环境；
+    // node.js 的语法；
+    // 模块 ： 遵循common.js规范；
+    // 核心模块  第三方模块  自定义模块；（运行在node环境下的JS，都是一个单独的模块）
+
+    // 自定义模块
+    // require 导入模块   module.exports   exports【导出模块】
+    // 第三方模块
+    // npm install + 模块名 + -g(全局)  --save(生产依赖) --save-dev(开发依赖)
+    // yarn   add  + 模块  yarn  remove
+    // nrm  ls  查看源   nrm  use + 源    nrm  test测试源
+
+    // node的核心模块
+    // fs : 文件系统
+    // fs.readFile(path,"utf8",callback(err,data){})
+     // 回调函数当读取完毕之后，会触发回调函数，并且将读取的内容传给回调函数第二个参数；如果读取失败，会把错误信息传递给第一个参数err;
+     // fs.readFileSync(path,option);
+     // 同步的读取；会把读取的内容给了当前方法的返回值
+     // fs.writeFile(path,data,option,callback)
+     // 异步写文件;data是一个字符串（JSON.stringify）或者buffer类型；
+     // fs.writeFileSync(path,data,option)
+     // 同步写文件；方法的返回值是undefined；
+
+    // appendFile： 向文件的末尾追加内容；如果文件路径不存在，那么会默认创建一个文件；并且把内容写进去；
+    // 会默认的调用toString方法，讲其他的数据类型转成字符串；
+    // appendFileSync
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

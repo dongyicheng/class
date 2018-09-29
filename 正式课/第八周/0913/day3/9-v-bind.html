@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .bg{
+            background: #f4f4f4;
+        }
+        .col{
+            color: #ee2ad6;
+        }
+        .fnt{
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--<div class="bg col" :class="true?'fnt':''"></div>-->
+        <!--<div class="bg col" :class="{fnt:!flag}"></div>-->
+        <div class="bg" :class="['fnt',cla,]">
+        <!--<div class="bg" :class="ary">-->
+            <!--<img :src="pic" alt="" :title="title">-->
+            珠峰培训
+        </div>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            ary:['col','fnt'],
+            cla:'col',
+            flag:false,
+            pic:'',
+            title:'古典风格的歌'
+        },
+        methods: {}
+    })
+</script>  

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="app">
+    {{$store.state.count}}
+    <h2>{{mycount}}</h2>
+    <h3>{{myGetCount}}</h3>
+    <h3>{{evenCount}}</h3>
+    <button @click="add">增加</button>
+
+
+    <router-view></router-view>
+    <router-link to="/home1" active-class="cur">首页1</router-link>
+    <router-link to="/home2">首页2</router-link>
+    <router-link to="/home3">首页3</router-link>
+
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vuex/dist/vuex.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<template id="home1">
+    <h2>首页1</h2>
+</template>
+<template id="home2">
+    <h2>首页2</h2>
+</template>
+<template id="home3">
+    <h2>首页3</h2>
+</template>
+<script>
+    const state = {
+        count:0
+    };
+    const getters = {
+        evenCount(state,obj){
+            return state.count%2==0 ? state.count : '奇数'
+        }
+    };
+    const mutations = {
+        add(state,obj){
+            state.count += obj;
+        }
+    };
+    const actions = {
+        // addFn(store,obj){
+        //     console.log(store);
+        //     store.commit('add',obj)
+        // },
+        addFn({commit},obj){
+            // axios.get('./1.json').then((data)=>{
+            //     commit('add',data)
+            // });
+            commit('add',obj)
+        }
+    };
+    const store = new Vuex.Store({
+        state, // 用来存放数据
+        getters, // 一般用来过滤 state 中的数据
+        mutations, // 是一些方法 ；官方推荐用的 用来修改state中的数据; --- this.$store.commit('add',2)
+        actions // 可以写一些异步的操作 ，比如ajax请求
+    });
+
+    const home1 = {
+        template:"#home1"
+    };
+    const home2 = {
+        template:"#home2"
+    };
+    const home3 = {
+        template:"#home3"
+    };
+    const routes = [
+        {
+            path:'/',
+            redirect:'/home1'  // 进页面之后如果发现是路由只是一个 /； 则直接重定向到 /home1
+        },
+        {
+            path:'/home1',
+            meta:{
+                // 用来放置一些自己想用的信息
+                til:'首页1'
+            },
+            component:home1
+        },
+        {
+            path:'/home2',
+            meta:{
+                // 用来放置一些自己想用的信息
+                til:'首页2'
+            },
+            component:home2
+        },
+        {
+            path:'/home3',
+            meta:{
+                // 用来放置一些自己想用的信息
+                til:'首页3'
+            },
+            component:home3
+        },
+        {
+            path:'/*',
+            redirect:'/home1'
+            // 从上到下 挨个匹配；没有匹配成功时，才会走到 这个匹配；
+        }
+    ];
+    const router = new VueRouter({
+        routes,
+        linkActiveClass:'current', // 被选中 路由的 元素的 类名
+        mode:'hash' // 路由的使用方式  使用hash 还是  history
+    });
+    router.beforeEach((to,from,next)=>{
+        // to 是要跳到哪个路由
+        // from 从哪个路由跳转过来的
+        // next 接着执行跳转
+       // 目标 改title
+        document.title = to.meta.til || '珠峰培训';
+        next();
+        console.log(to);
+    });
+    let vm = new Vue({
+        el: '#app',
+        store,
+        router,
+        data: {},
+        methods: {
+            add(){
+                // this.$store.state.count += 2;
+                // this.$store.commit('add',3)
+                // this.$store.dispatch('addFn',4);
+                this.$store.dispatch('addFn',Math.round(Math.random()*10));
+            }
+        },
+        computed:{
+            mycount(){
+                let n = this.$store.state.count;
+                return n%2==0 ? n : '奇数';
+                // return this.$store.state.count
+            },
+            myGetCount(){
+                return this.$store.getters.evenCount;
+            },
+            ...Vuex.mapGetters(['evenCount'])
+            // evenCount(){return this.$store.getters.evenCount;}
+        }
+
+    })
+</script>  

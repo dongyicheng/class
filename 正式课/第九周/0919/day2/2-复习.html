@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <model>
+            <template>
+                <div>template1</div>
+                <div>template2</div>
+                <div>template3</div>
+                <div>template4</div>
+            </template>
+            <template slot="qqq">
+                <div>template5</div>
+            </template>
+            <div slot="default">自己的结构</div>
+            <div slot="www"></div>
+            <!--<template slot="www"></template>  不好使-->
+        </model>
+    </div>
+</body>
+</html>
+<template id="model">
+    <div>
+        <h2>title</h2>
+        <div class="content"></div>
+        <footer>
+            <slot></slot>
+            <slot name="qqq"></slot>
+            <slot name="www">
+                <div>默认的slot</div>
+            </slot>
+        </footer>
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 子组件 调用 父组件 的  方法 ---》 1-->$emit 2-->this.$parent.fn
+    * 父组件 调用 子组件 的  方法 ---》 1-->ref 2-->children
+    *
+    * 自定义组件的v-model
+    * <son v-model="name"></son>
+    * <template>
+    *     <input :value='value' @input="$emit('input',$event.target.value)">
+    * </template>
+    * props:['value']
+    *
+    * mounted(){}  子组件先执行  父组件 后执行；
+    * <component is='pag1'></component>
+    * <component :is='page'></component>
+    * keep-alive
+    *
+    * 插槽
+    * slot
+    *
+    * */
+
+    let model = {
+        template:'#model'
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        components:{
+            model
+        }
+    })
+</script>  

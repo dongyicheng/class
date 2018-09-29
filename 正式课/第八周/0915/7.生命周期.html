@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * beforeCreate  created
+    * beforeMount   mounted
+    * beforeUpdate  updated
+    * beforeDestroy destroyed
+    * */
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'zf'
+        },
+        beforeCreate(){//这时有VUE的原生事件 但实例中的数据还没有放上去(基本用不到)
+            console.log(this.name);//undefined
+        },
+        created(){
+            //一进页面就执行  进行axios获取ajax , 初始化操作
+            console.log(this.name);//zf
+        },
+        methods:{
+
+        },
+        beforeMount(){
+          //DOM元素渲染之前 询问使用的template模板
+        },
+        mounted(){
+            //数据和页面都已渲染完毕  可以操作DOM了
+        },
+        beforeUpdate(){
+            //更新前
+        },
+        updated(){
+            //更新后
+            //不要触发视图更新
+            this.name=Math.random();//会一直触发
+        },
+        beforeDestroy(){
+          alert('销毁前')
+            //可以清除定时器  或者清除事件绑定
+        },
+        destroyed(){
+            alert('销毁后')
+        }
+    })
+    vm.$destroy();//销毁组件
+</script>

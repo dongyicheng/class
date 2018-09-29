@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--小胡子-->
+    {{name}}
+    <!-- v-model双向绑定 v-text和小胡子一样在行内使用 -->
+    <input type="text" v-text="name" v-model="name">
+    <!-- v-html 变量有标签-->
+    <div v-html="p"></div>
+    <!-- v-once 只渲染一遍-->
+    <div v-once>{{name}}</div>
+    <!-- v-for 循环 (数组和对象都可以) -->
+    <div v-for="(v,i) in ary">是数值{{v}}是索引{{i}}</div>
+    <div v-for="(val,key,index) in obj">是属性值{{val}}是属性名{{key}}是索引{{index}}</div>
+    <!-- v-on 绑定事件 简写@
+    不写括号默认参数是事件对象
+    写了括号传的参数就成了相应的值
+    想要传参数和事件对象 写上 $event 和 参数 即可-->
+    <button @click="fn($event,'2018')"></button>
+    <!-- 多选框-->
+    {{checked}}
+    <input type="checkbox" v-model="checked" value="1">JS
+    <input type="checkbox" v-model="checked" value="2">CSS
+    <input type="checkbox" v-model="checked" value="3">VUE
+    <!-- 单选框 -->
+    {{sex}}
+    <input type="radio" v-model="sex" value="0" id="boy"><label for="boy">男</label>
+    <input type="radio" v-model="sex" value="1" id="girl"><label for="girl">女</label>
+    <!-- select -->
+    {{arr}}
+    <select name="" id="" v-model="arr">
+        <option value="" disabled>请选择</option>
+        <option value="1">桃子1</option>
+        <option value="2">桃子2</option>
+        <option value="3">桃子3</option>
+        <option value="4">桃子4</option>
+    </select>
+    <!-- obj没定义 aa 不报错 就是个空 ; 结果为undefined的都是空-->
+    <!-- 只要是在初始化时定义了的对象属性就有set和get(数据劫持) 改变时页面会改变-->
+    {{obj.aa}}
+    {{a}}<!-- 空 -->
+    <!-- 数组的每一项是没有get和set的
+    ary[0]=100 , ary.length--不会触发视图改变
+    数组的原生方法中 改变原有数组的方法 可以触发(ary有get和set)-->
+    {{ary}}
+    <!-- 局部过滤器 定义在vm的Filters属性里-->
+    {{name | myFilters}}
+</div>
+</body>
+</html>
+<script src="../0911/node_modules/vue/dist/vue.js"></script>
+<script>
+    /*设置axios的一些属性*/
+    let a=axios.create({
+        baseURL:'',/*默认请求路径*/
+        timeout:1000,/*超时时间*/
+        headers:{'Content-type':"application/x-www-form-urlencoded"},/*设置请求头*/
+    })
+    axios.interceptors.request.use(function (config) {
+        // 在发送请求之前做些什么
+        return config;
+    }, function (error) {
+
+    });/*axios可以设置请求拦截和响应拦截*/
+    let vm = new Vue({
+        el: '#app',//标签
+        data: {
+            //定义变量
+            name:'ccc',
+            p:'<p>标签用v-html</p>',
+            obj:{name:'dd',age:12},
+            a:undefined,
+            ary:[1,2,3],
+            checked:[],
+            sex:0,
+            arr:''
+        },
+
+        methods:{
+            //定义方法
+            fn(e,m){},
+            getData(){
+                //获取数据
+                axios.get('xxx.json',{params:{name:'dd'}}).then((data)=>{
+                    console.log(data.data);
+                    //data 是个大对象  里面的data才是要的数据
+                }).catch((res)=>{});
+
+                axios.post('xxx.json',{data:{name:'ff'}}).then((data=>{})).catch((res)=>{})
+
+                axios({
+                    method:'get',
+                    url:'xxx.json',
+                    params:{
+                        name:'dd'
+                    }
+                }).then((data)=>{})
+
+                a.post('xxx.json',{name:'ee'}).then(()=>{})/*a是前面为axios设置的默认设置 a=axios.create({})*/
+            }
+        },
+        filters:{
+          // 过滤器 都是函数 第一个参数默认是前面的值  后面的才是传的参数 return是返回给页面的值
+            myFilters(val){
+                return val+'fff'
+            }
+        },
+        computed:{
+            //计算属性
+           pink:{
+               get(){//当依赖的变量放生改变就会变
+                   return this.name + 'rr'
+               },
+               set(val){//自己发生改变 触发  val是
+
+               }
+           }
+        },
+        watch:{
+            //监听属性 监听data已有的属性 支持异步
+            name(cur,prev){//第一个参数当前数 第二个前一个数
+                setTimeout(()=>{
+                    if(cur.length>=4){
+
+                    }
+                },200)
+            }
+        }
+    })
+    /*当页面没定义的变量写上了  改变他的值页面也不会发生改变  因为初始化没为其设置get和set 最简单的方法正常写上需要的变量或属性               下面是两种解决方法*/
+    vm.$set(vm.obj,'aa',12);/*vm给的方法$set  直接给这个变量设置set*/
+    // vm.obj={aa:12};//把obj重新赋值 ; 因为obj是有get 和 set
+</script>

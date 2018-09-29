@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        .router-link-active{/**/
+            color:#a6a8ff;
+        }
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--tag修改展示的标签元素 不写的话默认a标签
+        active-class是控制当前选中状态的类名 , 后面跟的值就是当前选中状态下的类名 ,
+                    不写这个属性 , 默认选中的类名 就是 router-link-active
+        exact-active-class 精确(会把传的一些参数 认成不同路径)匹配路由;
+                    不写这个属性 默认值是 router-link-exact-active
+     -->
+    <!--<router-link to="/home" tag="button" active-class="current" exact-active-class="exactClass">首页</router-link>
+    <router-link to="/list">列表页</router-link>-->
+    <!-- 可以写对象 query 是 vue-router 规定的  ;  后面跟的是个对象 , router会把对象中的每一项拼接到路由后面 有问号拼接-->
+    <router-link :to="{path:'/home',query:{name:12,age:13}}">首页</router-link>
+    <!--路径传参-->
+    <!--params 是 vue-router 规定的  他是把对象中的参数当做路径拼到之前的路径上  没有问号当做路径传
+        这里不能再用path跳转  必须用name(这个属性值是固定的)
+    -->
+    <router-link :to="{name:'qqq',params:{name:12,age:13}}">列表页</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template:"<h2>首页</h2>",
+        mounted(){
+            console.log(this.$route.query);//通过$route.query 可以获取路径上的参数
+            console.log(this);
+        }
+    };
+    let list = {
+        template:"<h2>列表页</h2>",
+        mounted(){
+            console.log('list');
+        }
+    };
+
+    const routes=[
+        {
+            path:'/home',
+            component:home,
+        },
+        {
+            path:'/list/:name/:age',//用路径传参时 则需要在路径参数对应的位置写成  :变量的形式  ---> 这个变量会对应上在行内设置的 params 对象中的属性名对应的属性值
+            name:'qqq',// 路径传参  ,  必须用 name 去指定跳转路径
+            component:list
+        }
+    ];
+    const router=new VueRouter({
+        // mode:'history',
+        routes,
+        // linkActiveClass:'current2',//这个是给全局的选中状态下 router-link 修改类名
+        linkExactActiveClass:'activeClass',
+    })
+
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+    })
+</script>

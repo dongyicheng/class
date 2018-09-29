@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <button @click="getData">按钮</button>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+
+    axios.interceptors.request.use(function (config) {
+        // 在发送请求之前做些什么
+        return config;
+    }, function (error) {
+
+    });
+    // axios.defaults.baseURL='http://www.163.com';//设置默认的请求路径  会拼在自己写的路径前面
+    let a=axios.create({
+        baseURL:'http://www.163.com',
+        timeout:1000,
+        headers:{"Content-type":"application/x-www-form-urlencoded"}
+    })
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            ary:[]
+        },
+        methods:{
+          getData(){
+              axios.get('package.json').then((data)=>{
+                  console.log(data.data);
+                  //data 是个大对象  里面的data才是要的数据
+              }).catch((res)=>{
+                  console.log(res);
+              })
+              axios.get('package.json',{params:{name:'zf',age:12}})
+              // axios({
+              //     method:'get',
+              //     url:'package.json',
+              //         params:{
+              //             //使用get 方法时, 想要传参 , 需要把参数写到 params 中
+              //             name:'zf',
+              //             age:9
+              //         }
+              // }).then((data=>{
+              //     console.log(data);
+              // }))
+              // axios({
+              //     method:'post',
+              //     url:'package.json',
+              //     data:{
+              //         name:'zf',
+              //         age:22
+              //     }
+              // }).then((data=>{
+              //     console.log(data);
+              // }))
+              axios.post('package.json',{name:'zf',age:20});
+
+              a.get('package.json?ww=12').then();
+
+          }
+        }
+    })
+    /*
+    1.会用get post
+    2.知道可以设置 基础路径
+    3.知道他可以设置请求拦截 和 响应拦截
+    */
+</script>

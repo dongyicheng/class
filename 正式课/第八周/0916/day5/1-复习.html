@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <div :style="'color:#ccc'">珠峰培训</div>
+        <div :style="{color:'red',fontSize:'40px'}">珠峰培训</div>
+        <div :style="cssObj">珠峰培训</div>
+
+        <div :class="{qqq:true}"></div>
+        <!--
+            stop  prevent  capture  once  self  passive
+            13(enter)  tab left right ...
+        -->
+        <div v-color="'red'">珠峰培训</div>
+        {{name | my}}
+        {{myData}}
+
+        <div ref="zf">
+            <h2>珠峰</h2>
+        </div>
+        <div ref="zf">
+            <h2>珠峰</h2>
+        </div>
+        <div ref="zf">
+            <h2>珠峰</h2>
+        </div>
+
+        <p v-for="i in 'ab cd'" ref="p">珠峰2018{{i}}</p>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // directives filters  中函数的this 不是指向 vue 实例的；
+    let vm = new Vue({
+        el: '#app',
+        directives:{
+            color(el,obj){
+                // console.log(this);
+                el.style.color = obj.value;
+            }
+        },
+        filters:{
+            my(val){
+                console.log(this);
+            }
+        },
+        data: {
+            cssObj:{
+                color:'blue',
+                fontSize:'50px',
+                background:'#ccc'
+            },
+            name:'zfpx'
+        },
+        methods: {},
+        computed:{
+            myData(){
+                //只要在函数中用到了实例中的哪些属性；那这个计算属性就依赖哪些属性
+                console.log(this.name);
+                return 123
+            }
+        },
+        beforeCreate(){},
+        // created(){
+        //     console.log(this.$refs);
+        // },
+        mounted(){
+            //this.$refs 是个对象，里边存储的属性名 是DOM中对应的ref的值，属性值 是ref对应的DOM
+            console.log(this.$refs);
+        }
+    })
+</script>  

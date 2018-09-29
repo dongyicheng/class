@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <grand></grand>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*'
+    * 理论上组件可以无限调用
+    * */
+    let son={
+        template:'<h3>这是个儿子</h3>'
+    };
+    let parent={
+        template:'<h2>这是个父亲<son></son></h2>',
+        components:{
+            son,
+        }
+    };
+    let grandP={
+        template:'<h1>这是个爷爷<parent></parent></h1>',
+        components:{
+            parent,
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        components:{
+            grand:grandP
+        }
+    })
+</script>

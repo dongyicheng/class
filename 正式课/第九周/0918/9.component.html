@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <button v-for="val in ary" @click="page=val" :style="{color:page==val?'red':''}">{{val}}</button>
+    <!--keep-alive  回缓存之前的组件  不会销毁之前的组件-->
+    <keep-alive>
+    <components :is="page"></components>
+    </keep-alive>
+
+    <keep-alive>
+    <pag1 v-if="page == 'pag1'"></pag1>
+    <pag2 v-if="page == 'pag2'"></pag2>
+    <pag3 v-if="page == 'pag3'"></pag3>
+    </keep-alive>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let pag1 = {
+        template:'<h2>page1</h2>',
+        mounted(){
+            console.log(1);
+        },
+        beforeDestroy(){
+            console.log('销毁');//切换时 会自动销毁 加keep-alive
+        }
+    };
+    let pag2 = {
+        template:'<h2>page2</h2>'
+    };
+    let pag3 = {
+        template:'<h2>page3</h2>'
+    }
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            ary:['pag1','pag2','pag3'],
+            page:'pag1'
+        },
+        components:{
+            pag1,pag2,pag3
+        }
+    })
+</script>

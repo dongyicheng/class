@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--原生方法-->
+   <!-- <input type="radio" name="sex">男
+    <input type="radio" name="sex">女-->
+    <input type="radio" v-model="sex" value="1">男
+    <input type="radio" v-model="sex" value="0">女
+    {{sex}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            sex:0//默认选女
+        }
+    })
+</script>

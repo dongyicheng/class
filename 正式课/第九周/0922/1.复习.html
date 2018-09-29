@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <button @click="add">增加</button>
+    {{$store.state.n}}
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vuex/dist/vuex.js"></script>
+<script>
+    let store = new Vuex.Store({
+        state:{
+            count:0
+        },
+        mutations:{
+            addFn(state,obj){
+                state.count+=obj;
+            },
+        },
+        getters:{
+            evenFn(state){
+                let n=state.count%2==0?state.count:'奇数';
+                return n;
+            }
+        },
+        actives:{
+            getAddFn({commit},obj){
+                commit('addFn',obj)
+            }
+        }
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        store,
+        methods:{
+            add(){
+                let n=Math.round(Math.random()*10)
+                this.$store.commit('addFn',n)
+                this.dispatch('getAddFn',n)
+            }
+        }
+    })
+</script>

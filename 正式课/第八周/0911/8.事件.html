@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--<button id="btn" onclick="fn()">按钮</button>&lt;!&ndash;原生方法&ndash;&gt;
+    <button id="btn"v-on:click="fn">按钮</button>-->
+    <button id="btn" @click="fn">按钮</button><!--简写 常用-->
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    function fn() {
+        alert(1)
+    }
+    let vm=new Vue({
+        el:'#app',
+        data:{
+            fn(){alert(123)}
+        }
+    })
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        div{
+            padding: 30px;
+            border: 1px solid #24ccc8;
+        }
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <div class="outer" @click.capture="alert('outer')">outer
+        <!--使得click只在捕获阶段被触发-->
+        <div class="center" @click="alert('center')">center
+            <div class="inner" @click="alert('inner')">inner</div>
+        </div>
+    </div><!--outer inner center-->
+
+    <div class="outer" @click="alert('outer')">outer
+        <div class="center" @click.stop="alert('center')">center
+            <div class="inner" @click="alert('inner')">inner</div>
+        </div>
+    </div><!--点击inner , 触发inner , center
+阻止了center之后的冒泡事件-->
+
+    <div class="outer" @click="alert('outer')">outer
+        <div class="center" @click.self="alert('center')">center
+            <div class="inner" @click="alert('inner')">inner</div>
+        </div>
+    </div>
+
+    <input type="text" @keyup.81="alert('q')">
+    <input type="text" @keyup.q="alert('q')">
+</div>
+<!--
+事件修饰符
+@click.stop  --- 阻止冒泡
+@click.prevent  --- 阻止默认事件
+@click.capture --- addEventListener('click',fn,true) 使得click在捕获阶段被触发 , 在冒泡阶段就不会触发了
+@click.self --- 只有点击自己时 才会触发后面的函数
+@click.once --- 置触发一次 再点击就不起作用了
+
+-->
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //可以通过全局 config.keyCodes 对象自定义按键修饰符别名：
+    Vue.config.keyCodes.q=81;
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods:{
+            alert(val){
+                alert(val)
+            }
+        }
+    })
+</script>

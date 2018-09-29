@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+   <h1>{{ary}}</h1>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    *
+    * */
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            ary:[1,2,3,4,5]
+        }
+    });
+    vm.ary.length--;
+    // vm.ary.push(12)
+    vm.ary = vm.ary.map((item)=>{
+        return item*=2;
+    })
+    /*
+    数组中的每一项是没有get 和set的
+    * ary[0]=100;这种写法是不会触发视图的刷新
+    * ary.length--;这种写法也不会触发视图的刷新
+    * */
+    //数组的原生方法中 改变原有数组的方法 pop push unshift shift reverse sort splice
+    //可以触发视图的更新(ary改变了 ary中有get set)
+</script>

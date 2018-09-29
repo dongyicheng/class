@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--path query name  params   这四个词是vue-router 定死的-->
+
+        <!-- 用query传参  path 和 name 都可以使用 -->
+        <router-link :to="{path:'/home',query:{sex:12,age:13}}">首页</router-link>
+        <router-link :to="{name:'myName2',query:{sex:12,age:13}}">列表页2</router-link>
+
+        <!--若用 params 传参 则只能用 name-->
+        <router-link :to="{name:'myName',params:{sex:12,age:13}}">列表页</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script>
+    const home = {
+        template:"<h2>首页 的信息 {{msg}}</h2>",
+        data(){
+            return{
+                msg:''
+            }
+        },
+        created(){
+            //通过query获取
+            console.log(this.$route.query);
+            axios.get('https://m.huli.com/wap/1.6/bid/hulilist',{params:this.$route.query}).then((data)=>{
+                console.log(data);
+                this.msg = data.data.errorMessage
+            })
+        }
+    };
+    const list = {
+        template:"<h2>列表页{{$route.params}}</h2>",
+        created(){
+            //通过params获取
+            console.log(this.$route.params);
+        }
+    };
+    const routes = [
+        {
+            path:'/home',
+            component:home
+        },
+        {
+            path:'/list/:sex/:age',
+            name:'myName',
+            component:list
+        },
+        {
+            path:'/list',
+            name:'myName2',
+            component:list
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+        methods: {}
+    })
+</script>  

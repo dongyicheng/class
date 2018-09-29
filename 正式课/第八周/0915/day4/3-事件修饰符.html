@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        div{
+            padding: 30px;
+            border: 1px solid #1f3acc;
+        }
+    </style>
+</head>
+<body>
+    <div onclick="alert(1)">ccc</div>
+    <div id="app">
+        <div class="outer" @click="alert('outer')">outer
+            <div class="center" @click.self="alert('center')">center
+                <div class="inner" @click="alert('inner')">inner</div>
+            </div>
+        </div>
+
+        <input type="text" @keyup.q="alert('q')">
+    </div>
+<!--
+    事件修饰符
+    @click.stop ---》 阻止冒泡
+    @click.prevent ---》 阻止默认事件
+    @click.capture  ---》 div.addEventListener('click',fn,true)
+                          div.addEventListener('click',fn,false)
+    @click.self  ---》 只有点击这个元素才会触发后边的函数
+    @click.once ---》 只触发一次，第二次点击就不再起作用了
+-->
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.config.keyCodes.q = 81;
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            alert(val){
+                alert(val)
+            }
+        }
+    })
+</script>  

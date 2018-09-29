@@ -16,14 +16,14 @@
 </html>
 <script>
     //p1成功了在执行p2
-    var p1 = new Promise(function (resolve,reject) {});
-    var p2 = new Promise(function (resolve,reject) {});
-    p1.then((data)=>{
-        console.log(1,data);
-        return p2;
-    },()=>{}).then((data)=>{
-        // console.log(2,data);
-    },()=>{});
+    // var p1 = new Promise(function (resolve,reject) {});
+    // var p2 = new Promise(function (resolve,reject) {});
+    // p1.then((data)=>{
+    //     console.log(1,data);
+    //     return p2;
+    // },()=>{}).then((data)=>{
+    //     // console.log(2,data);
+    // },()=>{});
 
 
 
@@ -53,6 +53,7 @@
             })
         }
     })
+
     var p1 = new Promise(function (resolve, reject) {
         ajax({
             type:'get',

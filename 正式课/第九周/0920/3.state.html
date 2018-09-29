@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    name:<input type="text" v-model="name">
+    age:<input type="text" v-model="age">
+    <button @click="add">add</button>
+    <list1></list1>
+    <list2></list2>
+</div>
+</body>
+</html>
+<template id="list1">
+    <ul>
+        {{qqq}}
+        <h2>成年</h2>
+        <li v-for="val in arr1">name:{{val.name}}----age:{{val.age}}</li>
+    </ul>
+</template>
+<template id="list2">
+    <ul>
+        <h2>成年</h2>
+        <li v-for="val in arr2">name:{{val.name}}----age:{{val.age}}</li>
+    </ul>
+</template>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/vuex/dist/vuex.js"></script>
+<script>
+    /*
+    * 两个列表组件  一个组件显示成年的  另一个组件未成年的
+    * 父组件中 有2个 input框  是添加人物的
+    *1、先创造两个组件
+    * 2、获取输入的内容的组成的对象 然后添加到 vuex的数组中 ;使用 vuex的 mutations 提交
+    * */
+    const list1={
+        template:'#list1',
+        data(){
+            return{
+            }
+        },
+        computed:{
+            arr1(){
+                return this.$store.state.ary.filter((item) => {
+                    return item.age >= 18;
+                })
+            },
+            // ...Vuex.mapState(['qqq']),
+            ...Vuex.mapState({
+                qqq: state => state.qqq + 1111
+            })
+        }
+        // computed:Vuex.mapState(['qqq'])
+        //'qqq' ---> qqq(){return this.$store.state.qqq}
+    };
+    const list2={
+        template:'#list2',
+        computed:{
+            arr2(){
+                return this.$store.state.ary.filter((item) => {
+                    return item.age < 18;
+                })
+            }
+        }
+    };
+    const obj= {
+        state: {
+            qqq: 0,
+            ary: [
+                {name: 'tom', age: 20},
+                {name: 'jerry', age: 18},
+                {name: 'rose', age: 10}
+            ]
+        },
+        mutations: {
+            changeAry(state, obj) {
+                obj = obj || [];
+                state.ary.push(obj)
+            }
+        },
+    }
+    const store = new Vuex.Store(obj);
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            age:'',
+            name:'',
+        },
+        components:{
+            list1,
+            list2,
+        },
+        store,
+        methods:{
+            add(){
+                let obj={};
+                obj.name=this.name;
+                obj.age=this.age;
+                this.$store.commit('changeAry',obj);
+                this.name='';
+                this.age='';
+            }
+        }
+    })
+</script>

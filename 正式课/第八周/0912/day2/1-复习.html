@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <button @click='fn("珠峰培训2018",$event)'>按钮</button>
+        <div @mouseenter="move" @mouseleave="leave">{{name}}</div>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * vm 中的数据  是挂在到 vm 上的  （数据劫持 get set）
+    * 指令
+    *   DOM元素上的行内属性  v- 开头的；v-model = 'name'
+    *   v-text='name'  ---- {{变量  表达式  赋值  计算}}
+    *   v-model='name' ----> 表单元素
+    *   v-once  只让这个元素标签中的变量只渲染一次
+    *   v-html='p' 可以把变量中的带有DOM结构渲染出来
+    *   v-for='(val,i) in/of 数组'
+    *   v-on:click='fn' ----> @click='fn' 简写
+    *
+    * */
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:"珠峰培训",
+            // fn(){ //this 是指向 window 的
+            //     console.log(this);
+            // }
+            // fn:123,
+        },
+        methods:{
+            fn(a,e){ // 方法名不能跟 data中的属性名重复
+                // fn写到 methods中; 那么 fn中的 this 是指向这个实例本身的
+                this.name = '珠峰';
+                //当fn在DOM中不加括号时；那么fn默认接收一个 事件对象
+                //当fn在DOM中加上括号时；那么就不会把事件对象传进来；
+                //若需要事件对象，则在DOM上的fn加一个 $event实参；
+                console.log(a);
+                this.add();// 函数调用 ；只用this调用
+            },
+            add(){
+                console.log('add');
+            },
+            move(e){
+                console.log('划过');
+                e.target.style.background = '#ccc';
+            },
+            leave(e){
+                console.log('划出');
+                e.target.style.background = '';
+            }
+        }
+
+    });
+</script>  

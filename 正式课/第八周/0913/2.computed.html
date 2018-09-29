@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <input type="text" v-model="name">
+    <h3>{{'@'+name+'#'}}</h3>
+    <!--@name#-->
+    <h3>{{msg}}</h3>
+    <input type="checkbox" v-model="checkAll">全选
+    <!--<input type="checkbox" v-for="item in ary" v-model="item">-->
+    <!--<input type="checkbox" v-model="a">css-->
+    <!--<input type="checkbox" v-model="b">js-->
+    <!--<input type="checkbox" v-model="c">vue-->
+    <input type="text" v-model="txt1">
+    <input type="text" v-model="txt2">
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'zhege',
+            ary:[{a:true},{a:true},{a:true},{a:true}],
+            txt2:'ss'
+        },
+        methods:{},
+        computed:{
+            //计算属性
+            msg:{
+                get(){
+                    //this指向 vm 实例
+                    //mag 是依赖于 this.name 的
+                    let str=this.name.split('').reverse().join('');
+                    return str;
+                    //输出倒着的name
+                },
+                set(val){
+
+                }
+            },
+            checkAll:{
+                get(){
+                    return this.ary.every((item)=>{
+                        return item.a;
+                    })
+                },
+                set(val){
+                    this.ary.forEach((item)=>{
+                        item.a = val;
+                    });
+                    console.log(val);
+                }
+            },
+            txt1:{
+                get(){
+                    return this.txt2 + 'txt1'
+                },
+                set(val){
+                    console.log(val);
+                    this.txt2=val;
+                }
+            }
+
+        }
+    })
+</script>

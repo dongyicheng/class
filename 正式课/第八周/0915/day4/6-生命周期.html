@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        祝福那个
+        {{name}}
+        <template id="zf">
+            <h2>珠峰培训</h2>
+        </template>
+    </div>
+<!--<template id="zf">-->
+    <!--<div>-->
+        <!--祝福那个珠峰-->
+        <!--{{name}}-->
+    <!--</div>-->
+<!--</template>-->
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * beforeCreate   created
+    * beforeMount    mounted
+    * beforeUpdate   updated
+    * beforeDestroy  destroyed
+    *
+    * */
+    let vm = new Vue({
+        el:"#app",
+        data: {
+            name:'zfpx',
+            age:12
+        },
+        // template:'#zf',
+        beforeCreate(){// 这时 有VUE的原生事件，但是没有实例的数据；
+            // debugger
+            console.log(this.name);
+        },
+        created(){ // axios
+            console.log(this.name);
+            console.log(this.fn);
+            // debugger;
+        },
+        beforeMount(){// 询问 使用的 template模板
+            // debugger
+        },
+        mounted(){ // 数据和页面都已渲染完毕
+            // debugger;
+        },
+        beforeUpdate(){
+            // alert('更新前')
+        },
+        updated(){ // 不要触发视图更新
+            // alert("更新后");
+            // this.name = Math.random();
+        },
+        beforeDestroy(){
+            alert('销毁前')
+        },
+        destroyed(){
+            alert('销毁后')
+        },
+        methods: {
+            fn(){
+                console.log(12);
+            }
+        }
+    });
+    // vm.$mount("#app")
+    vm.$destroy(); // 销毁组件
+</script>  

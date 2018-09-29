@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <!--<div id="div1">珠峰培训</div>-->
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2 v-text="name"></h2>
+        <input type="text" v-model="name">
+        <div>
+            {{name}}
+            <div v-html="p"></div>
+        </div>
+        <input type="text" v-once >
+        <div v-model="p" v-html="p">v-once:{{name}}</div>
+        <div>{{a}}</div>
+    </div>
+    <!--<h3>{{name}}</h3>
+    <input type="text" v-model="name">-->
+</body>
+</html>
+<script src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:'珠峰培训',
+            p:'<p>zhufeng2018</p>',
+            a:1234
+        }
+    })
+    /*
+    * v-text
+    * v-model
+    * v-html 渲染有DOM结构的字符串
+    * v-once  后边没有表达式；代表这个DOM只渲染一次
+    *
+    * */
+</script>  

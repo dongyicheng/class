@@ -24,7 +24,7 @@
         });
     });
     let p2 = p.then((data)=>{
-        console.log(l);
+        console.log(data);
         return new Promise(function (resolve,reject) {
             setTimeout(function () {
                 resolve('success')
@@ -42,8 +42,9 @@
         console.log(data);
     },res=>{
         setTimeout(function () {
-            console.log(res,q);
+            console.log(res,j);
         },2000);
+        return 123
         //走这  计时器没执行就会直接 执行下面第一个函数 因为计时器成功执行 就算成功
         //so  会先输出下面的data没传参 所以是undefined  然后报错 没定义q
     }).then((data)=>{

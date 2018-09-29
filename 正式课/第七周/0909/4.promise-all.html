@@ -48,15 +48,15 @@
 
     let p = new Promise(function (resolve, reject) {
         setTimeout(function () {
-            resolve('成功了')
-        },1000)
+            reject(123);
+        },3000)
     });
     p.then(function (data) {
         return setTimeout(function () {
             console.log(data);
-
         },1000)
     }, function (res) {
         console.log(res);
-    });
+    }).then((d)=>{
+        console.log(d);});
 </script>

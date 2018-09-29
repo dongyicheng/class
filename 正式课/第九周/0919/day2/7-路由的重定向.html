@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.css">
+    <style>
+        .current{
+            background: #cc080b;
+            color: #EFF3EF;
+        }
+        .active{
+            background: #fa9752;
+            color: #3059fa;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link
+                to="/home?123"
+                tag="button"
+                active-class="current"
+                exact-active-class="exactClass"
+        >首页</router-link>
+        <router-link to="/list" tag="button">列表页</router-link>
+        <router-link to="/list2" tag="button">列表页2</router-link>
+        <transition
+            enter-active-class="animated bounceIn"
+            leave-active-class="animated bounceOut"
+            mode="out-in"
+        >
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </transition>
+
+
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const home = {
+        template:"<h2>首页</h2>",
+    };
+    const list = {
+        template:"<h2>列表页</h2>",
+    };
+    const list2 = {
+        template:"<h2>列表页2</h2>",
+    };
+    const routes = [
+        {
+            path:'/',
+            redirect:'/home' //一进页面时 没有对应的路由，只有一个 /； 这时我们可以利用 redirect ，让路由重新指向 /home
+        },
+        // {
+        //     path:'/home',
+        //     component:list  路由的匹配是从上到下 依次匹配的；只要匹配到  就不再往下查询了
+        // },
+        {
+            path:'/home',
+            component:home
+        },
+        {
+            path:'/list',
+            component:list
+        },
+        {
+            path:'/list2',
+            component:list2
+        },
+        {
+            path:"/*",
+            redirect:'/home'
+            // component:home
+        }
+    ];
+    const router = new VueRouter({
+        routes,
+        linkActiveClass:'active',
+        linkExactActiveClass:'exactC'
+    });
+    let vm = new Vue({
+        el: '#app',
+        router,
+        data: {},
+        methods: {}
+    })
+</script>  

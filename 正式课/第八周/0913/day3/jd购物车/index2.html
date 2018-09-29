@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        [v-cloak]{
+            /*//所有行间有 v-cloak 的元素 的样式*/
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+<div id="app" v-cloak>
+    <table class="table table-bordered text-center table-striped">
+        <thead>
+        <tr>
+            <th><input type="checkbox" v-model="checkAll">全选</th>
+            <th>商品</th>
+            <th></th>
+            <th></th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,i) in list">
+            <td><input type="checkbox" v-model="item.isSelect"></td>
+            <td>
+                <img :src="item.pic" alt="">
+            </td>
+            <td><p>{{item.title}}</p></td>
+            <td><p>{{item.desc}}</p></td>
+            <td>
+                {{item.price | toFixed()}}
+            </td>
+            <td><input type="text"  v-model="item.count" @input.stop="change(item)"></td>
+            <td>{{item.count*item.price | toFixed()}}</td>
+            <td><button :class="item" class="btn btn-danger" @click="remove(item)">删除</button></td>
+        </tr>
+        <tr>
+            <td colspan="8" class="text-right">
+                <button class="btn btn-danger" @click="clearCart">清空购物车</button>
+            </td>
+        </tr>
+        <tr>
+            <!-- colspan='数列' 合并列 原生的-->
+            <!-- class="text-right" bootstrap -->
+            <td colspan="8" class="text-right"><h2>总价：{{total | toFixed}}</h2></td>
+        </tr>
+        </tbody>
+    </table>
+    <!--{{test}}-->
+</div>
+</body>
+</html>
+<script src="../node_modules/axios/dist/axios.js"></script>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        // created:function(){},
+        created(){
+            // 一进来就执行 // 这里边的this 也是执行 这个vm 实例的
+            this.getData();
+        },
+        data:{
+            list:[],
+            // test:[1,2,3,4,5],
+            // checkAll:true
+        },
+        computed:{
+            checkAll:{
+                get(){
+                    if(this.list.length == 0)return false;
+                    return this.list.every((item)=>{
+                        return item.isSelect
+                    })
+                },
+                set(val){
+                    this.list.forEach((item)=>{
+                        item.isSelect = val;
+                    })
+                }
+            },
+            total:{
+                get(){
+                    let tol = this.list.reduce((prev,next)=>{
+                        // console.log(prev, next);
+                        if(!next.isSelect)return prev;
+                        return prev + next.count * next.price;
+                    },0);
+                    return tol;
+                },
+                set(){}
+            }
+        },
+        methods:{
+            getData(){
+                axios.post('./data.json',{name:'zf'}).then((data)=>{
+                    console.log(data);
+                    // 获取到数据之后给谁
+                    this.list = data.data;
+                    this.checkOneFn();
+                }).catch((res)=>{
+                    console.log(res);
+                })
+            },
+            change(item){
+                // console.log(item);
+                let n = item.count;
+                n = n.replace(/\D/g,'');
+                n = n < 0 ? 1 : n;
+                item.count = n;
+            },
+            remove(item2){
+                this.list = this.list.filter((item,index)=>{
+                    return item2 !== item
+                });
+                // this.list.splice(i,1);
+            },
+            sum(){
+                //算总和的函,只加 isSelect 为 true  的项；
+                let tol = this.list.reduce((prev,next)=>{
+                    // console.log(prev, next);
+                    if(!next.isSelect)return prev;
+                    return prev + next.count * next.price;
+                },0);
+                return tol;
+            },
+            checkAllFn(){//对应操作每一个isSelect的值就可以了
+                console.log(this.checkAll);
+                this.list.forEach((item)=>{
+                    item.isSelect = this.checkAll;
+                });
+                // this.test.forEach((item)=>{
+                //     item += 10;
+                // })
+            },
+            checkOneFn(){
+                // 操作下边的复选框时，让 上边的全选跟着变化
+                this.checkAll = this.list.every((item)=>{
+                    return item.isSelect;
+                })
+            },
+            clearCart(){
+                this.list = [];
+                // this.checkAll = false;
+            }
+        },
+        filters:{
+            toFixed(val,n=2){
+                // n = n || 2;
+                return "￥"+(val/100).toFixed(n);
+            }
+        }
+    })
+</script>  

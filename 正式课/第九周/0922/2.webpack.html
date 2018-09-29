@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'></div>
+</body>
+</html>
+<!--
+使用 webpack  gulp grunt 都是打包代码用的工具
+1. npm init -y 产生 package.json 文件
+2. 在webpack.json 的script里面 添加脚本
+"build":"webpack"
+3. 使用webpack  必须默认配置一个 webpack.config.js 的文件;
+这里面放置的都是一些默认配置项
+-->
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/webpack/bin/webpack.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {}
+    })
+</script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <my-name1></my-name1>
+    <!--<my-name2></my-name2>-->
+</div>
+</body>
+</html>
+<template id="myName1">
+    <div>
+        <h2>{{name}}</h2>
+        <input type="text" v-model="name">
+        <my-name2></my-name2>
+        <my></my><!--全局在哪都可以调用-->
+    </div>
+</template>
+<template id="myName2">
+    <div>
+        <h3>{{name}}</h3>
+        <input type="text" v-model="name">
+
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    *1.先去声明一个组件 (定义一个对象 对象中属性是 VUE 规定好的)
+    * 2.去对应的实例中注册这个组件 在 components 这个对象中添加这个组件名
+    * 3.在对应的实例渲染DOM中使用即可
+    *
+    * 保证组件的独立性 : 不从其他地方拿数据  只能拿自己的
+    * */
+
+    Vue.component('my',{
+        template:"<h1>sss</h1>"
+    })
+
+    let myName2={
+        // template:"<h2>zfpx2</h2>"
+        template:'#myName2',
+        data(){
+            return {
+                name:''
+            }
+        }
+    }
+    let myName1={
+
+        // template:"<h2>{{name}}</h2>",
+        template:'#myName1',
+        data(){
+            return {
+                name:'珠峰培训',
+            }
+        },
+        components:{
+            myName2,//实现name1 调用 name2
+        }
+    }
+
+    let vm = new Vue({//根实例
+        el: '#app',
+        data: {
+            name:'zfpx'
+        },
+        components:{
+            // myName1:myName1, // 名和值一样 可以简写
+            myName1,
+            // myName2,
+        }
+    })
+</script>

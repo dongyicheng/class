@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <name1></name1>
+        <!--<my-name2></my-name2>-->
+    </div>
+</body>
+</html>
+<template id="myName1">
+    <div>
+        <h2>{{name}}</h2>
+        <input type="text" v-model="name">
+        <name2></name2>
+        <my></my>
+    </div>
+</template>
+<template id="myName2">
+    <div>
+        <h3>{{name}}</h3>
+        <input type="text" v-model="name">
+        <my></my>
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 1、先去声明一个组件 （定义一个对象，对象中的属性是VUE规定好的）
+    * 2、去对应的实例中注册这个组件 在components这个对象中添加这个组件名
+    * 3、在对应的实例渲染的DOM中使用即可
+    *
+    *
+    * 保证组件的独立性
+    * */
+    Vue.component('my',{
+       template:"<h1>wwwww</h1>"
+    });
+    let myName2 = {
+        template:"#myName2",
+        data(){
+            return{
+                name:''
+            }
+        }
+    };
+    let myName1 = {
+        //实现 name1 调用name2 组件
+        template:"#myName1",
+        components:{
+            name2:myName2
+        },
+        data(){
+            return{
+                name:'珠峰培训'
+            }
+        }
+    };
+    let vm = new Vue({ //根 实例
+            el: '#app',
+            data: {
+                name:'珠峰培训'
+            },
+        components:{
+            // myName1:myName1,
+            name1:myName1, //注册完成后 ，myName1就变成了 VUE的一个实例
+            name2:myName2
+        },
+        methods: {}
+    })
+</script>  

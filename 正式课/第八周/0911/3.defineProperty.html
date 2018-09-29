@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='div1'></div>
+</body>
+</html>
+<script>
+    /*
+    *
+    * */
+    let obj={};
+    let temp={};
+    //vue 实现核心原理 set & get
+    Object.defineProperty(obj,'name',{
+        // value:'珠峰培训', //对应value值
+        // enumerable:true,//可枚举 默认false false
+        // writable:false,//是否可写
+        // configurable:true,//是否可删除
+        get(){//当这个属性 被获取的时候触发
+            console.log('get');
+            // return 123;//获取这个属性,给外界的value值  不能和上面的参数同时设置
+            return temp['name'];
+        },
+        set(val){//当给这个属性赋值的时候触发
+            console.log(val);
+            console.log('set');
+            // obj.name=200; 死循环 会一直触发
+            div1.innerHTML=val;//val修改可以改变div的内容
+            temp['name']=val;
+        }
+    });
+    console.log(obj.name);
+    for (var k in obj) {
+        console.log(k);
+    }
+</script>

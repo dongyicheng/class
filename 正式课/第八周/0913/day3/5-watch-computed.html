@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="app">
+    <!--<input type="text" v-model="firstName">-->
+    <input type="text" v-model="centerName">
+    <!--<input type="text" v-model="lastName">-->
+    <h1>{{name}}</h1>
+    <h2>{{name2}}</h2>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            firstName:'迪丽热巴 ',
+            lastName:' 新疆姑娘',
+            centerName:'ddd',
+            name2:' wwww '
+        },
+        computed:{
+            name:{
+                //可以单独写 get  但是单独写 set;
+                get(){
+                    return this.firstName + this.centerName + this.lastName;
+                }
+            }
+        },
+        watch:{
+            centerName(cur,prev){
+                this.name2 = this.firstName + cur + this.lastName;
+            }
+        },
+        methods: {}
+    })
+</script>  

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <input type="text" v-model="firstName">
+    <input type="text" v-model="centerName">
+    <input type="text" v-model="lastName">
+    <h1>{{name}}</h1>
+    <h2>{{name2}}</h2>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            firstName:' hhhh ',
+            lastName:' ffff ',
+            centerName:'',
+            name2:'1'
+        },
+        computed:{
+            //可以单独写get 但不能单独写set
+            name: {
+                get() {
+                    return this.firstName + this.centerName + this.lastName
+                }
+            }
+        },
+        watch:{
+            centerName(cur,prev){
+                this.name2=this.firstName + cur + this.lastName
+            }
+        }
+    })
+</script>

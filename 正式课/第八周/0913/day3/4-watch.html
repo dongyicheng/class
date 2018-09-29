@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        <br>
+        <h2>{{msg}}</h2>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'',
+            msg:'' //提示信息
+        },
+        methods: {
+
+        },
+        watch:{
+            name(cur,prev){
+                if(cur.length !== 11) return;
+                axios.get('https://www.huli.com/regist/isUsernameUsed?username='+cur).then((data)=>{
+                    console.log(data);
+                    this.msg = data.data.errorMessage || data.data.data;
+                })
+            }
+        }
+    })
+</script>  

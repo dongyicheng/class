@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <son m="123" :ary="[1,2,3,4]"></son>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<template id="son">
+    <div>
+        <h2 v-for="val in ary">这是子组件{{val}}</h2>
+        {{m}}
+    </div>
+</template>
+<script>
+    let son = {
+        template:'#son',
+        // props:['m'],
+        props:{
+            m:{
+                type:String,
+                default:'abc',
+                required:false,
+                // validator(val){
+                //     console.log(val);
+                //     // return 123
+                //     // 有这个验证的话  这个函数必须有返回值；返回值是一个布尔类型
+                //     // 若这个布尔是个true---> 证明符和自己的验证条件；否则报错
+                //     // 自定义判断  验证传进来的值是否满足自己的需求
+                // }
+            },
+            ary:{
+                default(){
+                    return []// 若没传ary 给一个默认值 空数组
+                }
+            }
+        },
+        data(){
+            return{
+                // m:100  不能和 props中的属性重复命名
+            }
+        },
+        created(){
+            console.log(this.m);
+        },
+        mounted(){
+            console.log(this);
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        components:{
+            son
+        }
+    })
+</script>  

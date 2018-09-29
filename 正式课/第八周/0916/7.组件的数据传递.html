@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    {{ary1}}
+    <son :ary="ary1" q="12" :w="18"></son>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 父 --> 子  是通过属性传递的 ;
+    * 子组件是不能修改  从父组件传递的数据的
+    * 这是个单向数据流 是从父亲传向儿子的 ; 只要父组件的数据更新 , 那么儿子的也会跟着更新
+    *
+    * 当确实需要修改从父组件中获取的数据时  ;  有两种处理方式
+    * 第一种  给子组件 设置data , 在mounted中 把父组件接受的数据复制一份赋给自己的data
+    * 缺点: 当父组件修改时 , 子组件无法同时修改  因为 mounted 只执行一次
+    * 第二种  通过computed属性 依赖于父组件
+    *在父组件修改时 ,  子组件也会相应改变
+    * */
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            n:0,
+            ary1:[1,2,3,4]
+        },
+        components:{
+            son:{
+                template:'<div><h1>this is a son</h1>{{arr2}}<button @click="fn">按钮</button></div>',
+                data(){
+                    return {
+                        n:10,
+                        arr:[]
+                    }
+                },
+                props:['q','w','ary'],
+                mounted(){
+                    console.log(this.q,this.w,this);//字符串'12' 数字18  this是 son 的组件
+                    // this.arr=this.ary;
+                    //Vue  中不报错  ;  但是工作中一般是直接用slice 或者  concat 重新产生一个新数组
+                    this.arr=this.ary.slice();
+                    //保证自己的组件和父亲不是一个地址  无法改变父亲的
+                },
+                computed:{
+                  arr2:{
+                      get() {
+                          return this.ary.slice()
+                      },
+                      set(val){
+
+                      }
+                  }
+                },
+                methods:{
+                    fn(){
+                        // this.ary=[4,5,6] //报错 不能修改父级组件
+                        // this.arr=[4,5,6];
+                        console.log(this.arr2);
+                        this.arr2.pop();
+                        // this.ary.pop();//会把原有数组删掉 , 不要这么使用
+                    }
+                }
+            },
+
+
+        },
+
+    })
+</script>

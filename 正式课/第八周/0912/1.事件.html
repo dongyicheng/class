@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='div'>
+    <h1>{{name}}</h1>
+    <h2>{{obj.aa}}</h2><!--不报错-->
+    <button @click="fn($event,'2018')">按钮</button>
+    <div @mouseenter="move" @mouseleave="leave">按钮</div><!--可以绑定多个-->
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * vm 中的数据  是挂在到vm上的  (数据劫持 get set)
+    *
+    * */
+    let vm=new Vue({
+        el:'#div',
+        data:{
+            obj:{},
+            name:"珠峰培训",
+            // fn(){
+            //     console.log(this);//this 是window
+            // }
+        },
+        //methods方法名不能data中的属性名重复
+        methods:{
+            //fn写到methods中 fn中的this只想这个实例本身
+            fn(a,e){
+                this.name='zhufeng';//点击会跟着改变
+                console.log(arguments);
+                //当fn在DOM中不加括号时 , 那么fn 默认接受一个 事件对象
+                //当fn在DOM中加括号时 , 就不会把事件对象传进来;
+                //若需要事件对象  则在DOM上的fn加一个 $event 实参
+                this.add();//函数内部调用 ; 只用this调用
+            },
+            add(){
+                console.log(add);
+            },
+            move(e){
+                console.log('划过');
+                e.target.style.background="#000"
+            },
+            leave(e){
+                console.log('划出');
+                e.target.style.background=""
+            }
+        }
+    })
+</script>

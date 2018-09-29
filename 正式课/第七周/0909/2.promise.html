@@ -20,15 +20,12 @@
             type:'get',
             url:'./1.json',
             // success:resolve,// success && success(data)
-            success:function(data){
-                // data[19] = 1233;
-                resolve(data);
-            },
+            success:resolve,
             error:reject
         });
     });
     let p2 = p.then((data)=>{
-        console.log(l);
+        console.log(a);
         return new Promise(function (resolve,reject) {
             setTimeout(function () {
                 resolve('success')

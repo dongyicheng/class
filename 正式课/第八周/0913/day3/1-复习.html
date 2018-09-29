@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn(1,$event,2)">按钮</button>
+
+        <input type="checkbox" v-model="ary" value="1">CSS
+        <input type="checkbox" v-model="ary" value="2">JS
+        <input type="checkbox" v-model="ary" value="3">VUE
+        {{ary}}
+
+        <select name="" id="" v-model="selected">
+            <option value="" disabled>请选择</option>
+            <option value="1">CSS</option>
+            <option value="2">JS</option>
+            <option value="3">VUE</option>
+            <option value="4">REACT</option>
+
+            <!--<option>CSS</option>
+            <option>JS</option>
+            <option>VUE</option>
+            <option>REACT</option>-->
+        </select>
+        <br>
+        {{selected}}
+
+        <input type="radio" v-model="sex" value="1">男
+        <input type="radio" v-model="sex" value="0">女
+        {{sex | myFilter(2,3)}}
+        {{sex | myFilter2}}
+    </div>
+    <div id="app2">
+        {{name | myFilter2}}
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * v-on:click ---> @click
+    * checkbox  -->  v-model 绑定一个数组 ； 必须有 value;
+    * select
+    * radio
+    * */
+    Vue.filter('myFilter2',(data)=>{
+       return data + '珠峰培训'
+    });//全局 过滤器  设置全局过滤器时； 用的是 filter  而不是 filters；
+    Vue.filter('myFilter',(data)=>{
+        return data + '珠峰培训'
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'珠峰',
+            ary:[],
+            selected:'',
+            sex:1
+        },
+        filters:{//过滤器
+            myFilter(val,n,m,x){
+                //val -- 0   1
+                console.log(arguments);
+                return val == 0 ? '女' : '男'
+            }
+        },
+        methods: {
+            // fn:function(){}
+            fn(n,e,m){
+               // this --->实例vm
+                console.log(this.name);
+                console.log(n, e, m);
+            }
+        }
+    });
+    let vm2 = new Vue({
+        el:'#app2',
+        data:{
+            name:'珠峰'
+        },
+    });
+
+    /*
+    * axios({
+    *   method:'get',
+    *   params:{name:12},
+    *   url:'./1.json'
+    * }).then().catch()
+    *
+    * axios({
+    *   method:'post',
+    *   data:{name:12},
+    *   url:'./1.json'
+    * }).then().catch()
+    *
+    * */
+</script>  

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="app">
+    <!--
+        根据输入的内容 决定显示的提示信息
+    -->
+    <input type="text" v-model="name2">
+    <h3>{{msg2}}</h3>
+
+
+    <!--<input type="text" v-model="name">
+    <h3>{{name+'123456'}}</h3>
+    <h3>{{fn()}}</h3>
+    <h3>{{name | myFilter}}</h3>
+    <h3>{{msg}}</h3>-->
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'',
+            name2:'',
+            // msg2:''
+        },
+        filters:{
+            myFilter(val){
+                return val + '123456';
+            }
+        },
+        methods: {
+            fn(){
+                return this.name + '123456';
+            }
+        },
+        computed:{
+            msg:{
+                get(){
+                    return this.name + '123456';
+                },
+                set(){}
+            },
+            msg2:{
+                //computed 不支持异步
+                get(){
+                    console.log(this.name2);
+                    setTimeout(() => {
+                        let n = this.name2.length;
+                        console.log(n);
+                        if(n <=2 ){
+                            this.msg2 = '名字不能少于两位'
+                        }else if(n >=4){
+                            this.msg2 = '名字不能超过三位'
+                        }else {
+                            this.msg2 = '正确'
+                        }
+                    },200);
+                },
+                set(){}
+            }
+        },
+        watch:{
+            //只能监听 data中存在的；可以支持异步
+            // name2(cur,prev){
+            //     setTimeout(()=>{
+            //         if(cur.length >=4){
+            //             this.msg2 = '名字太长'
+            //         }
+            //     },2000)
+            // }
+        }
+    })
+</script>  

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{name}}</h1>
+    <son></son>
+</div>
+</body>
+<template id="son">
+    <div>
+        <h2>这是子组件</h2>
+        <button @click="changeName">改名</button>
+    </div>
+</template>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 子组件调用父组件的 方法
+    * 1、正规的 自定义事件  @qqq = 'fn'   --- this.$emit('qqq',1,2,3)
+    * 2、this.$parent.fn(1,2,3);
+    * */
+    let son = {
+        template:"#son",
+        methods:{
+            changeName(){
+                //修改父组件的中的name
+                console.log(this.$parent.name);
+                // this.$parent.name = '珠峰培训2018';// 获取父组件中所有的数据
+                // this.$parent.name2 = '1234';
+                this.$parent.fn();
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:"珠峰培训"
+        },
+        methods: {
+            fn(){
+                this.name = '1234'
+            }
+        },
+        components:{
+            son
+        }
+    });
+</script>  

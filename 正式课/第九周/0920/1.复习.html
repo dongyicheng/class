@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <router-link to="/home" >index</router-link>
+    <router-link to="/list">list</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const home={
+        template:'<h2>首页</h2>',
+        created(){
+            let til=this.$route.meta.til;
+            document.title=til;  //切换标题名字
+        }
+    };
+    const list={
+        template:'<h2>列表页</h2>'
+    };
+    const routes=[
+        {
+            path:'/home',
+            component:home,
+            meta:{
+                til:'首页'
+            }
+        },
+        {
+            path:'/list',
+            component:list,
+        }
+    ];
+    const router=new VueRouter({
+        routes,
+    });
+    //导航守卫
+    //beforeEach 在路由变化之前触发回调函数
+    //afterEach 在路由变化之后触发回调函数
+    router.beforeEach((to,from,next)=>{
+        let til=to.meta.til || '默认title';
+        document.title=til;
+        next();/*不写这个 无法向下走  可以传参数,规定跳转到哪*/
+    })
+
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+    })
+</script>

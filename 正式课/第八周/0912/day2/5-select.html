@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--multiple 多选-->
+        <select name="" id="select" v-model="str"  @change="change">
+            <option value="" disabled>请选择</option>
+            <!--disabled 让该项不能点击 原生的属性-->
+            <option value="1">香蕉</option>
+            <option value="2">苹果</option>
+            <option value="3">桃子</option>
+            <option value="4">梨子</option>
+        </select>
+        {{ary}}
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //不起作用
+    // let options = document.getElementsByTagName('option');
+    // for(let i = 0; i < options.length; i++){
+    //     options[i].onclick = function () {
+    //         console.log(this.innerHTML);
+    //     }
+    // }
+    // select.onchange = function () {
+    //     console.log(this.value);
+    // };
+    let vm = new Vue({
+        el:"#app",
+        data:{
+            str:''
+        },
+        methods:{
+            change(e){
+                // console.log(e.target.value);
+                console.log(this.str);
+            }
+        }
+    })
+</script>  

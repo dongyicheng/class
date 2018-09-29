@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        {{$store.state.qqq}}
+        <home></home>
+        <list></list>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vuex/dist/vuex.js"></script>
+<script>
+    const home = {
+        template:`<h2>{{$store.state.qqq}}
+                    <button @click='fn'> 按钮+</button>
+                    <button @click='fn2'> 按钮-</button>
+                    </h2>`,
+        created(){
+            console.log('son',this);
+        },
+        methods:{
+            fn(){
+                // this.$store.state.qqq++
+                //this.$store.commit 是执行 mutations中的函数
+                // 第一个参数 是 mutations中对应的函数名；
+                // 第二个参数 是传给对应函数的实参
+                this.$store.commit('add',1);
+            },
+            fn2(){
+                this.$store.commit('remove',10)
+            }
+        }
+    };
+    const list = {
+        template:`<ul><li v-for="val in ary">name:{{val.name}};age:{{val.age}}</li>
+        ===
+            <li v-for="val in arr">name:{{val.name}};age:{{val.age}}</li></ul>`,
+        data(){
+            return {
+                ary:this.$store.state.ary.filter((item)=>{
+                    return item.age >= 18;
+                })
+            }
+        },
+        computed:{
+            arr:{
+                get(){
+                    return this.$store.state.ary.filter((item)=>{
+                        return item.age >= 18;
+                    })
+                }
+            }
+        }
+    };
+    const store = new Vuex.Store({
+        //state 仓库 用来放置公用数据的
+        state:{
+            qqq:0,
+            www:0,
+            ary:[
+                {name:'tom',age:30},
+                {name:'Jerry',age:18},
+                {name:'rose',age:10}
+                ]
+        },
+        //
+        mutations:{
+            add(state,obj){
+                //只有两个参数；第一个参数 是 vuex中的 state，
+                // 第二项是 对应commit执行时，传递进来第二个参数
+                // vuex提倡通过 这种方式修改咱们的state属性
+                //obj 一般是个对象，但是也支持 传 值类型
+                console.log(arguments);
+                state.qqq += obj
+            },
+            remove(state,obj){
+                state.qqq -= obj
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#app',
+        store,
+        data: {},
+        created(){
+            console.log(this);
+        },
+        methods: {},
+        components:{
+            home,list
+        }
+    })
+</script>  

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src="">
+    </script>
+</head>
+<body>
+<div id='app'>
+    <my-name></my-name>
+    <my-name></my-name>
+    <my-name></my-name>
+</div>
+</body>
+</html>
+<template id="myName"><!--不能放到 #app 里-->
+    <div>
+        <button @click="fn">点击我</button>
+        我被点击了{{n}}次
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let obj={n:0};
+    Vue.component('my-name',{
+        // template:'<div><button @click="fn">点击我</button>我被点击了{{n}}次</div>',
+        template:'#myName',
+        data(){//写成函数的形式  可以每次都返回一个不同的地址  保证多次调用时 每个组件的独立性(不会发生一个数值改变 , 其他都跟着变)
+            return {n:0};
+        },
+        methods:{
+            fn(){
+                console.log(this);//this 是指向这个组件本身的
+                this.n++;
+            }
+        }
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {}
+    })
+</script>

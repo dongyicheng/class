@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .left{
+            float: left;
+            width: 200px;
+            height: 100px;
+            background: red;
+        }
+        .right{
+            float: right;
+            height: 100px;
+            background: green;
+            width: 100px
+        }
+        .middle{
+            background: yellow;
+            height: 100px;
+            margin-left: 200px;
+            margin-right: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="middle"></div>
+</body>
+</html>
+<script>
+    // 左边固定 右边自适应
+let ary = [{a:1,b:2},{a:2,b:1},{a:1,b:2},{b:2,a:1}]
+let obj = {};
+// let len = ary.length
+for (let i = 0; i < ary.length; i++) {
+    if(obj[ary[i].a+','+ary[i].b]){
+        obj[ary[i].a+','+ary[i].b]=obj[ary[ary.length-1].a+','+ary[ary.length-1].b];
+        ary.length--;
+        // ary.splice(i,1)
+        i--;
+        continue;
+    }
+    obj[ary[i].a+','+ary[i].b]=true
+}
+console.log(ary);
+</script>

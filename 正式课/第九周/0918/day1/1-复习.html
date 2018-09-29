@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--自定义组件名的使用情况
+            1、在DOM结构中使用 不能用驼峰式命名的组件
+            2、在 template中 可以使用驼峰
+            两种情况都可以使用 my-name
+        -->
+        <my-name></my-name>
+        <com1></com1>
+        <component2></component2>
+    </div>
+</body>
+</html>
+<template id="myName">
+    <!--只能有一个根元素-->
+    <div v-if="true">
+        <h1>myName</h1>
+        <com1></com1>
+    </div>
+    <div v-else>
+        <h3>myName</h3>
+    </div>
+</template>
+<template id="com1">
+    <h2>组件1</h2>
+</template>
+<template id="com2">
+    <h2>组件2</h2>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let component1 = {
+        template:'#com1'
+    };
+    let component2 = {
+        template:"#com2"
+    };
+    // Vue.component('my-name',{
+    Vue.component('myName',{
+        template:"#myName",
+        data(){
+            return {
+
+            }
+        },
+        components:{
+            com1:component1
+        }
+    });
+
+    let vm = new Vue({
+        el: '#app',
+        // template:"<div>template<myName></myName></div>",
+        data: {},
+        components:{
+            com1:component1,
+            component2,
+        },
+        methods: {}
+    })
+</script>  

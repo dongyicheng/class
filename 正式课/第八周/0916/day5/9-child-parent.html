@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 子跟父通信  需要通过自定义事件来实现； 在子组件的行内定义一个事件，这个事件在子组件中 根据自己的业务逻辑来触发； 通过 this.$emit(‘自定义事件名称’，。。。其他参数)    来触发 自定义事件-->
+        <!-- @my-name自定义事件    -->
+        <!-- v-on:my-name 类似于原生的 on ---》 订阅  -->
+        <son :money="num" @my-name="fn"></son>
+        <h2>{{name}}</h2>
+    </div>
+</body>
+</html>
+<template id="son">
+    <div>
+        {{money}}
+        {{arr}}
+        <button @click="clickFn">按钮</button>
+    </div>
+</template>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:'#son',
+        props:['money'],
+        // props:{
+        //     money:{
+        //         type:String
+        //     }
+        // },
+        data(){
+            return {
+                name:'珠峰培训',
+                arr:[1,2,3]
+            }
+        },
+        methods:{
+            clickFn(){
+                //若传给 父组件的是一个引用数据类型，则父组件修改这个数据时，仍然会把子组件的这个数据修改掉；
+                this.$emit('my-name',this.name,this.arr);
+                // fire('myDrag',)
+                console.log(this);
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            num:800,
+            name:''
+        },
+        methods: {
+            fn(){
+                console.log(arguments);
+                this.name = arguments[0] + '2018';
+                arguments[1].pop();
+            }
+        },
+        components:{
+            son
+        }
+    })
+</script>  

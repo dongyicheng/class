@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <brother1></brother1>
+        <brother2></brother2>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm2 = new Vue();
+    let brother1 = {
+        template:'<div :style="{background:col}">红色<button @click="changeCol">兄弟变红</button></div>',
+        created(){
+            vm2.$on('changeColor',(val)=>{
+                console.log('brother1');
+                this.col = val;
+            })
+        },
+        data(){
+            return{
+                col:'red'
+            }
+        },
+        methods:{
+            changeCol(){
+                vm2.name = '珠峰';
+                vm2.$emit('changeColor2','red');
+            }
+        }
+    };
+    let brother2 = {
+        template:'<div :style="{background:col}">蓝色<button @click="changeCol">兄弟变蓝</button></div>',
+        created(){
+            vm2.$on('changeColor2',(val)=>{
+                this.col = val;
+            })
+        },
+        data(){
+            return{
+                col:'blue'
+            }
+        },
+        methods:{
+            changeCol(){
+                vm2.$emit('changeColor','blue')
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        components:{
+            brother1,
+            brother2
+        }
+    });
+</script>  

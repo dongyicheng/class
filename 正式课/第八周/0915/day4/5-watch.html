@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">珠峰培训</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            obj:{
+                name:123,
+                obj2:{
+                    name:345
+                }
+            }
+        },
+        methods: {},
+        watch:{
+            // obj(cur,prev){
+            //     console.log(1)
+            // }
+            obj:{
+                handler(cur,prev){
+                    console.log(1);
+                },
+                // handler:function(){},
+                deep:true
+            }
+        }
+    })
+</script>  

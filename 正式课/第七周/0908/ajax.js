@@ -1,73 +1,65 @@
-function ajax(options){
-let{
-    url,
-    data={},
-    type='get',
-    dataType='json',
-    cache=false,
-    async=true,
-    success,
-    error,
-}=options;
-    let str='';
+function ajax(options) {
+    let {
+        type = 'get',
+        url,
+        data = {},
+        dataType = 'json',
+        async = true,
+        cache = false,
+        success,
+        error
+    } = options;
+    let str = '';
+
     for (var k in data) {
-        if(data.hasOwnProperty(k)){
-            str+=`${k}=${data[k]}$`
+        if (data.hasOwnProperty(k)) {
+            str += `${k}=${data[k]}`
         }
-    }
-    str=str.slice(0,str.length-1);
-
-    let isGet=null;
-    if(/get|head|delete/.test(type)){
-        isGet=true;
-    }else if(/post|put/.test(type)){
-        isGet=false;
     }
 
-    let xhr=new XMLHttpRequest();
-    if(isGet){
-        if(url.indexOf('?') === -1){
-            url +=`?${str}`
-        }else{
-            url=url.replace(/&$/,'')
-            url+=`&${str}`;
+    if(/get|head|delete/.test(type)) {
+        if (url.indexOf('?') === -1) {
+            url += `?${str}`
+        } else {
+            url = url.replace(/&$/, '')
+            url += `&${str}`
         }
-        if(cache == false){
-            url+=`$_=${Math.random()}`
-        }
+        cache ? null : url += `&t=${Math.random()}`
     }
-    xhr.open(type,url,async);
-    xhr.onreadystatechange=function () {
-        if(xhr.readyState===4&&/^2\d{2}|304/.test(xhr.status)){
-            switch(dataType){
-                case 'json':
-                    let data=JSON.parse(xhr.response)
-                    success&&success(data);
-                    break;
-                case 'xml':
-                    success&&success(xhr.responseXML)
-                    break;
-                default:
-                    success&&success(xhr.response)
+        let xhr = new XMLHttpRequest();
+        xhr.open(type, url, async)
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && /^2\d{2}|304/.test(xhr.status)) {
+                let data = null;
+                switch (dataType) {
+                    case 'json':
+                        data = JSON.parse(xhr.responseText);
+                        success && success(data)
+                        break;
+                    case 'xml':
+                        success && success(xhr.responseXML);
+                        break;
+                    default:
+                        success && success(xhr.response);
+                }
+            }
+            if (xhr.readyState === 4 && /^[45]\d{2}/.test(xhr.status)) {
+                error && error(data)
             }
         }
-        if(xhr.readyState===4&&/^[45]\d{2}/.test(xhr.status)){
-            error&&error(xhr)
+        if(/post|put/.test(type)){
+            xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
         }
-    }
-    if(!isGet){
-        xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
-    }
-    xhr.send(str)
+        xhr.send(str);
 }
 ajax({
-    type: 'post',
-    url: '1.json?n=12&',
-    data: {name: '珠峰'},
-    success: function (d) {
+    type:'post',
+    url:'./1.json?n=12&',
+    data:{name:'珠峰'},
+    success:function (d) {
         console.log(d);
     },
-    error: function (res) {
+    error:function (res) {
         console.log(res);
     }
-})
+});

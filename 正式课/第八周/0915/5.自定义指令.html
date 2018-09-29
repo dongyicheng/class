@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <button @click="fn">按钮</button>
+    <input type="text" v-focus1="flag">
+    <div v-color="col">gggg</div>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag:true,
+            col:'red'
+        },
+        directives:{//添加自定义属性
+          focus1(el,obj){//el 当前元素  obj.value是变量的值
+              console.log(obj.value);
+              if(obj.value) {
+                  //     setTimeout(function () {
+                  //         el.focus()
+                  //     },10)
+                  el.focus()
+                  // debugger;
+              }
+          },
+          color(el,obj){
+              //改变字体颜色
+              el.style.color=obj.value;
+          }
+        },
+        mounted(){
+            // debugger;
+        },
+        methods:{
+            fn(){
+                this.flag=!this.flag;
+            }
+        }
+    })
+</script>

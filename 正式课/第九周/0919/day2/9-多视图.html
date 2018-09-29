@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/home">首页</router-link>
+        <!--
+            <router-view name="default"></router-view>
+            等价于
+            <router-view></router-view>
+        -->
+        <router-view name="a"></router-view>
+        <!--
+        <router-view name="a"></router-view>
+        <router-view name="b"></router-view>-->
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    const home1 = {
+        template:"<h2>home1</h2>"
+    };
+    const home2 = {
+        template:"<h2>home2</h2>"
+    };
+    const home3 = {
+        template:"<h2>home3</h2>"
+    };
+    const routes = [
+        {
+            path:'/home',
+            components:{
+                default:home1,
+                a:home2,
+                b:home3
+            }
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+        methods: {}
+    })
+</script>  

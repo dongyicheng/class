@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        .current{
+            color:#a6a8ff;
+        }
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <router-link to="/home" tag="button">首页</router-link>
+    <router-link to="/list" tag="button">列表页</router-link>
+    <router-view></router-view>
+</div>
+</body>
+</html>
+<template id="list">
+    <div>
+        <h2>列表页</h2>
+        <!--to 后面要写全路径-->
+        <router-link to="/list/detail">去详情页</router-link>
+        <router-link to="/list/detail2">去详情页2</router-link>
+        <router-link to="/list/detail3">去详情页3</router-link>
+        <router-view></router-view>
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home={
+        template:'<h2>首页</h2>'
+    };
+    let list={
+        template:'#list'
+    };
+    let detail={
+        template:'<h2>详情页</h2>'
+    };
+    let detail2 = {
+        template:"<h2>详情页2</h2>"
+    };
+    let detail3 = {
+        template:"<h2>详情页3</h2>"
+    };
+    const routes=[
+        {
+            path:'/home',
+            component:home,
+        },
+        {
+            path:'/list',
+            component:list,
+            redirect:'/list/detail',//进了list  直接转入detail页
+            children:[{
+                path:'detail',//'/list/detail'
+                component:detail,
+            },
+                {
+                    path:'detail2',
+                    component:detail2,
+                },
+                {
+                    path:'detail3',
+                    component:detail3,
+                },
+            ]
+        }
+    ];
+    let router=new VueRouter({
+        routes,
+        linkActiveClass:'current',
+        mode:'hash' //默认值为正常显示  history 跟真实路径一样 没有问号  刷新一下就404 得找运维配置页面
+    })
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+    })
+</script>

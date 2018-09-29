@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.css">
+    <style>
+        h2{
+            position: absolute;
+            top: 100px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--<a href="#/home1">首页</a>-->
+        <!--<a href="#/list">列表页</a>-->
+        <router-link to="/home1">首页</router-link>
+        <router-link to="/list">列表页</router-link>
+
+        <transition
+                enter-active-class="animated fadeIn"
+                leave-active-class="animated fadeOut"
+
+        >
+            <!--不能放到 transition外边  放到外边失效-->
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </transition>
+
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    /*
+    * 步骤
+    * 1、先写对应的组件
+    * 2、根据写好的组件 编写路由映射表
+    * 3、创建一个router实例 把路由映射表注入到这个实例中
+    * 4、把router注入根实例中
+    *
+    * */
+    let home = {
+        template:"<h2>首页</h2>",
+        mounted(){
+            console.log('home');
+        }
+    };
+    let list = {
+        template:"<h2>列表页</h2>",
+        mounted(){
+            console.log('list');
+        }
+    };
+    /*路由映射表*/
+    let routes = [
+        {
+            path:'/home1',
+            component:home
+        },
+        {
+            path:'/list',
+            component:list
+        }
+    ];
+    const router = new VueRouter({
+        routes
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,// 注入
+        methods: {}
+    })
+</script>  

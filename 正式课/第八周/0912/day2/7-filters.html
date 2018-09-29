@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="name">
+    {{name | myName('珠峰') | myName2}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#app',
+        data:{
+            name:''
+        },
+        filters:{
+            // 每个过滤器都是个函数
+            myName(val,str){
+                console.log(val);
+                return val.toUpperCase() + str;
+            },
+            myName2(val){
+                return '培训'
+            }
+        }
+    })
+</script>  

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--<zfpx></zfpx>-->
+    <my-name></my-name>
+    <my-name></my-name>
+    <my-name></my-name>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 组件 : 复用性高  可维护性强
+    * 组件 ---> 功能  页面级块  ,  可复用的模块
+    *保证组件的独立性 : 不从其他地方拿数据  只能拿自己的定义的数据
+    *
+    *
+    * Vue 中的组件 --->  全局组件  局部组件
+    *
+    * */
+
+    /*
+    * 全局组件的声明加注册  使用 Vue.component('组件名',{
+    *     template:"<span></span>" ----> DOM模板是个字符串 , 里边是个正常的DOM标签 , template中只能含有一个DOM根元素 , 不然报错 , 可以包在元素里面
+    *
+    * })
+    * 声明好了 在哪里都可以被使用
+    * */
+    // Vue.component('zfpx',{
+    //     /*zfpx  组件名*/
+    //     template:`<h1>zfpx<h2>2018</h2></h1>`
+    // });
+    Vue.component('my-name',{
+        //命名驼峰式 上面标签叫一样的名字 会报错 名字被统一变成小写了
+        //直接在上都命名成 xxx-xxx 就可以了
+        template:`<h1>zfpx<h2>{{name}}</h2></h1>`,
+        data(){//组件的data 必须是一个函数
+            return {
+                name: '珠峰'
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {}
+    })
+</script>

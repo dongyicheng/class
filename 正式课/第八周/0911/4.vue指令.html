@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='div'>
+    <h1>{{name}}</h1>
+    <h2 v-text="name"></h2>
+    <input type="text" v-model="name">
+    <div>
+        {{p}}
+        <div v-html="p"></div>
+    </div>
+
+    <div v-once>v-once:{{name}}</div><!--只渲染一次  再改变也不会变化-->
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:'#div',
+        data:{
+            name:'珠峰培训',
+            p:'<p>zhufeng</p>'
+            //在小胡子里 直接当字符串输出 ; 在行内写上v-html="p" 即可当标签输出
+
+        }
+    })
+    /*
+    * v-text
+    * v-model
+    * v-html 渲染有DOM结构的字符串
+    * v-once 后面没有表达式 只渲染一次 在改变也不会跟着变化
+    *
+    * */
+</script>

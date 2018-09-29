@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        h2{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+    <script src=""></script>
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.css">
+</head>
+<body>
+<div id='app'>
+    <!--<a href="#/home">首页</a>-->
+    <!--<a href="#/list">列表页</a>-->
+    <router-link to="/home">首页</router-link>
+    <router-link to="/list">列表页</router-link>
+        <transition
+                enter-active-class="animated fadeIn"
+                leave-active-class="animated fadeOut"
+                >
+            <keep-alive><!--使组件不会被销毁  必须要加在router-view的外面 加在transition外面没用-->
+                <router-view></router-view>
+            </keep-alive>
+        </transition>
+
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+   /*
+   * 步骤
+   * 1 先写对应的组件
+   * 2 根据写好的组件 编写路由映射表
+   * 3 创建一个router实例 把路由映射表注入到这个实例中
+   * 4 把router注入根实例中
+   * */
+    let home={
+        template:'<h2>首页</h2>',
+        mounted(){
+            console.log('home');//每点一次 都会输出 说明每次切换都会自动销毁 在DOM结构上加上<keep-alive>即可
+        }
+    };
+    let list={
+        template:'<h2>列表页</h2>',
+    };
+    /*
+   * 路由映射表
+   * */
+    let routes=[
+        {
+        path:'/home',
+        component:home,
+       },
+        {
+            path:'/list',
+            component:list,
+        },
+    ];
+    const router = new VueRouter({
+        routes
+    })
+    let vm = new Vue({
+        el: '#app',
+        router,//注入
+        data: {}
+    })
+</script>

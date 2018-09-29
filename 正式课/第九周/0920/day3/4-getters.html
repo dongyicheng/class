@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .lt{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="text" placeholder="请输入姓名" v-model="name">
+    <input type="number" placeholder="请输入年龄" v-model="age">
+    <button @click="add">添加</button>
+    <list1></list1>
+    <list2></list2>
+</div>
+</body>
+</html>
+<template id="list1">
+    <ul class="lt">
+        <h2>成年</h2>
+        <!--{{qqq}}-->
+        <!--{{$store.getters.list1Ary}}-->
+        {{list1Ary}}
+        <!--{{www}}{{eee}}-->
+        <li v-for="v in arr">name:{{v.name}}-----age:{{v.age}}</li>
+    </ul>
+</template>
+<template id="list2">
+    <ul class="lt">
+        <h2>未成年</h2>
+        <li v-for="v in arr">name:{{v.name}}-----age:{{v.age}}</li>
+    </ul>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="../node_modules/vuex/dist/vuex.js"></script>
+<script>
+    /*
+    * 两个列表组件  一个组件显示 成年的  另一个组件未成年的；
+    * 父组件中 有2个 input框 是添加人物的
+    * 1、先创造两个组件
+    * 2、获取输入的内容的组成的对象 然后添加到 vuex的数组中 ;使用 vuex的 mutations 提交
+    * */
+    const list1 = {
+        template:'#list1',
+        data(){
+            return{
+                ary: this.$store.state.ary.filter((item)=>{
+                    return item.age >= 18
+                })
+            }
+        },
+        computed:{
+            arr(){
+                // 大前提 是  这个 arr 必须用到视图上
+                return this.$store.state.ary.filter((item)=>{
+                    return item.age >= 18
+                })
+            },
+            // ...Vuex.mapState(['qqq','www','ee']),
+            ...Vuex.mapState({
+                // qqq: state => state.qqq + 1111,
+                qqq(state){ state.qqq + 1111}
+            }),
+            ...Vuex.mapGetters(['list1Ary'])
+            // list1Ary(){return this.$store.getters.qqq}
+        }
+        // computed:Vuex.mapState(['qqq','www','eee'])
+        // 'qqq' ----> qqq(){return this.$store.state.qqq}
+    };
+    const list2 = {
+        template:'#list2',
+        computed:{
+            arr(){
+                return this.$store.state.ary.filter((item)=>{
+                    return item.age < 18
+                })
+            }
+        }
+    };
+    const obj = {
+        state:{
+            qqq:0,
+            www:0,
+            eee:0,
+            ary:[
+                {name:'tom',age:30},
+                {name:'Jerry',age:18},
+                {name:'rose',age:10}
+            ]
+        },
+        getters:{
+            // 他就是一个 computed 计算属性
+            list1Ary(state){// 传进来的参数 就是咱们vuex 中的state
+                console.log(state);
+                return state.ary.filter((item)=>{
+                    return item.age >=18;
+                })
+            }
+        },
+        mutations:{
+            changeAry(state,obj){
+                obj = obj || {};
+                state.ary.push(obj);
+            }
+        }
+    };
+    const store = new Vuex.Store(obj);
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'',
+            age:''
+        },
+        store,
+        methods: {
+            add(){
+                // 用 name 和 age 组成对象  ，然后添加到 vuex中的 ary里
+                let obj = {};
+                obj.name = this.name;
+                obj.age = this.age;
+                this.$store.commit('changeAry',obj);
+                this.name = '';
+                this.age = '';
+            }
+        },
+        components:{
+            list1,list2
+        }
+    })
+</script>  

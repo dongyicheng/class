@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style>
+        .bg{
+            background: #fa866e;
+        }
+        .col{
+            color: #a6a8ff;
+        }
+        .fnt{
+            font-size: 50px;
+        }
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--<div class="bg col" :class="true?'fnt':''">zhufeng</div>-->
+    <!--<div class="bg col" :class="{fnt:!flag}">-->
+    <!--<div class="bg" :class="['fnt',cla,]">-->
+    <div class="bg" :class="ary">
+        <!--<img :src="pic" alt=""  :title="title">-->
+        珠峰
+    </div>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag:false,
+            pic:'',
+            title:'',
+            cla:'col',
+            ary:['col','fnt']
+        }
+    })
+</script>

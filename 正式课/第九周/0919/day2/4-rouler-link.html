@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .router-link-active{
+            color: #cc080b;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--
+            router-link  标签上的 tag 是修改 展示的标签元素的  不写的话默认 a标签
+            active-class 是控制当前选中状态的类名的，后边跟的值就是选中状态下的类名,
+                         不写这个属性，默认选中的类名就是 "router-link-active"
+            exact-active-class  精确（会把传的一些参数 认成不同路径）匹配 路由 ；
+                         不写这个属性， 默认类名 是 router-link-exact-active
+
+        -->
+        <!--<router-link-->
+                <!--to="/home?name=12"-->
+                <!--tag="button"-->
+                <!--active-class="current">首页</router-link>-->
+        <!--<router-link-->
+                <!--to="/list?name=q"-->
+                <!--tag="button"-->
+                <!--exact-active-class="exactClass"-->
+        <!--&gt;列表页</router-link>-->
+
+        <!--query 这个单词是 vue-router规定的； 后边跟的是个对象，router 会把对象中的每一项拼接到路由后边，-->
+        <router-link :to="{path:'/home',query:{name:12,age:13}}">首页</router-link>
+
+
+        <!--路径传参-->
+        <!--params 这个单词也是 vue-router规定的； 它是对象中的参数当作路径拼到之前的路径上， 这个地方不能再用 path条转  必须用 name（这个属性名也是固定的）跳转-->
+        <router-link :to="{name:'qqq',params:{name:12}}">列表页</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script src="../../node_modules/vue-router/dist/vue-router.js"></script>
+<script>
+    let home = {
+        template:"<h2>首页</h2>",
+        mounted(){
+            console.log(this.$route.query);
+            //通过$route可以获取路径上的参数
+            console.log(this);
+        }
+    };
+    let list = {
+        template:"<h2>列表页</h2>",
+        mounted(){
+            console.log(this.$route.params);
+            console.log(this);
+        }
+    };
+    const routes = [
+        {
+            path:'/home',
+            component:home
+        },
+        {
+            path:'/list/:name',//若想用 路径传参 ，则需要在路径参数对应的位置写成 :变量的形式  ---》 这个变量会对应上 在行内设置的 params对象中的属性名对应的属性值
+            name:'qqq', // 若想用 路径传参；则必须用 name 去指定跳转路径
+            component:list
+        }
+    ];
+    const router = new VueRouter({
+        // mode:'history',
+        routes,
+        linkActiveClass:'current2',//这个是给全局的选中状态下的 router-link修改类名
+        linkExactActiveClass:'activeClass'
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        router,
+        methods: {}
+    })
+</script>  

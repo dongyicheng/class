@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    {{name}}
+    <input type="checkbox" v-model="checked" value="1">CSS<!--checkbox 多选框-->
+    <input type="checkbox" v-model="checked" value="2">JS
+    <input type="checkbox" v-model="checked" value="3">VUE
+    <input type="text" v-model="name" value="123"><!--value起作用了但是被vue盖了-->
+    {{checked}}
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm =new Vue({
+        el:"#app",
+        data:{
+            name:"",
+            checked:[],//在checkbox上只有true 和 false
+        }
+    })
+</script>

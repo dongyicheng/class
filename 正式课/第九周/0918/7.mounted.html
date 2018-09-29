@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <son ref="son"></son>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 父子组件之间  子组件先渲染完  父组件最后才能渲染完
+    * */
+    let son={
+        template:'<div>子组件{{name}}</div>',
+        mounted(){
+            alert('son')//先son 再parent
+        },
+        data() {
+            return {
+                name: ''
+            }
+        }
+    }
+
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        mounted(){
+            alert('parent');
+            this.$refs.son.name='dd';
+            console.log(this.$refs.son.$el.innerHTML);
+            this.$nextTick(()=>{
+                //
+                console.log(this.$refs.son.$el.innerHTML);
+
+            })
+        },
+        components:{son,}
+
+    })
+</script>

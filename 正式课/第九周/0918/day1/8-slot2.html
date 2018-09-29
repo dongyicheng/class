@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <style>
+        .mask{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            top: 0;
+            left: 0;
+        }
+        .content{
+            position: relative;
+            width: 600px;
+            height: 400px;
+            top:50%;
+            margin:-200px auto 0;
+            background: #fff;
+        }
+        header{
+            text-align: center;
+            font-size: 30px;
+        }
+        main{
+            text-align: center;
+            font-size: 25px;
+        }
+        footer{
+            text-align: right;
+            font-size: 20px;
+            position: absolute;
+            width: 100%;
+            bottom: 50px;
+            right: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <button @click="flag = !flag">显示弹框</button>
+    <model
+            v-show="flag"
+            :data="modelData"
+            @cancelBtn = 'fn'
+            @sureBtn = 'fn2'
+            custom-class="wwww"
+            title="传进来的标题"
+    >
+        <div class="tell">这个是个告知通知</div>
+        <!--<div class="footer" slot="footer">-->
+        <!--<button @click="parentFn">我知道了</button>-->
+        <!--</div>-->
+    </model>
+    <model custom-class="qqq"></model>
+    <model custom-class="aaa"></model>
+</div>
+</body>
+</html>
+<template id="mask">
+    <div class="mask">
+        <div class="content" :class="customClass">
+            <header>{{title}}</header>
+            <main><slot></slot></main>
+            <footer>
+                <slot name="footer">
+                    <button @click="$emit('cancelbtn',false)">取消</button>
+                    <button @click="sure">确认</button>
+                </slot>
+            </footer>
+        </div>
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let model = {
+        template:'#mask',
+        data(){
+            return {
+                name:"子组件"
+            }
+        },
+        // props:['data','custom-class'],
+        props:{
+            data:{},
+            "custom-class":{
+                type:String,
+                default:''
+            },
+            title:{
+                default:'这是默认标题'
+            }
+        },
+        methods:{
+            cancel(){
+                this.$emit('cancelbtn',false);
+            },
+            sure(){
+                this.$emit('surebtn');
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag: false,
+            name:'父组件',
+            modelData:{
+                title:'这个是父组件传递title',
+                content:"<h1> 自定义的结构</h1>"
+            }
+        },
+        methods: {
+            fn(val){
+                //val 是子组件传进来的
+                this.flag = val;
+            },
+            fn2(){
+                alert('确定')
+            },
+            parentFn(){
+                // console.log(this);
+                this.flag = false;
+                setTimeout(() => {
+                    console.log("已发送给后台")
+                },3000);
+            }
+        },
+        components:{
+            model
+        }
+    })
+</script>  

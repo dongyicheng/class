@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>
+<script>
+    /*
+    *
+    *
+    * */
+    let obj = {};
+    let temp = {};
+    Object.defineProperty(obj,'name',{
+        // value:'珠峰培训', // 对应的value值
+        // enumerable:true, // 可枚举， 默认是 false
+        // writable:true, // 是否可写
+        // configurable:true // 是否可删除
+        get(){ // 当这个属性被获取的时候会触发这个get
+            // console.log('get');
+            return temp['name'];
+            // return 123; //获取这个属性时，给外界的value值
+        },
+        set(val){ // 当我们给这个属性赋值时 会触发这个set
+            // console.log(val);
+            // console.log('set');
+            // obj.name = val;
+            div1.innerHTML = val;
+            temp['name'] = val;
+        }
+    });
+    // obj.name = 200;
+    // console.log(obj);
+    // for(let k in obj){
+    //     console.log(k);
+    // }
+</script>  

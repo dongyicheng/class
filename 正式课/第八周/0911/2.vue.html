@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <!--
+    两个大括号 小胡子语法
+    能写变变量 也能写表达式 ；不能写JS语句
+    -->
+    {{name}}
+    {{1<2?name='fff':null}}<!--输出两个’fff‘-->
+    <h1 v-text="name"></h1>
+     v-text === {{}}
+
+
+    <!--视图驱动数据  用表单元素 input textarea-->
+    <input type="text" v-model="name"><!--输入框改变 name就会跟着变 改变页面  双向改变  name改变input也会变-->
+    <!--<h1>{{name}}</h1>-->
+
+    <textarea name="" id="" cols="30" rows="10" v-model="age"></textarea>
+    <h1>{{name+"的年龄是"}}{{age}}</h1><!--这两个都可以-->
+    <h1>{{name+"的年龄是"+age}}</h1>
+    <h3 v-text="name"></h3>
+</div>
+</body>
+</html>
+<script>
+    /*
+    * 渐进式 框架
+    *
+    * 库 JQ zepto animate.css  --->我们调用库
+    * 框架 vue react bootstrap angular 有自己一套独立的解决方案
+    *   每一个框架 都有自己的一个核心库  框架调用我们写的代码
+    *
+    *
+    * 渐进增强  优雅降级
+    *
+    * 渐进式
+    * 本身有自己的一套核心代码；
+    * vue全家桶  vue  vue-router axios vueX（状态管理器）
+    *
+    * Object.defineProperty
+    *
+    * 设计模型
+    * MVC 数据单向（通过数据 改变视图）
+    * M model
+    * V view
+    * C controller
+    * MVVM 双向（通过数据 改变视图 通过视图改变数据）
+    * M model
+    * V view
+    * VM view-model
+    * */
+</script>
+<script src="node_modules/vue/dist/vue.js">
+
+</script>
+<script>
+    //el 是指对哪个元素实行VUE； 这个元素不能是html或者body
+    //指令 行内的VUE自定义属性  vue的指令都是 v- 开头的
+    let a=2018;
+    let vm = new Vue({
+        el:'#app',//css选择器
+        data:{
+            name:`珠峰培训${a}`,
+            age:12//最终会把数据放到vm上 ； vm代理data中的数据
+        }
+    });
+    console.log(vm);
+</script>

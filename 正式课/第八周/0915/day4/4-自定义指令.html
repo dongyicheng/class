@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="fn">按钮</button>
+        <input type="text" v-focus1="flag">
+        <div v-color="col">珠峰培训</div>
+        <div v-drag='true'>珠峰</div>
+        <!--<div type="text" v-focus1="flag">dddd</div>-->
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag:true,
+            col:'red'
+        },
+        directives:{
+            focus1(el,obj){
+                if(obj.value){
+                    setTimeout(function () {
+                        el.focus()
+                    },10)
+                    // el.focus();
+                }
+            },
+            color(el,obj){
+                // 改变字体颜色
+                el.style.color = obj.value;
+            }
+        },
+        methods: {
+            fn(){
+                this.flag = !this.flag
+            }
+        }
+    })
+</script>  

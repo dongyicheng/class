@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    {{$store.state.count}}
+    <home></home>
+    <list></list>
+</div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/vuex/dist/vuex.js"></script>
+<script>
+    const store = new Vuex.Store({
+        // state 仓库 是用来放置公用数据的
+        state:{
+            count:0,
+            ary:[
+                {name:'tom',age:20},
+                {name:'jerry',age:18},
+                {name:'rose',age:10}
+                ]
+        },
+        mutations:{
+            //每个函数只对应一个操作 , 以后好维护
+            add(state,obj){
+                //只有两个参数  第一个参数 默认 是vuex中的state ,
+                // 第二项是commit执行时 传进来的参数 一般是对象,但是也支持传值类型
+                //vuex提倡通过 这种方式修改state属性
+                console.log(arguments);
+                state.count+=obj;
+            },
+            remove(state,obj){
+                state.count-=obj;
+            }
+        }
+    });
+    const home ={
+        template:'<h2>{{$store.state.count}} <button @click="fn">按钮+</button><button @click="fn2">按钮-</button></h2>',
+
+        methods: {
+            fn() {
+                // this.$store.state.count++ //真实项目不会这么用
+                this.$store.commit('add',1) ;
+                //this.$store.commit  是执行  mutations 中的函数
+                //第一个参数是 mutations 中对应的函数名 ;  第二个参数  是传给对应函数的实参
+            },
+            fn2(){
+                this.$store.commit('remove',10) ;
+            }
+        }
+    }
+    const list={
+        template:`<ul><li v-for="val in ary">name:{{val.name}};age:{{val.age}}</li>====
+<li v-for="val in arr">name:{{val.name}};age:{{val.age}}</li></ul>`,
+        data(){
+            return{
+                ary:this.$store.state.ary.filter((item)=>{
+                    return item.age>=18;
+                })
+            }
+        },
+        computed:{
+            arr:{
+                get() {
+                    return this.$store.state.ary.filter((item) => {
+                        console.log(this.$store);
+                        return item.age >= 18;
+                    })
+                }
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        store,
+        mounted(){
+            console.log(this);//把store的内容 挂载到了$store下
+        },
+        components:{
+            home,
+            list,
+        }
+    })
+</script>

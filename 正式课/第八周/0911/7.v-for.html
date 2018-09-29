@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='div'>
+    <ul>
+        <li>{{ary[1].name}}</li><!--小红-->
+        <!--要循环谁 就把 v-for 加到谁身上  val in ary  val 代表数组中的每一项;当需要索引时,写两个参数,用括号包起来;前面的参数是数组中的项,后面的是该项对应的索引-->
+        <li v-for="(val,i) in ary">
+            {{i+1}}姓名:{{val.name}}<br>
+            <span v-for="(v,i) in val.user">用户:{{i+1}}:{{v}}<br></span>
+        </li>
+        <li v-for="(v,i) of ary">
+            姓名:{{v.name}}{{i+1}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(val,key,index) in obj">
+            {{key}}:{{val}} {{index}}
+        </li>
+    </ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el:'#div',
+        data:{
+            ary:[{name:'小明',user:['id1']},
+                {name:'小红',user:['id11','id12','id13']},
+                {name:'小花',user:['id']}],
+            obj:{name:'珠峰',age:9,sex:'男'}//v-for 也可以循环对象 循环项是属性值
+        }
+    })
+
+</script>

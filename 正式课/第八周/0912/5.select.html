@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <!--multiple 按住ctrl多选-->
+    <select name="" id="select" v-model="ary"  @change="change($event)">
+        <!--disabled  让该项不能点击 原生的属性-->
+        <option value="" disabled>请选择</option>
+        <option value="1">香蕉</option>
+        <option value="2">桃子</option>
+        <option value="3">苹果</option>
+        <option value="4">西瓜</option>
+    </select>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    //option绑不上onclick  不起作用
+    // let options= document.getElementsByTagName('option');
+    // for (let i = 0; i < options.length; i++) {
+    //     options[i].onclick=function () {
+    //         console.log(this.innerHTML);
+    //     }
+    //
+    // }
+    select.onchange =function () {
+        console.log(this.value);
+    }
+
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+           ary:''
+        },
+        methods:{
+            change(e){
+                console.log(e.target.value);
+                console.log(this.ary);//这俩个输出一样
+            }
+        }
+    })
+</script>

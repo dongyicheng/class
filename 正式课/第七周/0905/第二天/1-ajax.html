@@ -20,13 +20,13 @@
     xhr.onreadystatechange = function () {
         console.log(xhr.readyState);
     };
-    // xhr.setRequestHeader('name','zhufeng');//
+    xhr.setRequestHeader('name','zhufeng');
     // xhr.setRequestHeader('name','珠峰');// 报错 Value is not a valid ByteString.
     // 不能写中文；；
     //需要我们把中文转成 计算机支持的字符
-    // var str = escape('珠峰');// unescape('%u73E0%u5CF0')
+    var str = escape('珠峰');// unescape('%u73E0%u5CF0')
     // 后台语言一般不支持这种转义方式
-    var str = encodeURI('珠峰');
+    // var str = encodeURI('珠峰');
     /*
     * escape  ---  unescape  基本不用
     *

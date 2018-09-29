@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="div1">珠峰培训</div>
+</body>
+</html>
+<script>
+    /*
+    * VUE 数据操纵
+    *
+    * 操纵DOM
+    *
+    *
+    * JS数据类型
+    * 基本数据类型   number  string  boolean  null undefined
+    * 引用数据类型   {}  []  function Date RegExp ...
+    *
+    * {}  [];
+    *
+    * [] 常用方法
+    *  pop push  shift unshift  reverse sort  splice(n,m,x,y,z...) //改变原有数组  数组的变异
+    *  slice  concat  toString  join  indexOf
+    *
+    *  迭代的方法
+    *  forEach  map  filter(过滤)
+    *  some   只要有一项满足条件， 那么some的返回结果就是true; 找到true之后，后边的内容就不再循环
+    *  every  只要有一项不满足条件， 那么every的返回结果就是false； 找到false之后，后边的内容就不再循环
+    *  reduce((prev,next,index,ary)=>{},xxx); 接收1-2个参数；若第二个参数不传；则prev默认是数组的第一项；再循环时，prev就是上一次的循环的返回值；
+    *  reduce的返回值 是最后一次迭代的返回值；
+    *
+    *
+    *
+    *  find   返回值是符合条件的第一项；若是没有符合条件的；则返回 undefined
+    *
+    *  includes(数组中的某一项,index)  返回值是个 boolean
+    *
+    * */
+    let ary = [10,20,30,40,50];
+    // let arr = ary.forEach((item,index)=>{
+    //     item = item*2;
+    //     return 12;
+    // });
+    // let arr2 = ary.map((item,index)=>{
+    //     item = item*2;
+    //     return item;
+    // });
+    // let arr = ary.filter(function (item,index) {
+    //     // return false;  新数组一项都没有
+    //     // return true;   新数组和老数组内容一样
+    //     // 循环到当前项时， 若return 的值是个true ，则把当前项复制一份给返回的数组
+    //     // 若是 return的值时false ，则不给返回数组任何值
+    //     let t = Math.random();
+    //     return t > 0.5;
+    // });
+
+    // let arr = ary.find((item,index)=>{
+    //     console.log('index');
+    //     return item > 5;
+    // });
+    let bol = ary.includes(1,0);
+    // console.log(bol, ary);
+
+    // let a = ary.reduce((prev,next,index,arr)=>{
+    //     console.log(prev, next, index, arr);
+    //
+    //     return 1111
+    // });
+    // console.log(a);
+
+    //使用 reduce实现数组的求和
+    // let sum = ary.reduce((prev,next)=>{
+    //     console.log(prev, next);
+    //     return prev + next;
+    // });
+    // console.log(sum);
+
+    /*
+    * 数组的迭代方法
+    * for
+    * for in
+    * forEach
+    * map
+    * for of
+    * */
+    // ary.a = 12;
+    // for(let k in ary){
+    //     console.log(k);
+    // }
+    // for(let v of ary){// 只能用于数组
+    //     console.log(v);
+    // }
+    let obj = {name:'zf',age:9};
+    // for(let v of obj){
+    //     console.log(v);
+    // }
+
+    for(let i=0; i< ary.length;i++){//编程式
+
+    }
+    ary.forEach(()=>{}); // 声明式
+
+
+
+    // let fn0 = (a)=>{return 12};
+    // let fn0 = a => 12;
+    let fn1 = a => a;
+    console.log(fn1(123));
+
+
+    function a(n) {// 高阶函数
+        return function (m) {
+            return n+m;
+        }
+    }
+    a(2)(6);
+
+    let fn2 = n => m => n+m;
+    console.log(fn2(1));// 返回一个函数体
+    // 箭头函数没有this和arguments
+
+
+
+</script>  

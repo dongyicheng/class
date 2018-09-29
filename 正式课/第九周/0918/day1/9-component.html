@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <button v-for="v in ary" @click="page = v"
+                :style="{color: page == v ? 'red' :''}"
+        >{{v}}</button>
+        <pag1 :data="page"></pag1>
+        <!--keep-alive 会缓存之前的组件  不会销毁之前的组件-->
+        <!--<keep-alive>-->
+            <!--<component :is="page"></component>-->
+        <!--</keep-alive>-->
+        <!--<keep-alive>-->
+            <!--<pag1 v-if="page == 'pag1'"></pag1>-->
+            <!--<pag2 v-if="page == 'pag2'"></pag2>-->
+            <!--<pag3 v-if="page == 'pag3'"></pag3>-->
+        <!--</keep-alive>-->
+
+        <h2>珠峰培训</h2>
+    </div>
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let pag1 = {
+        template:'<h2>{{data}}</h2>',
+        props:['data'],
+        mounted(){
+            console.log(1);
+        },
+        beforeDestroy(){
+            console.log('销毁');
+        },
+        updated(){
+            console.log('updated');
+        }
+    };
+    let pag2 = {
+        template:'<h2>page2</h2>'
+    };
+    let pag3 = {
+        template:'<h2>page3</h2>'
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            page:'pag1',
+            ary:['pag1','pag2','pag3']
+        },
+        methods: {},
+        components:{
+            pag1,pag2,pag3
+        }
+    })
+</script>  

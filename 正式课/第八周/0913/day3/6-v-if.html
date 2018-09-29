@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--<template v-if="!flag">
+            <div>珠峰</div>
+            <div>2018</div>
+            <div>2018</div>
+            <div>2018</div>
+        </template>
+        <div v-else-if="true">
+            培训
+        </div>
+        <div v-else>
+            2019
+        </div>-->
+        <!--<button @click="change">按钮</button>-->
+        <button @click="flag = !flag">按钮</button>
+        <template v-if="flag">
+            <!--<label for="inp">登陆</label>
+            <input type="text" id="inp">-->
+            <label>登陆</label>
+            <input type="text" key="12">
+        </template>
+        <template v-else>
+            <label>注册</label>
+            <input type="text" id="ww" key="21">
+        </template>
+    </div>
+
+</body>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            flag:true
+        },
+        methods: {
+            change(){
+                this.flag = !this.flag
+            }
+        },
+
+    })
+</script>  

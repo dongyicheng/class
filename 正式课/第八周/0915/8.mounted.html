@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id="app">
+    <div id="zf" :ref="zf" key="1">珠峰培训</div>
+    <div :ref="zf" key="2">珠峰培训</div>
+    <div :ref="zf" key="3">珠峰培训</div>
+    <div :ref="zf" key="4">珠峰培训</div>
+
+    <h3 v-for="i in 5" ref="zhufeng">和德国人的</h3>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            zf:'zfpx'
+        },
+        created(){
+            console.log(document.getElementById('zf'));//没渲染完 拿不到
+        },
+        mounted(){
+            //使用 $refs ; 在结构中写死的  只能获取最后一个  元素
+            //但是通过 v-for 循环出来的 ; 可以全部获取 , 得到的结果是一个数组
+            console.log(document.getElementById('zf'));//DOM渲染完成了 能拿到
+            console.log(this.$refs.zf);//
+
+            // console.log(vm);//报错 在window里找不到vm
+            this.$nextTick(()=>{
+                console.log(vm);//这个回调函数是在 整个vm 渲染完成之后执行的
+            })
+        }
+    })
+</script>

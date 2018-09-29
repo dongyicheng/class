@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'></div>
+</body>
+</html>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script>
+    /*
+    * v-on:click ===> @click
+    * */
+    Vue.filter('myFilter',(data)=>{
+        return data+'zfpx'
+    })//全局过滤器  设置全局过滤器时 , 用的是filter  而不是filters
+    let vm = new Vue({
+        el: '#app',
+        data: {}
+    })
+</script>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <son ref="mySon"></son>
+        <son ref="mySon"></son>
+        <son ref="mySon"></son>
+        <son ref="mySon"></son>
+        <!--<div ref="zf">珠峰培训1</div>
+        <div ref="zf">珠峰培训2</div>
+        <div ref="zf">珠峰培训3</div>
+        <div ref="zf">珠峰培训4</div>
+        <div v-for="val in 'abcd'" ref="qqq">{{val}}</div>-->
+        <button @click="fn">调用儿子方法</button>
+
+    </div>
+</body>
+</html>
+<template id="son">
+    <div>
+        <h2>这是个子组件</h2>
+        {{name}}
+    </div>
+</template>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 目标 父组件 调用  子组件的 方法
+    * 1、通过 $refs 获取对应的子组件的实例
+    * 2、通过父组件的this.$children 获取对应的组件的实例
+    *
+    * */
+    let son = {
+        template:'#son',
+        data(){
+            return {
+                name:'珠峰培训2018-2019'
+            }
+        },
+        methods:{
+            fn(){
+                alert('son');
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            fn(){
+                // 调用 子组件方法
+                //this.$refs.mySon 调用到 子组件这个实例
+                // this.$refs.mySon.name='1234';
+                // this.$refs.mySon.fn();
+                // 先弹出的 1；  再去更新的DOM---》 因为 DOM的渲染式异步的
+                console.log(this);
+            }
+        },
+        created(){
+            console.log(this.$refs);
+        },
+        mounted(){
+            // $refs  ref  都是vue规定死的
+            console.log(this.$refs);
+        },
+        components:{
+            son
+        }
+    })
+</script>  

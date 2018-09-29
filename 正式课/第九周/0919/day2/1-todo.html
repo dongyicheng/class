@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">珠峰培训</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 1、按回车  添加任务 @keyup.13 = add ;
+    * 2、删除任务(修改任务列表)  splice  filter
+    * 3、选中当前项
+    *       给当前项添加 text_del 类名 :class="{text_del: item.isSelect}"
+    * 4、选中之后 移除 一项要做的事情
+    * 5、@dblclick = ------> 把当前项的 isShow 属性改成 true;
+    * 6、 让input显示出来之后  默认获取焦点  v-focus = 'true' ------>
+    * 7、input 的 v-model 要跟  item.title 绑定
+    * 8、在input中回车 或者 失去焦点时  让 item.isShow 变成 false
+    * 9、点击 下边的按钮  对应显示 要展示的列表 ---》onhashchange  修改 this.hash
+    *   todoAry  依赖于 this.hash 和 this.ary
+    *   按钮的类名  :class="{current:hash === 'all'}"
+    * 10、数据存储到 localStorage   setItem  getItem
+    *
+    * */
+    let vm = new Vue({
+        el: '#app',
+        data: {},
+        directives:{
+            focus(el,obj){
+                if(obj.value){
+                    el.focus()
+                }
+            }
+        },
+        methods: {}
+    })
+</script>  

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <!--<zfpx></zfpx>-->
+        <my-name></my-name>
+        <my-name></my-name>
+        <my-name></my-name>
+        <my-name></my-name>
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    /*
+    * 组件 ： 复用性高  可维护性强
+    * 组件 --》 功能  页面级块   ， 可复用的模块
+    *
+    * Vue 中的组件 --》 全局组件  局部组件
+    *
+    * */
+
+    /*
+    * 全局组件的声明 使用 Vue.component('组件名',{
+    *   template:"<span></span>" --->DOM模板是个字符串， 里边是个正常的DOM标签
+    *template中只能含有一个DOM根元素
+    * })
+    * */
+
+    // Vue.component('zfpx',{
+    //     /*zfpx  组件名*/
+    //     template:`<h1>珠峰培训2018<h2>珠峰2019</h2></h1>`
+    // });
+    // Vue.component('myname',{
+    //     template:`<h1>珠峰培训2018<h2>珠峰2019</h2></h1>`
+    // });
+    // Vue.component('myName',{
+    //     template:`<h1>珠峰培训2018<h2>珠峰2019</h2></h1>`
+    // });
+    // Vue.component('my-name',{
+    //     template:`<h1>珠峰培训2018<h2>珠峰2019</h2></h1>`
+    // });
+    Vue.component('MyName',{
+        template:`<h1>珠峰培训2018<h2>{{name}}2019</h2></h1>`,
+        data(){
+            return{
+                name:"珠峰"
+            }
+        }
+    });
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:'珠峰'
+        },
+        // template:"<div id='www'><MyName></MyName></div>",
+        methods: {
+
+        }
+    })
+</script>  

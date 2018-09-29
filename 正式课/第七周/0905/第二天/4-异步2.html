@@ -14,7 +14,7 @@
     xhr.onreadystatechange = function () {
         console.log(xhr.readyState);
         // debugger;
-        // xhr.abort();// 中断 ajax 进程；直接让 readyState 变成4
+        xhr.abort();// 中断 ajax 进程；直接让 readyState 变成4
         // console.log(xhr.response)
     };
     var str = encodeURI('珠峰');

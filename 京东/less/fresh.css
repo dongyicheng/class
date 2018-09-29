@@ -193,7 +193,7 @@ div.aside a div .aside_close {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/gb/images/mod_top_close.png) no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/gb/images/mod_top_close.png) no-repeat;
   position: absolute;
   top: 8px;
   right: 8px;
@@ -209,7 +209,7 @@ div.aside a div .aside_close {
   padding: 0;
   margin-top: 42px;
   margin-bottom: 22px;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/gb/images/mod_header_logo.png) 0 0 no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/gb/images/mod_header_logo.png) 0 0 no-repeat;
 }
 .title .logo a {
   width: 210px;
@@ -321,7 +321,7 @@ div.aside a div .aside_close {
   display: block;
   width: 25px;
   height: 25px;
-  background: url(//static.360buyimg.com/mtd/pc/cms/index/images/qrcode_25x25@2x.png);
+  background: url(http://static.360buyimg.com/mtd/pc/cms/index/images/qrcode_25x25@2x.png);
   background-size: 100% 100%;
   position: absolute;
   top: 5px;
@@ -489,7 +489,7 @@ div.aside a div .aside_close {
   display: block;
   width: 26px;
   height: 26px;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_fs@2x.png) no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_fs@2x.png) no-repeat;
   background-position: 0 0;
   background-size: 82px 54px;
   position: absolute;
@@ -675,7 +675,7 @@ div.aside a div .aside_close {
   z-index: 10;
   top: 378px;
   left: -120px;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_bgs.png) no-repeat -335px -354px;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_bgs.png) no-repeat -335px -354px;
   width: 174px;
   height: 120px;
 }
@@ -685,7 +685,7 @@ div.aside a div .aside_close {
   bottom: -22px;
   width: 1190px;
   height: 24px;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_fs_shadow.png) 0px 0 no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_fs_shadow.png) 0px 0 no-repeat;
 }
 .bgcolor .img_table {
   width: 1190px;
@@ -695,7 +695,7 @@ div.aside a div .aside_close {
 }
 .bgcolor .img_table > div i.table_bg1 {
   position: absolute;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_seckill_bg_l.png) 0 0 no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_seckill_bg_l.png) 0 0 no-repeat;
   left: -138px;
   bottom: 18px;
   width: 710px;
@@ -705,7 +705,7 @@ div.aside a div .aside_close {
   position: absolute;
   right: -71px;
   top: 125px;
-  background-image: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_bgs.png);
+  background-image: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_bgs.png);
   background-position: -335px -205px;
   background-repeat: no-repeat;
   width: 145px;
@@ -787,7 +787,7 @@ div.aside a div .aside_close {
 .bgcolor .img_table > div .table_tab .table_head {
   padding-left: 50px;
   height: 100px;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_seckill_head_bg.png) 0 0 no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_seckill_head_bg.png) 0 0 no-repeat;
 }
 .bgcolor .img_table > div .table_tab .table_head .table_head_item {
   position: relative;
@@ -938,7 +938,7 @@ div.aside a div .aside_close {
   left: 0;
   right: 0;
   height: 440px;
-  background: #1e1d22 url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_bg.jpg) 50% no-repeat;
+  background: #1e1d22 url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_bg.jpg) 50% no-repeat;
 }
 .bgcolor .fresh_special .spacial_inner {
   position: relative;
@@ -950,7 +950,7 @@ div.aside a div .aside_close {
 .bgcolor .fresh_special .spacial_inner .special_head {
   margin-bottom: 30px;
   height: 60px;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_mod_head_bg.png) 0 0 no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_mod_head_bg.png) 0 0 no-repeat;
 }
 .bgcolor .fresh_special .spacial_inner .special_head .special_head_inner {
   margin: 0 auto;
@@ -985,7 +985,7 @@ div.aside a div .aside_close {
   z-index: 2;
   margin-bottom: 10px;
   height: 584px;
-  background: #fff url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_top100_bg.jpg) center 0 no-repeat;
+  background: #fff url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_top100_bg.jpg) center 0 no-repeat;
 }
 .bgcolor .fresh_special .spacial_inner .top_100 .top_100_head {
   padding: 40px 0 35px;
@@ -998,7 +998,7 @@ div.aside a div .aside_close {
   overflow: hidden;
 }
 .bgcolor .fresh_special .spacial_inner .top_100 .top_100_head .top_100_head_inner h4 {
-  background-image: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_index@2x.png);
+  background-image: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_index@2x.png);
   background-position: 0 -82px;
   background-size: 132px 112px ;
   background-repeat: no-repeat;
@@ -1044,7 +1044,7 @@ div.aside a div .aside_close {
   height: 100%;
 }
 .bgcolor .fresh_special .spacial_inner .top_100 .top_100_goods .goods_item .good_item_pri {
-  background-image: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_index@2x.png);
+  background-image: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/sprite_fresh_index@2x.png);
   background-position: 0 0;
   -moz-background-size: 132px 112px;
   background-size: 132px 112px;
@@ -1135,7 +1135,7 @@ div.aside a div .aside_close {
   float: left;
   width: 590px;
   height: 522px;
-  background: #fff url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_dong_bg.png) 0 0 no-repeat;
+  background: #fff url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_dong_bg.png) 0 0 no-repeat;
   border-top: 4px solid #222;
 }
 .bgcolor .fresh_special .spacial_inner .special_other .other_dong .dong_head {
@@ -1274,7 +1274,7 @@ div.aside a div .aside_close {
   width: 590px;
   height: 196px;
   border-top: 4px solid #222;
-  background: #fff url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_trial_bg.png) 0 0 no-repeat;
+  background: #fff url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_trial_bg.png) 0 0 no-repeat;
 }
 .bgcolor .fresh_special .spacial_inner .special_other .other_new .new_top .top_head {
   float: left;
@@ -1374,7 +1374,7 @@ div.aside a div .aside_close {
   width: 590px;
   height: 312px;
   border-top: 4px solid #222;
-  background: url(//static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_new_bg.jpg) 0 0 no-repeat;
+  background: url(http://static.360buyimg.com/mtd/pc/fresh_v3/1.0.0/home/images/fresh_unique_new_bg.jpg) 0 0 no-repeat;
 }
 .bgcolor .fresh_special .spacial_inner .special_other .other_new .new_bot .top_head {
   float: left;

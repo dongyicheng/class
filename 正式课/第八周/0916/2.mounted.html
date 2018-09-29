@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+    <style type="text/less">
+
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<div id='app'>
+    <h3 v-for="val in ary" ref="h3">{{val}}</h3>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            ary:[1,2,3]
+        },
+        mounted(){
+            console.log(this.$refs.h3, this.$refs.h3.length);//[h3,h3,h3]  3
+            this.ary=[4,5,6,7];
+            console.log(this.$refs.h3.length);//3  未改变之前的  vue的DOM渲染是异步的
+            // mounted只做一次,将数据挂载上去,在这里改变,视图还未更新,所以拿到的是之前的
+            this.$nextTick(()=>{
+                console.log(this.$refs.h3.length);//4
+                //将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。
+                //在更新完成后在调用他 , 所以能拿到最新的数据
+            })
+        },
+        updated(){
+            console.log(this.$refs.h3.length);//4 视图更新之后执行
+            //视图一更新就执行(会多次执行) , 会拿到新的
+        }
+    })
+</script>

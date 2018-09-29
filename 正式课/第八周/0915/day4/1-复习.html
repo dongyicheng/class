@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="name">
+        {{name.toUpperCase()}}
+        {{name | upper(123)}}
+        {{fn()}}
+        {{fn()}}
+        {{fn()}}
+        {{myName}}
+        {{myName}}
+        {{myName}}
+        <br>
+        {{name2}}
+        <br>
+        {{name3}}
+        <!--v-if 后边跟的表达式-->
+        <template v-if="1>2">
+            <div>成功</div>
+            <div>成功</div>
+            <div>成功</div>
+            <div>成功</div>
+        </template>
+        <div v-else-if="3>2">成功</div>
+        <div v-else>成功</div>
+
+        <button @click="flag = !flag">按钮</button>
+        <template v-if="flag">
+            <label for="inp">登陆</label>
+            <input type="text" id="inp" key="1">
+        </template>
+        <template v-else>
+            <label for="inp2">注册</label>
+            <input type="text" id="inp2" key="2">
+        </template>
+
+        <template v-show="false">
+            <div>v-show</div>
+        </template>
+
+        <div class="bg" :class="1>2 ? font : 'col'"></div>
+
+        <!-- 属性名是要加的类名  属性值是控制这个类名要不要加上  -->
+        <div class="bg" :class="{font:false,col:true}"></div>
+
+
+        <div class="bg" :class="[font,'col',{qqq:true}]"></div>
+
+
+
+
+
+
+    </div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            font:'font',
+            flag:true,
+            name:"zfpx",
+            name3:'',
+            timer:null
+        },
+        computed:{
+            myName:{
+                get(){
+                    return this.name.toUpperCase();
+                },
+                set(){}
+            },
+            name2(){
+                return this.name + '123';
+            }
+        },
+        watch:{ // 监听 已有的data数据
+            name(cur,prev){
+                clearTimeout(this.timer);
+                this.timer = setTimeout(()=>{
+                    this.name3 = this.name + 'watch';
+                    // 每次重新给name赋值  都会触发这个watch;导致无限循环
+                },2000);
+            }
+        },
+        filters:{
+            upper(val,n,m){
+                return val.toUpperCase();
+            }
+        },
+        methods: {
+            fn(){
+                return this.name.toUpperCase();
+            }
+        }
+    })
+    /*
+    *
+    * axios({
+    *       method:'get',
+    *       params:{name:123,age:234},
+    *       url:'./1.json'
+    * }).then()
+    *
+    * */
+
+</script>  

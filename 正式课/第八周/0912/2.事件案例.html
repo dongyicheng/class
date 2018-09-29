@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="">
+
+    <script src=""></script>
+</head>
+<body>
+<div id="app">
+<input type="text" v-model="text" @keyup="keyup($event)">
+<input type="text" v-model="text" @keyup.enter="keyup2">
+    <!--(按键修饰符)可以直接在后面写上keycode(键盘数或者特殊键盘名字) 点击对应键会触发事件  这样可以不用传事件对象--!>
+    <!--全部的按键别名(VUE提供的)：
+        enter
+        tab
+        delete (捕获 “删除” 和 “退格” 键)
+        esc
+        space
+        up
+        down
+        left
+        right-->
+<ul>
+    <li v-for="(val,i) in ary">
+        {{val}}
+        <button @click.prevent.stop="del(i)">删除</button>
+        <!--(事件修饰符)  stop  阻止冒泡  prevent 阻止默认事件-->
+    </li>
+</ul>
+</div>
+</body>
+</html>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    let vm=new Vue({
+        el:'#app',
+        data:{
+            text:'',
+            ary:[],//存储每次放进来的输入框内容
+        },
+        methods:{
+           keyup(e){//键盘抬起触发的事件
+                this.text=this.text.replace(/^ +/g,'');//把开头的空格清空
+                if(e.keyCode===13 && this.text){//抬起键盘对应的键盘码
+                this.ary.push(this.text);//把text放到数组中
+                   this.text='';//把输入框清空
+               }
+           },
+           keyup2(){
+               this.text=this.text.replace(/^ +/g,'');//把开头的空格清空
+               //'   '  --> ''
+               if(!this.text)return;
+               this.ary.push(this.text);//把text放到数组中
+               this.text='';//把输入框清空
+           },
+           del(i){
+               //删除点击的那一项 ---> 删除数组中的某项  需要索引
+               this.ary.splice(i,1)
+           }
+        }
+    })
+</script>

@@ -15,9 +15,9 @@
         console.log(xhr.getResponseHeader('date'));// 获取响应头中的对应项的值
         console.log(xhr.getAllResponseHeaders());// 获取所有的响应头 是个大字符串
     };
-    xhr.open('post','./1.xml?name=珠峰&a=12&b=13',false);// 在路径后边
+    xhr.open('post','./1.xml?name=珠峰&a=12&b=14',false);// 在路径后边
     var str = encodeURI('珠峰');
-    xhr.setRequestHeader('name',str);//在请求头中
+    xhr.setRequestHeader('name','aa');//在请求头中
     xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
     xhr.abort();
     xhr.send('name1=12&a=34&b=45'); // 在请求体中

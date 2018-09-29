@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <son @my-son="fn" :ary="arr" :obj="obj"></son>
+        {{obj}}
+    </div>
+</body>
+<template id="son">
+    <div>
+        <h2>这是子组件</h2>
+        <button @click="changeName">改名</button>
+    </div>
+</template>
+</html>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    let son = {
+        template:"#son",
+        props:['ary','obj'],
+        methods:{
+            changeName(){
+                //修改父组件的中的name
+                this.$emit('my-son',"珠峰","培训","2018");
+                this.ary.pop();
+                this.obj.name = 'qqeqewrwqetqtwe';
+            }
+        }
+    };
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            name:"珠峰培训",
+            arr:[1,2,3,4],
+            obj:{name:'珠峰'}
+        },
+        methods: {
+            fn(a,b,c){
+                this.name = a+b+c;
+            }
+        },
+        components:{
+            son
+        }
+    });
+</script>  

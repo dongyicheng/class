@@ -9,6 +9,8 @@ http.createServer(function(req,res){
     // pathname : 当前的路径
     // query : 参数组合的对象；
     let  {pathname,query} = url.parse(req.url,true);
+    console.log(url.parse(req.url,true));
+
     if(pathname==="/login"){
         res.end("100");
     }

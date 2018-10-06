@@ -70,6 +70,8 @@
     box.onclick=function (e) {
         e=e||window.event
         let tar=e.target||e.srcElement
+        console.log(tar.nodeName);
+        
         if(tar.nodeName.toLowerCase()=='a'){
             let str=tar.innerHTML+'内容'
             sec.innerHTML=str;

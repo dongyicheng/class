@@ -65,6 +65,8 @@ let phoneFn=function () {
         $noListenBox.css({
             transform:'translateY(0)'
         });
+        console.log($noListenBox);
+        
         bell.pause();
         say.play();
         //语音播放  怎么让上边的时间跟着变化

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<!-- 
+linux 常用命令
+    mkdir  + 文件夹名  创建文件夹 
+    cd ./ 当前目录
+    cd ../ 上级目录
+    touch  + 文件名   创建文件
+    vi  ----》 按 i 键；进去编辑模式  
+        ----》 编辑完成后 按 ctrl + c  退出编辑模式 
+        ----》 按出 :wq  敲回车保存
+
+    cat  +  文件名   查看文件
+
+
+git init 把本地的文件夹变成一个git本地仓库    
+git config --list
+
+git remote add 桥梁名 git远程仓库地址
+
+git add 文件名   git add . 把代码从工作区 提交到缓存区
+git commit -m '珠峰' 从 缓存区把代码提交到 历史区
+git push 桥梁名 master（分支名）
+
+git clone git远程仓库地址
+git add .
+git commit -m '注释'
+git push    ---- 可以省略 桥梁名和 分支名  默认的桥梁名是 origin
+
+
+本地仓库新切分支  git branch 新分支名 dev/20180706
+git checkout -b nrc/182020   新创一个分支；并且换到这个新分支
+
+
+新切分支时   ，在哪个分支（master）下新切的新分支；
+新分支的内容就跟哪个分支(master)的内容一致（在切分支的哪个时段）；
+后期 master再更改时， 新分支的内容是不会跟随master改变的
+
+工作中一般都是从master 上新切出分支；
+当好几个不同的分支改了同一个内容时；
+在合并master时，会发现有很多conflict ；这时就需要我们去选择留哪个分支的内容
+
+git checkout .    用缓存区的代码覆盖工作区 
+
+
+merge 的合并过程
+假设 当前分支是 nrc/1010；
+这个分支是从 master分支 切出来的
+现在已经在这个分支上更改了很多的代码；
+这时需要合并代码的话  需要先切到 master 分支； 
+由master分支去合并 nrc/1010分支； 相当于把 nrc/1010分支上的内容合并到 master上；
+合并后；要查看有没有 conflict；若有 则需要先去解决冲突； 
+在去提交
+
+
+
+
+ -->

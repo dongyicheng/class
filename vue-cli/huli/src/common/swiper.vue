@@ -20,12 +20,13 @@ export default {
     swiperInit() {
       new Swiper(".swiper-container", {
         autoplay: {
-          disableOnInteraction: false
+          disableOnInteraction: true
         },
         loop: true,
         pagination: {
           el: ".swiper-pagination",
           clickable:true,
+          bulletActiveClass: 'my-bullet-active'
         }
       });
     }
@@ -33,7 +34,7 @@ export default {
 };
 </script>
 
-<style scoped lang='less'>
+<style lang='less'>
 .swiper-container {
   width: 100%;
   height: 100%;
@@ -41,5 +42,10 @@ export default {
     width: 100%;
     height: 100%;
   }
+  .swiper-pagination .my-bullet-active{
+      background: #fff;
+      opacity: 1;
+  }
+  
 }
 </style>

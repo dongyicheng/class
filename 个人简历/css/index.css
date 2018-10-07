@@ -78,8 +78,8 @@ section.indexBox .bg1 .bg2 {
   top: 0.8rem;
 }
 section.indexBox .title {
-  width: 6.66666667rem;
-  height: 6.66666667rem;
+  width: 6rem;
+  height: 6rem;
   margin: 0 auto;
   position: relative;
 }
@@ -111,7 +111,7 @@ section.indexBox .name {
 }
 section.indexBox .name h2 {
   flex: 1;
-  font-size: 0.88rem;
+  font-size: 0.66666667rem;
   font-weight: normal;
   text-align: center;
   color: #eccb2e;
@@ -175,14 +175,14 @@ section.Personal .bg1 .bg2 {
 }
 section.Personal .title {
   position: relative;
-  top: 1.33333333rem;
+  top: 1.2rem;
 }
 section.Personal .title div {
   display: flex;
 }
 section.Personal .title div h2 {
   flex: 1;
-  font-size: 0.8rem;
+  font-size: 0.66666667rem;
   font-weight: normal;
   text-align: center;
 }
@@ -198,23 +198,25 @@ section.Personal .title div .title_l {
   float: left;
   position: relative;
   left: 2rem;
-  top: 1.2rem;
+  top: 0.8rem;
 }
 section.Personal .title div .title_r {
   float: right;
   position: relative;
-  right: 2.13333333rem;
+  right: 2.26666667rem;
   top: -0.53333333rem;
 }
 section.Personal .title p {
   text-align: center;
   color: #eccb2e;
   font-size: 0.4rem;
+  position: relative;
+  top: -0.4rem;
 }
 section.Personal .photo {
-  width: 4rem;
-  height: 4rem;
-  margin: 1.73333333rem auto 0;
+  width: 3.33333333rem;
+  height: 3.33333333rem;
+  margin: 1.46666667rem auto 0;
   border-radius: 50%;
   border: 4px solid #eccb2e;
   overflow: hidden;
@@ -269,14 +271,14 @@ section.self .bg1 .bg2 {
 }
 section.self .title {
   position: relative;
-  top: 1.33333333rem;
+  top: 1.2rem;
 }
 section.self .title div {
   display: flex;
 }
 section.self .title div h2 {
   flex: 1;
-  font-size: 0.8rem;
+  font-size: 0.66666667rem;
   font-weight: normal;
   text-align: center;
 }
@@ -292,23 +294,25 @@ section.self .title div .title_l {
   float: left;
   position: relative;
   left: 2rem;
-  top: 1.2rem;
+  top: 0.8rem;
 }
 section.self .title div .title_r {
   float: right;
   position: relative;
-  right: 2.13333333rem;
+  right: 2.26666667rem;
   top: -0.53333333rem;
 }
 section.self .title p {
   text-align: center;
   color: #eccb2e;
   font-size: 0.4rem;
+  position: relative;
+  top: -0.4rem;
 }
 section.self .icon {
   width: 1.6rem;
   height: 1.6rem;
-  margin: 1.33333333rem auto -0.13333333rem;
+  margin: 0.8rem auto -0.13333333rem;
 }
 section.self .icon img {
   width: 100%;
@@ -366,14 +370,14 @@ section.worked .bg1 .bg2 {
 }
 section.worked .title {
   position: relative;
-  top: 1.33333333rem;
+  top: 1.2rem;
 }
 section.worked .title div {
   display: flex;
 }
 section.worked .title div h2 {
   flex: 1;
-  font-size: 0.8rem;
+  font-size: 0.66666667rem;
   font-weight: normal;
   text-align: center;
 }
@@ -389,23 +393,25 @@ section.worked .title div .title_l {
   float: left;
   position: relative;
   left: 2rem;
-  top: 1.2rem;
+  top: 0.8rem;
 }
 section.worked .title div .title_r {
   float: right;
   position: relative;
-  right: 2.13333333rem;
+  right: 2.26666667rem;
   top: -0.53333333rem;
 }
 section.worked .title p {
   text-align: center;
   color: #eccb2e;
   font-size: 0.4rem;
+  position: relative;
+  top: -0.4rem;
 }
 section.worked .icon {
   width: 1.6rem;
   height: 1.6rem;
-  margin: 1.33333333rem auto -0.13333333rem;
+  margin: 0.8rem auto -0.13333333rem;
 }
 section.worked .icon img {
   width: 100%;
@@ -453,14 +459,14 @@ section.contact .bg1 .bg2 {
 }
 section.contact .title {
   position: relative;
-  top: 1.33333333rem;
+  top: 1.2rem;
 }
 section.contact .title div {
   display: flex;
 }
 section.contact .title div h2 {
   flex: 1;
-  font-size: 0.8rem;
+  font-size: 0.66666667rem;
   font-weight: normal;
   text-align: center;
 }
@@ -476,23 +482,25 @@ section.contact .title div .title_l {
   float: left;
   position: relative;
   left: 2rem;
-  top: 1.2rem;
+  top: 0.8rem;
 }
 section.contact .title div .title_r {
   float: right;
   position: relative;
-  right: 2.13333333rem;
+  right: 2.26666667rem;
   top: -0.53333333rem;
 }
 section.contact .title p {
   text-align: center;
   color: #eccb2e;
   font-size: 0.4rem;
+  position: relative;
+  top: -0.4rem;
 }
 section.contact .icon {
   width: 1.6rem;
   height: 1.6rem;
-  margin: 1.33333333rem auto -0.13333333rem;
+  margin: 0.8rem auto -0.13333333rem;
 }
 section.contact .icon img {
   width: 100%;

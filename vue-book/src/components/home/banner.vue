@@ -1,13 +1,13 @@
 <template>
     <div class="banner">
-      <!-- <mySwiper :ary="arr" v-if="arr.length"></mySwiper> -->
-      <mySwiper :ary="arr"></mySwiper>
+      <mySwiper :ary="arr" v-if="arr.length"></mySwiper>
+      <!-- <mySwiper :ary="arr"></mySwiper> -->
     </div>
 </template>
 
 <script>
-    // import mySwiper from '@/common/myswiper.vue'
-    import mySwiper from '@/common/myswiper2.vue'
+    import mySwiper from '@/common/myswiper.vue'
+    // import mySwiper from '@/common/myswiper2.vue'
     // 引入之后 需要注册一下
     import axios from 'axios'
     // 引入第三方插件

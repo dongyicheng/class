@@ -17,12 +17,12 @@
         props:['ary'],
         mounted(){
           // console.log(Swiper);
-          this.swiperInit();
+          // this.swiperInit();
           // 需要在DOM渲染完毕之后在去初始化 swiper
           // console.log(this.swiperInit);;
         },
         updated(){
-          // this.swiperInit();
+          this.swiperInit();
         },
         methods:{
           swiperInit(){

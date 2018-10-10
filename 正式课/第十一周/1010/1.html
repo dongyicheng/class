@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 小公司一般问项目，大公司问技术；
+    // 框架   项目    原生
+    // 实例  组件  路由    vuex  vue-cli
+    // 实例  ：vue的属性   vue 的指令   生命周期
+    // vue的属性  : el   data   methods  computed   watch  filters  directives  props  router  components  store  template  render
+
+    //  vue 的指令 ： v-model  v-if  v-show  v-else  v-else-if  v-text  v-for  v-html  v-once  v-bind v-on   v-cloak
+
+    // vue  的生命周期 ：
+    // beforeCreate   created
+    // beforeMount    mounted
+    // beforeUpdate   updated
+    // beforeDestroy  destroyed
+
+    // 组件 ：
+    // 组件定义 ： 1.创建一个组件   2.注册一个组件   3. 使用组件
+    // 组件的数据传递： 1. props  2.发布订阅   3. vueX(统一数据管理)【redux】
+    // .vue
+    reuqire("");
+    module.exports = {
+        entry :"",
+        output:{
+            filename:"",
+            path:""
+        },
+        modules:{
+            rules:[{test:/\.js$/,use:"babel-loader"}]
+        },
+        plugins:[
+
+        ]
+    };
+    // webpack git  checkout
+
+    // 路由 ： hash  history  模式；
+    //1. 组件  2， 路由映射表  3. 实例化   4.注册
+    //路由的传参： 路径   query  params
+    new Vue({
+        el:"#app",
+        render:(h)=>{
+            // h : createElement ;
+            return h(App);
+        }
+    });
+
+</script>
+</body>
+</html>

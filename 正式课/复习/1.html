@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        js的数据类型
+        基本数据类型 
+     -->
+</body>
+</html>
+<script>
+    // 冒泡排序
+let ary=[1,5,3,2,4]
+for (let i = 0; i < ary.length; i++) {
+    for (let j = i+1; j < ary.length; j++) {
+        let item=ary[i];
+        if(item<ary[j]){
+            ary[i]=ary[j];
+            ary[j]=item;
+        }
+    }
+}
+console.log(ary);
+// 快速排序
+function sum(n){
+    if(n<=0)return 0;
+    return n + sum(n-1)
+}
+sum(100)
+
+function quick(ary) {
+    if(ary.length<=1)return ary;
+    let curIndex=Math.floor(ary.length/2),
+        curValue=ary[curIndex],
+        curLeft=[],
+        curRight=[];
+
+    ary.forEach((item,index) => {
+        if(curIndex != index){
+            item<cenValue?aryLeft.push(cur):aryRight.push(cur);
+        }
+    });
+    return quick(aryLeft).contact(curValue,quick(aryRight))
+}
+
+let str='qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890'
+function getstr(){
+    
+}
+</script>

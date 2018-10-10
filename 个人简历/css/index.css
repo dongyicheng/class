@@ -419,8 +419,8 @@ section.worked .icon img {
 }
 section.worked .company {
   width: 80%;
-  height: 8.66666667rem;
-  margin: 0 auto ;
+  height: 7.33333333rem;
+  margin: 0.66666667rem auto;
   border-left: #fff solid 2px;
   box-sizing: border-box;
   padding-left: 0.8rem;
@@ -431,7 +431,10 @@ section.worked .company .dot {
   border-radius: 50%;
   background: #eccb2e;
   position: relative;
-  top: 1.01333333rem;
+  top: 0.88rem;
+}
+section.worked .company .first {
+  margin-bottom: 0.93333333rem;
 }
 section.worked .company p {
   font-size: 0.4rem;
